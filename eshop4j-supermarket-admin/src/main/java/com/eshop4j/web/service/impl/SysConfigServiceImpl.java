@@ -58,7 +58,6 @@ public class SysConfigServiceImpl extends GenericServiceImpl<SysConfig, Long> im
 		return tableReturn;
 	}
     
-    
 	/**
 	 * 查询所有的配置
 	 * @return

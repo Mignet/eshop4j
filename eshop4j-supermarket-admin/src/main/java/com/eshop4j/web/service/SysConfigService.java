@@ -3,9 +3,11 @@ package com.eshop4j.web.service;
 import java.util.Date;
 import java.util.List;
 
+import com.eshop4j.core.base.api.PaginatorResponse;
 import com.eshop4j.core.datatable.DataTable;
 import com.eshop4j.core.datatable.DataTableReturn;
 import com.eshop4j.core.generic.GenericService;
+import com.eshop4j.core.orm.paging.Page;
 import com.eshop4j.web.model.SysConfig;
  /**
  * 
@@ -25,8 +27,6 @@ public interface SysConfigService extends GenericService<SysConfig,Long>{
 	 * @return
 	 */
 	DataTableReturn selectByDatatables(DataTable dataTable);
-	
-
 	
 	/**
 	 * 查询所有的配置

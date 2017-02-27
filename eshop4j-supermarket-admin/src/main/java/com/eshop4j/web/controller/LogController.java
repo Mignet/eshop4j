@@ -8,19 +8,13 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.annotation.Resource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.eshop4j.core.datatable.DataTableReturn;
-import com.eshop4j.web.request.CfpCommonRequest;
-import com.eshop4j.web.service.LogService;
 import com.eshop4j.xoss.util.RequestLogging;
 
 /**
@@ -35,9 +29,6 @@ public class LogController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogController.class);
 
-    @Resource
-    private LogService logService;
-    
     /**
      * 账号操作日志列表显示列表页
      * @return
@@ -46,19 +37,6 @@ public class LogController {
     @RequestLogging("账号操作日志列表显示列表页")
     public String accountLog(){
         return "logs/log-account";
-    }
-
-    /**
-     * 账号操作日志列表数据请求源操作
-     * @param cfpCommonRequest
-     * @return
-     * @throws Exception
-     */
-    @RequestLogging("账号操作日志列表数据请求源操作")
-    @RequestMapping("/account_ajax")
-    @ResponseBody
-    public DataTableReturn accountLogAjax(@RequestBody CfpCommonRequest cfpCommonRequest) throws Exception{
-    	return logService.queryAccountOpLogList(cfpCommonRequest);
     }
 
     @RequestMapping(value = "/thread",method = RequestMethod.GET)

@@ -1,22 +1,15 @@
 package com.eshop4j.xoss.helper;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.alibaba.fastjson.JSONObject;
 import com.eshop4j.core.constant.SysConfigConstant;
 import com.eshop4j.web.enums.AppTypeEnum;
-import com.eshop4j.web.model.SysConfig;
-import com.eshop4j.web.model.share.ShareContent;
 import com.eshop4j.web.service.SysConfigService;
 
 @Component
@@ -87,56 +80,6 @@ public class CommonHelper {
 		wechatShareConfig.setLink(link);
 		wechatShareConfig.setTitle(config.get(SysConfigConstant.WECHAT_SHARE_CUSTOMER_TITLE));
 		return wechatShareConfig;
-	}
-	
-	public ShareContent getWechatShareCustomer(String mobile,String name) {
-		ShareContent shareContent = new ShareContent();
-		//Map<String,String> config = configHelper.getValuesByType(SysConfigConstant.WECHAT_SHARE_CUSTOMER);		
-		List<SysConfig> sysList = sysConfigService.querySysConfigByName("微信分享-邀请客户");
-    	Map<String,String> config = new HashMap<String,String>();
-    	for(SysConfig item:sysList){
-    		config.put(item.getConfigKey(),item.getConfigValue());  		  		
-    	}      	
-		shareContent.setShareDesc(config.get(SysConfigConstant.WECHAT_SHARE_CUSTOMER_DESC));
-		shareContent.setShareImgurl(config.get(SysConfigConstant.WECHAT_SHARE_CUSTOMER_IMGURL));
-		String link = String.format(config.get(SysConfigConstant.WECHAT_SHARE_CUSTOMER_LINK), mobile,name);
-		shareContent.setShareLink(link);
-		shareContent.setShareTitle(config.get(SysConfigConstant.WECHAT_SHARE_CUSTOMER_TITLE));
-		return shareContent;
-	}
-	
-	public ShareContent getWechatShareRclcs(String mobile,String name) {
-		ShareContent shareContent = new ShareContent();
-		//Map<String,String> config = configHelper.getValuesByType(SysConfigConstant.WECHAT_SHARE);		
-		List<SysConfig> sysList = sysConfigService.querySysConfigByName("微信分享-邀请理财师");
-    	Map<String,String> config = new HashMap<String,String>();
-    	for(SysConfig item:sysList){
-    		config.put(item.getConfigKey(),item.getConfigValue());  		  		
-    	}   	
-		shareContent.setShareDesc(config.get(SysConfigConstant.WECHAT_SHARE_DESC));
-		shareContent.setShareImgurl(config.get(SysConfigConstant.WECHAT_SHARE_IMGURL));
-		String link = String.format(config.get(SysConfigConstant.WECHAT_SHARE_LINK),mobile,name);
-		shareContent.setShareLink(link);
-		shareContent.setShareTitle(config.get(SysConfigConstant.WECHAT_SHARE_TITLE));
-		return shareContent;
-	}
-	
-	public ShareContent getWechatShareLcsRcCus(String mobile,String name) {
-		ShareContent shareContent = new ShareContent();
-		//Map<String,String> config = configHelper.getValuesByType(SysConfigConstant.WECHAT_SHARE_LCS_CUSTOMER);
-		
-		List<SysConfig> sysList = sysConfigService.querySysConfigByName("微信分享-理财师邀请客户");
-    	Map<String,String> config = new HashMap<String,String>();
-    	for(SysConfig item:sysList){
-    		config.put(item.getConfigKey(),item.getConfigValue());  		  		
-    	}
-    	
-		shareContent.setShareDesc(config.get(SysConfigConstant.WECHAT_SHARE_LCS_CUSTOMER_DESC));
-		shareContent.setShareImgurl(config.get(SysConfigConstant.WECHAT_SHARE_LCS_CUSTOMER_IMGURL));
-		String link = String.format(config.get(SysConfigConstant.WECHAT_SHARE_LCS_CUSTOMER_LINK),mobile,name);
-		shareContent.setShareLink(link);
-		shareContent.setShareTitle(config.get(SysConfigConstant.WECHAT_SHARE_LCS_CUSTOMER_TITLE));
-		return shareContent;
 	}
 	
 }
