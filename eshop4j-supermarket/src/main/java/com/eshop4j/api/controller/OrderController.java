@@ -16,7 +16,7 @@ public class OrderController {
 	@ResponseBody
 	@RequestLogging("订单记录测试")
 	public String test(){
-		return "{'test':'success'}";
+		return "{\"test\":\"success\"}";
 	}
 	
 }
