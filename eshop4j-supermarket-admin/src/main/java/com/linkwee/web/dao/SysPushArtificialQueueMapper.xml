@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.SysPushArtificialQueueMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.mc.SysPushArtificialQueue" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="app_type" property="appType" jdbcType="INTEGER"/>
+		<result column="content" property="content" jdbcType="VARCHAR"/>
+		<result column="link" property="link" jdbcType="VARCHAR"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="start_type" property="startType" jdbcType="INTEGER"/>
+		<result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+		<result column="send_object_type" property="sendObjectType" jdbcType="INTEGER"/>
+		<result column="send_object" property="sendObject" jdbcType="LONGVARCHAR"/>
+		<result column="send_type" property="sendType" jdbcType="INTEGER"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="crt_time" property="crtTime" jdbcType="TIMESTAMP"/>
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+		<result column="user_ids" property="userIds" jdbcType="VARCHAR"/>
+		<result column="mobiles" property="mobiles" jdbcType="VARCHAR"/>
+		
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	app_type,
+	    	content,
+	    	link,
+	    	status,
+	    	start_type,
+	    	start_time,
+	    	send_object_type,
+	    	send_object,
+	    	send_type,
+	    	remark,
+	    	crt_time,
+	    	modify_time,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != appType ">
+			and app_type = #{appType}
+		</if>
+		<if test=" null != content and ''!= content  ">
+			and content = #{content}
+		</if>
+		<if test=" null != link and ''!= link  ">
+			and link = #{link}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+		<if test=" null != startType ">
+			and start_type = #{startType}
+		</if>
+		<if test=" null != startTime ">
+			and start_time = #{startTime}
+		</if>
+		<if test=" null != sendObjectType ">
+			and send_object_type = #{sendObjectType}
+		</if>
+		<if test=" null != sendObject and ''!= sendObject  ">
+			and send_object = #{sendObject}
+		</if>
+		<if test=" null != sendType ">
+			and send_type = #{sendType}
+		</if>
+		<if test=" null != crtTime ">
+			and crt_time = #{crtTime}
+		</if>
+		<if test=" null != modifyTime ">
+			and modify_time = #{modifyTime}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.mc.SysPushArtificialQueue">
+		select <include refid="Base_Column_List" /> from tsys_push_artificial_queue 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.mc.SysPushArtificialQueue">
+		select <include refid="Base_Column_List" /> from tsys_push_artificial_queue 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select  id,
+	    	app_type,
+	    	content,
+	    	link,
+	    	status,
+	    	start_type,
+	    	start_time,
+	    	send_object_type,
+	    	send_object,
+	    	send_type,
+	    	remark,
+	    	crt_time,
+	    	modify_time,
+	    	user_ids,
+	    	mobiles
+    from tsys_push_artificial_queue
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tsys_push_artificial_queue
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.mc.SysPushArtificialQueue" >
+    INSERT INTO tsys_push_artificial_queue
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+			 	<if test=" null != content and ''!= content  ">
+					content,
+				</if>
+			 	<if test=" null != link and ''!= link  ">
+					link,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != startType ">
+					start_type,
+				</if>
+			 	<if test=" null != startTime ">
+					start_time,
+				</if>
+			 	<if test=" null != sendObjectType ">
+					send_object_type,
+				</if>
+			 	<if test=" null != sendObject and ''!= sendObject  ">
+					send_object,
+				</if>
+				<if test=" null != sendType ">
+					send_type,
+				</if>
+				<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+				<if test=" null != userIds and ''!= userIds  ">
+					user_ids,
+				</if>
+				<if test=" null != mobiles and ''!= mobiles  ">
+					mobiles,
+				</if>
+			 	<if test=" null != crtTime ">
+					crt_time,
+				</if>
+			 	<if test=" null != modifyTime ">
+					modify_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+			 	<if test=" null != content and ''!= content  ">
+					 	#{content},
+				</if>
+			 	<if test=" null != link and ''!= link  ">
+					 	#{link},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != startType ">
+					 	#{startType},
+				</if>
+			 	<if test=" null != startTime ">
+					 	#{startTime},
+				</if>
+			 	<if test=" null != sendObjectType ">
+					 	#{sendObjectType},
+				</if>
+			 	<if test=" null != sendObject and ''!= sendObject  ">
+					 	#{sendObject},
+				</if>
+				<if test=" null != sendType ">
+					 	#{sendType},
+				</if>
+				<if test=" null != remark and ''!= remark  ">
+					   #{remark},
+				</if>
+				<if test=" null != userIds and ''!= userIds  ">
+						#{userIds},
+				</if>
+				<if test=" null != mobiles and ''!= mobiles  ">
+					 #{mobiles},
+				</if>
+			 	<if test=" null != crtTime ">
+					 	#{crtTime},
+				</if>
+			 	<if test=" null != modifyTime ">
+					 	#{modifyTime},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.mc.SysPushArtificialQueue" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tsys_push_artificial_queue
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+			 	<if test=" null != content and ''!= content  ">
+					content,
+				</if>
+			 	<if test=" null != link and ''!= link  ">
+					link,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != startType ">
+					start_type,
+				</if>
+			 	<if test=" null != startTime ">
+					start_time,
+				</if>
+			 	<if test=" null != sendObjectType ">
+					send_object_type,
+				</if>
+			 	<if test=" null != sendObject and ''!= sendObject  ">
+					send_object,
+				</if>
+				<if test=" null != sendType ">
+					send_type,
+				</if>
+				<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+				<if test=" null != userIds and ''!= userIds  ">
+					user_ids,
+				</if>
+				<if test=" null != mobiles and ''!= mobiles  ">
+					mobiles,
+				</if>
+			 	<if test=" null != crtTime ">
+					crt_time,
+				</if>
+			 	<if test=" null != modifyTime ">
+					modify_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+			 	<if test=" null != content and ''!= content  ">
+					 	#{content},
+				</if>
+			 	<if test=" null != link and ''!= link  ">
+					 	#{link},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != startType ">
+					 	#{startType},
+				</if>
+			 	<if test=" null != startTime ">
+					 	#{startTime},
+				</if>
+			 	<if test=" null != sendObjectType ">
+					 	#{sendObjectType},
+				</if>
+			 	<if test=" null != sendObject and ''!= sendObject  ">
+					 	#{sendObject},
+				</if>
+				<if test=" null != sendType ">
+					 	#{sendType},
+				</if>
+				<if test=" null != remark and ''!= remark  ">
+					   #{remark},
+				</if>
+				<if test=" null != userIds and ''!= userIds  ">
+						#{userIds},
+				</if>
+				<if test=" null != mobiles and ''!= mobiles  ">
+					#{mobiles},
+				</if>
+			 	<if test=" null != crtTime ">
+					 	#{crtTime},
+				</if>
+			 	<if test=" null != modifyTime ">
+					 	#{modifyTime},
+				</if>
+		</trim>
+	</insert>
+  
+   <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.mc.SysPushArtificialQueue" >
+  		UPDATE tsys_push_artificial_queue
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != content and ''!= content  ">
+						content = #{content},
+					</if>
+					<if test=" null != link and ''!= link  ">
+						link = #{link},
+					</if>
+					<if test=" null != startType ">
+						start_type = #{startType},
+					</if>
+					<if test=" null != startTime ">
+						start_time = #{startTime},
+					</if>
+					<if test=" null != sendObjectType ">
+						send_object_type = #{sendObjectType},
+					</if>
+					<if test=" null != sendObject and ''!= sendObject  ">
+						send_object = #{sendObject},
+					</if>
+					<if test=" null != sendType ">
+						send_type = #{sendType},
+					</if>
+					<if test=" null != userIds and ''!= userIds  ">
+						user_ids = #{userIds},
+					</if>
+					<if test=" null != mobiles and ''!= mobiles  ">
+						mobiles = #{mobiles},
+					</if>			
+					<if test=" null != modifyTime ">
+						modify_time = #{modifyTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update> 
+	
+<!-- 	<update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.mc.SysPushArtificialQueue" >
+  		UPDATE tsys_push_artificial_queue
+		<set>
+			<trim suffixOverrides=",">					
+					<if test=" null != content and ''!= content  ">
+						content = #{content},
+					</if>
+					<if test=" null != link and ''!= link  ">
+						link = #{link},
+					</if>					
+					<if test=" null != startTime ">
+						start_time = #{startTime},
+					</if>							
+					<if test=" null != modifyTime ">
+						modify_time = #{modifyTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update> -->
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.mc.SysPushArtificialQueue" >
+	    UPDATE tsys_push_artificial_queue
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != content and ''!= content  ">
+						content = #{content},
+					</if>
+					<if test=" null != link and ''!= link  ">
+						link = #{link},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != startType ">
+						start_type = #{startType},
+					</if>
+					<if test=" null != startTime ">
+						start_time = #{startTime},
+					</if>
+					<if test=" null != sendObjectType ">
+						send_object_type = #{sendObjectType},
+					</if>
+					<if test=" null != sendObject and ''!= sendObject  ">
+						send_object = #{sendObject},
+					</if>
+					<if test=" null != sendType ">
+						send_type = #{sendType},
+					</if>
+					<if test=" null != crtTime ">
+						crt_time = #{crtTime},
+					</if>
+					<if test=" null != modifyTime ">
+						modify_time = #{modifyTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tsys_push_artificial_queue
+        <where> 
+        <if test="dt.search!=null">  
+                content LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>   
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+    
+     <select id="querySysPushMessageList" resultMap="BaseResultMap">
+    	SELECT id,app_type,content,link,status,start_type,	start_time,send_object_type,send_object,send_type,remark,crt_time,user_ids
+        FROM tsys_push_artificial_queue t
+        <where> 
+        t.status = 0 
+        and  (t.start_type = 0 or (t.start_type = 1  AND DATE_FORMAT(now(), '%Y-%m-%d %H:%i') = DATE_FORMAT(t.start_time,'%Y-%m-%d %H:%i') ) ) 
+         <if test="null != sendType ">  
+              and t.send_type = #{sendType}
+         </if>  
+        </where>
+        order by  t.crt_time ASC   		
+    </select>
+    
+        <!-- 批量修改 -->
+	<update id="updateBatch" parameterType="java.util.List">
+		update tsys_push_artificial_queue set modify_time = now(),
+		`status` =  (CASE id
+			<foreach item="item" collection="list">
+				when ${item.id} then ${item.status}
+			</foreach>
+			END)		
+		<where>
+			id 
+		<foreach item="item" open="IN (" close=")" separator="," collection="list">
+			#{item.id}
+		</foreach>
+		</where>
+		
+	</update>
+
+</mapper>

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CrmCfpUpgradeRecordMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.CrmCfpUpgradeRecord" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="cfp_level_before" property="cfpLevelBefore" jdbcType="VARCHAR"/>
+		<result column="cfp_level" property="cfpLevel" jdbcType="VARCHAR"/>
+		<result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	user_id,
+	    	cfp_level_before,
+	    	cfp_level,
+	    	remarks,
+	    	create_time,
+	    	last_update_time,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != userId and ''!= userId  ">
+			and user_id = #{userId}
+		</if>
+		<if test=" null != cfpLevelBefore and ''!= cfpLevelBefore  ">
+			and cfp_level_before = #{cfpLevelBefore}
+		</if>
+		<if test=" null != cfpLevel and ''!= cfpLevel  ">
+			and cfp_level = #{cfpLevel}
+		</if>
+		<if test=" null != remarks and ''!= remarks  ">
+			and remarks = #{remarks}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != lastUpdateTime ">
+			and last_update_time = #{lastUpdateTime}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CrmCfpUpgradeRecord">
+		select <include refid="Base_Column_List" /> from tcrm_cfp_upgrade_record 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CrmCfpUpgradeRecord">
+		select <include refid="Base_Column_List" /> from tcrm_cfp_upgrade_record 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcrm_cfp_upgrade_record
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcrm_cfp_upgrade_record
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.CrmCfpUpgradeRecord" >
+    INSERT INTO tcrm_cfp_upgrade_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != cfpLevelBefore and ''!= cfpLevelBefore  ">
+					cfp_level_before,
+				</if>
+			 	<if test=" null != cfpLevel and ''!= cfpLevel  ">
+					cfp_level,
+				</if>
+			 	<if test=" null != remarks and ''!= remarks  ">
+					remarks,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					last_update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != cfpLevelBefore and ''!= cfpLevelBefore  ">
+					 	#{cfpLevelBefore},
+				</if>
+			 	<if test=" null != cfpLevel and ''!= cfpLevel  ">
+					 	#{cfpLevel},
+				</if>
+			 	<if test=" null != remarks and ''!= remarks  ">
+					 	#{remarks},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					 	#{lastUpdateTime},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.CrmCfpUpgradeRecord" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcrm_cfp_upgrade_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != cfpLevelBefore and ''!= cfpLevelBefore  ">
+					cfp_level_before,
+				</if>
+			 	<if test=" null != cfpLevel and ''!= cfpLevel  ">
+					cfp_level,
+				</if>
+			 	<if test=" null != remarks and ''!= remarks  ">
+					remarks,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					last_update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != cfpLevelBefore and ''!= cfpLevelBefore  ">
+					 	#{cfpLevelBefore},
+				</if>
+			 	<if test=" null != cfpLevel and ''!= cfpLevel  ">
+					 	#{cfpLevel},
+				</if>
+			 	<if test=" null != remarks and ''!= remarks  ">
+					 	#{remarks},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					 	#{lastUpdateTime},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.CrmCfpUpgradeRecord" >
+  		UPDATE tcrm_cfp_upgrade_record
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != cfpLevelBefore and ''!= cfpLevelBefore  ">
+						cfp_level_before = #{cfpLevelBefore},
+					</if>
+					<if test=" null != cfpLevel and ''!= cfpLevel  ">
+						cfp_level = #{cfpLevel},
+					</if>
+					<if test=" null != remarks and ''!= remarks  ">
+						remarks = #{remarks},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != lastUpdateTime ">
+						last_update_time = #{lastUpdateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.CrmCfpUpgradeRecord" >
+	    UPDATE tcrm_cfp_upgrade_record
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != cfpLevelBefore and ''!= cfpLevelBefore  ">
+						cfp_level_before = #{cfpLevelBefore},
+					</if>
+					<if test=" null != cfpLevel and ''!= cfpLevel  ">
+						cfp_level = #{cfpLevel},
+					</if>
+					<if test=" null != remarks and ''!= remarks  ">
+						remarks = #{remarks},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != lastUpdateTime ">
+						last_update_time = #{lastUpdateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcrm_cfp_upgrade_record
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+</mapper>

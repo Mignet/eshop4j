@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CimOrgFeeAttrMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.cim.CimOrgFeeAttr" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="fee_desc" property="feeDesc" jdbcType="VARCHAR"/>
+		<result column="fee_type" property="feeType" jdbcType="CHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	fee_desc,
+	    	fee_type,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != feeDesc and ''!= feeDesc  ">
+			and fee_desc = #{feeDesc}
+		</if>
+		<if test=" null != feeType and ''!= feeType  ">
+			and fee_type = #{feeType}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.cim.CimOrgFeeAttr">
+		select <include refid="Base_Column_List" /> from tcim_org_fee_attr 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.cim.CimOrgFeeAttr">
+		select <include refid="Base_Column_List" /> from tcim_org_fee_attr 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_org_fee_attr
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_org_fee_attr
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.cim.CimOrgFeeAttr" >
+    INSERT INTO tcim_org_fee_attr
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != feeDesc and ''!= feeDesc  ">
+					fee_desc,
+				</if>
+			 	<if test=" null != feeType and ''!= feeType  ">
+					fee_type,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != feeDesc and ''!= feeDesc  ">
+					 	#{feeDesc},
+				</if>
+			 	<if test=" null != feeType and ''!= feeType  ">
+					 	#{feeType},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.cim.CimOrgFeeAttr" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcim_org_fee_attr
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != feeDesc and ''!= feeDesc  ">
+					fee_desc,
+				</if>
+			 	<if test=" null != feeType and ''!= feeType  ">
+					fee_type,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != feeDesc and ''!= feeDesc  ">
+					 	#{feeDesc},
+				</if>
+			 	<if test=" null != feeType and ''!= feeType  ">
+					 	#{feeType},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.cim.CimOrgFeeAttr" >
+  		UPDATE tcim_org_fee_attr
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != feeDesc and ''!= feeDesc  ">
+						fee_desc = #{feeDesc},
+					</if>
+					<if test=" null != feeType and ''!= feeType  ">
+						fee_type = #{feeType},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.cim.CimOrgFeeAttr" >
+	    UPDATE tcim_org_fee_attr
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != feeDesc and ''!= feeDesc  ">
+						fee_desc = #{feeDesc},
+					</if>
+					<if test=" null != feeType and ''!= feeType  ">
+						fee_type = #{feeType},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcim_org_fee_attr
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+</mapper>

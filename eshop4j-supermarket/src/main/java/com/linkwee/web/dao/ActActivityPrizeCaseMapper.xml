@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.ActActivityPrizeCaseMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.ActActivityPrizeCase" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="activity_id" property="activityId" jdbcType="VARCHAR"/>
+		<result column="condition_case" property="conditionCase" jdbcType="INTEGER"/>
+		<result column="prize_case" property="prizeCase" jdbcType="INTEGER"/>
+		<result column="case_desc" property="caseDesc" jdbcType="VARCHAR"/>
+		<result column="case_variable" property="caseVariable" jdbcType="INTEGER"/>
+		<result column="case_type" property="caseType" jdbcType="INTEGER"/>
+		<result column="issued_times" property="issuedTimes" jdbcType="INTEGER"/>
+		<result column="waste_times" property="wasteTimes" jdbcType="INTEGER"/>
+		<result column="prize_style" property="prizeStyle" jdbcType="INTEGER"/>
+		<result column="prize_amt" property="prizeAmt" jdbcType="DECIMAL"/>
+		<result column="prize_type" property="prizeType" jdbcType="INTEGER"/>
+		<result column="extends1" property="extends1" jdbcType="VARCHAR"/>
+		<result column="extends2" property="extends2" jdbcType="VARCHAR"/>
+		<result column="extends3" property="extends3" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	activity_id,
+	    	condition_case,
+	    	prize_case,
+	    	case_desc,
+	    	case_variable,
+	    	case_type,
+	    	issued_times,
+	    	waste_times,
+	    	prize_style,
+	    	prize_amt,
+	    	prize_type,
+	    	extends1,
+	    	extends2,
+	    	extends3,
+    </trim>
+  </sql>
+  
+ <sql id="Base_Column_List_T">
+    <trim suffixOverrides=",">
+	    	t.id,
+	    	t.activity_id,
+	    	t.condition_case,
+	    	t.prize_case,
+	    	t.case_desc,
+	    	t.case_variable,
+	    	t.case_type,
+	    	t.issued_times,
+	    	t.waste_times,
+	    	t.prize_style,
+	    	t.prize_amt,
+	    	t.prize_type,
+	    	t.extends1,
+	    	t.extends2,
+	    	t.extends3,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != activityId and ''!= activityId  ">
+			and activity_id = #{activityId}
+		</if>
+		<if test=" null != conditionCase ">
+			and condition_case = #{conditionCase}
+		</if>
+		<if test=" null != prizeCase ">
+			and prize_case = #{prizeCase}
+		</if>
+		<if test=" null != caseDesc and ''!= caseDesc  ">
+			and case_desc = #{caseDesc}
+		</if>
+		<if test=" null != caseVariable ">
+			and case_variable = #{caseVariable}
+		</if>
+		<if test=" null != caseType ">
+			and case_type = #{caseType}
+		</if>
+		<if test=" null != issuedTimes ">
+			and issued_times = #{issuedTimes}
+		</if>
+		<if test=" null != wasteTimes ">
+			and waste_times = #{wasteTimes}
+		</if>
+		<if test=" null != prizeStyle ">
+			and prize_style = #{prizeStyle}
+		</if>
+		<if test=" null != prizeAmt ">
+			and prize_amt = #{prizeAmt}
+		</if>
+		<if test=" null != prizeType ">
+			and prize_type = #{prizeType}
+		</if>
+		<if test=" null != extends1 and ''!= extends1  ">
+			and extends1 = #{extends1}
+		</if>
+		<if test=" null != extends2 and ''!= extends2  ">
+			and extends2 = #{extends2}
+		</if>
+		<if test=" null != extends3 and ''!= extends3  ">
+			and extends3 = #{extends3}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.ActActivityPrizeCase">
+		select <include refid="Base_Column_List" /> from tact_activity_prize_case 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.ActActivityPrizeCase">
+		select <include refid="Base_Column_List" /> from tact_activity_prize_case 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tact_activity_prize_case
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tact_activity_prize_case
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.ActActivityPrizeCase" >
+    INSERT INTO tact_activity_prize_case
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != activityId and ''!= activityId  ">
+					activity_id,
+				</if>
+			 	<if test=" null != conditionCase ">
+					condition_case,
+				</if>
+			 	<if test=" null != prizeCase ">
+					prize_case,
+				</if>
+			 	<if test=" null != caseDesc and ''!= caseDesc  ">
+					case_desc,
+				</if>
+			 	<if test=" null != caseVariable ">
+					case_variable,
+				</if>
+			 	<if test=" null != caseType ">
+					case_type,
+				</if>
+			 	<if test=" null != issuedTimes ">
+					issued_times,
+				</if>
+			 	<if test=" null != wasteTimes ">
+					waste_times,
+				</if>
+			 	<if test=" null != prizeStyle ">
+					prize_style,
+				</if>
+			 	<if test=" null != prizeAmt ">
+					prize_amt,
+				</if>
+			 	<if test=" null != prizeType ">
+					prize_type,
+				</if>
+			 	<if test=" null != extends1 and ''!= extends1  ">
+					extends1,
+				</if>
+			 	<if test=" null != extends2 and ''!= extends2  ">
+					extends2,
+				</if>
+			 	<if test=" null != extends3 and ''!= extends3  ">
+					extends3,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != activityId and ''!= activityId  ">
+					 	#{activityId},
+				</if>
+			 	<if test=" null != conditionCase ">
+					 	#{conditionCase},
+				</if>
+			 	<if test=" null != prizeCase ">
+					 	#{prizeCase},
+				</if>
+			 	<if test=" null != caseDesc and ''!= caseDesc  ">
+					 	#{caseDesc},
+				</if>
+			 	<if test=" null != caseVariable ">
+					 	#{caseVariable},
+				</if>
+			 	<if test=" null != caseType ">
+					 	#{caseType},
+				</if>
+			 	<if test=" null != issuedTimes ">
+					 	#{issuedTimes},
+				</if>
+			 	<if test=" null != wasteTimes ">
+					 	#{wasteTimes},
+				</if>
+			 	<if test=" null != prizeStyle ">
+					 	#{prizeStyle},
+				</if>
+			 	<if test=" null != prizeAmt ">
+					 	#{prizeAmt},
+				</if>
+			 	<if test=" null != prizeType ">
+					 	#{prizeType},
+				</if>
+			 	<if test=" null != extends1 and ''!= extends1  ">
+					 	#{extends1},
+				</if>
+			 	<if test=" null != extends2 and ''!= extends2  ">
+					 	#{extends2},
+				</if>
+			 	<if test=" null != extends3 and ''!= extends3  ">
+					 	#{extends3},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.ActActivityPrizeCase" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tact_activity_prize_case
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != activityId and ''!= activityId  ">
+					activity_id,
+				</if>
+			 	<if test=" null != conditionCase ">
+					condition_case,
+				</if>
+			 	<if test=" null != prizeCase ">
+					prize_case,
+				</if>
+			 	<if test=" null != caseDesc and ''!= caseDesc  ">
+					case_desc,
+				</if>
+			 	<if test=" null != caseVariable ">
+					case_variable,
+				</if>
+			 	<if test=" null != caseType ">
+					case_type,
+				</if>
+			 	<if test=" null != issuedTimes ">
+					issued_times,
+				</if>
+			 	<if test=" null != wasteTimes ">
+					waste_times,
+				</if>
+			 	<if test=" null != prizeStyle ">
+					prize_style,
+				</if>
+			 	<if test=" null != prizeAmt ">
+					prize_amt,
+				</if>
+			 	<if test=" null != prizeType ">
+					prize_type,
+				</if>
+			 	<if test=" null != extends1 and ''!= extends1  ">
+					extends1,
+				</if>
+			 	<if test=" null != extends2 and ''!= extends2  ">
+					extends2,
+				</if>
+			 	<if test=" null != extends3 and ''!= extends3  ">
+					extends3,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != activityId and ''!= activityId  ">
+					 	#{activityId},
+				</if>
+			 	<if test=" null != conditionCase ">
+					 	#{conditionCase},
+				</if>
+			 	<if test=" null != prizeCase ">
+					 	#{prizeCase},
+				</if>
+			 	<if test=" null != caseDesc and ''!= caseDesc  ">
+					 	#{caseDesc},
+				</if>
+			 	<if test=" null != caseVariable ">
+					 	#{caseVariable},
+				</if>
+			 	<if test=" null != caseType ">
+					 	#{caseType},
+				</if>
+			 	<if test=" null != issuedTimes ">
+					 	#{issuedTimes},
+				</if>
+			 	<if test=" null != wasteTimes ">
+					 	#{wasteTimes},
+				</if>
+			 	<if test=" null != prizeStyle ">
+					 	#{prizeStyle},
+				</if>
+			 	<if test=" null != prizeAmt ">
+					 	#{prizeAmt},
+				</if>
+			 	<if test=" null != prizeType ">
+					 	#{prizeType},
+				</if>
+			 	<if test=" null != extends1 and ''!= extends1  ">
+					 	#{extends1},
+				</if>
+			 	<if test=" null != extends2 and ''!= extends2  ">
+					 	#{extends2},
+				</if>
+			 	<if test=" null != extends3 and ''!= extends3  ">
+					 	#{extends3},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.ActActivityPrizeCase" >
+  		UPDATE tact_activity_prize_case
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != activityId and ''!= activityId  ">
+						activity_id = #{activityId},
+					</if>
+					<if test=" null != conditionCase ">
+						condition_case = #{conditionCase},
+					</if>
+					<if test=" null != prizeCase ">
+						prize_case = #{prizeCase},
+					</if>
+					<if test=" null != caseDesc and ''!= caseDesc  ">
+						case_desc = #{caseDesc},
+					</if>
+					<if test=" null != caseVariable ">
+						case_variable = #{caseVariable},
+					</if>
+					<if test=" null != caseType ">
+						case_type = #{caseType},
+					</if>
+					<if test=" null != issuedTimes ">
+						issued_times = #{issuedTimes},
+					</if>
+					<if test=" null != wasteTimes ">
+						waste_times = #{wasteTimes},
+					</if>
+					<if test=" null != prizeStyle ">
+						prize_style = #{prizeStyle},
+					</if>
+					<if test=" null != prizeAmt ">
+						prize_amt = #{prizeAmt},
+					</if>
+					<if test=" null != prizeType ">
+						prize_type = #{prizeType},
+					</if>
+					<if test=" null != extends1 and ''!= extends1  ">
+						extends1 = #{extends1},
+					</if>
+					<if test=" null != extends2 and ''!= extends2  ">
+						extends2 = #{extends2},
+					</if>
+					<if test=" null != extends3 and ''!= extends3  ">
+						extends3 = #{extends3},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.ActActivityPrizeCase" >
+	    UPDATE tact_activity_prize_case
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != activityId and ''!= activityId  ">
+						activity_id = #{activityId},
+					</if>
+					<if test=" null != conditionCase ">
+						condition_case = #{conditionCase},
+					</if>
+					<if test=" null != prizeCase ">
+						prize_case = #{prizeCase},
+					</if>
+					<if test=" null != caseDesc and ''!= caseDesc  ">
+						case_desc = #{caseDesc},
+					</if>
+					<if test=" null != caseVariable ">
+						case_variable = #{caseVariable},
+					</if>
+					<if test=" null != caseType ">
+						case_type = #{caseType},
+					</if>
+					<if test=" null != issuedTimes ">
+						issued_times = #{issuedTimes},
+					</if>
+					<if test=" null != wasteTimes ">
+						waste_times = #{wasteTimes},
+					</if>
+					<if test=" null != prizeStyle ">
+						prize_style = #{prizeStyle},
+					</if>
+					<if test=" null != prizeAmt ">
+						prize_amt = #{prizeAmt},
+					</if>
+					<if test=" null != prizeType ">
+						prize_type = #{prizeType},
+					</if>
+					<if test=" null != extends1 and ''!= extends1  ">
+						extends1 = #{extends1},
+					</if>
+					<if test=" null != extends2 and ''!= extends2  ">
+						extends2 = #{extends2},
+					</if>
+					<if test=" null != extends3 and ''!= extends3  ">
+						extends3 = #{extends3},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tact_activity_prize_case
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+</mapper>

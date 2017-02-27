@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CimOrgDynamicMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.CimOrgDynamic" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="org_number" property="orgNumber" jdbcType="VARCHAR"/>
+		<result column="org_summary" property="orgSummary" jdbcType="VARCHAR"/>
+		<result column="org_title" property="orgTitle" jdbcType="VARCHAR"/>
+		<result column="org_content" property="orgContent" jdbcType="LONGVARCHAR"/>
+		<result column="org_dynamic_url" property="orgDynamicUrl" jdbcType="VARCHAR"/>
+		<result column="creator" property="creator" jdbcType="VARCHAR"/>
+		<result column="updater" property="updater" jdbcType="VARCHAR"/>
+		<result column="release_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		<result column="sort" property="sort" jdbcType="INTEGER"/>
+		<result column="isshow" property="isshow" jdbcType="INTEGER"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	org_number,
+	    	org_summary,
+	    	org_title,
+	    	org_content,
+	    	org_dynamic_url,
+	    	creator,
+	    	updater,
+	    	create_time,
+	    	update_time,
+	    	sort,
+	    	isshow,
+	    	remark,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != orgNumber and ''!= orgNumber  ">
+			and org_number = #{orgNumber}
+		</if>
+		<if test=" null != orgSummary and ''!= orgSummary  ">
+			and org_summary = #{orgSummary}
+		</if>
+		<if test=" null != orgTitle and ''!= orgTitle  ">
+			and org_title = #{orgTitle}
+		</if>
+		<if test=" null != orgContent and ''!= orgContent  ">
+			and org_content = #{orgContent}
+		</if>
+		<if test=" null != orgDynamicUrl and ''!= orgDynamicUrl  ">
+			and org_dynamic_url = #{orgDynamicUrl}
+		</if>
+		<if test=" null != creator and ''!= creator  ">
+			and creator = #{creator}
+		</if>
+		<if test=" null != updater and ''!= updater  ">
+			and updater = #{updater}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+		<if test=" null != sort ">
+			and sort = #{sort}
+		</if>
+		<if test=" null != isshow ">
+			and isshow = #{isshow}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimOrgDynamic">
+		select <include refid="Base_Column_List" /> from tcim_org_dynamic 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimOrgDynamic">
+		select <include refid="Base_Column_List" /> from tcim_org_dynamic 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_org_dynamic
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_org_dynamic
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.CimOrgDynamic" >
+    INSERT INTO tcim_org_dynamic
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					org_number,
+				</if>
+			 	<if test=" null != orgSummary and ''!= orgSummary  ">
+					org_summary,
+				</if>
+			 	<if test=" null != orgTitle and ''!= orgTitle  ">
+					org_title,
+				</if>
+			 	<if test=" null != orgContent and ''!= orgContent  ">
+					org_content,
+				</if>
+			 	<if test=" null != orgDynamicUrl and ''!= orgDynamicUrl  ">
+					org_dynamic_url,
+				</if>
+			 	<if test=" null != creator and ''!= creator  ">
+					creator,
+				</if>
+			 	<if test=" null != updater and ''!= updater  ">
+					updater,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != sort ">
+					sort,
+				</if>
+			 	<if test=" null != isshow ">
+					isshow,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					 	#{orgNumber},
+				</if>
+			 	<if test=" null != orgSummary and ''!= orgSummary  ">
+					 	#{orgSummary},
+				</if>
+			 	<if test=" null != orgTitle and ''!= orgTitle  ">
+					 	#{orgTitle},
+				</if>
+			 	<if test=" null != orgContent and ''!= orgContent  ">
+					 	#{orgContent},
+				</if>
+			 	<if test=" null != orgDynamicUrl and ''!= orgDynamicUrl  ">
+					 	#{orgDynamicUrl},
+				</if>
+			 	<if test=" null != creator and ''!= creator  ">
+					 	#{creator},
+				</if>
+			 	<if test=" null != updater and ''!= updater  ">
+					 	#{updater},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != sort ">
+					 	#{sort},
+				</if>
+			 	<if test=" null != isshow ">
+					 	#{isshow},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.CimOrgDynamic" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcim_org_dynamic
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					org_number,
+				</if>
+			 	<if test=" null != orgSummary and ''!= orgSummary  ">
+					org_summary,
+				</if>
+			 	<if test=" null != orgTitle and ''!= orgTitle  ">
+					org_title,
+				</if>
+			 	<if test=" null != orgContent and ''!= orgContent  ">
+					org_content,
+				</if>
+			 	<if test=" null != orgDynamicUrl and ''!= orgDynamicUrl  ">
+					org_dynamic_url,
+				</if>
+			 	<if test=" null != creator and ''!= creator  ">
+					creator,
+				</if>
+			 	<if test=" null != updater and ''!= updater  ">
+					updater,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != sort ">
+					sort,
+				</if>
+			 	<if test=" null != isshow ">
+					isshow,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					 	#{orgNumber},
+				</if>
+			 	<if test=" null != orgSummary and ''!= orgSummary  ">
+					 	#{orgSummary},
+				</if>
+			 	<if test=" null != orgTitle and ''!= orgTitle  ">
+					 	#{orgTitle},
+				</if>
+			 	<if test=" null != orgContent and ''!= orgContent  ">
+					 	#{orgContent},
+				</if>
+			 	<if test=" null != orgDynamicUrl and ''!= orgDynamicUrl  ">
+					 	#{orgDynamicUrl},
+				</if>
+			 	<if test=" null != creator and ''!= creator  ">
+					 	#{creator},
+				</if>
+			 	<if test=" null != updater and ''!= updater  ">
+					 	#{updater},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != sort ">
+					 	#{sort},
+				</if>
+			 	<if test=" null != isshow ">
+					 	#{isshow},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.CimOrgDynamic" >
+  		UPDATE tcim_org_dynamic
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != orgNumber and ''!= orgNumber  ">
+						org_number = #{orgNumber},
+					</if>
+					<if test=" null != orgSummary and ''!= orgSummary  ">
+						org_summary = #{orgSummary},
+					</if>
+					<if test=" null != orgTitle and ''!= orgTitle  ">
+						org_title = #{orgTitle},
+					</if>
+					<if test=" null != orgContent and ''!= orgContent  ">
+						org_content = #{orgContent},
+					</if>
+					<if test=" null != orgDynamicUrl and ''!= orgDynamicUrl  ">
+						org_dynamic_url = #{orgDynamicUrl},
+					</if>
+					<if test=" null != creator and ''!= creator  ">
+						creator = #{creator},
+					</if>
+					<if test=" null != updater and ''!= updater  ">
+						updater = #{updater},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != sort ">
+						sort = #{sort},
+					</if>
+					<if test=" null != isshow ">
+						isshow = #{isshow},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.CimOrgDynamic" >
+	    UPDATE tcim_org_dynamic
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != orgNumber and ''!= orgNumber  ">
+						org_number = #{orgNumber},
+					</if>
+					<if test=" null != orgSummary and ''!= orgSummary  ">
+						org_summary = #{orgSummary},
+					</if>
+					<if test=" null != orgTitle and ''!= orgTitle  ">
+						org_title = #{orgTitle},
+					</if>
+					<if test=" null != orgContent and ''!= orgContent  ">
+						org_content = #{orgContent},
+					</if>
+					<if test=" null != orgDynamicUrl and ''!= orgDynamicUrl  ">
+						org_dynamic_url = #{orgDynamicUrl},
+					</if>
+					<if test=" null != creator and ''!= creator  ">
+						creator = #{creator},
+					</if>
+					<if test=" null != updater and ''!= updater  ">
+						updater = #{updater},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != sort ">
+						sort = #{sort},
+					</if>
+					<if test=" null != isshow ">
+						isshow = #{isshow},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcim_org_dynamic
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+	
+	<!-- 平台动态分页查询 显示最近10条动态 -->
+    <select id="queryCimOrgDynamicList" resultMap="BaseResultMap">
+	    SELECT
+	    		id,
+				org_number,
+		    	org_title,
+		    	org_dynamic_url,
+		    	release_time
+		    	
+				FROM tcim_org_dynamic
+				WHERE org_number = #{orgNumber}
+				ORDER BY sort,release_time DESC
+				LIMIT 10
+    </select>
+    
+    <!-- 查询平台动态信息 -->
+    <select id="queryOrgDynamicInfo" resultMap="BaseResultMap">
+	    SELECT
+				org_number,
+		    	org_summary,
+		    	org_title,
+		    	org_content,
+		    	org_dynamic_url,
+		    	release_time
+				FROM tcim_org_dynamic
+				
+				WHERE id = #{orgDynamicId}
+    </select>
+    
+</mapper>

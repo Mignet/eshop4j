@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CimOrgFeeTimetaskMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.CimOrgFeeTimetask" id="BaseResultMap">
+		<result column="fid" property="fid" jdbcType="INTEGER"/>
+		<result column="org_number" property="orgNumber" jdbcType="VARCHAR"/>
+		<result column="org_name" property="orgName" jdbcType="VARCHAR"/>
+		<result column="task_start_time" property="taskStartTime" jdbcType="TIMESTAMP"/>
+		<result column="org_fee_ratio" property="orgFeeRatio" jdbcType="DECIMAL"/>
+		<result column="org_old_fee_ratio" property="orgOldFeeRatio" jdbcType="DECIMAL"/>
+		<result column="task_type" property="taskType" jdbcType="INTEGER"/>
+		<result column="task_status" property="taskStatus" jdbcType="INTEGER"/>
+		<result column="task_create_reason" property="taskCreateReason" jdbcType="VARCHAR"/>
+		<result column="creater" property="creater" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="updater" property="updater" jdbcType="VARCHAR"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	fid,
+	    	org_number,
+	    	org_name,
+	    	task_start_time,
+	    	org_fee_ratio,
+	    	org_old_fee_ratio,
+	    	task_type,
+	    	task_status,
+	    	task_create_reason,
+	    	creater,
+	    	create_time,
+	    	updater,
+	    	update_time,
+	    	remark,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != fid ">
+			and fid = #{fid}
+		</if>
+		<if test=" null != orgNumber and ''!= orgNumber  ">
+			and org_number = #{orgNumber}
+		</if>
+		<if test=" null != orgName and ''!= orgName  ">
+			and org_name = #{orgName}
+		</if>
+		<if test=" null != taskStartTime ">
+			and task_start_time = #{taskStartTime}
+		</if>
+		<if test=" null != orgFeeRatio ">
+			and org_fee_ratio = #{orgFeeRatio}
+		</if>
+		<if test=" null != orgOldFeeRatio ">
+			and org_old_fee_ratio = #{orgOldFeeRatio}
+		</if>
+		<if test=" null != taskType ">
+			and task_type = #{taskType}
+		</if>
+		<if test=" null != taskStatus ">
+			and task_status = #{taskStatus}
+		</if>
+		<if test=" null != taskCreateReason and ''!= taskCreateReason  ">
+			and task_create_reason = #{taskCreateReason}
+		</if>
+		<if test=" null != creater and ''!= creater  ">
+			and creater = #{creater}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != updater and ''!= updater  ">
+			and updater = #{updater}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimOrgFeeTimetask">
+		select <include refid="Base_Column_List" /> from tcim_org_fee_timetask 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimOrgFeeTimetask">
+		select <include refid="Base_Column_List" /> from tcim_org_fee_timetask 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_org_fee_timetask
+    where  fid = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_org_fee_timetask
+    where fid = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.CimOrgFeeTimetask" >
+    INSERT INTO tcim_org_fee_timetask
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != fid ">
+					fid,
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					org_number,
+				</if>
+			 	<if test=" null != orgName and ''!= orgName  ">
+					org_name,
+				</if>
+			 	<if test=" null != taskStartTime ">
+					task_start_time,
+				</if>
+			 	<if test=" null != orgFeeRatio ">
+					org_fee_ratio,
+				</if>
+				<if test=" null != orgOldFeeRatio ">
+					org_old_fee_ratio,
+				</if>
+			 	<if test=" null != taskType ">
+					task_type,
+				</if>
+			 	<if test=" null != taskStatus ">
+					task_status,
+				</if>
+			 	<if test=" null != taskCreateReason and ''!= taskCreateReason  ">
+					task_create_reason,
+				</if>
+			 	<if test=" null != creater and ''!= creater  ">
+					creater,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updater and ''!= updater  ">
+					updater,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != fid ">
+					 	#{fid},
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					 	#{orgNumber},
+				</if>
+			 	<if test=" null != orgName and ''!= orgName  ">
+					 	#{orgName},
+				</if>
+			 	<if test=" null != taskStartTime ">
+					 	#{taskStartTime},
+				</if>
+			 	<if test=" null != orgFeeRatio ">
+					 	#{orgFeeRatio},
+				</if>
+			 	<if test=" null != orgOldFeeRatio ">
+					 	#{orgOldFeeRatio},
+				</if>
+			 	<if test=" null != taskType ">
+					 	#{taskType},
+				</if>
+			 	<if test=" null != taskStatus ">
+					 	#{taskStatus},
+				</if>
+			 	<if test=" null != taskCreateReason and ''!= taskCreateReason  ">
+					 	#{taskCreateReason},
+				</if>
+			 	<if test=" null != creater and ''!= creater  ">
+					 	#{creater},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updater and ''!= updater  ">
+					 	#{updater},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.CimOrgFeeTimetask" useGeneratedKeys="true" keyProperty="fid" >
+		INSERT INTO tcim_org_fee_timetask
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != fid ">
+					fid,
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					org_number,
+				</if>
+			 	<if test=" null != orgName and ''!= orgName  ">
+					org_name,
+				</if>
+			 	<if test=" null != taskStartTime ">
+					task_start_time,
+				</if>
+			 	<if test=" null != orgFeeRatio ">
+					org_fee_ratio,
+				</if>
+				<if test=" null != orgOldFeeRatio ">
+					org_old_fee_ratio,
+				</if>
+			 	<if test=" null != taskType ">
+					task_type,
+				</if>
+			 	<if test=" null != taskStatus ">
+					task_status,
+				</if>
+			 	<if test=" null != taskCreateReason and ''!= taskCreateReason  ">
+					task_create_reason,
+				</if>
+			 	<if test=" null != creater and ''!= creater  ">
+					creater,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updater and ''!= updater  ">
+					updater,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != fid ">
+					 	#{fid},
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					 	#{orgNumber},
+				</if>
+			 	<if test=" null != orgName and ''!= orgName  ">
+					 	#{orgName},
+				</if>
+			 	<if test=" null != taskStartTime ">
+					 	#{taskStartTime},
+				</if>
+			 	<if test=" null != orgFeeRatio ">
+					 	#{orgFeeRatio},
+				</if>
+			 	<if test=" null != orgOldFeeRatio ">
+					 	#{orgOldFeeRatio},
+				</if>
+			 	<if test=" null != taskType ">
+					 	#{taskType},
+				</if>
+			 	<if test=" null != taskStatus ">
+					 	#{taskStatus},
+				</if>
+			 	<if test=" null != taskCreateReason and ''!= taskCreateReason  ">
+					 	#{taskCreateReason},
+				</if>
+			 	<if test=" null != creater and ''!= creater  ">
+					 	#{creater},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updater and ''!= updater  ">
+					 	#{updater},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.CimOrgFeeTimetask" >
+  		UPDATE tcim_org_fee_timetask
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != orgNumber and ''!= orgNumber  ">
+						org_number = #{orgNumber},
+					</if>
+					<if test=" null != orgName and ''!= orgName  ">
+						org_name = #{orgName},
+					</if>
+					<if test=" null != taskStartTime ">
+						task_start_time = #{taskStartTime},
+					</if>
+					<if test=" null != orgFeeRatio ">
+						org_fee_ratio = #{orgFeeRatio},
+					</if>
+					<if test=" null != orgOldFeeRatio ">
+						org_old_fee_ratio = #{orgOldFeeRatio},
+					</if>
+					<if test=" null != taskType ">
+						task_type = #{taskType},
+					</if>
+					<if test=" null != taskStatus ">
+						task_status = #{taskStatus},
+					</if>
+					<if test=" null != taskCreateReason and ''!= taskCreateReason  ">
+						task_create_reason = #{taskCreateReason},
+					</if>
+					<if test=" null != creater and ''!= creater  ">
+						creater = #{creater},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updater and ''!= updater  ">
+						updater = #{updater},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 fid = #{fid}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.CimOrgFeeTimetask" >
+	    UPDATE tcim_org_fee_timetask
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != orgNumber and ''!= orgNumber  ">
+						org_number = #{orgNumber},
+					</if>
+					<if test=" null != orgName and ''!= orgName  ">
+						org_name = #{orgName},
+					</if>
+					<if test=" null != taskStartTime ">
+						task_start_time = #{taskStartTime},
+					</if>
+					<if test=" null != orgFeeRatio ">
+						org_fee_ratio = #{orgFeeRatio},
+					</if>
+					<if test=" null != orgOldFeeRatio ">
+						org_old_fee_ratio = #{orgOldFeeRatio},
+					</if>
+					<if test=" null != taskType ">
+						task_type = #{taskType},
+					</if>
+					<if test=" null != taskStatus ">
+						task_status = #{taskStatus},
+					</if>
+					<if test=" null != taskCreateReason and ''!= taskCreateReason  ">
+						task_create_reason = #{taskCreateReason},
+					</if>
+					<if test=" null != creater and ''!= creater  ">
+						creater = #{creater},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updater and ''!= updater  ">
+						updater = #{updater},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+			</trim>
+		</set>
+		<where>
+			fid = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcim_org_fee_timetask
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+	
+	<select id="queryOrgFeeTimeTaskByStatus" resultMap="BaseResultMap">
+		SELECT
+			fid,
+	    	org_number,
+	    	org_name,
+	    	task_start_time,
+	    	org_fee_ratio,
+	    	org_old_fee_ratio,
+	    	task_type,
+	    	task_status,
+	    	task_create_reason,
+	    	creater,
+	    	create_time,
+	    	updater,
+	    	update_time,
+	    	remark
+	    	 FROM tcim_org_fee_timetask
+	    	 WHERE task_status = #{taskStatus}
+	    	 <if test=" null != currentTime ">
+	    	 	<![CDATA[
+					AND date_format(task_start_time,'%Y-%m-%d %H:%i:%s') <= date_format(#{currentTime},'%Y-%m-%d %H:%i:%s')
+				]]>
+			 </if>
+	    	 <if test=" null != orgNumber and ''!= orgNumber ">
+				AND org_number = #{orgNumber}
+			</if>
+			ORDER BY task_start_time
+	</select>
+	
+	<!-- 查询用户当前购买时间段的佣金率 -->
+	<select id="queryOrgCurrentBuyDateFee" resultMap="BaseResultMap">
+		SELECT
+			fid,
+	    	org_number,
+	    	org_name,
+	    	task_start_time,
+	    	org_fee_ratio,
+	    	org_old_fee_ratio,
+	    	task_type,
+	    	task_status,
+	    	task_create_reason,
+	    	creater,
+	    	create_time,
+	    	updater,
+	    	update_time,
+	    	remark
+	    	 FROM tcim_org_fee_timetask
+	    	 WHERE task_status = 2
+	    	<![CDATA[
+				AND update_time <= #{buyDate}
+			]]>
+				AND org_number = #{orgNumber}
+			ORDER BY  update_time DESC
+			LIMIT 1
+	</select>
+	
+</mapper>

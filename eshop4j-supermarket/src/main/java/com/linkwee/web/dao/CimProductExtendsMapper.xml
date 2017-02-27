@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CimProductExtendsMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.CimProductExtends" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="product_id" property="productId" jdbcType="VARCHAR"/>
+		<result column="share_desc" property="shareDesc" jdbcType="VARCHAR"/>
+		<result column="share_imgurl" property="shareImgurl" jdbcType="VARCHAR"/>
+		<result column="share_link" property="shareLink" jdbcType="VARCHAR"/>
+		<result column="share_title" property="shareTitle" jdbcType="VARCHAR"/>
+		<result column="creat_time" property="creatTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	product_id,
+	    	share_desc,
+	    	share_imgurl,
+	    	share_link,
+	    	share_title,
+	    	creat_time,
+	    	update_time,
+    </trim>
+  </sql>
+  
+  <sql id="Base_Column_List_T">
+    <trim suffixOverrides=",">
+	    	t.id,
+	    	t.product_id,
+	    	t.share_desc,
+	    	t.share_imgurl,
+	    	t.share_link,
+	    	t.share_title,
+	    	t.creat_time,
+	    	t.update_time,
+    </trim>
+  </sql>
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != productId and ''!= productId  ">
+			and product_id = #{productId}
+		</if>
+		<if test=" null != shareDesc and ''!= shareDesc  ">
+			and share_desc = #{shareDesc}
+		</if>
+		<if test=" null != shareImgurl and ''!= shareImgurl  ">
+			and share_imgurl = #{shareImgurl}
+		</if>
+		<if test=" null != shareLink and ''!= shareLink  ">
+			and share_link = #{shareLink}
+		</if>
+		<if test=" null != shareTitle and ''!= shareTitle  ">
+			and share_title = #{shareTitle}
+		</if>
+		<if test=" null != creatTime ">
+			and creat_time = #{creatTime}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimProductExtends">
+		select <include refid="Base_Column_List" /> from tcim_product_extends 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimProductExtends">
+		select <include refid="Base_Column_List" /> from tcim_product_extends 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_product_extends
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_product_extends
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.CimProductExtends" >
+    INSERT INTO tcim_product_extends
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != shareDesc and ''!= shareDesc  ">
+					share_desc,
+				</if>
+			 	<if test=" null != shareImgurl and ''!= shareImgurl  ">
+					share_imgurl,
+				</if>
+			 	<if test=" null != shareLink and ''!= shareLink  ">
+					share_link,
+				</if>
+			 	<if test=" null != shareTitle and ''!= shareTitle  ">
+					share_title,
+				</if>
+			 	<if test=" null != creatTime ">
+					creat_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != shareDesc and ''!= shareDesc  ">
+					 	#{shareDesc},
+				</if>
+			 	<if test=" null != shareImgurl and ''!= shareImgurl  ">
+					 	#{shareImgurl},
+				</if>
+			 	<if test=" null != shareLink and ''!= shareLink  ">
+					 	#{shareLink},
+				</if>
+			 	<if test=" null != shareTitle and ''!= shareTitle  ">
+					 	#{shareTitle},
+				</if>
+			 	<if test=" null != creatTime ">
+					 	#{creatTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.CimProductExtends" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcim_product_extends
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != shareDesc and ''!= shareDesc  ">
+					share_desc,
+				</if>
+			 	<if test=" null != shareImgurl and ''!= shareImgurl  ">
+					share_imgurl,
+				</if>
+			 	<if test=" null != shareLink and ''!= shareLink  ">
+					share_link,
+				</if>
+			 	<if test=" null != shareTitle and ''!= shareTitle  ">
+					share_title,
+				</if>
+			 	<if test=" null != creatTime ">
+					creat_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != shareDesc and ''!= shareDesc  ">
+					 	#{shareDesc},
+				</if>
+			 	<if test=" null != shareImgurl and ''!= shareImgurl  ">
+					 	#{shareImgurl},
+				</if>
+			 	<if test=" null != shareLink and ''!= shareLink  ">
+					 	#{shareLink},
+				</if>
+			 	<if test=" null != shareTitle and ''!= shareTitle  ">
+					 	#{shareTitle},
+				</if>
+			 	<if test=" null != creatTime ">
+					 	#{creatTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.CimProductExtends" >
+  		UPDATE tcim_product_extends
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != shareDesc and ''!= shareDesc  ">
+						share_desc = #{shareDesc},
+					</if>
+					<if test=" null != shareImgurl and ''!= shareImgurl  ">
+						share_imgurl = #{shareImgurl},
+					</if>
+					<if test=" null != shareLink and ''!= shareLink  ">
+						share_link = #{shareLink},
+					</if>
+					<if test=" null != shareTitle and ''!= shareTitle  ">
+						share_title = #{shareTitle},
+					</if>
+					<if test=" null != creatTime ">
+						creat_time = #{creatTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.CimProductExtends" >
+	    UPDATE tcim_product_extends
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != shareDesc and ''!= shareDesc  ">
+						share_desc = #{shareDesc},
+					</if>
+					<if test=" null != shareImgurl and ''!= shareImgurl  ">
+						share_imgurl = #{shareImgurl},
+					</if>
+					<if test=" null != shareLink and ''!= shareLink  ">
+						share_link = #{shareLink},
+					</if>
+					<if test=" null != shareTitle and ''!= shareTitle  ">
+						share_title = #{shareTitle},
+					</if>
+					<if test=" null != creatTime ">
+						creat_time = #{creatTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcim_product_extends
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+    
+    <!-- 分页条件查询 -->
+    <select id="selectShareContentByProductId" parameterType="java.lang.String"  resultType="com.linkwee.web.model.share.ShareContent">
+	  SELECT
+			t.share_desc AS shareDesc,
+			t.share_imgurl AS shareImgurl,
+			t.share_link AS shareLink,
+			t.share_title AS shareTitle
+		FROM
+			tcim_product_extends t
+		where t.product_id =  #{productId,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

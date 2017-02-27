@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.AcOfflineRewardDraftMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.acc.AcOfflineRewardDraft" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="user_type" property="userType" jdbcType="INTEGER"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="trans_type" property="transType" jdbcType="INTEGER"/>
+		<result column="trans_amount" property="transAmount" jdbcType="DECIMAL"/>
+		<result column="reward_time" property="rewardTime" jdbcType="TIMESTAMP"/>
+		<result column="grant_time" property="grantTime" jdbcType="TIMESTAMP"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP"/>
+		<result column="create_person" property="createPerson" jdbcType="VARCHAR"/>
+		<result column="last_update_person" property="lastUpdatePerson" jdbcType="VARCHAR"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="batch" property="batch" jdbcType="VARCHAR"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="user_name" property="userName" jdbcType="VARCHAR"/>
+		<result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	user_type,
+	    	user_id,
+	    	trans_type,
+	    	trans_amount,
+	    	reward_time,
+	    	grant_time,
+	    	create_time,
+	    	last_update_time,
+	    	create_person,
+	    	last_update_person,
+	    	remark,
+	    	batch,
+	    	status,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != userType ">
+			and user_type = #{userType}
+		</if>
+		<if test=" null != userId and ''!= userId  ">
+			and user_id = #{userId}
+		</if>
+		<if test=" null != transType ">
+			and trans_type = #{transType}
+		</if>
+		<if test=" null != transAmount ">
+			and trans_amount = #{transAmount}
+		</if>
+		<if test=" null != rewardTime ">
+			and reward_time = #{rewardTime}
+		</if>
+		<if test=" null != grantTime ">
+			and grant_time = #{grantTime}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != lastUpdateTime ">
+			and last_update_time = #{lastUpdateTime}
+		</if>
+		<if test=" null != createPerson and ''!= createPerson  ">
+			and create_person = #{createPerson}
+		</if>
+		<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+			and last_update_person = #{lastUpdatePerson}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+		<if test=" null != batch and ''!= batch  ">
+			and batch = #{batch}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.acc.AcOfflineRewardDraft">
+		select <include refid="Base_Column_List" /> from tac_offline_reward_draft 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.acc.AcOfflineRewardDraft">
+		select <include refid="Base_Column_List" /> from tac_offline_reward_draft 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tac_offline_reward_draft
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tac_offline_reward_draft
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.acc.AcOfflineRewardDraft" >
+    INSERT INTO tac_offline_reward_draft
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != userType ">
+					user_type,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != transType ">
+					trans_type,
+				</if>
+			 	<if test=" null != transAmount ">
+					trans_amount,
+				</if>
+			 	<if test=" null != rewardTime ">
+					reward_time,
+				</if>
+			 	<if test=" null != grantTime ">
+					grant_time,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					last_update_time,
+				</if>
+			 	<if test=" null != createPerson and ''!= createPerson  ">
+					create_person,
+				</if>
+			 	<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+					last_update_person,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != batch and ''!= batch  ">
+					batch,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != userType ">
+					 	#{userType},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != transType ">
+					 	#{transType},
+				</if>
+			 	<if test=" null != transAmount ">
+					 	#{transAmount},
+				</if>
+			 	<if test=" null != rewardTime ">
+					 	#{rewardTime},
+				</if>
+			 	<if test=" null != grantTime ">
+					 	#{grantTime},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					 	#{lastUpdateTime},
+				</if>
+			 	<if test=" null != createPerson and ''!= createPerson  ">
+					 	#{createPerson},
+				</if>
+			 	<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+					 	#{lastUpdatePerson},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != batch and ''!= batch  ">
+					 	#{batch},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.acc.AcOfflineRewardDraft" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tac_offline_reward_draft
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != userType ">
+					user_type,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != transType ">
+					trans_type,
+				</if>
+			 	<if test=" null != transAmount ">
+					trans_amount,
+				</if>
+			 	<if test=" null != rewardTime ">
+					reward_time,
+				</if>
+			 	<if test=" null != grantTime ">
+					grant_time,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					last_update_time,
+				</if>
+			 	<if test=" null != createPerson and ''!= createPerson  ">
+					create_person,
+				</if>
+			 	<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+					last_update_person,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != batch and ''!= batch  ">
+					batch,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != userType ">
+					 	#{userType},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != transType ">
+					 	#{transType},
+				</if>
+			 	<if test=" null != transAmount ">
+					 	#{transAmount},
+				</if>
+			 	<if test=" null != rewardTime ">
+					 	#{rewardTime},
+				</if>
+			 	<if test=" null != grantTime ">
+					 	#{grantTime},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					 	#{lastUpdateTime},
+				</if>
+			 	<if test=" null != createPerson and ''!= createPerson  ">
+					 	#{createPerson},
+				</if>
+			 	<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+					 	#{lastUpdatePerson},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != batch and ''!= batch  ">
+					 	#{batch},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.acc.AcOfflineRewardDraft" >
+  		UPDATE tac_offline_reward_draft
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != userType ">
+						user_type = #{userType},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != transType ">
+						trans_type = #{transType},
+					</if>
+					<if test=" null != transAmount ">
+						trans_amount = #{transAmount},
+					</if>
+					<if test=" null != rewardTime ">
+						reward_time = #{rewardTime},
+					</if>
+					<if test=" null != grantTime ">
+						grant_time = #{grantTime},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != lastUpdateTime ">
+						last_update_time = #{lastUpdateTime},
+					</if>
+					<if test=" null != createPerson and ''!= createPerson  ">
+						create_person = #{createPerson},
+					</if>
+					<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+						last_update_person = #{lastUpdatePerson},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != batch and ''!= batch  ">
+						batch = #{batch},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.acc.AcOfflineRewardDraft" >
+	    UPDATE tac_offline_reward_draft
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != userType ">
+						user_type = #{userType},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != transType ">
+						trans_type = #{transType},
+					</if>
+					<if test=" null != transAmount ">
+						trans_amount = #{transAmount},
+					</if>
+					<if test=" null != rewardTime ">
+						reward_time = #{rewardTime},
+					</if>
+					<if test=" null != grantTime ">
+						grant_time = #{grantTime},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != lastUpdateTime ">
+						last_update_time = #{lastUpdateTime},
+					</if>
+					<if test=" null != createPerson and ''!= createPerson  ">
+						create_person = #{createPerson},
+					</if>
+					<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+						last_update_person = #{lastUpdatePerson},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != batch and ''!= batch  ">
+						batch = #{batch},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tac_offline_reward_draft
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+    
+    <select id="queryAcOfflineRewardDraft" resultMap="BaseResultMap">
+     SELECT
+        d.* , u.user_name, u.mobile
+        FROM tac_offline_reward_draft d left join tcrm_user_info u on u.user_id=d.user_id
+        <where>
+	 	1=1
+	 	<if test=" null != query.name and ''!= query.name ">
+	 		and u.mobile  = #{query.name} or u.user_name =#{query.name}
+		</if>
+		<if test=" null != query.batch and ''!= query.batch ">
+	 		and d.batch  = #{query.batch}
+		</if>
+		<if test=" null != query.status and ''!= query.status ">
+	 		and d.status  = #{query.status}
+		</if>
+		</where>
+		order by d.id desc
+    </select>
+    
+    <select id="queryNotGrantBatchList" resultType="String">
+   	 	select DISTINCT batch from tac_offline_reward_draft where `status`=0 order by id
+    </select>
+    
+    <select id="queryAcOfflineRewardDraftForUpdate" resultMap="BaseResultMap">
+   	 	select * from tac_offline_reward_draft where id=#{id} for update
+    </select>
+
+</mapper>

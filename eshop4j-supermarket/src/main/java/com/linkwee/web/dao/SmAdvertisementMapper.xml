@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.SmAdvertisementMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.news.SmAdvertisement" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="page_index" property="pageIndex" jdbcType="VARCHAR"/>
+		<result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
+		<result column="link_url" property="linkUrl" jdbcType="VARCHAR"/>
+		<result column="show_index" property="showIndex" jdbcType="INTEGER"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="app_type" property="appType" jdbcType="INTEGER"/>
+		<result column="valid_begin_date" property="validBeginDate" jdbcType="TIMESTAMP"/>
+		<result column="valid_end_date" property="validEndDate" jdbcType="TIMESTAMP"/>
+		<result column="share_title" property="shareTitle" jdbcType="VARCHAR"/>
+		<result column="share_desc" property="shareDesc" jdbcType="VARCHAR"/>
+		<result column="share_icon" property="shareIcon" jdbcType="VARCHAR"/>
+		<result column="share_link" property="shareLink" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	page_index,
+	    	img_url,
+	    	link_url,
+	    	show_index,
+	    	status,
+	    	app_type,
+	    	valid_begin_date,
+	    	valid_end_date,
+	    	share_title,
+	    	share_desc,
+	    	share_icon,
+	    	share_link,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != pageIndex and ''!= pageIndex  ">
+			and page_index = #{pageIndex}
+		</if>
+		<if test=" null != imgUrl and ''!= imgUrl  ">
+			and img_url = #{imgUrl}
+		</if>
+		<if test=" null != linkUrl and ''!= linkUrl  ">
+			and link_url = #{linkUrl}
+		</if>
+		<if test=" null != showIndex ">
+			and show_index = #{showIndex}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+		<if test=" null != appType ">
+			and app_type = #{appType}
+		</if>
+		<if test=" null != validBeginDate ">
+			and valid_begin_date = #{validBeginDate}
+		</if>
+		<if test=" null != validEndDate ">
+			and valid_end_date = #{validEndDate}
+		</if>
+		<if test=" null != shareTitle and ''!= shareTitle  ">
+			and share_title = #{shareTitle}
+		</if>
+		<if test=" null != shareDesc and ''!= shareDesc  ">
+			and share_desc = #{shareDesc}
+		</if>
+		<if test=" null != shareIcon and ''!= shareIcon  ">
+			and share_icon = #{shareIcon}
+		</if>
+		<if test=" null != shareLink and ''!= shareLink  ">
+			and share_link = #{shareLink}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.news.SmAdvertisement">
+		select <include refid="Base_Column_List" /> from tsm_advertisement 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.news.SmAdvertisement">
+		select <include refid="Base_Column_List" /> from tsm_advertisement 
+		where 1=1 <include refid="Base_Condition" />
+		ORDER BY show_index ASC 
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsm_advertisement
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tsm_advertisement
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.news.SmAdvertisement" >
+    INSERT INTO tsm_advertisement
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != pageIndex and ''!= pageIndex  ">
+					page_index,
+				</if>
+			 	<if test=" null != imgUrl and ''!= imgUrl  ">
+					img_url,
+				</if>
+			 	<if test=" null != linkUrl and ''!= linkUrl  ">
+					link_url,
+				</if>
+			 	<if test=" null != showIndex ">
+					show_index,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+			 	<if test=" null != validBeginDate ">
+					valid_begin_date,
+				</if>
+			 	<if test=" null != validEndDate ">
+					valid_end_date,
+				</if>
+			 	<if test=" null != shareTitle and ''!= shareTitle  ">
+					share_title,
+				</if>
+			 	<if test=" null != shareDesc and ''!= shareDesc  ">
+					share_desc,
+				</if>
+			 	<if test=" null != shareIcon and ''!= shareIcon  ">
+					share_icon,
+				</if>
+			 	<if test=" null != shareLink and ''!= shareLink  ">
+					share_link,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != pageIndex and ''!= pageIndex  ">
+					 	#{pageIndex},
+				</if>
+			 	<if test=" null != imgUrl and ''!= imgUrl  ">
+					 	#{imgUrl},
+				</if>
+			 	<if test=" null != linkUrl and ''!= linkUrl  ">
+					 	#{linkUrl},
+				</if>
+			 	<if test=" null != showIndex ">
+					 	#{showIndex},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+			 	<if test=" null != validBeginDate ">
+					 	#{validBeginDate},
+				</if>
+			 	<if test=" null != validEndDate ">
+					 	#{validEndDate},
+				</if>
+			 	<if test=" null != shareTitle and ''!= shareTitle  ">
+					 	#{shareTitle},
+				</if>
+			 	<if test=" null != shareDesc and ''!= shareDesc  ">
+					 	#{shareDesc},
+				</if>
+			 	<if test=" null != shareIcon and ''!= shareIcon  ">
+					 	#{shareIcon},
+				</if>
+			 	<if test=" null != shareLink and ''!= shareLink  ">
+					 	#{shareLink},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.news.SmAdvertisement" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tsm_advertisement
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != pageIndex and ''!= pageIndex  ">
+					page_index,
+				</if>
+			 	<if test=" null != imgUrl and ''!= imgUrl  ">
+					img_url,
+				</if>
+			 	<if test=" null != linkUrl and ''!= linkUrl  ">
+					link_url,
+				</if>
+			 	<if test=" null != showIndex ">
+					show_index,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+			 	<if test=" null != validBeginDate ">
+					valid_begin_date,
+				</if>
+			 	<if test=" null != validEndDate ">
+					valid_end_date,
+				</if>
+			 	<if test=" null != shareTitle and ''!= shareTitle  ">
+					share_title,
+				</if>
+			 	<if test=" null != shareDesc and ''!= shareDesc  ">
+					share_desc,
+				</if>
+			 	<if test=" null != shareIcon and ''!= shareIcon  ">
+					share_icon,
+				</if>
+			 	<if test=" null != shareLink and ''!= shareLink  ">
+					share_link,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != pageIndex and ''!= pageIndex  ">
+					 	#{pageIndex},
+				</if>
+			 	<if test=" null != imgUrl and ''!= imgUrl  ">
+					 	#{imgUrl},
+				</if>
+			 	<if test=" null != linkUrl and ''!= linkUrl  ">
+					 	#{linkUrl},
+				</if>
+			 	<if test=" null != showIndex ">
+					 	#{showIndex},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+			 	<if test=" null != validBeginDate ">
+					 	#{validBeginDate},
+				</if>
+			 	<if test=" null != validEndDate ">
+					 	#{validEndDate},
+				</if>
+			 	<if test=" null != shareTitle and ''!= shareTitle  ">
+					 	#{shareTitle},
+				</if>
+			 	<if test=" null != shareDesc and ''!= shareDesc  ">
+					 	#{shareDesc},
+				</if>
+			 	<if test=" null != shareIcon and ''!= shareIcon  ">
+					 	#{shareIcon},
+				</if>
+			 	<if test=" null != shareLink and ''!= shareLink  ">
+					 	#{shareLink},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.news.SmAdvertisement" >
+  		UPDATE tsm_advertisement
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != pageIndex and ''!= pageIndex  ">
+						page_index = #{pageIndex},
+					</if>
+					<if test=" null != imgUrl and ''!= imgUrl  ">
+						img_url = #{imgUrl},
+					</if>
+					<if test=" null != linkUrl and ''!= linkUrl  ">
+						link_url = #{linkUrl},
+					</if>
+					<if test=" null != showIndex ">
+						show_index = #{showIndex},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != validBeginDate ">
+						valid_begin_date = #{validBeginDate},
+					</if>
+					<if test=" null != validEndDate ">
+						valid_end_date = #{validEndDate},
+					</if>
+					<if test=" null != shareTitle and ''!= shareTitle  ">
+						share_title = #{shareTitle},
+					</if>
+					<if test=" ''!= shareDesc  ">
+						share_desc = #{shareDesc},
+					</if>
+					<if test=" null != shareIcon and ''!= shareIcon  ">
+						share_icon = #{shareIcon},
+					</if>
+					<if test=" null != shareLink and ''!= shareLink  ">
+						share_link = #{shareLink},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.news.SmAdvertisement" >
+	    UPDATE tsm_advertisement
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != pageIndex and ''!= pageIndex  ">
+						page_index = #{pageIndex},
+					</if>
+					<if test=" null != imgUrl and ''!= imgUrl  ">
+						img_url = #{imgUrl},
+					</if>
+					<if test=" null != linkUrl and ''!= linkUrl  ">
+						link_url = #{linkUrl},
+					</if>
+					<if test=" null != showIndex ">
+						show_index = #{showIndex},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != validBeginDate ">
+						valid_begin_date = #{validBeginDate},
+					</if>
+					<if test=" null != validEndDate ">
+						valid_end_date = #{validEndDate},
+					</if>
+					<if test=" null != shareTitle and ''!= shareTitle  ">
+						share_title = #{shareTitle},
+					</if>
+					<if test=" null != shareDesc and ''!= shareDesc  ">
+						share_desc = #{shareDesc},
+					</if>
+					<if test=" null != shareIcon and ''!= shareIcon  ">
+						share_icon = #{shareIcon},
+					</if>
+					<if test=" null != shareLink and ''!= shareLink  ">
+						share_link = #{shareLink},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tsm_advertisement
+        <where> 
+        <if test="dt.search!=null">  
+                share_title LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+	<select id="query" resultMap="BaseResultMap"  >
+			SELECT <include refid="Base_Column_List" /> FROM tsm_advertisement T WHERE 1=1
+			<include refid="Base_Condition" />
+	</select>
+	
+	<select id="findAdvList" resultMap="BaseResultMap">
+			SELECT <include refid="Base_Column_List" /> FROM tsm_advertisement T WHERE 1=1
+			<include refid="Base_Condition" />
+			ORDER BY t.id desc
+	</select>
+
+	<select id="findAdvertisementDtl" resultType="com.linkwee.api.response.act.AdvertismentDtlResp">
+		SELECT
+		t.page_index pageIndex,		
+		t.img_url imgUrl,
+		t.link_url linkUrl,
+		t.valid_end_date validEndDate
+		FROM
+		tsm_advertisement t
+		WHERE
+		DATE_FORMAT(now(), '%Y-%m-%d %H:%i:%S') &gt;= DATE_FORMAT(
+		t.valid_begin_date,
+		'%Y-%m-%d %H:%i:%S'
+		)
+		AND DATE_FORMAT(now(), '%Y-%m-%d %H:%i:%S') &lt;= DATE_FORMAT(
+		t.valid_end_date,
+		'%Y-%m-%d %H:%i:%S'
+		)
+		and t.status = 0
+
+		<if test=" null != pageIndex and ''!= pageIndex  ">
+			AND t.page_index = #{pageIndex}
+		</if>
+		<if test=" null != appType ">
+			AND t.app_type = #{appType}
+		</if>
+		ORDER BY t.show_index ASC
+	</select>
+	
+	<select id="queryAdvertisement" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.news.SmAdvertisement">
+		select <include refid="Base_Column_List" /> from tsm_advertisement 
+		where 1=1
+		<if test=" null != pageIndex and ''!= pageIndex  ">
+			and page_index = #{pageIndex}
+		</if>		
+		<if test=" null != appType ">
+			and app_type = #{appType}
+		</if>
+		<if test=" null != status and ''!= status  ">
+			and status = #{status}
+		</if>
+		AND DATE_FORMAT(now(), '%Y-%m-%d %H:%i:%S') &gt;= DATE_FORMAT(
+		valid_begin_date,
+		'%Y-%m-%d %H:%i:%S'
+		)
+		AND DATE_FORMAT(now(), '%Y-%m-%d %H:%i:%S') &lt;= DATE_FORMAT(
+		valid_end_date,
+		'%Y-%m-%d %H:%i:%S'
+		)		
+		ORDER BY show_index ASC 
+  </select>
+	
+</mapper>

@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.SysPushParameterMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.mc.SysPushParameter" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="BIGINT"/>
+		<result column="app_type" property="appType" jdbcType="INTEGER"/>
+		<result column="os_type" property="osType" jdbcType="VARCHAR"/> 
+		<result column="app_id" property="appId" jdbcType="VARCHAR"/>
+		<result column="app_key" property="appKey" jdbcType="VARCHAR"/>
+		<result column="host" property="host" jdbcType="VARCHAR"/>
+		<result column="app_secret" property="appSecret" jdbcType="VARCHAR"/>
+		<result column="master_secret" property="masterSecret" jdbcType="VARCHAR"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="create_person" property="createPerson" jdbcType="VARCHAR"/>
+		<result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP"/>
+		<result column="last_update_person" property="lastUpdatePerson" jdbcType="VARCHAR"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="extend1" property="extend1" jdbcType="VARCHAR"/>
+		<result column="extend2" property="extend2" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	app_type,
+	    	os_type,
+	    	app_id,
+	    	app_key,
+	    	host,
+	    	app_secret,
+	    	master_secret,
+	    	status,
+	    	create_time,
+	    	create_person,
+	    	last_update_time,
+	    	last_update_person,
+	    	remark,
+	    	extend1,
+	    	extend2,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != appType ">
+			and app_type = #{appType}
+		</if>
+		<if test=" null != osType and ''!= osType  ">
+			and os_type = #{osType}
+		</if>
+		<if test=" null != appId and ''!= appId  ">
+			and app_id = #{appId}
+		</if>
+		<if test=" null != appKey and ''!= appKey  ">
+			and app_key = #{appKey}
+		</if>
+		<if test=" null != host and ''!= host  ">
+			and host = #{host}
+		</if>
+		<if test=" null != appSecret and ''!= appSecret  ">
+			and app_secret = #{appSecret}
+		</if>
+		<if test=" null != masterSecret and ''!= masterSecret  ">
+			and master_secret = #{masterSecret}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != createPerson and ''!= createPerson  ">
+			and create_person = #{createPerson}
+		</if>
+		<if test=" null != lastUpdateTime ">
+			and last_update_time = #{lastUpdateTime}
+		</if>
+		<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+			and last_update_person = #{lastUpdatePerson}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+		<if test=" null != extend1 and ''!= extend1  ">
+			and extend1 = #{extend1}
+		</if>
+		<if test=" null != extend2 and ''!= extend2  ">
+			and extend2 = #{extend2}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.mc.SysPushParameter">
+		select <include refid="Base_Column_List" /> from tsys_push_parameter 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.mc.SysPushParameter">
+		select <include refid="Base_Column_List" /> from tsys_push_parameter 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsys_push_parameter
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tsys_push_parameter
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.mc.SysPushParameter" >
+    INSERT INTO tsys_push_parameter
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+			 	<if test=" null != osType and ''!= osType  ">
+					os_type,
+				</if>
+			 	<if test=" null != appId and ''!= appId  ">
+					app_id,
+				</if>
+			 	<if test=" null != appKey and ''!= appKey  ">
+					app_key,
+				</if>
+			 	<if test=" null != host and ''!= host  ">
+					host,
+				</if>
+			 	<if test=" null != appSecret and ''!= appSecret  ">
+					app_secret,
+				</if>
+			 	<if test=" null != masterSecret and ''!= masterSecret  ">
+					master_secret,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != createPerson and ''!= createPerson  ">
+					create_person,
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					last_update_time,
+				</if>
+			 	<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+					last_update_person,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != extend1 and ''!= extend1  ">
+					extend1,
+				</if>
+			 	<if test=" null != extend2 and ''!= extend2  ">
+					extend2,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+			 	<if test=" null != osType and ''!= osType  ">
+					 	#{osType},
+				</if>
+			 	<if test=" null != appId and ''!= appId  ">
+					 	#{appId},
+				</if>
+			 	<if test=" null != appKey and ''!= appKey  ">
+					 	#{appKey},
+				</if>
+			 	<if test=" null != host and ''!= host  ">
+					 	#{host},
+				</if>
+			 	<if test=" null != appSecret and ''!= appSecret  ">
+					 	#{appSecret},
+				</if>
+			 	<if test=" null != masterSecret and ''!= masterSecret  ">
+					 	#{masterSecret},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != createPerson and ''!= createPerson  ">
+					 	#{createPerson},
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					 	#{lastUpdateTime},
+				</if>
+			 	<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+					 	#{lastUpdatePerson},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != extend1 and ''!= extend1  ">
+					 	#{extend1},
+				</if>
+			 	<if test=" null != extend2 and ''!= extend2  ">
+					 	#{extend2},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.mc.SysPushParameter" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tsys_push_parameter
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+			 	<if test=" null != osType and ''!= osType  ">
+					os_type,
+				</if>
+			 	<if test=" null != appId and ''!= appId  ">
+					app_id,
+				</if>
+			 	<if test=" null != appKey and ''!= appKey  ">
+					app_key,
+				</if>
+			 	<if test=" null != host and ''!= host  ">
+					host,
+				</if>
+			 	<if test=" null != appSecret and ''!= appSecret  ">
+					app_secret,
+				</if>
+			 	<if test=" null != masterSecret and ''!= masterSecret  ">
+					master_secret,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != createPerson and ''!= createPerson  ">
+					create_person,
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					last_update_time,
+				</if>
+			 	<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+					last_update_person,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != extend1 and ''!= extend1  ">
+					extend1,
+				</if>
+			 	<if test=" null != extend2 and ''!= extend2  ">
+					extend2,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+			 	<if test=" null != osType and ''!= osType  ">
+					 	#{osType},
+				</if>
+			 	<if test=" null != appId and ''!= appId  ">
+					 	#{appId},
+				</if>
+			 	<if test=" null != appKey and ''!= appKey  ">
+					 	#{appKey},
+				</if>
+			 	<if test=" null != host and ''!= host  ">
+					 	#{host},
+				</if>
+			 	<if test=" null != appSecret and ''!= appSecret  ">
+					 	#{appSecret},
+				</if>
+			 	<if test=" null != masterSecret and ''!= masterSecret  ">
+					 	#{masterSecret},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != createPerson and ''!= createPerson  ">
+					 	#{createPerson},
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					 	#{lastUpdateTime},
+				</if>
+			 	<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+					 	#{lastUpdatePerson},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != extend1 and ''!= extend1  ">
+					 	#{extend1},
+				</if>
+			 	<if test=" null != extend2 and ''!= extend2  ">
+					 	#{extend2},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.mc.SysPushParameter" >
+  		UPDATE tsys_push_parameter
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != osType and ''!= osType  ">
+						os_type = #{osType},
+					</if>
+					<if test=" null != appId and ''!= appId  ">
+						app_id = #{appId},
+					</if>
+					<if test=" null != appKey and ''!= appKey  ">
+						app_key = #{appKey},
+					</if>
+					<if test=" null != host and ''!= host  ">
+						host = #{host},
+					</if>
+					<if test=" null != appSecret and ''!= appSecret  ">
+						app_secret = #{appSecret},
+					</if>
+					<if test=" null != masterSecret and ''!= masterSecret  ">
+						master_secret = #{masterSecret},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != createPerson and ''!= createPerson  ">
+						create_person = #{createPerson},
+					</if>
+					<if test=" null != lastUpdateTime ">
+						last_update_time = #{lastUpdateTime},
+					</if>
+					<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+						last_update_person = #{lastUpdatePerson},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != extend1 and ''!= extend1  ">
+						extend1 = #{extend1},
+					</if>
+					<if test=" null != extend2 and ''!= extend2  ">
+						extend2 = #{extend2},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.mc.SysPushParameter" >
+	    UPDATE tsys_push_parameter
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != osType and ''!= osType  ">
+						os_type = #{osType},
+					</if>
+					<if test=" null != appId and ''!= appId  ">
+						app_id = #{appId},
+					</if>
+					<if test=" null != appKey and ''!= appKey  ">
+						app_key = #{appKey},
+					</if>
+					<if test=" null != host and ''!= host  ">
+						host = #{host},
+					</if>
+					<if test=" null != appSecret and ''!= appSecret  ">
+						app_secret = #{appSecret},
+					</if>
+					<if test=" null != masterSecret and ''!= masterSecret  ">
+						master_secret = #{masterSecret},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != createPerson and ''!= createPerson  ">
+						create_person = #{createPerson},
+					</if>
+					<if test=" null != lastUpdateTime ">
+						last_update_time = #{lastUpdateTime},
+					</if>
+					<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+						last_update_person = #{lastUpdatePerson},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != extend1 and ''!= extend1  ">
+						extend1 = #{extend1},
+					</if>
+					<if test=" null != extend2 and ''!= extend2  ">
+						extend2 = #{extend2},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tsys_push_parameter
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+</mapper>

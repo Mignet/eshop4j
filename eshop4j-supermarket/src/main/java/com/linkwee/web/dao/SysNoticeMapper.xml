@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.SysNoticeMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.mc.SysNotice" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="link" property="link" jdbcType="VARCHAR"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+		<result column="crt_time" property="crtTime" jdbcType="TIMESTAMP"/>
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+		<result column="app_type" property="appType" jdbcType="INTEGER"/>
+		<result column="message" property="message" jdbcType="LONGVARCHAR"/>
+		<result column="platform" property="platform" jdbcType="INTEGER"/>		
+		<result column="content" property="content" jdbcType="LONGVARCHAR"/>
+	</resultMap>
+	
+	<resultMap  type="com.linkwee.api.response.mc.MsgResp" id="MsgRespResultMap">
+	<result column="id" property="id" jdbcType="VARCHAR"/>
+	<result column="link" property="link" jdbcType="VARCHAR"/>
+	<result column="status" property="status" jdbcType="INTEGER"/>
+	<result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+	<result column="crt_time" property="crtTime" jdbcType="TIMESTAMP"/>
+	<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+	<result column="content" property="content" jdbcType="LONGVARCHAR"/>
+	<result column="read" property="read" jdbcType="VARCHAR"/>
+</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	link,
+	    	status,
+	    	start_time,
+	    	crt_time,
+	    	modify_time,
+	    	app_type,
+	    	message,
+	    	platform,
+	    	content,
+    </trim>
+  </sql>  
+  
+     <sql id="Base_Column_List_T">
+    <trim suffixOverrides=",">
+	    	t.id,
+	    	t.link,
+	    	t.status,
+	    	t.start_time,
+	    	t.crt_time,
+	    	t.modify_time,
+	    	t.app_type,
+	    	t.message,
+	    	t.platform,
+    </trim>
+  </sql> 
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != link and ''!= link  ">
+			and link = #{link}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+		<if test=" null != startTime ">
+			and start_time = #{startTime}
+		</if>
+		<if test=" null != crtTime ">
+			and crt_time = #{crtTime}
+		</if>
+		<if test=" null != modifyTime ">
+			and modify_time = #{modifyTime}
+		</if>
+		<if test=" null != appType ">
+			and app_type = #{appType}
+		</if>
+		<if test=" null != message and ''!= message  ">
+			and message = #{message}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.mc.SysNotice">
+		select <include refid="Base_Column_List" /> from tsys_notice 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.mc.SysNotice">
+		select <include refid="Base_Column_List" /> from tsys_notice 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsys_notice
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tsys_notice
+    where id = #{0}
+  </delete>
+  
+  <delete id="deleteBatch" parameterType="Object">
+	DELETE FROM tsys_notice
+	<where>
+		<foreach item="item" index="index" collection="array"  open="(" separator="or" close=") ">
+			  id  = #{item}
+		</foreach>
+	</where>
+</delete>
+
+<update id="deletePersonMsgs" >
+      <foreach collection="msgs" item="item" index="index" open="" close="" separator=";">
+            update tsys_notice
+            <set>
+              	 status = 1
+            </set>
+             where id = #{item} and user_number = #{userNumber} and type = 1
+     </foreach>
+</update> 
+
+  <insert id="insert" parameterType="com.linkwee.web.model.mc.SysNotice" >
+    INSERT INTO tsys_notice
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != link and ''!= link  ">
+					link,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != startTime ">
+					start_time,
+				</if>
+			 	<if test=" null != crtTime ">
+					crt_time,
+				</if>
+			 	<if test=" null != modifyTime ">
+					modify_time,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+			 	<if test=" null != message and ''!= message  ">
+					message,
+				</if>
+				<if test=" null != platform ">
+					platform,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != link and ''!= link  ">
+					 	#{link},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != startTime ">
+					 	#{startTime},
+				</if>
+			 	<if test=" null != crtTime ">
+					 	#{crtTime},
+				</if>
+			 	<if test=" null != modifyTime ">
+					 	#{modifyTime},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+			 	<if test=" null != message and ''!= message  ">
+					 	#{message},
+				</if>
+				<if test=" null != platform ">
+					 	#{platform},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.mc.SysNotice" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tsys_notice
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != link and ''!= link  ">
+					link,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != startTime ">
+					start_time,
+				</if>
+			 	<if test=" null != crtTime ">
+					crt_time,
+				</if>
+			 	<if test=" null != modifyTime ">
+					modify_time,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+			 	<if test=" null != message and ''!= message  ">
+					message,
+				</if>
+				<if test=" null != platform ">
+					platform,
+				</if>
+				<if test=" null != content and ''!= content  ">
+					content,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != link and ''!= link  ">
+					 	#{link},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != startTime ">
+					 	#{startTime},
+				</if>
+			 	<if test=" null != crtTime ">
+					 	#{crtTime},
+				</if>
+			 	<if test=" null != modifyTime ">
+					 	#{modifyTime},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+			 	<if test=" null != message and ''!= message  ">
+					 	#{message},
+				</if>
+				<if test=" null != platform ">
+					#{platform},
+				</if>
+				<if test=" null != content and ''!= content  ">
+					#{content},
+				</if>
+		</trim>
+	</insert>
+	
+	 <insert id="addBatch" parameterType="java.util.List">
+	insert into tsys_notice 
+	<trim prefix="(" suffix=")" >
+			<include refid="Base_Column_List" />
+	</trim>
+	VALUES
+	<foreach item="item" index="index" collection="list" separator=",">
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id,jdbcType=INTEGER},
+				#{item.link,jdbcType=VARCHAR},
+				#{item.status,jdbcType=INTEGER},
+				#{item.startTime,jdbcType=TIMESTAMP},
+				#{item.crtTime,jdbcType=TIMESTAMP},
+				#{item.modifyTime,jdbcType=TIMESTAMP},
+				#{item.appType,jdbcType=INTEGER},
+				#{item.message,jdbcType=VARCHAR},
+				#{item.platform,jdbcType=INTEGER},
+		</trim>
+	</foreach>
+</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.mc.SysNotice" >
+  		UPDATE tsys_notice
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != link and ''!= link  ">
+						link = #{link},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != startTime ">
+						start_time = #{startTime},
+					</if>
+					<if test=" null != crtTime ">
+						crt_time = #{crtTime},
+					</if>
+					<if test=" null != modifyTime ">
+						modify_time = #{modifyTime},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != message and ''!= message  ">
+						message = #{message},
+					</if>
+					<if test=" null != platform ">
+						platform = #{platform},
+					</if>
+					<if test=" null != content and ''!= content  ">
+						content = #{content},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.mc.SysNotice" >
+	    UPDATE tsys_notice
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != link and ''!= link  ">
+						link = #{link},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != startTime ">
+						start_time = #{startTime},
+					</if>
+					<if test=" null != crtTime ">
+						crt_time = #{crtTime},
+					</if>
+					<if test=" null != modifyTime ">
+						modify_time = #{modifyTime},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != message and ''!= message  ">
+						message = #{message},
+					</if>
+					<if test=" null != platform ">
+						platform = #{platform},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+	  
+	  <update id="updateBatchWithEmpty" parameterType="java.util.List">
+      <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update tsys_notice
+            <set>
+              	<trim suffixOverrides=",">
+					        link = #{item.link,jdbcType=VARCHAR},
+					        status = #{item.status,jdbcType=INTEGER},
+					        start_time = #{item.startTime,jdbcType=TIMESTAMP},
+					        crt_time = #{item.crtTime,jdbcType=TIMESTAMP},
+					        modify_time = #{item.modifyTime,jdbcType=TIMESTAMP},
+					        app_type = #{item.appType,jdbcType=INTEGER},
+					        message = #{item.message,jdbcType=VARCHAR},
+					        platform = #{item.platform,jdbcType=INTEGER},
+			   </trim>
+            </set>
+             where id = #{item.id}
+     </foreach>
+</update>  
+
+	<!-- 分页条件查询 -->
+        <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tsys_notice
+        <where>
+        <if test="dt.search!=null">  
+                message LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="appType!=null">  
+                and app_type = #{appType}  
+         </if>
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+    
+    <!-- add new method -->
+	<select id="querySysMsgResp" resultMap="MsgRespResultMap">
+	<choose>
+		<when test="userNumber !=null and '' != userNumber ">
+			SELECT m.id,m.link,m.status,m.start_time,m.crt_time,m.modify_time,m.message,m.content,case when l.id is null then 0 else 1 end 'read'
+			FROM
+			tsys_notice m LEFT JOIN tsys_notice_read_log l ON (
+			m.id = l.notice_id
+			AND l.app_type = #{appType}
+			AND l.user_id = #{userNumber}
+			)
+			WHERE m.status = 0 AND ( m.app_type = 0 OR m.app_type = #{appType}) and
+			m.start_time &lt;= NOW() 
+			<if test="regTime !=null and '' != regTime"> 
+			AND m.start_time &gt;= #{regTime}
+			</if>
+			 <if test="platform !=null">                
+               	<choose>	
+			  		<when test="platform == 5">
+			  			 and m.platform = 5  
+			  		</when>
+			  		<otherwise>
+			  			and m.platform  &lt; 5  
+			  		</otherwise>
+		  		</choose>
+         	</if>
+			order by (case when l.id is null then 0 else 1 end) asc , m.start_time desc
+		</when>
+		<otherwise>
+			SELECT m.id,m.link,m.status,m.start_time,m.crt_time,m.modify_time,m.message,m.content, 0 AS 'read' FROM
+			tsys_notice m
+			WHERE
+			m. STATUS = 0
+			AND (
+			m.app_type = 0
+			OR m.app_type = #{appType}) and m.start_time &lt;= NOW()
+			<if test="platform !=null">  
+              	<choose>	
+			  		<when test="platform == 5">
+			  			 and m.platform = 5  
+			  		</when>
+			  		<otherwise>
+			  			and m.platform  &lt; 5  
+			  		</otherwise>
+		  		</choose> 
+         	</if>
+			order by m.start_time desc
+		</otherwise>
+	</choose>  
+		  
+	</select>
+
+
+	<!-- 未读公告消息统计公告 -->
+	<select id="queryUnReadSysMsgCount" resultType="int">
+
+	SELECT
+	COUNT(m.id)
+	FROM
+	tsys_notice m
+	LEFT JOIN tsys_notice_read_log l ON (
+	m.id = l.notice_id
+	AND l.app_type = #{appType}
+	AND l.user_id =
+	#{userId}
+	)
+	WHERE
+	m.start_time &lt;= NOW()
+	AND m. STATUS = 0
+	AND (m.app_type = 0 OR m.app_type = #{appType})
+	<if test="platform !=null">		
+			<choose>	
+			  		<when test="platform == 5">
+			  			 and m.platform = 5  
+			  		</when>
+			  		<otherwise>
+			  			and m.platform  &lt; 5  
+			  		</otherwise>
+		  		</choose> 
+	</if>
+	<if test="regTime !=null and '' != regTime"> 
+			AND m.start_time &gt;= #{regTime}
+	</if>
+	AND l.id IS NULL
+
+	</select>
+
+	<select id="beforeOneNotice" resultMap="MsgRespResultMap" parameterType="com.linkwee.web.model.mc.SysNotice">	
+		SELECT m.id,m.link,m.status,m.start_time,m.crt_time,m.modify_time,m.message, 0 AS 'read' FROM
+		tsys_notice m
+		WHERE
+		m. STATUS = 0
+		AND (
+		m.app_type = 0
+		OR m.app_type = #{appType}) and m.start_time &lt;= NOW() 
+		<if test="platform !=null">  
+           <choose>	
+		  		<when test="platform == 5">
+		  			 and m.platform = 5  
+		  		</when>
+		  		<otherwise>
+		  			and m.platform  &lt; 5  
+		  		</otherwise>
+	  		</choose> 
+        </if>
+        and (m.start_time &gt; #{startTime} or (m.start_time = #{startTime} and m.id &lt; #{id}))
+		order by m.start_time asc,m.id desc limit 1		  
+	</select>
+	
+	<select id="nextOneNotice" resultMap="MsgRespResultMap" parameterType="com.linkwee.web.model.mc.SysNotice">	
+		SELECT m.id,m.link,m.status,m.start_time,m.crt_time,m.modify_time,m.message, 0 AS 'read' FROM
+		tsys_notice m
+		WHERE
+		m. STATUS = 0
+		AND (
+		m.app_type = 0
+		OR m.app_type = #{appType}) and m.start_time &lt;= NOW() 
+		<if test="platform !=null">  
+           <choose>	
+		  		<when test="platform == 5">
+		  			 and m.platform = 5  
+		  		</when>
+		  		<otherwise>
+		  			and m.platform  &lt; 5  
+		  		</otherwise>
+	  		</choose> 
+        </if>
+        and (m.start_time &lt; #{startTime} or (m.start_time = #{startTime} and m.id &gt; #{id}))
+		order by m.start_time desc,m.id asc limit 1		  
+	</select>
+
+</mapper>

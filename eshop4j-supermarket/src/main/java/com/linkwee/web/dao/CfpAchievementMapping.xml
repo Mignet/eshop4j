@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CfpAchievementDao">
+
+
+<resultMap  type="com.linkwee.web.model.crm.CfpAchievementResp" id="CfpAchievementResp">
+	<result column="id" property="id" />
+	<result column="cfpName" property="cfpName" />
+	<result column="cfpMobile" property="cfpMobile" />
+	<result column="city" property="city" />
+	<result column="investorName" property="investorName" />
+	<result column="investorMobile" property="investorMobile" />
+	<result column="invest_amt" property="investAmount" />
+	<result column="platfromName" property="platfromName" />
+	<result column="biz_time" property="bizTime" jdbcType="TIMESTAMP"/>
+</resultMap>
+
+<resultMap  type="com.linkwee.web.model.crm.CfpAchiAnalysisResp" id="CfpAchiAnalysisResp">
+	<result column="id" property="id" />
+	<result column="cfpName" property="cfpName" />
+	<result column="cfpMobile" property="cfpMobile" />
+	<result column="yearAmount" property="yearAmount" />
+</resultMap>
+
+
+
+<!-- 理财师业绩 -->
+<select id="selectCfpAchievement" resultMap="CfpAchievementResp" >
+   SELECT 
+	    o.name as platfromName, r.invest_amt,r.biz_time,u.user_name investorName,u.mobile investorMobile,c.user_name cfpName,c.mobile cfpMobile,a.city
+ 	from 
+		tcim_product_invest_record  r 
+		LEFT JOIN tcim_org_info o on r.platfrom=o.org_number 
+		LEFT JOIN tcrm_user_info u on u.user_id=r.user_id
+		LEFT JOIN tcrm_investor i on i.user_id=r.user_id
+		LEFT JOIN tcrm_user_info c on c.user_id= i.cfplanner
+		LEFT JOIN  tsys_mobile_area a on a.mobile = left(c.mobile,7) 
+     where 1=1
+     <if test=" null != query.name and ''!= query.name ">
+		and a.city = #{query.name}
+  		</if>
+  		<if test=" null != query.startTimeForSearch and '' != query.startTimeForSearch">
+			and DATE_FORMAT(r.biz_time, '%Y-%m-%d') &gt;=  DATE_FORMAT(#{query.startTimeForSearch}, '%Y-%m-%d')
+		</if>
+		<if test=" null != query.endTimeForSearch and '' != query.endTimeForSearch">
+			and DATE_FORMAT(r.biz_time, '%Y-%m-%d') &lt;=  DATE_FORMAT(#{query.endTimeForSearch}, '%Y-%m-%d')
+		</if>
+      order by r.id desc
+</select>
+
+<!-- 理财师分布城市数据 -->
+<select id="queryCfpAreaData" resultType="HashMap" >
+   SELECT * from 
+	(SELECT count(c.mobile) as personNum,a.city from tcrm_cfplanner c 
+	LEFT JOIN  tsys_mobile_area a on a.mobile = left(c.mobile,7) 
+	where a.city is not null
+	GROUP BY a.city
+	ORDER BY personNum desc
+	LIMIT 10) t
+	ORDER BY personNum
+</select>
+
+<!-- 理财师客户数量数据 -->
+<select id="queryCfpCustomerCountData" resultType="HashMap" >
+<![CDATA[
+	select '2' as customerValue,count(1) as personNum  from (SELECT cfplanner, count(1) aaa from tcrm_investor GROUP BY cfplanner) t
+	where aaa=2
+	UNION
+	select '3' as customerValue,count(1) as personNum  from (SELECT cfplanner, count(1) aaa from tcrm_investor GROUP BY cfplanner) t
+	where aaa=3
+	UNION
+	select '4' as customerValue,count(1) as personNum  from (SELECT cfplanner, count(1) aaa from tcrm_investor GROUP BY cfplanner) t
+	where aaa=4
+	UNION
+	select '5' as customerValue,count(1) as personNum  from (SELECT cfplanner, count(1) aaa from tcrm_investor GROUP BY cfplanner) t
+	where aaa=5
+	UNION
+	select '6-10' as customerValue,count(1) as personNum  from (SELECT cfplanner, count(1) aaa from tcrm_investor GROUP BY cfplanner) t
+	where aaa>=6 and aaa<=10
+	UNION
+	select '11-20' as customerValue,count(1) as personNum  from (SELECT cfplanner, count(1) aaa from tcrm_investor GROUP BY cfplanner) t
+	where aaa>10 and aaa<=20
+	UNION
+	select '21-50' as customerValue,count(1) as personNum  from (SELECT cfplanner, count(1) aaa from tcrm_investor GROUP BY cfplanner) t
+	where aaa>20 and aaa<=50
+	UNION
+	select '50以上客户' as customerValue,count(1) as personNum from (SELECT cfplanner, count(1) aaa from tcrm_investor GROUP BY cfplanner) t
+	where  aaa>50
+]]>
+</select>
+
+
+
+<!-- 理财师年化业绩数据 -->
+<select id="queryCfpYearAchiData" resultType="HashMap" >
+	select '10万以下' yearAmount, count(1) personNum from 
+	(SELECT origin_cfplanner_id, SUM(yearpur_amount) total_year_amount from tcim_fee 
+		where 1=1
+		<if test=" null != startDate and '' != startDate">
+			AND DATE_FORMAT(create_time, '%Y-%m-%d') &gt;=  DATE_FORMAT(#{startDate}, '%Y-%m-%d')
+		</if>
+		<if test=" null != endDate and '' != endDate">
+			AND DATE_FORMAT(#{endDate}, '%Y-%m-%d') &gt;=  DATE_FORMAT(create_time, '%Y-%m-%d')
+		</if>
+	GROUP BY origin_cfplanner_id)t
+	where total_year_amount <![CDATA[<]]>100000
+	
+	union
+	select '10-20万', count(1) from 
+	(SELECT origin_cfplanner_id, SUM(yearpur_amount) total_year_amount from tcim_fee
+		where 1=1
+		<if test=" null != startDate and '' != startDate">
+			AND DATE_FORMAT(create_time, '%Y-%m-%d') &gt;=  DATE_FORMAT(#{startDate}, '%Y-%m-%d')
+		</if>
+		<if test=" null != endDate and '' != endDate">
+			AND DATE_FORMAT(#{endDate}, '%Y-%m-%d') &gt;=  DATE_FORMAT(create_time, '%Y-%m-%d')
+		</if>
+	 GROUP BY origin_cfplanner_id)t
+	where total_year_amount >=100000 and total_year_amount<![CDATA[<]]>200000
+	
+	union
+	select '20-30万', count(1) from 
+	(SELECT origin_cfplanner_id, SUM(yearpur_amount) total_year_amount from tcim_fee 
+		where 1=1
+		<if test=" null != startDate and '' != startDate">
+			AND DATE_FORMAT(create_time, '%Y-%m-%d') &gt;=  DATE_FORMAT(#{startDate}, '%Y-%m-%d')
+		</if>
+		<if test=" null != endDate and '' != endDate">
+			AND DATE_FORMAT(#{endDate}, '%Y-%m-%d') &gt;=  DATE_FORMAT(create_time, '%Y-%m-%d')
+		</if>
+	GROUP BY origin_cfplanner_id)t
+	where total_year_amount >=200000 and total_year_amount<![CDATA[<]]>300000
+	union
+	select '30-40万', count(1) from 
+	(SELECT origin_cfplanner_id, SUM(yearpur_amount) total_year_amount from tcim_fee
+		where 1=1
+		<if test=" null != startDate and '' != startDate">
+			AND DATE_FORMAT(create_time, '%Y-%m-%d') &gt;=  DATE_FORMAT(#{startDate}, '%Y-%m-%d')
+		</if>
+		<if test=" null != endDate and '' != endDate">
+			AND DATE_FORMAT(#{endDate}, '%Y-%m-%d') &gt;=  DATE_FORMAT(create_time, '%Y-%m-%d')
+		</if>
+	 GROUP BY origin_cfplanner_id)t
+	where total_year_amount >=300000 and total_year_amount<![CDATA[<]]>400000
+	union
+	select '40-50万', count(1) from 
+	(SELECT origin_cfplanner_id, SUM(yearpur_amount) total_year_amount from tcim_fee 
+		where 1=1
+		<if test=" null != startDate and '' != startDate">
+			AND DATE_FORMAT(create_time, '%Y-%m-%d') &gt;=  DATE_FORMAT(#{startDate}, '%Y-%m-%d')
+		</if>
+		<if test=" null != endDate and '' != endDate">
+			AND DATE_FORMAT(#{endDate}, '%Y-%m-%d') &gt;=  DATE_FORMAT(create_time, '%Y-%m-%d')
+		</if>
+	GROUP BY origin_cfplanner_id)t
+	where total_year_amount >=400000 and total_year_amount<![CDATA[<]]>500000
+	union
+	select '50-100万', count(1) from 
+	(SELECT origin_cfplanner_id, SUM(yearpur_amount) total_year_amount from tcim_fee 
+		where 1=1
+		<if test=" null != startDate and '' != startDate">
+			AND DATE_FORMAT(create_time, '%Y-%m-%d') &gt;=  DATE_FORMAT(#{startDate}, '%Y-%m-%d')
+		</if>
+		<if test=" null != endDate and '' != endDate">
+			AND DATE_FORMAT(#{endDate}, '%Y-%m-%d') &gt;=  DATE_FORMAT(create_time, '%Y-%m-%d')
+		</if>
+	GROUP BY origin_cfplanner_id)t
+	where total_year_amount >=500000 and total_year_amount<![CDATA[<]]>1000000
+	union
+	select '100万以上', count(1) from 
+	(SELECT origin_cfplanner_id, SUM(yearpur_amount) total_year_amount from tcim_fee
+		where 1=1
+		<if test=" null != startDate and '' != startDate">
+			AND DATE_FORMAT(create_time, '%Y-%m-%d') &gt;=  DATE_FORMAT(#{startDate}, '%Y-%m-%d')
+		</if>
+		<if test=" null != endDate and '' != endDate">
+			AND DATE_FORMAT(#{endDate}, '%Y-%m-%d') &gt;=  DATE_FORMAT(create_time, '%Y-%m-%d')
+		</if>
+	 GROUP BY origin_cfplanner_id)t
+	where total_year_amount >=1000000
+</select>
+
+<!-- 理财师拥有客户数量范围列表 -->
+<select id="queryCfpOfCustomerCount" resultMap="CfpAchiAnalysisResp" >
+  select t.*,ifnull(u.user_name,'--') cfpName,u.mobile cfpMobile,ifnull(t2.total_year_amount,0) yearAmount  from (SELECT cfplanner, count(1) aaa from tcrm_investor GROUP BY cfplanner) t
+	LEFT JOIN tcrm_user_info u on u.user_id=t.cfplanner
+	LEFT JOIN 
+	(SELECT origin_cfplanner_id, SUM(yearpur_amount) total_year_amount from tcim_fee GROUP BY origin_cfplanner_id)t2
+	on t2.origin_cfplanner_id=u.user_id
+		where 1=1
+		<if test=" null != query.name and ''!= query.name ">
+			<if test=" 6 > query.name ">
+			 and aaa=#{query.name}
+			 </if>
+			 <if test=" 10 == query.name ">
+			 and aaa >5 and aaa <![CDATA[<=]]>10
+			 </if>
+			 <if test=" 20 == query.name ">
+			 and aaa >10 and aaa <![CDATA[<=]]>20
+			 </if>
+			 <if test=" 50 == query.name ">
+			 and aaa >20 and aaa <![CDATA[<=]]>50
+			 </if>
+			 <if test=" 60 == query.name ">
+			 and aaa >50 
+			 </if>
+  		</if>
+	ORDER BY t2.total_year_amount desc, aaa desc,u.id asc
+</select>
+
+<!-- 根据范围分类的理财师业绩列表 -->
+<select id="queryCfpAchiValueList" resultMap="CfpAchiAnalysisResp" >
+ select t.total_year_amount yearAmount, ifnull(u.user_name,'--') cfpName,u.mobile as cfpMobile from 
+	(SELECT origin_cfplanner_id, SUM(yearpur_amount) total_year_amount from tcim_fee 
+		where 1=1
+		<if test=" null != query.startTimeForSearch and '' != query.startTimeForSearch">
+			AND DATE_FORMAT(create_time, '%Y-%m-%d') &gt;=  DATE_FORMAT(#{query.startTimeForSearch}, '%Y-%m-%d')
+		</if>
+		<if test=" null != query.endTimeForSearch and '' != query.endTimeForSearch">
+			AND DATE_FORMAT(#{query.endTimeForSearch}, '%Y-%m-%d') &gt;=  DATE_FORMAT(create_time, '%Y-%m-%d')
+		</if>
+	GROUP BY origin_cfplanner_id)t
+	LEFT JOIN tcrm_user_info u on u.user_id=t.origin_cfplanner_id
+	where 1=1
+	<if test=" null != query.name and ''!= query.name ">
+			<if test=" 10 == query.name ">
+				 and t.total_year_amount<![CDATA[<=]]>100000
+			 </if>
+			 <if test=" 20 == query.name ">
+				 and t.total_year_amount >=100000 and t.total_year_amount <![CDATA[<]]>200000
+			 </if>
+			 <if test=" 30 == query.name ">
+				 and t.total_year_amount >=200000 and t.total_year_amount <![CDATA[<]]>300000
+			 </if>
+			 <if test=" 40 == query.name ">
+				 and t.total_year_amount >=300000 and t.total_year_amount <![CDATA[<]]>400000
+			 </if>
+			 <if test=" 50 == query.name ">
+				 and t.total_year_amount >=400000 and t.total_year_amount <![CDATA[<]]>500000
+			 </if>
+			 <if test=" 100 == query.name ">
+				 and t.total_year_amount >=500000 and t.total_year_amount <![CDATA[<]]>1000000
+			 </if>
+			  <if test=" 110 == query.name ">
+				 and t.total_year_amount >=1000000
+			 </if>
+  		</if>
+	ORDER BY yearAmount desc, u.id asc
+</select>
+
+</mapper>

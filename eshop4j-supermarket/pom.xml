@@ -1,0 +1,253 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.eshop4j</groupId>
+		<artifactId>eshop4j-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>eshop4j-supermarket</artifactId>
+	<packaging>war</packaging>
+
+ <repositories>
+ 	<!-- 个推仓库 -->
+    <repository>
+        <id>getui-nexus</id>
+        <url>http://mvn.gt.igexin.com/nexus/content/repositories/releases/</url>
+    </repository>
+    <!-- 中央仓库 当当代码 -->
+    <repository>
+        <id>center-nexus</id>
+        <url>http://repo1.maven.org/maven2/</url>
+    </repository>
+ </repositories>
+
+	<dependencies>
+		<!-- 依赖领会核心框架 -->
+		<dependency>
+			<groupId>com.eshop4j</groupId>
+			<artifactId>eshop4j-framework</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- 公共依赖需要在parent中定义， 项目自己的独特依赖才定义在这里-->
+		<!-- 引入elastic-job核心模块 -->
+		<dependency>
+		    <groupId>com.dangdang</groupId>
+		    <artifactId>elastic-job-core</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
+		<!-- 使用springframework自定义命名空间时引入 -->
+		<dependency>
+		    <groupId>com.dangdang</groupId>
+		    <artifactId>elastic-job-spring</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
+		<!-- http://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>4.3.2</version>
+		</dependency>
+		<!-- Json Web Token -->
+		<!-- https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt -->
+		<dependency>
+		    <groupId>com.nimbusds</groupId>
+		    <artifactId>nimbus-jose-jwt</artifactId>
+		    <version>2.10.1</version>
+		</dependency>
+		<!-- 二维码 -->
+		<dependency>
+		  <groupId>com.google.zxing</groupId>
+		  <artifactId>javase</artifactId>
+		  <version>3.2.0</version>
+		</dependency>
+		<!-- 图形验证码 -->
+		<dependency>
+		    <groupId>com.github.axet</groupId>
+		    <artifactId>kaptcha</artifactId>
+		    <version>0.0.6</version>
+		</dependency>
+		<!-- 快钱 wsdl start-->
+		<!-- https://mvnrepository.com/artifact/org.jdom/jdom -->
+		<dependency>
+		    <groupId>org.jdom</groupId>
+		    <artifactId>jdom</artifactId>
+		    <version>1.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.jcraft/jsch -->
+		<dependency>
+		    <groupId>com.jcraft</groupId>
+		    <artifactId>jsch</artifactId>
+		    <version>0.1.53</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jibx/jibx-run -->
+		<dependency>
+		    <groupId>org.jibx</groupId>
+		    <artifactId>jibx-run</artifactId>
+		    <version>1.2.6</version>
+		</dependency>
+		<!-- 快钱独有 -->
+		<dependency>
+		  <groupId>com.bill99</groupId>
+		  <artifactId>fo-jibx-commons</artifactId>
+		  <version>1.0.2</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.bill99</groupId>
+		  <artifactId>fo-jibx-settlement</artifactId>
+		  <version>1.0.2</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.bill99</groupId>
+		  <artifactId>if-crypto-sdk</artifactId>
+		  <version>3.3.2</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.bill99</groupId>
+		  <artifactId>if-jibx-schema-commons</artifactId>
+		  <version>1.0.1</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.bill99</groupId>
+		  <artifactId>if-jibx-schema-asap</artifactId>
+		  <version>1.0</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.bill99</groupId>
+		  <artifactId>if-util</artifactId>
+		  <version>3.2.8</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.axis/axis -->
+		<dependency>
+		    <groupId>org.apache.axis</groupId>
+		    <artifactId>axis</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.axis/axis-saaj -->
+		<dependency>
+		    <groupId>org.apache.axis</groupId>
+		    <artifactId>axis-saaj</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.axis/axis-jaxrpc -->
+		<dependency>
+		    <groupId>org.apache.axis</groupId>
+		    <artifactId>axis-jaxrpc</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/axis/axis-wsdl4j -->
+		<dependency>
+		    <groupId>axis</groupId>
+		    <artifactId>axis-wsdl4j</artifactId>
+		    <version>1.5.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-discovery/commons-discovery -->
+		<dependency>
+		    <groupId>commons-discovery</groupId>
+		    <artifactId>commons-discovery</artifactId>
+		    <version>0.2</version>
+		</dependency>
+		<!-- 快钱 wsdl end-->
+		<!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
+		<dependency>
+		    <groupId>com.sun.mail</groupId>
+		    <artifactId>javax.mail</artifactId>
+		    <version>1.5.2</version>
+		</dependency>
+		<!-- 个推 服务端SDK-->
+		<dependency>
+		    <groupId>com.gexin.platform</groupId>
+		    <artifactId>gexin-rp-sdk-http</artifactId>
+		    <version>4.0.1.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
+		<dependency>
+		    <groupId>joda-time</groupId>
+		    <artifactId>joda-time</artifactId>
+		    <version>2.9.4</version>
+		</dependency>
+		
+		<!-- jpress相关 -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jfinal</groupId>
+			<artifactId>jfinal</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.lmax</groupId>
+		    <artifactId>disruptor</artifactId>
+		    <version>3.3.4</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>eshop4j-supermarket</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<warName>ROOT</warName>
+				</configuration>
+			</plugin>
+
+			<!-- mvn jetty:run -->
+			<plugin>
+				<!-- http://wiki.eclipse.org/Jetty/Feature/Jetty_Maven_Plugin -->
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${plugin.jetty.version}</version>
+				<configuration>
+					<stopPort>9966</stopPort>
+					<stopKey>foo</stopKey>
+					<scanIntervalSeconds>0</scanIntervalSeconds>
+					<connectors>
+						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+							<port>8888</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
+					<webAppConfig>
+						<allowDuplicateFragmentNames>true</allowDuplicateFragmentNames>
+						<contextPath>/</contextPath>
+					</webAppConfig>
+				</configuration>
+			</plugin>
+		</plugins>
+
+		<!--配置Maven 对resource文件 过滤 -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.jpg</include>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+			<!-- 证书 -->
+			<resource>
+				<directory>cers/bill99</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+</project>

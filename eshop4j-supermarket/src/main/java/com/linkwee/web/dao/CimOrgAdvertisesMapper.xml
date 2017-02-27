@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CimOrgAdvertisesMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.CimOrgAdvertises" id="BaseResultMap">
+		<result column="aid" property="aid" jdbcType="INTEGER"/>
+		<result column="org_number" property="orgNumber" jdbcType="VARCHAR"/>
+		<result column="org_activity_advertise" property="orgActivityAdvertise" jdbcType="VARCHAR"/>
+		<result column="org_activity_advertise_url" property="orgActivityAdvertiseUrl" jdbcType="VARCHAR"/>
+		<result column="sort" property="sort" jdbcType="INTEGER"/>
+		<result column="isshow" property="isshow" jdbcType="INTEGER"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	aid,
+	    	org_number,
+	    	org_activity_advertise,
+	    	org_activity_advertise_url,
+	    	sort,
+	    	isshow,
+	    	remark,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != aid ">
+			and aid = #{aid}
+		</if>
+		<if test=" null != orgNumber and ''!= orgNumber  ">
+			and org_number = #{orgNumber}
+		</if>
+		<if test=" null != orgActivityAdvertise and ''!= orgActivityAdvertise  ">
+			and org_activity_advertise = #{orgActivityAdvertise}
+		</if>
+		<if test=" null != orgActivityAdvertiseUrl and ''!= orgActivityAdvertiseUrl  ">
+			and org_activity_advertise_url = #{orgActivityAdvertiseUrl}
+		</if>
+		<if test=" null != sort ">
+			and sort = #{sort}
+		</if>
+		<if test=" null != isshow ">
+			and isshow = #{isshow}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimOrgAdvertises">
+		select <include refid="Base_Column_List" /> from tcim_org_advertises 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimOrgAdvertises">
+		select <include refid="Base_Column_List" /> from tcim_org_advertises 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_org_advertises
+    where  aid = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_org_advertises
+    where aid = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.CimOrgAdvertises" >
+    INSERT INTO tcim_org_advertises
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != aid ">
+					aid,
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					org_number,
+				</if>
+			 	<if test=" null != orgActivityAdvertise and ''!= orgActivityAdvertise  ">
+					org_activity_advertise,
+				</if>
+			 	<if test=" null != orgActivityAdvertiseUrl and ''!= orgActivityAdvertiseUrl  ">
+					org_activity_advertise_url,
+				</if>
+			 	<if test=" null != sort ">
+					sort,
+				</if>
+			 	<if test=" null != isshow ">
+					isshow,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != aid ">
+					 	#{aid},
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					 	#{orgNumber},
+				</if>
+			 	<if test=" null != orgActivityAdvertise and ''!= orgActivityAdvertise  ">
+					 	#{orgActivityAdvertise},
+				</if>
+			 	<if test=" null != orgActivityAdvertiseUrl and ''!= orgActivityAdvertiseUrl  ">
+					 	#{orgActivityAdvertiseUrl},
+				</if>
+			 	<if test=" null != sort ">
+					 	#{sort},
+				</if>
+			 	<if test=" null != isshow ">
+					 	#{isshow},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.CimOrgAdvertises" useGeneratedKeys="true" keyProperty="aid" >
+		INSERT INTO tcim_org_advertises
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != aid ">
+					aid,
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					org_number,
+				</if>
+			 	<if test=" null != orgActivityAdvertise and ''!= orgActivityAdvertise  ">
+					org_activity_advertise,
+				</if>
+			 	<if test=" null != orgActivityAdvertiseUrl and ''!= orgActivityAdvertiseUrl  ">
+					org_activity_advertise_url,
+				</if>
+			 	<if test=" null != sort ">
+					sort,
+				</if>
+			 	<if test=" null != isshow ">
+					isshow,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != aid ">
+					 	#{aid},
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					 	#{orgNumber},
+				</if>
+			 	<if test=" null != orgActivityAdvertise and ''!= orgActivityAdvertise  ">
+					 	#{orgActivityAdvertise},
+				</if>
+			 	<if test=" null != orgActivityAdvertiseUrl and ''!= orgActivityAdvertiseUrl  ">
+					 	#{orgActivityAdvertiseUrl},
+				</if>
+			 	<if test=" null != sort ">
+					 	#{sort},
+				</if>
+			 	<if test=" null != isshow ">
+					 	#{isshow},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.CimOrgAdvertises" >
+  		UPDATE tcim_org_advertises
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != orgNumber and ''!= orgNumber  ">
+						org_number = #{orgNumber},
+					</if>
+					<if test=" null != orgActivityAdvertise and ''!= orgActivityAdvertise  ">
+						org_activity_advertise = #{orgActivityAdvertise},
+					</if>
+					<if test=" null != orgActivityAdvertiseUrl and ''!= orgActivityAdvertiseUrl  ">
+						org_activity_advertise_url = #{orgActivityAdvertiseUrl},
+					</if>
+					<if test=" null != sort ">
+						sort = #{sort},
+					</if>
+					<if test=" null != isshow ">
+						isshow = #{isshow},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 aid = #{aid}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.CimOrgAdvertises" >
+	    UPDATE tcim_org_advertises
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != orgNumber and ''!= orgNumber  ">
+						org_number = #{orgNumber},
+					</if>
+					<if test=" null != orgActivityAdvertise and ''!= orgActivityAdvertise  ">
+						org_activity_advertise = #{orgActivityAdvertise},
+					</if>
+					<if test=" null != orgActivityAdvertiseUrl and ''!= orgActivityAdvertiseUrl  ">
+						org_activity_advertise_url = #{orgActivityAdvertiseUrl},
+					</if>
+					<if test=" null != sort ">
+						sort = #{sort},
+					</if>
+					<if test=" null != isshow ">
+						isshow = #{isshow},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+			</trim>
+		</set>
+		<where>
+			aid = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcim_org_advertises
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+    
+    <!-- 查询机构所有活动图片 -->
+    <select id="queryOrgAdvertisesList" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from tcim_org_advertises 
+		where org_number = #{orgNumber}
+  	</select>
+
+</mapper>

@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.NewsDao">
+<parameterMap type="com.linkwee.web.model.news.News" id="NewsParameterMap" />	
+<!-- Result Map-->
+<resultMap  type="com.linkwee.web.model.news.News" id="NewsResultMap">
+	<result column="id" property="id" jdbcType="INTEGER"/>
+	<result column="app_type" property="appType" jdbcType="INTEGER"/>
+	<result column="name" property="name" jdbcType="VARCHAR"/>
+	<result column="type_code" property="typeCode" jdbcType="VARCHAR"/>
+	<result column="type_name" property="typeName" jdbcType="VARCHAR"/>
+	<result column="img" property="img" jdbcType="VARCHAR"/>
+	<result column="title" property="title" jdbcType="VARCHAR"/>
+	<result column="summary" property="summary" jdbcType="VARCHAR"/>
+	<result column="link_url" property="linkUrl" jdbcType="VARCHAR"/>
+	<result column="content" property="content" jdbcType="LONGVARCHAR"/>
+	<result column="status" property="status" jdbcType="INTEGER"/>
+	<result column="creator" property="creator" jdbcType="VARCHAR"/>
+	<result column="crt_time" property="crtTime" jdbcType="TIMESTAMP"/>
+	<result column="show_inx" property="showInx" jdbcType="INTEGER"/>
+	<result column="valid_begin" property="validBegin" jdbcType="TIMESTAMP"/>
+	<result column="valid_end" property="validEnd" jdbcType="TIMESTAMP"/>
+	<result column="modifiy_time" property="modifiyTime" jdbcType="TIMESTAMP"/>
+</resultMap>
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	app_type,
+	    	name,
+	    	type_code,
+	    	type_name,
+	    	img,
+	    	title,
+	    	summary,
+	    	link_url,
+	    	content,
+	    	status,
+	    	creator,
+	    	crt_time,
+	    	show_inx,
+		DATE_FORMAT(valid_begin,'%Y-%m-%d %H:%i:%s') as valid_begin,
+		DATE_FORMAT(valid_end,'%Y-%m-%d %H:%i:%s') as valid_end,
+	    	modifiy_time,
+    </trim>
+  </sql>  
+  
+   <sql id="Base_Column_List_T">
+    <trim suffixOverrides=",">
+	    	t.id,
+	    	t.app_type,
+	    	t.name,
+	    	t.type_code,
+	    	t.type_name,
+	    	t.img,
+	    	t.title,
+	    	t.summary,
+	    	t.link_url,
+	    	t.content,
+	    	t.status,
+	    	t.creator,
+	    	t.crt_time,
+	    	t.show_inx,
+	    	DATE_FORMAT(t.valid_begin,'%Y-%m-%d %H:%i:%s') as valid_begin,
+		   DATE_FORMAT(t.valid_end,'%Y-%m-%d %H:%i:%s') as valid_end,
+	    	t.modifiy_time,
+    </trim>
+  </sql> 
+  	
+  <select id="getByPrimaryKey"  resultMap="NewsResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tsm_news where  id = #{0}
+  </select>	
+
+  <delete id="deleteByPrimaryKey" >
+    delete from tsm_news
+	<where>
+		id = #{0}
+	</where>
+  </delete>
+  
+  
+  <insert id="add" parameterMap="NewsParameterMap" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tsm_news
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					name,
+				</if>
+			 	<if test=" null != typeCode and ''!= typeCode  ">
+					type_code,
+				</if>
+			 	<if test=" null != typeName and ''!= typeName  ">
+					type_name,
+				</if>
+			 	<if test=" null != img and ''!= img  ">
+					img,
+				</if>
+			 	<if test=" null != title and ''!= title  ">
+					title,
+				</if>
+			 	<if test=" null != summary and ''!= summary  ">
+					summary,
+				</if>
+			 	<if test=" null != linkUrl and ''!= linkUrl  ">
+					link_url,
+				</if>
+			 	<if test=" null != content and ''!= content  ">
+					content,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != creator and ''!= creator  ">
+					creator,
+				</if>
+			 	<if test=" null != crtTime ">
+					crt_time,
+				</if>
+			 	<if test=" null != showInx ">
+					show_inx,
+				</if>
+			 	<if test=" null != validBegin ">
+					valid_begin,
+				</if>
+			 	<if test=" null != validEnd ">
+					valid_end,
+				</if>
+			 	<if test=" null != modifiyTime ">
+					modifiy_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					 	#{name},
+				</if>
+			 	<if test=" null != typeCode and ''!= typeCode  ">
+					 	#{typeCode},
+				</if>
+			 	<if test=" null != typeName and ''!= typeName  ">
+					 	#{typeName},
+				</if>
+			 	<if test=" null != img and ''!= img  ">
+					 	#{img},
+				</if>
+			 	<if test=" null != title and ''!= title  ">
+					 	#{title},
+				</if>
+			 	<if test=" null != summary and ''!= summary  ">
+					 	#{summary},
+				</if>
+			 	<if test=" null != linkUrl and ''!= linkUrl  ">
+					 	#{linkUrl},
+				</if>
+			 	<if test=" null != content and ''!= content  ">
+					 	#{content},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != creator and ''!= creator  ">
+					 	#{creator},
+				</if>
+			 	<if test=" null != crtTime ">
+					 	#{crtTime},
+				</if>
+			 	<if test=" null != showInx ">
+					 	#{showInx},
+				</if>
+			 	<if test=" null != validBegin ">
+					 	#{validBegin},
+				</if>
+			 	<if test=" null != validEnd ">
+					 	#{validEnd},
+				</if>
+			 	<if test=" null != modifiyTime ">
+					 	#{modifiyTime},
+				</if>
+		</trim>
+	</insert>
+  
+  
+  <update id="update" parameterMap="NewsParameterMap">
+		UPDATE tsm_news
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != name and ''!= name  ">
+						name = #{name},
+					</if>
+					<if test=" null != typeCode and ''!= typeCode  ">
+						type_code = #{typeCode},
+					</if>
+					<if test=" null != typeName and ''!= typeName  ">
+						type_name = #{typeName},
+					</if>
+					<if test=" null != img and ''!= img  ">
+						img = #{img},
+					</if>
+					<if test=" null != title and ''!= title  ">
+						title = #{title},
+					</if>
+					<if test=" null != summary and ''!= summary  ">
+						summary = #{summary},
+					</if>
+					<if test=" null != linkUrl and ''!= linkUrl  ">
+						link_url = #{linkUrl},
+					</if>
+					<if test=" null != content and ''!= content  ">
+						content = #{content},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != creator and ''!= creator  ">
+						creator = #{creator},
+					</if>
+					<if test=" null != crtTime ">
+						crt_time = #{crtTime},
+					</if>
+					<if test=" null != showInx ">
+						show_inx = #{showInx},
+					</if>
+					<if test=" null != validBegin ">
+						valid_begin = #{validBegin},
+					</if>
+					<if test=" null != validEnd ">
+						valid_end = #{validEnd},
+					</if>
+					<if test=" null != modifiyTime ">
+						modifiy_time = #{modifiyTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+  
+   <update id="updateWithEmpty" parameterMap="NewsParameterMap">
+		UPDATE tsm_news
+		<set>
+			<trim suffixOverrides=",">
+						app_type = #{appType},
+						name = #{name},
+						type_code = #{typeCode},
+						type_name = #{typeName},
+						img = #{img},
+						title = #{title},
+						summary = #{summary},
+						link_url = #{linkUrl},
+						content = #{content},
+						status = #{status},
+						creator = #{creator},
+						crt_time = #{crtTime},
+						show_inx = #{showInx},
+						valid_begin = #{validBegin},
+						valid_end = #{validEnd},
+						modifiy_time = #{modifiyTime},
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+
+  <insert id="addBatch" parameterType="java.util.List">
+	insert into tsm_news 
+	<trim prefix="(" suffix=")" >
+			<include refid="Base_Column_List" />
+	</trim>
+	VALUES
+	<foreach item="item" index="index" collection="list" separator=",">
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id,jdbcType=INTEGER},
+				#{item.appType,jdbcType=INTEGER},
+				#{item.name,jdbcType=VARCHAR},
+				#{item.typeCode,jdbcType=VARCHAR},
+				#{item.typeName,jdbcType=VARCHAR},
+				#{item.img,jdbcType=VARCHAR},
+				#{item.title,jdbcType=VARCHAR},
+				#{item.summary,jdbcType=VARCHAR},
+				#{item.linkUrl,jdbcType=VARCHAR},
+				#{item.content,jdbcType=LONGVARCHAR},
+				#{item.status,jdbcType=INTEGER},
+				#{item.creator,jdbcType=VARCHAR},
+				#{item.crtTime,jdbcType=TIMESTAMP},
+				#{item.showInx,jdbcType=INTEGER},
+				#{item.validBegin,jdbcType=TIMESTAMP},
+				#{item.validEnd,jdbcType=TIMESTAMP},
+				#{item.modifiyTime,jdbcType=TIMESTAMP},
+		</trim>
+	</foreach>
+</insert>
+
+ 
+<update id="updateBatch" parameterType="java.util.List">
+      <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update tsm_news
+            <set>
+              	<trim suffixOverrides=",">
+					   <if test="item.appType!=null ">
+					        app_type = #{item.appType,jdbcType=INTEGER},
+					   </if>
+					   <if test="item.name!=null and ''!= item.name  ">
+					        name = #{item.name,jdbcType=VARCHAR},
+					   </if>
+					   <if test="item.typeCode!=null and ''!= item.typeCode  ">
+					        type_code = #{item.typeCode,jdbcType=VARCHAR},
+					   </if>
+					   <if test="item.typeName!=null and ''!= item.typeName  ">
+					        type_name = #{item.typeName,jdbcType=VARCHAR},
+					   </if>
+					   <if test="item.img!=null and ''!= item.img  ">
+					        img = #{item.img,jdbcType=VARCHAR},
+					   </if>
+					   <if test="item.title!=null and ''!= item.title  ">
+					        title = #{item.title,jdbcType=VARCHAR},
+					   </if>
+					   <if test="item.summary!=null and ''!= item.summary  ">
+					        summary = #{item.summary,jdbcType=VARCHAR},
+					   </if>
+					   <if test="item.linkUrl!=null and ''!= item.linkUrl  ">
+					        link_url = #{item.linkUrl,jdbcType=VARCHAR},
+					   </if>
+					   <if test="item.content!=null and ''!= item.content  ">
+					        content = #{item.content,jdbcType=LONGVARCHAR},
+					   </if>
+					   <if test="item.status!=null ">
+					        status = #{item.status,jdbcType=INTEGER},
+					   </if>
+					   <if test="item.creator!=null and ''!= item.creator  ">
+					        creator = #{item.creator,jdbcType=VARCHAR},
+					   </if>
+					   <if test="item.crtTime!=null ">
+					        crt_time = #{item.crtTime,jdbcType=TIMESTAMP},
+					   </if>
+					   <if test="item.showInx!=null ">
+					        show_inx = #{item.showInx,jdbcType=INTEGER},
+					   </if>
+					   <if test="item.validBegin!=null ">
+					        valid_begin = #{item.validBegin,jdbcType=TIMESTAMP},
+					   </if>
+					   <if test="item.validEnd!=null ">
+					        valid_end = #{item.validEnd,jdbcType=TIMESTAMP},
+					   </if>
+					   <if test="item.modifiyTime!=null ">
+					        modifiy_time = #{item.modifiyTime,jdbcType=TIMESTAMP},
+					   </if>
+			   </trim>
+            </set>
+             where id = #{item.id}
+     </foreach>
+</update>
+
+<update id="updateBatchWithEmpty" parameterType="java.util.List">
+      <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update tsm_news
+            <set>
+              	<trim suffixOverrides=",">
+					        app_type = #{item.appType,jdbcType=INTEGER},
+					        name = #{item.name,jdbcType=VARCHAR},
+					        type_code = #{item.typeCode,jdbcType=VARCHAR},
+					        type_name = #{item.typeName,jdbcType=VARCHAR},
+					        img = #{item.img,jdbcType=VARCHAR},
+					        title = #{item.title,jdbcType=VARCHAR},
+					        summary = #{item.summary,jdbcType=VARCHAR},
+					        link_url = #{item.linkUrl,jdbcType=VARCHAR},
+					        content = #{item.content,jdbcType=LONGVARCHAR},
+					        status = #{item.status,jdbcType=INTEGER},
+					        creator = #{item.creator,jdbcType=VARCHAR},
+					        crt_time = #{item.crtTime,jdbcType=TIMESTAMP},
+					        show_inx = #{item.showInx,jdbcType=INTEGER},
+					        valid_begin = #{item.validBegin,jdbcType=TIMESTAMP},
+					        valid_end = #{item.validEnd,jdbcType=TIMESTAMP},
+					        modifiy_time = #{item.modifiyTime,jdbcType=TIMESTAMP},
+			   </trim>
+            </set>
+             where id = #{item.id}
+     </foreach>
+</update>         
+
+<delete id="deleteBatch" parameterType="Object">
+	DELETE FROM tsm_news
+	<where>
+		<foreach item="item" index="index" collection="array"  open="(" separator="or" close=") ">
+			  id  = #{item}
+		</foreach>
+	</where>
+</delete>
+    
+ <sql id="Base_Condition">
+		   <if test=" null != query.id ">
+				AND	T.id = #{query.id}
+		</if>
+		   <if test=" null != query.appType ">
+				AND	T.app_type = #{query.appType}
+		</if>
+		   <if test=" null != query.name and ''!= query.name  ">
+				AND	T.name = #{query.name}
+		</if>
+		   <if test=" null != query.typeCode and ''!= query.typeCode  ">
+				AND	T.type_code = #{query.typeCode}
+		</if>
+		   <if test=" null != query.typeName and ''!= query.typeName  ">
+				AND	T.type_name = #{query.typeName}
+		</if>
+		   <if test=" null != query.img and ''!= query.img  ">
+				AND	T.img = #{query.img}
+		</if>
+		   <if test=" null != query.title and ''!= query.title  ">
+				AND	T.title = #{query.title}
+		</if>
+		   <if test=" null != query.summary and ''!= query.summary  ">
+				AND	T.summary = #{query.summary}
+		</if>
+		   <if test=" null != query.linkUrl and ''!= query.linkUrl  ">
+				AND	T.link_url = #{query.linkUrl}
+		</if>
+		   <if test=" null != query.content and ''!= query.content  ">
+				AND	T.content = #{query.content}
+		</if>
+		   <if test=" null != query.status ">
+				AND	T.status = #{query.status}
+		</if>
+		   <if test=" null != query.creator and ''!= query.creator  ">
+				AND	T.creator = #{query.creator}
+		</if>
+		   <if test=" null != query.crtTime ">
+				AND	T.crt_time = #{query.crtTime}
+		</if>
+		   <if test=" null != query.showInx ">
+				AND	T.show_inx = #{query.showInx}
+		</if>
+		   <if test=" null != query.validBegin ">
+				AND	T.valid_begin = #{query.validBegin}
+		</if>
+		   <if test=" null != query.validEnd ">
+				AND	T.valid_end = #{query.validEnd}
+		</if>
+		   <if test=" null != query.modifiyTime ">
+				AND	T.modifiy_time = #{query.modifiyTime}
+		</if>
+ </sql>    
+<select id="list" resultMap="NewsResultMap"  >
+		SELECT <include refid="Base_Column_List" /> FROM tsm_news T WHERE 1=1
+		<include refid="Base_Condition" />
+</select>
+
+<select id="query" resultMap="NewsResultMap"  >
+		SELECT <include refid="Base_Column_List" /> FROM tsm_news T WHERE 1=1
+		<include refid="Base_Condition" />
+</select>
+
+
+
+	<!--*********************-->
+	<!--新版本资讯列表查询-->
+	<!--*********************-->
+	<select id="findNewsList" resultType="com.linkwee.web.request.NewsRequest">
+			SELECT nt.id as id, nt.title as title,nt.type_code as typeCode,
+		nt.type_name as typeName,
+		DATE_FORMAT(nt.crt_time,'%Y-%m-%d %H:%i:%s') as createTime,
+			nt.creator as creator,
+		DATE_FORMAT(nt.valid_begin,'%Y-%m-%d %H:%i:%s') as validBegin,
+		DATE_FORMAT(nt.valid_end,'%Y-%m-%d %H:%i:%s') as validEnd
+			 FROM tsm_news as nt WHERE  1=1
+			 <if test="null!=query.typeCode and query.typeCode>0">AND nt.type_code = #{query.typeCode}</if>
+			 <if test="null!=query.title and query.title!=''">AND  nt.title LIKE CONCAT(CONCAT('%',#{query.title}),'%')</if>
+			 <if test="null!=query.appType and query.appType>0">AND nt.app_type =#{query.appType}</if>
+		ORDER BY nt.valid_begin DESC
+
+
+	</select>
+
+
+
+
+</mapper>

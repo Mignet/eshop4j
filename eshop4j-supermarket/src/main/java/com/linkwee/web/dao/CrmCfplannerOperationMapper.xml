@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CrmCfplannerOperationMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.crm.CrmCfplannerOperation" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="cfplanner" property="cfplanner" jdbcType="VARCHAR"/>
+		<result column="type" property="type" jdbcType="INTEGER"/>
+		<result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
+		<result column="operation_admin" property="operationAdmin" jdbcType="VARCHAR"/>
+		<result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	cfplanner,
+	    	type,
+	    	parent_id,
+	    	operation_admin,
+	    	remarks,
+	    	create_time,
+	    	last_update_time,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != cfplanner and ''!= cfplanner  ">
+			and cfplanner = #{cfplanner}
+		</if>
+		<if test=" null != type ">
+			and type = #{type}
+		</if>
+		<if test=" null != parentId and ''!= parentId  ">
+			and parent_id = #{parentId}
+		</if>
+		<if test=" null != operationAdmin and ''!= operationAdmin  ">
+			and operation_admin = #{operationAdmin}
+		</if>
+		<if test=" null != remarks and ''!= remarks  ">
+			and remarks = #{remarks}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != lastUpdateTime ">
+			and last_update_time = #{lastUpdateTime}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.crm.CrmCfplannerOperation">
+		select <include refid="Base_Column_List" /> from tcrm_cfplanner_operation 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.crm.CrmCfplannerOperation">
+		select <include refid="Base_Column_List" /> from tcrm_cfplanner_operation 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcrm_cfplanner_operation
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcrm_cfplanner_operation
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.crm.CrmCfplannerOperation" >
+    INSERT INTO tcrm_cfplanner_operation
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != cfplanner and ''!= cfplanner  ">
+					cfplanner,
+				</if>
+			 	<if test=" null != type ">
+					type,
+				</if>
+			 	<if test=" null != parentId and ''!= parentId  ">
+					parent_id,
+				</if>
+			 	<if test=" null != operationAdmin and ''!= operationAdmin  ">
+					operation_admin,
+				</if>
+			 	<if test=" null != remarks and ''!= remarks  ">
+					remarks,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					last_update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != cfplanner and ''!= cfplanner  ">
+					 	#{cfplanner},
+				</if>
+			 	<if test=" null != type ">
+					 	#{type},
+				</if>
+			 	<if test=" null != parentId and ''!= parentId  ">
+					 	#{parentId},
+				</if>
+			 	<if test=" null != operationAdmin and ''!= operationAdmin  ">
+					 	#{operationAdmin},
+				</if>
+			 	<if test=" null != remarks and ''!= remarks  ">
+					 	#{remarks},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					 	#{lastUpdateTime},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.crm.CrmCfplannerOperation" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcrm_cfplanner_operation
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != cfplanner and ''!= cfplanner  ">
+					cfplanner,
+				</if>
+			 	<if test=" null != type ">
+					type,
+				</if>
+			 	<if test=" null != parentId and ''!= parentId  ">
+					parent_id,
+				</if>
+			 	<if test=" null != operationAdmin and ''!= operationAdmin  ">
+					operation_admin,
+				</if>
+			 	<if test=" null != remarks and ''!= remarks  ">
+					remarks,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					last_update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != cfplanner and ''!= cfplanner  ">
+					 	#{cfplanner},
+				</if>
+			 	<if test=" null != type ">
+					 	#{type},
+				</if>
+			 	<if test=" null != parentId and ''!= parentId  ">
+					 	#{parentId},
+				</if>
+			 	<if test=" null != operationAdmin and ''!= operationAdmin  ">
+					 	#{operationAdmin},
+				</if>
+			 	<if test=" null != remarks and ''!= remarks  ">
+					 	#{remarks},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					 	#{lastUpdateTime},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.crm.CrmCfplannerOperation" >
+  		UPDATE tcrm_cfplanner_operation
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != cfplanner and ''!= cfplanner  ">
+						cfplanner = #{cfplanner},
+					</if>
+					<if test=" null != type ">
+						type = #{type},
+					</if>
+					<if test=" null != parentId and ''!= parentId  ">
+						parent_id = #{parentId},
+					</if>
+					<if test=" null != operationAdmin and ''!= operationAdmin  ">
+						operation_admin = #{operationAdmin},
+					</if>
+					<if test=" null != remarks and ''!= remarks  ">
+						remarks = #{remarks},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != lastUpdateTime ">
+						last_update_time = #{lastUpdateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.crm.CrmCfplannerOperation" >
+	    UPDATE tcrm_cfplanner_operation
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != cfplanner and ''!= cfplanner  ">
+						cfplanner = #{cfplanner},
+					</if>
+					<if test=" null != type ">
+						type = #{type},
+					</if>
+					<if test=" null != parentId and ''!= parentId  ">
+						parent_id = #{parentId},
+					</if>
+					<if test=" null != operationAdmin and ''!= operationAdmin  ">
+						operation_admin = #{operationAdmin},
+					</if>
+					<if test=" null != remarks and ''!= remarks  ">
+						remarks = #{remarks},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != lastUpdateTime ">
+						last_update_time = #{lastUpdateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcrm_cfplanner_operation
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+	<!-- 理财师更改上级记录 -->
+	<select id="queryChangeParentRecordList" resultMap="BaseResultMap"  >
+			select o.*,u.user_name parentName,u.mobile parentMobile from tcrm_cfplanner_operation o 
+			left join tcrm_user_info u on o.parent_id=u.user_id 
+			where type in (2,3) and o.cfplanner= #{userId}
+	  </select>
+
+</mapper>

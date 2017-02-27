@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.ActRedpacketTemplateMapper">
+	<!-- Result Map-->
+
+	<resultMap  type="com.linkwee.act.redpacket.model.ActRedpacketTemplate" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="redpacket_template_id" property="redpacketTemplateId" jdbcType="VARCHAR"/>
+		<result column="name" property="name" jdbcType="VARCHAR"/>
+		<result column="expires_time" property="expiresTime" jdbcType="TIMESTAMP"/>
+		<result column="expires_day" property="expiresDay" jdbcType="INTEGER"/>
+		<result column="money" property="money" jdbcType="DECIMAL"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="type" property="type" jdbcType="INTEGER"/>
+		<result column="platform_limit" property="platformLimit" jdbcType="INTEGER"/>
+		<result column="platform_id" property="platformId" jdbcType="VARCHAR"/>
+		<result column="product_limit" property="productLimit" jdbcType="INTEGER"/>
+		<result column="product_id" property="productId" jdbcType="LONGVARCHAR"/>
+		<result column="product_deadline" property="productDeadline" jdbcType="INTEGER"/>
+		<result column="product_type" property="productType" jdbcType="INTEGER"/>
+		<result column="invest_limit" property="investLimit" jdbcType="INTEGER"/>
+		<result column="amount_limit" property="amountLimit" jdbcType="INTEGER"/>
+		<result column="amount" property="amount" jdbcType="DECIMAL"/>
+		<result column="repayment_amt" property="repaymentAmt" jdbcType="DECIMAL"/>
+		<result column="max_repayment_amt" property="maxRepaymentAmt" jdbcType="DECIMAL"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		<result column="operator" property="operator" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	redpacket_template_id,
+	    	name,
+	    	expires_time,
+	    	expires_day,
+	    	money,
+	    	remark,
+	    	type,
+	    	platform_limit,
+	    	platform_id,
+	    	product_limit,
+	    	product_id,
+	    	product_deadline,
+	    	product_type,
+	    	invest_limit,
+	    	amount_limit,
+	    	amount,
+	    	repayment_amt,
+	    	max_repayment_amt,
+	    	create_time,
+	    	update_time,
+	    	operator,
+    </trim>
+  </sql>
+  
+ <sql id="Base_Column_List_T">
+    <trim suffixOverrides=",">
+	    	t.id,
+	    	t.redpacket_template_id,
+	    	t.name,
+	    	t.expires_time,
+	    	t.expires_day,
+	    	t.money,
+	    	t.remark,
+	    	t.type,
+	    	t.platform_limit,
+	    	t.platform_id,
+	    	t.product_limit,
+	    	t.product_id,
+	    	t.product_deadline,
+	    	t.product_type,
+	    	t.invest_limit,
+	    	t.amount_limit,
+	    	t.amount,
+	    	t.repayment_amt,
+	    	t.max_repayment_amt,
+	    	t.create_time,
+	    	t.update_time,
+	    	t.operator,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != redpacketTemplateId and ''!= redpacketTemplateId  ">
+			and redpacket_template_id = #{redpacketTemplateId}
+		</if>
+		<if test=" null != name and ''!= name  ">
+			and name = #{name}
+		</if>
+		<if test=" null != expiresTime ">
+			and expires_time = #{expiresTime}
+		</if>
+		<if test=" null != expiresDay ">
+			and expires_day = #{expiresDay}
+		</if>
+		<if test=" null != money ">
+			and money = #{money}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+		<if test=" null != type ">
+			and type = #{type}
+		</if>
+		<if test=" null != platformLimit ">
+			and platform_limit = #{platformLimit}
+		</if>
+		<if test=" null != platformId and ''!= platformId  ">
+			and platform_id = #{platformId}
+		</if>
+		<if test=" null != productLimit ">
+			and product_limit = #{productLimit}
+		</if>
+		<if test=" null != productId and ''!= productId  ">
+			and product_id = #{productId}
+		</if>
+		<if test=" null != productDeadline ">
+			and product_deadline = #{productDeadline}
+		</if>
+		<if test=" null != productType ">
+			and product_type = #{productType}
+		</if>
+		<if test=" null != investLimit ">
+			and invest_limit = #{investLimit}
+		</if>
+		<if test=" null != amountLimit ">
+			and amount_limit = #{amountLimit}
+		</if>
+		<if test=" null != amount ">
+			and amount = #{amount}
+		</if>
+		<if test=" null != repaymentAmt ">
+			and repayment_amt = #{repaymentAmt}
+		</if>
+		<if test=" null != maxRepaymentAmt ">
+			and max_repayment_amt = #{maxRepaymentAmt}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+		<if test=" null != operator and ''!= operator  ">
+			and operator = #{operator}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.act.redpacket.model.ActRedpacketTemplate">
+		select <include refid="Base_Column_List" /> from tact_redpacket_template 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.act.redpacket.model.ActRedpacketTemplate">
+		select <include refid="Base_Column_List" /> from tact_redpacket_template 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tact_redpacket_template
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tact_redpacket_template
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.act.redpacket.model.ActRedpacketTemplate" >
+    INSERT INTO tact_redpacket_template
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != redpacketTemplateId and ''!= redpacketTemplateId  ">
+					redpacket_template_id,
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					name,
+				</if>
+			 	<if test=" null != expiresTime ">
+					expires_time,
+				</if>
+			 	<if test=" null != expiresDay ">
+					expires_day,
+				</if>
+			 	<if test=" null != money ">
+					money,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != type ">
+					type,
+				</if>
+			 	<if test=" null != platformLimit ">
+					platform_limit,
+				</if>
+			 	<if test=" null != platformId and ''!= platformId  ">
+					platform_id,
+				</if>
+			 	<if test=" null != productLimit ">
+					product_limit,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != productDeadline ">
+					product_deadline,
+				</if>
+			 	<if test=" null != productType ">
+					product_type,
+				</if>
+			 	<if test=" null != investLimit ">
+					invest_limit,
+				</if>
+			 	<if test=" null != amountLimit ">
+					amount_limit,
+				</if>
+			 	<if test=" null != amount ">
+					amount,
+				</if>
+			 	<if test=" null != repaymentAmt ">
+					repayment_amt,
+				</if>
+			 	<if test=" null != maxRepaymentAmt ">
+					max_repayment_amt,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					operator,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != redpacketTemplateId and ''!= redpacketTemplateId  ">
+					 	#{redpacketTemplateId},
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					 	#{name},
+				</if>
+			 	<if test=" null != expiresTime ">
+					 	#{expiresTime},
+				</if>
+			 	<if test=" null != expiresDay ">
+					 	#{expiresDay},
+				</if>
+			 	<if test=" null != money ">
+					 	#{money},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != type ">
+					 	#{type},
+				</if>
+			 	<if test=" null != platformLimit ">
+					 	#{platformLimit},
+				</if>
+			 	<if test=" null != platformId and ''!= platformId  ">
+					 	#{platformId},
+				</if>
+			 	<if test=" null != productLimit ">
+					 	#{productLimit},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != productDeadline ">
+					 	#{productDeadline},
+				</if>
+			 	<if test=" null != productType ">
+					 	#{productType},
+				</if>
+			 	<if test=" null != investLimit ">
+					 	#{investLimit},
+				</if>
+			 	<if test=" null != amountLimit ">
+					 	#{amountLimit},
+				</if>
+			 	<if test=" null != amount ">
+					 	#{amount},
+				</if>
+			 	<if test=" null != repaymentAmt ">
+					 	#{repaymentAmt},
+				</if>
+			 	<if test=" null != maxRepaymentAmt ">
+					 	#{maxRepaymentAmt},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					 	#{operator},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.act.redpacket.model.ActRedpacketTemplate" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tact_redpacket_template
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != redpacketTemplateId and ''!= redpacketTemplateId  ">
+					redpacket_template_id,
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					name,
+				</if>
+			 	<if test=" null != expiresTime ">
+					expires_time,
+				</if>
+			 	<if test=" null != expiresDay ">
+					expires_day,
+				</if>
+			 	<if test=" null != money ">
+					money,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != type ">
+					type,
+				</if>
+			 	<if test=" null != platformLimit ">
+					platform_limit,
+				</if>
+			 	<if test=" null != platformId and ''!= platformId  ">
+					platform_id,
+				</if>
+			 	<if test=" null != productLimit ">
+					product_limit,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != productDeadline ">
+					product_deadline,
+				</if>
+			 	<if test=" null != productType ">
+					product_type,
+				</if>
+			 	<if test=" null != investLimit ">
+					invest_limit,
+				</if>
+			 	<if test=" null != amountLimit ">
+					amount_limit,
+				</if>
+			 	<if test=" null != amount ">
+					amount,
+				</if>
+			 	<if test=" null != repaymentAmt ">
+					repayment_amt,
+				</if>
+			 	<if test=" null != maxRepaymentAmt ">
+					max_repayment_amt,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					operator,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != redpacketTemplateId and ''!= redpacketTemplateId  ">
+					 	#{redpacketTemplateId},
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					 	#{name},
+				</if>
+			 	<if test=" null != expiresTime ">
+					 	#{expiresTime},
+				</if>
+			 	<if test=" null != expiresDay ">
+					 	#{expiresDay},
+				</if>
+			 	<if test=" null != money ">
+					 	#{money},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != type ">
+					 	#{type},
+				</if>
+			 	<if test=" null != platformLimit ">
+					 	#{platformLimit},
+				</if>
+			 	<if test=" null != platformId and ''!= platformId  ">
+					 	#{platformId},
+				</if>
+			 	<if test=" null != productLimit ">
+					 	#{productLimit},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != productDeadline ">
+					 	#{productDeadline},
+				</if>
+			 	<if test=" null != productType ">
+					 	#{productType},
+				</if>
+			 	<if test=" null != investLimit ">
+					 	#{investLimit},
+				</if>
+			 	<if test=" null != amountLimit ">
+					 	#{amountLimit},
+				</if>
+			 	<if test=" null != amount ">
+					 	#{amount},
+				</if>
+			 	<if test=" null != repaymentAmt ">
+					 	#{repaymentAmt},
+				</if>
+			 	<if test=" null != maxRepaymentAmt ">
+					 	#{maxRepaymentAmt},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					 	#{operator},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.act.redpacket.model.ActRedpacketTemplate" >
+  		UPDATE tact_redpacket_template
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != redpacketTemplateId and ''!= redpacketTemplateId  ">
+						redpacket_template_id = #{redpacketTemplateId},
+					</if>
+					<if test=" null != name and ''!= name  ">
+						name = #{name},
+					</if>
+					<if test=" null != expiresTime ">
+						expires_time = #{expiresTime},
+					</if>
+					<if test=" null != expiresDay ">
+						expires_day = #{expiresDay},
+					</if>
+					<if test=" null != money ">
+						money = #{money},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != type ">
+						type = #{type},
+					</if>
+					<if test=" null != platformLimit ">
+						platform_limit = #{platformLimit},
+					</if>
+					<if test=" null != platformId and ''!= platformId  ">
+						platform_id = #{platformId},
+					</if>
+					<if test=" null != productLimit ">
+						product_limit = #{productLimit},
+					</if>
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != productDeadline ">
+						product_deadline = #{productDeadline},
+					</if>
+					<if test=" null != productType ">
+						product_type = #{productType},
+					</if>
+					<if test=" null != investLimit ">
+						invest_limit = #{investLimit},
+					</if>
+					<if test=" null != amountLimit ">
+						amount_limit = #{amountLimit},
+					</if>
+					<if test=" null != amount ">
+						amount = #{amount},
+					</if>
+					<if test=" null != repaymentAmt ">
+						repayment_amt = #{repaymentAmt},
+					</if>
+					<if test=" null != maxRepaymentAmt ">
+						max_repayment_amt = #{maxRepaymentAmt},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != operator and ''!= operator  ">
+						operator = #{operator},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.act.redpacket.model.ActRedpacketTemplate" >
+	    UPDATE tact_redpacket_template
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != redpacketTemplateId and ''!= redpacketTemplateId  ">
+						redpacket_template_id = #{redpacketTemplateId},
+					</if>
+					<if test=" null != name and ''!= name  ">
+						name = #{name},
+					</if>
+					<if test=" null != expiresTime ">
+						expires_time = #{expiresTime},
+					</if>
+					<if test=" null != expiresDay ">
+						expires_day = #{expiresDay},
+					</if>
+					<if test=" null != money ">
+						money = #{money},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != type ">
+						type = #{type},
+					</if>
+					<if test=" null != platformLimit ">
+						platform_limit = #{platformLimit},
+					</if>
+					<if test=" null != platformId and ''!= platformId  ">
+						platform_id = #{platformId},
+					</if>
+					<if test=" null != productLimit ">
+						product_limit = #{productLimit},
+					</if>
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != productDeadline ">
+						product_deadline = #{productDeadline},
+					</if>
+					<if test=" null != productType ">
+						product_type = #{productType},
+					</if>
+					<if test=" null != investLimit ">
+						invest_limit = #{investLimit},
+					</if>
+					<if test=" null != amountLimit ">
+						amount_limit = #{amountLimit},
+					</if>
+					<if test=" null != amount ">
+						amount = #{amount},
+					</if>
+					<if test=" null != repaymentAmt ">
+						repayment_amt = #{repaymentAmt},
+					</if>
+					<if test=" null != maxRepaymentAmt ">
+						max_repayment_amt = #{maxRepaymentAmt},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != operator and ''!= operator  ">
+						operator = #{operator},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+	  
+	  <select id="getRedpacketTemplateList" resultType="com.linkwee.web.response.act.RedpacketTemplateListResponse">
+	  	SELECT 
+			rt.`name`,
+			rt.type,
+			rt.expires_day expiresDay,
+			rt.money,
+			rt.product_type productType,
+			rt.repayment_amt repaymentAmt,
+			rt.max_repayment_amt maxRepaymentAmt,
+			rt.update_time time,
+			rt.operator operator,
+			rt.redpacket_template_id redpacketTemplateId
+		FROM tact_redpacket_template rt ORDER BY rt.update_time DESC
+	  </select>
+	  
+	  
+
+</mapper>

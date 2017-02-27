@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.ActRepaymentRedpacketPoolMapper">
+	
+		<!-- Result Map-->
+	<resultMap  type="com.linkwee.act.redpacket.model.ActRepaymentRedpacketPool" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="biz_id" property="bizId" jdbcType="VARCHAR"/>
+		<result column="redpacket_template_id" property="redpacketTemplateId" jdbcType="VARCHAR"/>
+		<result column="redpacket_id" property="redpacketId" jdbcType="VARCHAR"/>
+		<result column="redpacket_send_id" property="redpacketSendId" jdbcType="VARCHAR"/>
+		<result column="repayment_amt" property="repaymentAmt" jdbcType="DECIMAL"/>
+		<result column="max_repayment_amt" property="maxRepaymentAmt" jdbcType="DECIMAL"/>
+		<result column="product_type" property="productType" jdbcType="INTEGER"/>
+		<result column="platform_id" property="platformId" jdbcType="VARCHAR"/>
+		<result column="main_platform" property="mainPlatform" jdbcType="INTEGER"/>
+		<result column="model" property="model" jdbcType="INTEGER"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		<result column="operator" property="operator" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	biz_id,
+	    	redpacket_template_id,
+	    	redpacket_id,
+	    	redpacket_send_id,
+	    	repayment_amt,
+	    	max_repayment_amt,
+	    	product_type,
+	    	platform_id,
+	    	main_platform,
+	    	model,
+	    	status,
+	    	create_time,
+	    	update_time,
+	    	operator,
+    </trim>
+  </sql>
+  
+ <sql id="Base_Column_List_T">
+    <trim suffixOverrides=",">
+	    	t.id,
+	    	t.biz_id,
+	    	t.redpacket_template_id,
+	    	t.redpacket_id,
+	    	t.redpacket_send_id,
+	    	t.repayment_amt,
+	    	t.max_repayment_amt,
+	    	t.product_type,
+	    	t.platform_id,
+	    	t.main_platform,
+	    	t.model,
+	    	t.status,
+	    	t.create_time,
+	    	t.update_time,
+	    	t.operator,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != bizId and ''!= bizId  ">
+			and biz_id = #{bizId}
+		</if>
+		<if test=" null != redpacketTemplateId and ''!= redpacketTemplateId  ">
+			and redpacket_template_id = #{redpacketTemplateId}
+		</if>
+		<if test=" null != redpacketId and ''!= redpacketId  ">
+			and redpacket_id = #{redpacketId}
+		</if>
+		<if test=" null != redpacketSendId and ''!= redpacketSendId  ">
+			and redpacket_send_id = #{redpacketSendId}
+		</if>
+		<if test=" null != repaymentAmt ">
+			and repayment_amt = #{repaymentAmt}
+		</if>
+		<if test=" null != maxRepaymentAmt ">
+			and max_repayment_amt = #{maxRepaymentAmt}
+		</if>
+		<if test=" null != productType ">
+			and product_type = #{productType}
+		</if>
+		<if test=" null != platformId and ''!= platformId  ">
+			and platform_id = #{platformId}
+		</if>
+		<if test=" null != mainPlatform ">
+			and main_platform = #{mainPlatform}
+		</if>
+		<if test=" null != model ">
+			and model = #{model}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+		<if test=" null != operator and ''!= operator  ">
+			and operator = #{operator}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.act.redpacket.model.ActRepaymentRedpacketPool">
+		select <include refid="Base_Column_List" /> from tact_repayment_redpacket_pool 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.act.redpacket.model.ActRepaymentRedpacketPool">
+		select <include refid="Base_Column_List" /> from tact_repayment_redpacket_pool 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tact_repayment_redpacket_pool
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tact_repayment_redpacket_pool
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.act.redpacket.model.ActRepaymentRedpacketPool" >
+    INSERT INTO tact_repayment_redpacket_pool
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != bizId and ''!= bizId  ">
+					biz_id,
+				</if>
+			 	<if test=" null != redpacketTemplateId and ''!= redpacketTemplateId  ">
+					redpacket_template_id,
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					redpacket_id,
+				</if>
+			 	<if test=" null != redpacketSendId and ''!= redpacketSendId  ">
+					redpacket_send_id,
+				</if>
+			 	<if test=" null != repaymentAmt ">
+					repayment_amt,
+				</if>
+			 	<if test=" null != maxRepaymentAmt ">
+					max_repayment_amt,
+				</if>
+			 	<if test=" null != productType ">
+					product_type,
+				</if>
+			 	<if test=" null != platformId and ''!= platformId  ">
+					platform_id,
+				</if>
+			 	<if test=" null != mainPlatform ">
+					main_platform,
+				</if>
+			 	<if test=" null != model ">
+					model,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					operator,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != bizId and ''!= bizId  ">
+					 	#{bizId},
+				</if>
+			 	<if test=" null != redpacketTemplateId and ''!= redpacketTemplateId  ">
+					 	#{redpacketTemplateId},
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					 	#{redpacketId},
+				</if>
+			 	<if test=" null != redpacketSendId and ''!= redpacketSendId  ">
+					 	#{redpacketSendId},
+				</if>
+			 	<if test=" null != repaymentAmt ">
+					 	#{repaymentAmt},
+				</if>
+			 	<if test=" null != maxRepaymentAmt ">
+					 	#{maxRepaymentAmt},
+				</if>
+			 	<if test=" null != productType ">
+					 	#{productType},
+				</if>
+			 	<if test=" null != platformId and ''!= platformId  ">
+					 	#{platformId},
+				</if>
+			 	<if test=" null != mainPlatform ">
+					 	#{mainPlatform},
+				</if>
+			 	<if test=" null != model ">
+					 	#{model},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					 	#{operator},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.act.redpacket.model.ActRepaymentRedpacketPool" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tact_repayment_redpacket_pool
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != bizId and ''!= bizId  ">
+					biz_id,
+				</if>
+			 	<if test=" null != redpacketTemplateId and ''!= redpacketTemplateId  ">
+					redpacket_template_id,
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					redpacket_id,
+				</if>
+			 	<if test=" null != redpacketSendId and ''!= redpacketSendId  ">
+					redpacket_send_id,
+				</if>
+			 	<if test=" null != repaymentAmt ">
+					repayment_amt,
+				</if>
+			 	<if test=" null != maxRepaymentAmt ">
+					max_repayment_amt,
+				</if>
+			 	<if test=" null != productType ">
+					product_type,
+				</if>
+			 	<if test=" null != platformId and ''!= platformId  ">
+					platform_id,
+				</if>
+			 	<if test=" null != mainPlatform ">
+					main_platform,
+				</if>
+			 	<if test=" null != model ">
+					model,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					operator,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != bizId and ''!= bizId  ">
+					 	#{bizId},
+				</if>
+			 	<if test=" null != redpacketTemplateId and ''!= redpacketTemplateId  ">
+					 	#{redpacketTemplateId},
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					 	#{redpacketId},
+				</if>
+			 	<if test=" null != redpacketSendId and ''!= redpacketSendId  ">
+					 	#{redpacketSendId},
+				</if>
+			 	<if test=" null != repaymentAmt ">
+					 	#{repaymentAmt},
+				</if>
+			 	<if test=" null != maxRepaymentAmt ">
+					 	#{maxRepaymentAmt},
+				</if>
+			 	<if test=" null != productType ">
+					 	#{productType},
+				</if>
+			 	<if test=" null != platformId and ''!= platformId  ">
+					 	#{platformId},
+				</if>
+			 	<if test=" null != mainPlatform ">
+					 	#{mainPlatform},
+				</if>
+			 	<if test=" null != model ">
+					 	#{model},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					 	#{operator},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.act.redpacket.model.ActRepaymentRedpacketPool" >
+  		UPDATE tact_repayment_redpacket_pool
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != bizId and ''!= bizId  ">
+						biz_id = #{bizId},
+					</if>
+					<if test=" null != redpacketTemplateId and ''!= redpacketTemplateId  ">
+						redpacket_template_id = #{redpacketTemplateId},
+					</if>
+					<if test=" null != redpacketId and ''!= redpacketId  ">
+						redpacket_id = #{redpacketId},
+					</if>
+					<if test=" null != redpacketSendId and ''!= redpacketSendId  ">
+						redpacket_send_id = #{redpacketSendId},
+					</if>
+					<if test=" null != repaymentAmt ">
+						repayment_amt = #{repaymentAmt},
+					</if>
+					<if test=" null != maxRepaymentAmt ">
+						max_repayment_amt = #{maxRepaymentAmt},
+					</if>
+					<if test=" null != productType ">
+						product_type = #{productType},
+					</if>
+					<if test=" null != platformId and ''!= platformId  ">
+						platform_id = #{platformId},
+					</if>
+					<if test=" null != mainPlatform ">
+						main_platform = #{mainPlatform},
+					</if>
+					<if test=" null != model ">
+						model = #{model},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != operator and ''!= operator  ">
+						operator = #{operator},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.act.redpacket.model.ActRepaymentRedpacketPool" >
+	    UPDATE tact_repayment_redpacket_pool
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != bizId and ''!= bizId  ">
+						biz_id = #{bizId},
+					</if>
+					<if test=" null != redpacketTemplateId and ''!= redpacketTemplateId  ">
+						redpacket_template_id = #{redpacketTemplateId},
+					</if>
+					<if test=" null != redpacketId and ''!= redpacketId  ">
+						redpacket_id = #{redpacketId},
+					</if>
+					<if test=" null != redpacketSendId and ''!= redpacketSendId  ">
+						redpacket_send_id = #{redpacketSendId},
+					</if>
+					<if test=" null != repaymentAmt ">
+						repayment_amt = #{repaymentAmt},
+					</if>
+					<if test=" null != maxRepaymentAmt ">
+						max_repayment_amt = #{maxRepaymentAmt},
+					</if>
+					<if test=" null != productType ">
+						product_type = #{productType},
+					</if>
+					<if test=" null != platformId and ''!= platformId  ">
+						platform_id = #{platformId},
+					</if>
+					<if test=" null != mainPlatform ">
+						main_platform = #{mainPlatform},
+					</if>
+					<if test=" null != model ">
+						model = #{model},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != operator and ''!= operator  ">
+						operator = #{operator},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+	  
+	  <update id="setMainPlatForm" parameterType="com.linkwee.act.redpacket.model.ActRepaymentRedpacketPool" >
+	    UPDATE tact_repayment_redpacket_pool
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != mainPlatform ">
+						main_platform = #{mainPlatform},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != operator and ''!= operator  ">
+						operator = #{operator},
+					</if>
+			</trim>
+		</set>
+		<where>
+			model=#{model}
+			<if test=" null != platformId and ''!= platformId  ">
+						and  platform_id = #{platformId}
+			</if>
+			
+		</where>
+	  </update>
+	  
+	  
+	  <update id="updateStatus" parameterType="com.linkwee.act.redpacket.model.ActRepaymentRedpacketPool" >
+	    UPDATE tact_repayment_redpacket_pool
+	   <set>
+			<trim suffixOverrides=",">
+					status = #{status},update_time = now(),operator = #{operator},
+			</trim>
+		</set>
+		<where>
+			 platform_id = #{platformId}
+		</where>
+	  </update>
+	  
+	   
+	  
+	  <select id="getMainPlatFormByModel" resultType="String">
+	  	SELECT r.platform_id FROM tact_repayment_redpacket_pool r where r.model=#{model} AND r.main_platform=1 GROUP BY r.platform_id
+	  </select>
+	  
+	   <select id="getRepaymentRedpackets" resultMap="BaseResultMap">
+	  	SELECT  <include refid="Base_Column_List" /> FROM tact_repayment_redpacket_pool r 
+	  	<where>
+	  	1=1
+			<if test=" null != repaymentAmt ">
+				<![CDATA[ and  (#{repaymentAmt} > repayment_amt   and  #{repaymentAmt} <= max_repayment_amt  ) ]]>
+				
+			</if>
+			<if test=" null != productType ">
+				and product_type = #{productType}
+			</if>
+			<if test=" null != platformId and ''!= platformId  ">
+				and platform_id = #{platformId}
+			</if>
+			<if test=" null != mainPlatform ">
+				and main_platform = #{mainPlatform}
+			</if>
+			<if test=" null != model ">
+				and model = #{model}
+			</if>
+			<if test=" null != status ">
+				and status = #{status}
+			</if>
+	  	</where> 
+	  </select>
+	  
+
+</mapper>

@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.SysMsgMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.mc.SysMsg" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="content" property="content" jdbcType="VARCHAR"/>
+		<result column="link" property="link" jdbcType="VARCHAR"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="type" property="type" jdbcType="INTEGER"/>
+		<result column="user_number" property="userNumber" jdbcType="VARCHAR"/>
+		<result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+		<result column="read_status" property="readStatus" jdbcType="INTEGER"/>
+		<result column="crt_time" property="crtTime" jdbcType="TIMESTAMP"/>
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+		<result column="app_type" property="appType" jdbcType="INTEGER"/>
+		<result column="type_name" property="typeName" jdbcType="LONGVARCHAR"/>
+		<result column="link_btn_txt" property="linkBtnTxt" jdbcType="VARCHAR"/>
+		<result column="link_url_key" property="linkUrlKey" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<resultMap  type="com.linkwee.api.response.mc.MsgResp" id="MsgRespResultMap">
+	<result column="id" property="id" jdbcType="VARCHAR"/>
+	<result column="content" property="content" jdbcType="VARCHAR"/>
+	<result column="status" property="status" jdbcType="VARCHAR"/>
+	<result column="user_number" property="userNumber" jdbcType="VARCHAR"/>
+	<result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+	<result column="crt_time" property="crtTime" jdbcType="TIMESTAMP"/>
+	<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+	<result column="read_status" property="read" jdbcType="VARCHAR"/>
+	<result column="type_name" property="typeName" jdbcType="VARCHAR"/>
+	<result column="link_btn_txt" property="linkBtnTxt" jdbcType="VARCHAR"/>
+	<result column="link_url_key" property="linkUrlKey" jdbcType="VARCHAR"/>
+</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	content,
+	    	status,
+	    	user_number,
+	    	start_time,
+	    	read_status,
+	    	crt_time,
+	    	modify_time,
+	    	app_type,
+	    	type_name,
+	    	link_btn_txt,
+	    	link_url_key,
+    </trim>
+  </sql>  
+  
+     <sql id="Base_Column_List_T">
+    <trim suffixOverrides=",">
+	    	t.id,
+	    	t.content,
+	    	t.status,
+	    	t.user_number,
+	    	t.start_time,
+	    	t.read_status,
+	    	t.crt_time,
+	    	t.modify_time,
+	    	t.app_type,
+	    	t.type_name,
+	    	t.link_btn_txt,
+	    	t.link_url_key,
+    </trim>
+  </sql> 
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != content and ''!= content  ">
+			and content = #{content}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+		<if test=" null != userNumber and ''!= userNumber  ">
+			and user_number = #{userNumber}
+		</if>
+		<if test=" null != startTime ">
+			and start_time = #{startTime}
+		</if>
+		<if test=" null != readStatus ">
+			and read_status = #{readStatus}
+		</if>
+		<if test=" null != crtTime ">
+			and crt_time = #{crtTime}
+		</if>
+		<if test=" null != modifyTime ">
+			and modify_time = #{modifyTime}
+		</if>
+		<if test=" null != appType ">
+			and app_type = #{appType}
+		</if>
+		<if test=" null != typeName and ''!= typeName  ">
+			and type_name = #{typeName}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.mc.SysMsg">
+		select <include refid="Base_Column_List" /> from tsys_msg 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.mc.SysMsg">
+		select <include refid="Base_Column_List" /> from tsys_msg 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsys_msg
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tsys_msg
+    where id = #{0}
+  </delete>
+  
+  <delete id="deleteBatch" parameterType="Object">
+	DELETE FROM tsys_msg
+	<where>
+		<foreach item="item" index="index" collection="array"  open="(" separator="or" close=") ">
+			  id  = #{item}
+		</foreach>
+	</where>
+</delete>
+
+<update id="deletePersonMsgs">
+	update tsys_msg
+	<set>
+		status = 1,
+		read_status = 1
+	</set>
+	<where>
+		<foreach collection="msgs" item="item" index="index"  open="(" separator="or" close=")">
+			 id  = #{item}
+		</foreach>
+		and user_number = #{userNumber} 
+	</where>
+
+</update> 
+
+<update id="markMsgReaded">
+	update tsys_msg
+	<set>
+		read_status = 1
+	</set>
+	<where>
+		<foreach collection="msgs" item="item" index="index"  open="(" separator="or" close=")">
+			 id  = #{item}
+		</foreach>
+		and user_number = #{userNumber} 
+	</where>
+
+</update> 
+
+
+<update id="markMsgAllReaded">
+	update tsys_msg
+	<set>
+		read_status = 1
+	</set>
+	<where>
+		and user_number = #{userNumber} 
+	</where>
+
+</update> 
+
+  <insert id="insert" parameterType="com.linkwee.web.model.mc.SysMsg" >
+    INSERT INTO tsys_msg
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != content and ''!= content  ">
+					content,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != userNumber and ''!= userNumber  ">
+					user_number,
+				</if>
+			 	<if test=" null != startTime ">
+					start_time,
+				</if>
+				<if test=" null != readStatus ">
+			        read_status,
+		       </if>
+			 	<if test=" null != crtTime ">
+					crt_time,
+				</if>
+			 	<if test=" null != modifyTime ">
+					modify_time,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+			 	<if test=" null != typeName and ''!= typeName  ">
+					type_name,
+				</if>
+				<if test=" null != linkBtnTxt and ''!= linkBtnTxt  ">
+					link_btn_txt,
+				</if>
+				<if test=" null != linkUrlKey and ''!= linkUrlKey  ">
+					link_url_key,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != content and ''!= content  ">
+					 	#{content},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != userNumber and ''!= userNumber  ">
+					 	#{userNumber},
+				</if>
+			 	<if test=" null != startTime ">
+					 	#{startTime},
+				</if>
+				<if test=" null != readStatus ">
+			     		#{readStatus}
+		        </if>
+			 	<if test=" null != crtTime ">
+					 	#{crtTime},
+				</if>
+			 	<if test=" null != modifyTime ">
+					 	#{modifyTime},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+			 	<if test=" null != typeName and ''!= typeName  ">
+					 	#{typeName},
+				</if>
+				<if test=" null != linkBtnTxt and ''!= linkBtnTxt  ">
+					#{linkBtnTxt},
+				</if>
+				<if test=" null != linkUrlKey and ''!= linkUrlKey  ">
+					#{linkUrlKey},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.mc.SysMsg" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tsys_msg
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != content and ''!= content  ">
+					content,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != userNumber and ''!= userNumber  ">
+					user_number,
+				</if>
+			 	<if test=" null != startTime ">
+					start_time,
+				</if>
+				<if test=" null != readStatus ">
+			 		read_status,
+		        </if>
+			 	<if test=" null != crtTime ">
+					crt_time,
+				</if>
+			 	<if test=" null != modifyTime ">
+					modify_time,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+			 	<if test=" null != typeName and ''!= typeName  ">
+					type_name,
+				</if>
+				<if test=" null != linkBtnTxt and ''!= linkBtnTxt  ">
+					link_btn_txt,
+				</if>
+				<if test=" null != linkUrlKey and ''!= linkUrlKey  ">
+					link_url_key,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != content and ''!= content  ">
+					 	#{content},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != userNumber and ''!= userNumber  ">
+					 	#{userNumber},
+				</if>
+			 	<if test=" null != startTime ">
+					 	#{startTime},
+				</if>
+				<if test=" null != readStatus ">
+					 #{readStatus},
+				</if>
+			 	<if test=" null != crtTime ">
+					 	#{crtTime},
+				</if>
+			 	<if test=" null != modifyTime ">
+					 	#{modifyTime},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+			 	<if test=" null != typeName and ''!= typeName  ">
+					 	#{typeName},
+				</if>
+				<if test=" null != linkBtnTxt and ''!= linkBtnTxt  ">
+					#{linkBtnTxt},
+				</if>
+				<if test=" null != linkUrlKey and ''!= linkUrlKey  ">
+					#{linkUrlKey},
+				</if>
+		</trim>
+	</insert>
+	
+	 <insert id="addBatch" parameterType="java.util.List">
+	insert into tsys_msg 
+	<trim prefix="(" suffix=")" >
+			content,
+	    	status,
+	    	user_number,
+	    	start_time,
+	    	read_status,
+	    	crt_time,
+	    	modify_time,
+	    	app_type,
+	    	type_name,
+	    	link_btn_txt,
+	    	link_url_key
+	</trim>
+	VALUES
+	<foreach item="item" index="index" collection="list" separator=",">
+		<trim prefix="(" suffix=")" suffixOverrides=",">				
+				#{item.content,jdbcType=VARCHAR},
+				#{item.status,jdbcType=INTEGER},
+				#{item.userNumber,jdbcType=VARCHAR},
+				#{item.startTime,jdbcType=TIMESTAMP},
+				#{item.readStatus,jdbcType=INTEGER},
+				#{item.crtTime,jdbcType=TIMESTAMP},
+				#{item.modifyTime,jdbcType=TIMESTAMP},
+				#{item.appType,jdbcType=INTEGER},
+				#{item.typeName,jdbcType=VARCHAR},
+				#{item.linkBtnTxt,jdbcType=VARCHAR},
+				#{item.linkUrlKey,jdbcType=VARCHAR},
+		</trim>
+	</foreach>
+</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.mc.SysMsg" >
+  		UPDATE tsys_msg
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != content and ''!= content  ">
+						content = #{content},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != userNumber and ''!= userNumber  ">
+						user_number = #{userNumber},
+					</if>
+					<if test=" null != startTime ">
+						start_time = #{startTime},
+					</if>
+					<if test=" null != readStatus ">
+						 read_status = #{readStatus},
+					</if>					
+					<if test=" null != crtTime ">
+						crt_time = #{crtTime},
+					</if>
+					<if test=" null != modifyTime ">
+						modify_time = #{modifyTime},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != typeName and ''!= typeName  ">
+						type_name = #{typeName},
+					</if>
+					<if test=" null != linkBtnTxt and ''!= linkBtnTxt  ">
+						link_btn_txt = #{linkBtnTxt},
+					</if>
+					<if test=" null != linkUrlKey and ''!= linkUrlKey  ">
+						link_url_key = #{linkUrlKey},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.mc.SysMsg" >
+	    UPDATE tsys_msg
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != content and ''!= content  ">
+						content = #{content},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != userNumber and ''!= userNumber  ">
+						user_number = #{userNumber},
+					</if>
+					<if test=" null != startTime ">
+						start_time = #{startTime},
+					</if>
+					<if test=" null != readStatus ">
+						 read_status = #{readStatus},
+					</if>	
+					<if test=" null != crtTime ">
+						crt_time = #{crtTime},
+					</if>
+					<if test=" null != modifyTime ">
+						modify_time = #{modifyTime},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != typeName and ''!= typeName  ">
+						type_name = #{typeName},
+					</if>
+					<if test=" null != linkBtnTxt and ''!= linkBtnTxt  ">
+						link_btn_txt = #{linkBtnTxt},
+					</if>
+					<if test=" null != linkUrlKey and ''!= linkUrlKey  ">
+						link_url_key = #{linkUrlKey},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+	  
+	  <update id="updateBatchWithEmpty" parameterType="java.util.List">
+      <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update tsys_msg
+            <set>
+              	<trim suffixOverrides=",">
+					        content = #{item.content,jdbcType=VARCHAR},
+					        status = #{item.status,jdbcType=INTEGER},
+					        user_number = #{item.userNumber,jdbcType=VARCHAR},
+					        start_time = #{item.startTime,jdbcType=TIMESTAMP},
+					        read_status = #{item.readStatus,jdbcType=INTEGER},
+					        crt_time = #{item.crtTime,jdbcType=TIMESTAMP},
+					        modify_time = #{item.modifyTime,jdbcType=TIMESTAMP},
+					        app_type = #{item.appType,jdbcType=INTEGER},
+					        type_name = #{item.typeName,jdbcType=VARCHAR},
+					        link_btn_txt = #{item.linkBtnTxt,jdbcType=VARCHAR},
+					        link_url_key = #{item.linkUrlKey,jdbcType=VARCHAR},
+			   </trim>
+            </set>
+             where id = #{item.id}
+     </foreach>
+</update>  
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tsys_msg
+        <where> 
+        <if test="dt.search!=null">  
+                content LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+    
+    <!-- 接口列表分页 -->
+     <select id="querySysMspList" resultMap="BaseResultMap">
+	    SELECT
+        <include refid="Base_Column_List" />
+        FROM tsys_msg	WHERE 1 = 1
+			<if test=" null != app_type and ''!= app_type ">
+				AND app_type = #{appType}
+			</if>
+		  ORDER BY crt_time DESC
+    </select> 
+    
+    <!-- add new method -->
+
+
+	<select id="queryPersonMsgResp" resultMap="MsgRespResultMap">
+	<!-- ,(case when m.start_time <= '${date}' then 1 else 0 end) 'read' -->
+	<![CDATA[ 
+	SELECT  m.*  FROM  tsys_msg m 	WHERE  m.status = 0   AND m.app_type = #{appType}   AND m.user_number = #{userNumber}
+	order by read_status asc,start_time desc 
+	]]>
+	</select>
+
+	<select id="queryUnReadMsgCount" resultType="int">
+	<![CDATA[ 
+		SELECT
+		COUNT(1)
+		FROM
+		tsys_msg m
+		WHERE m.start_time <= now() and m.status = 0
+		AND ((
+		m.start_time > #{sysMsgDate}
+		AND m.type = 0
+		AND (
+		m.app_type = 0
+		OR m.app_type = #{appType}
+		)
+		)
+		OR
+		(
+		m.start_time > #{personMsgDate}
+		AND m.type = 1
+		AND m.app_type = #{appType}
+		AND m.user_number = #{userNumber}
+		)
+		)
+		]]>
+	</select>
+
+
+	<!-- 未读消息统计个人 -->
+	<select id="queryPersonUnreadCount" resultType="int">
+	<![CDATA[ 
+		SELECT	COUNT(1) FROM	tsys_msg m WHERE m.read_status = 0 AND m.app_type = #{appType} AND m.user_number = #{userNumber}	
+		
+	]]>
+	</select>
+
+</mapper>

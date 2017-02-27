@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.SysThirdkeyConfigMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.SysThirdkeyConfig" id="BaseResultMap">
+		<result column="org_id" property="orgId" jdbcType="BIGINT"/>
+		<result column="org_number" property="orgNumber" jdbcType="VARCHAR"/>
+		<result column="org_key" property="orgKey" jdbcType="VARCHAR"/>
+		<result column="org_secret" property="orgSecret" jdbcType="VARCHAR"/>
+		<result column="org_status" property="orgStatus" jdbcType="CHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		<result column="archive" property="archive" jdbcType="INTEGER"/>
+		<result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	org_id,
+	    	org_number,
+	    	org_key,
+	    	org_secret,
+	    	org_status,
+	    	create_time,
+	    	update_time,
+	    	archive,
+	    	create_user,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != orgId ">
+			and org_id = #{orgId}
+		</if>
+		<if test=" null != orgNumber and ''!= orgNumber  ">
+			and org_number = #{orgNumber}
+		</if>
+		<if test=" null != orgKey and ''!= orgKey  ">
+			and org_key = #{orgKey}
+		</if>
+		<if test=" null != orgSecret and ''!= orgSecret  ">
+			and org_secret = #{orgSecret}
+		</if>
+		<if test=" null != orgStatus and ''!= orgStatus  ">
+			and org_status = #{orgStatus}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+		<if test=" null != archive ">
+			and archive = #{archive}
+		</if>
+		<if test=" null != createUser and ''!= createUser  ">
+			and create_user = #{createUser}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.SysThirdkeyConfig">
+		select <include refid="Base_Column_List" /> from tsys_thirdkey_config 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.SysThirdkeyConfig">
+		select <include refid="Base_Column_List" /> from tsys_thirdkey_config 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsys_thirdkey_config
+    where  org_id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tsys_thirdkey_config
+    where org_id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.SysThirdkeyConfig" >
+    INSERT INTO tsys_thirdkey_config
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != orgId ">
+					org_id,
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					org_number,
+				</if>
+			 	<if test=" null != orgKey and ''!= orgKey  ">
+					org_key,
+				</if>
+			 	<if test=" null != orgSecret and ''!= orgSecret  ">
+					org_secret,
+				</if>
+			 	<if test=" null != orgStatus and ''!= orgStatus  ">
+					org_status,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != archive ">
+					archive,
+				</if>
+			 	<if test=" null != createUser and ''!= createUser  ">
+					create_user,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != orgId ">
+					 	#{orgId},
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					 	#{orgNumber},
+				</if>
+			 	<if test=" null != orgKey and ''!= orgKey  ">
+					 	#{orgKey},
+				</if>
+			 	<if test=" null != orgSecret and ''!= orgSecret  ">
+					 	#{orgSecret},
+				</if>
+			 	<if test=" null != orgStatus and ''!= orgStatus  ">
+					 	#{orgStatus},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != archive ">
+					 	#{archive},
+				</if>
+			 	<if test=" null != createUser and ''!= createUser  ">
+					 	#{createUser},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.SysThirdkeyConfig" useGeneratedKeys="true" keyProperty="orgId" >
+		INSERT INTO tsys_thirdkey_config
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != orgId ">
+					org_id,
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					org_number,
+				</if>
+			 	<if test=" null != orgKey and ''!= orgKey  ">
+					org_key,
+				</if>
+			 	<if test=" null != orgSecret and ''!= orgSecret  ">
+					org_secret,
+				</if>
+			 	<if test=" null != orgStatus and ''!= orgStatus  ">
+					org_status,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != archive ">
+					archive,
+				</if>
+			 	<if test=" null != createUser and ''!= createUser  ">
+					create_user,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != orgId ">
+					 	#{orgId},
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					 	#{orgNumber},
+				</if>
+			 	<if test=" null != orgKey and ''!= orgKey  ">
+					 	#{orgKey},
+				</if>
+			 	<if test=" null != orgSecret and ''!= orgSecret  ">
+					 	#{orgSecret},
+				</if>
+			 	<if test=" null != orgStatus and ''!= orgStatus  ">
+					 	#{orgStatus},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != archive ">
+					 	#{archive},
+				</if>
+			 	<if test=" null != createUser and ''!= createUser  ">
+					 	#{createUser},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.SysThirdkeyConfig" >
+  		UPDATE tsys_thirdkey_config
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != orgNumber and ''!= orgNumber  ">
+						org_number = #{orgNumber},
+					</if>
+					<if test=" null != orgKey and ''!= orgKey  ">
+						org_key = #{orgKey},
+					</if>
+					<if test=" null != orgSecret and ''!= orgSecret  ">
+						org_secret = #{orgSecret},
+					</if>
+					<if test=" null != orgStatus and ''!= orgStatus  ">
+						org_status = #{orgStatus},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != archive ">
+						archive = #{archive},
+					</if>
+					<if test=" null != createUser and ''!= createUser  ">
+						create_user = #{createUser},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 org_id = #{orgId}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.SysThirdkeyConfig" >
+	    UPDATE tsys_thirdkey_config
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != orgNumber and ''!= orgNumber  ">
+						org_number = #{orgNumber},
+					</if>
+					<if test=" null != orgKey and ''!= orgKey  ">
+						org_key = #{orgKey},
+					</if>
+					<if test=" null != orgSecret and ''!= orgSecret  ">
+						org_secret = #{orgSecret},
+					</if>
+					<if test=" null != orgStatus and ''!= orgStatus  ">
+						org_status = #{orgStatus},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != archive ">
+						archive = #{archive},
+					</if>
+					<if test=" null != createUser and ''!= createUser  ">
+						create_user = #{createUser},
+					</if>
+			</trim>
+		</set>
+		<where>
+			org_id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tsys_thirdkey_config
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+</mapper>

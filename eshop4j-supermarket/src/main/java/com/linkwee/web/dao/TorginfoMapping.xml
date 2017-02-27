@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.TorginfoDao">
+
+    <select id="findTorgginNodeListByParentId" resultType="com.linkwee.web.model.TorginfoModel">
+        SELECT ax.fnumber as number ,ax.fname as `name` FROM torginfo ax WHERE fenable = 1
+        <choose>
+          <when test="parentid !=null and parentid!=''">
+              AND ax.fparentid = #{parentid}
+          </when>
+            <otherwise>
+                AND ax.fparentid is NULL
+            </otherwise>
+        </choose>
+    </select>
+</mapper>

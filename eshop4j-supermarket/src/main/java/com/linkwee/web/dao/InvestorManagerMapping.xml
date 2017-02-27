@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.InvestorManagerDao">
+
+<resultMap  type="com.linkwee.web.model.crm.InvestorManagerDetailResp" id="InvestorDetailResp">
+	<result column="id" property="id" />
+	<result column="user_name" property="userName" />
+	<result column="mobile" property="mobile" />
+	<result column="cfplanner_name" property="cfplannerName" />
+	<result column="cfplanner_mobile" property="cfplannerMobile" />
+	<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+	<result column="bank_card" property="bankCard" />
+	<result column="bank_name" property="bankName" />
+	<result column="id_card" property="idCard" />
+	<result column="user_id" property="userId" />
+	<result column="freinds_count" property="freindsCount" />
+	<result column="is_free_customer" property="isfreeCustomer" />
+</resultMap>
+
+
+
+<!-- 查询理财师列表 -->
+<select id="queryInvestorList" resultMap="InvestorDetailResp" >
+	SELECT 
+	(select count(1) from tcrm_investor where ref_user=c.user_id) freinds_count,
+	c.*, u.user_name, t.mobile as cfplanner_mobile,t.user_name as cfplanner_name
+	from tcrm_investor c 
+	left join tcrm_user_info u on c.user_id=u.user_id 
+	left join tcrm_user_info t on t.user_id=c.cfplanner
+	<where>
+	 	1=1
+	 	<if test=" null != query.nameOrmobile and ''!= query.nameOrmobile ">
+	 		and c.mobile  = #{query.nameOrmobile} or u.user_name =#{query.nameOrmobile}
+		</if>
+		<if test=" null != query.startDate">
+			and DATE_FORMAT(c.create_time, '%Y-%m-%d') &gt;=  DATE_FORMAT(#{query.startDate}, '%Y-%m-%d')
+		</if>
+		<if test=" null != query.endDate">
+			and DATE_FORMAT(c.create_time, '%Y-%m-%d') &lt;=  DATE_FORMAT(#{query.endDate}, '%Y-%m-%d')
+		</if>
+	 </where>
+	 order BY c.id 
+</select>
+
+
+<!-- 查询理财师详情 -->
+<select id="queryInvestorDetail" resultMap="InvestorDetailResp" >
+	SELECT a.bank_card,a.bank_name,a.id_card, a.user_name,
+	t.user_name cfplanner_name, t.mobile cfplanner_mobile,
+	i.* from tcrm_investor i 
+	LEFT JOIN tac_account_bind a on i.user_id=a.user_id
+	left join tcrm_user_info t on t.user_id=i.cfplanner
+	where i.mobile=#{mobile}
+</select>
+
+<!-- 获取邀请的好友列表数据 -->
+<select id="selectFreindsList" resultType="com.linkwee.web.model.FreindsResp" >
+     SELECT 
+     i.user_id as userId,
+     u.user_name as userName,
+     i.mobile,
+     i.create_time createTime,
+     (SELECT IFNULL(sum(invest_amt),0) from tcim_product_invest_record where user_id=i.user_id and `status`=2) investAmount
+      from tcrm_investor i left join tcrm_user_info u on u.user_id=i.user_id 
+     where i.ref_user =#{query.userId}
+     <if test=" null != query.name and ''!= query.name ">
+		and i.mobile  = #{query.name} or u.user_name =#{query.name}
+  		</if>
+      order by i.id desc
+</select>
+
+
+<!-- 指定时间投资人数统计 -->
+<select id="queryInvestorNumByTime" resultType="HashMap" >
+	<![CDATA[
+		SELECT
+			count(DISTINCT t.user_id) personNum,
+			DATE_FORMAT(t.biz_time, '%Y-%m-%d') investDate
+		FROM
+			tcim_product_invest_record t
+		WHERE
+			1=1
+			AND DATE_FORMAT(t.biz_time, '%Y-%m-%d') >= DATE_FORMAT(#{startDate}, '%Y-%m-%d') 
+			AND DATE_FORMAT(t.biz_time, '%Y-%m-%d') <= DATE_FORMAT(#{endDate}, '%Y-%m-%d') 
+		GROUP BY investDate
+	]]>
+</select>
+
+<!-- 指定时间投资额统计 -->
+<select id="queryInvestMoneyByTime" resultType="HashMap">
+	<![CDATA[
+		SELECT
+			IFNULL(sum(t.invest_amt),0) investTotal,
+			DATE_FORMAT(t.biz_time, '%Y-%m-%d') investDate
+		FROM
+			tcim_product_invest_record t
+		WHERE
+			1=1
+			AND DATE_FORMAT(t.biz_time, '%Y-%m-%d') >= DATE_FORMAT(#{startDate}, '%Y-%m-%d') 
+			AND DATE_FORMAT(t.biz_time, '%Y-%m-%d') <= DATE_FORMAT(#{endDate}, '%Y-%m-%d') 
+		GROUP BY investDate
+	]]>
+</select>
+
+<!-- 人数概要  总人数单独统计 -->
+<select id="personAmoutStat" resultType="HashMap">
+	select t2.currdayperson ,t3.currweekperson, t4.currmonthperson  from 
+	
+	(select count(DISTINCT user_id) currdayperson from tcim_product_invest_record  where  1=1 AND DATE_FORMAT(biz_time,'%Y-%m-%d')=CURDATE())t2,
+	
+	(select count(DISTINCT user_id) currweekperson  from tcim_product_invest_record  where  1=1 AND biz_time BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND  CURDATE() )t3,
+	
+	(select count(DISTINCT user_id) currmonthperson from tcim_product_invest_record  where 1=1 AND DATE_FORMAT(biz_time,'%Y-%m')=DATE_FORMAT(CURDATE(),'%Y-%m') )t4
+</select>
+
+<!-- 投资额  年化投资额单独统计-->
+<select id="investMoneyStat" resultType="HashMap">
+	select IFNULL(t2.currdaymoney,0) currdaymoney ,IFNULL(t3.currweekmoney,0) currweekmoney, IFNULL(t4.currmothmoney,0) currmothmoney  from 
+	
+	(select IFNULL(sum(invest_amt),0) currdaymoney from tcim_product_invest_record  where  1=1  AND DATE_FORMAT(biz_time,'%Y-%m-%d')=CURDATE())t2,
+	
+	(select IFNULL(sum(invest_amt),0) currweekmoney  from tcim_product_invest_record  where  1=1  AND biz_time BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND  CURDATE() )t3,
+	
+	(select IFNULL(sum(invest_amt),0) currmothmoney from tcim_product_invest_record  where 1=1  AND DATE_FORMAT(biz_time,'%Y-%m')=DATE_FORMAT(CURDATE(),'%Y-%m') )t4
+</select>
+
+<!-- 总投资人数 -->
+<select id="investorTotal" resultType="HashMap">
+	<![CDATA[
+		SELECT count( DISTINCT  user_id) totalperson FROM	tcim_product_invest_record  
+	]]> 
+</select>
+
+<!-- 总投资额 -->
+<select id="investMoneyTotal" resultType="HashMap">
+	<![CDATA[
+		SELECT	IFNULL(sum(yearpur_amount),0) totalmoney FROM	tcim_feedetail  WHERE	DATE_SUB(CURDATE(), INTERVAL 1 YEAR) <= date(create_time) AND fee_type = '1001'
+	]]> 
+</select>
+
+<!--  用户注册数据统计 -->
+<select id="queryUserRegisterTotalData" resultType="com.linkwee.web.model.crm.UserDataStatisticResp">
+	<![CDATA[
+		select *  from 
+	(SELECT count(1) todayCount from  tcrm_investor where DATE_FORMAT(create_time,'%Y-%m-%d')=CURDATE())t2,
+	(SELECT count(1) yesterdayCount from  tcrm_investor where DATE_FORMAT(create_time,'%Y-%m-%d')=DATE_SUB(CURDATE(), INTERVAL 1 DAY) )t3,
+	(SELECT count(1) thisMonthCount from  tcrm_investor where DATE_FORMAT(create_time,'%Y-%m')=DATE_FORMAT(CURDATE(),'%Y-%m') )t4,
+	(SELECT count(1) totalCount from  tcrm_investor)t5
+	]]> 
+</select>
+
+<!--  用户投资数据统计 -->
+<select id="queryUserInvestTotalData" resultType="com.linkwee.web.model.crm.InvestedUserDataStatisticResp">
+	<![CDATA[
+			select *  from 
+	(SELECT count(1) todayNewCount from  tcrm_investor where DATE_FORMAT(first_invest_time,'%Y-%m-%d')=CURDATE())t1,
+	(SELECT count(1) todayTotalCount from  tcrm_investor where DATE_FORMAT(create_time,'%Y-%m-%d')=CURDATE())t2,
+	(SELECT count(1) yesterdayNewCount from  tcrm_investor where DATE_FORMAT(first_invest_time,'%Y-%m-%d')=DATE_SUB(CURDATE(), INTERVAL 1 DAY) )t3,
+	(SELECT count(1) yesterdayTotalCount from  tcrm_investor where DATE_FORMAT(create_time,'%Y-%m-%d')=DATE_SUB(CURDATE(), INTERVAL 1 DAY) )t4,
+	(SELECT count(1) thisMonthNewCount from  tcrm_investor where DATE_FORMAT(first_invest_time,'%Y-%m')=DATE_FORMAT(CURDATE(),'%Y-%m') )t5,
+	(SELECT count(1) thisMonthTotalCount from  tcrm_investor where DATE_FORMAT(create_time,'%Y-%m')=DATE_FORMAT(CURDATE(),'%Y-%m') )t6,
+	(SELECT count(1) totalCount from  tcrm_investor)t9
+	]]> 
+</select>
+
+
+
+</mapper>

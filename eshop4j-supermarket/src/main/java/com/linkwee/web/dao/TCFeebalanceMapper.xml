@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.TCFeebalanceMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.tc.fee.model.TCFeebalance" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="biz_id" property="bizId" jdbcType="VARCHAR"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="user_mobile" property="userMobile" jdbcType="VARCHAR"/>
+		<result column="user_name" property="userName" jdbcType="VARCHAR"/>
+		<result column="fee_amount" property="feeAmount" jdbcType="DECIMAL"/>
+		<result column="recommend_people" property="recommendPeople" jdbcType="INTEGER"/>
+		<result column="recommend_invest" property="recommendInvest" jdbcType="DECIMAL"/>
+		<result column="month" property="month" jdbcType="VARCHAR"/>
+		<result column="bill_status" property="billStatus" jdbcType="TINYINT"/>
+		<result column="audit_time" property="auditTime" jdbcType="TIMESTAMP"/>
+		<result column="del_status" property="delStatus" jdbcType="TINYINT"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	biz_id,
+	    	user_id,
+	    	user_mobile,
+	    	user_name,
+	    	fee_amount,
+	    	recommend_people,
+	    	recommend_invest,
+	    	month,
+	    	bill_status,
+	    	audit_time,
+	    	del_status,
+	    	create_time,
+	    	update_time,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != bizId and ''!= bizId  ">
+			and biz_id = #{bizId}
+		</if>
+		<if test=" null != userId and ''!= userId  ">
+			and user_id = #{userId}
+		</if>
+		<if test=" null != userMobile and ''!= userMobile  ">
+			and user_mobile = #{userMobile}
+		</if>
+		<if test=" null != userName and ''!= userName  ">
+			and user_name = #{userName}
+		</if>
+		<if test=" null != feeAmount ">
+			and fee_amount = #{feeAmount}
+		</if>
+		<if test=" null != recommendPeople ">
+			and recommend_people = #{recommendPeople}
+		</if>
+		<if test=" null != recommendInvest ">
+			and recommend_invest = #{recommendInvest}
+		</if>
+		<if test=" null != month and ''!= month  ">
+			and month = #{month}
+		</if>
+		<if test=" null != billStatus ">
+			and bill_status = #{billStatus}
+		</if>
+		<if test=" null != auditTime ">
+			and audit_time = #{auditTime}
+		</if>
+		<if test=" null != delStatus ">
+			and del_status = #{delStatus}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.tc.fee.model.TCFeebalance">
+		select <include refid="Base_Column_List" /> from tcim_feebalance 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.tc.fee.model.TCFeebalance">
+		select <include refid="Base_Column_List" /> from tcim_feebalance 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_feebalance
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_feebalance
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.tc.fee.model.TCFeebalance" >
+    INSERT INTO tcim_feebalance
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != bizId and ''!= bizId  ">
+					biz_id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != userMobile and ''!= userMobile  ">
+					user_mobile,
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					user_name,
+				</if>
+			 	<if test=" null != feeAmount ">
+					fee_amount,
+				</if>
+			 	<if test=" null != recommendPeople ">
+					recommend_people,
+				</if>
+			 	<if test=" null != recommendInvest ">
+					recommend_invest,
+				</if>
+			 	<if test=" null != month and ''!= month  ">
+					month,
+				</if>
+			 	<if test=" null != billStatus ">
+					bill_status,
+				</if>
+			 	<if test=" null != auditTime ">
+					audit_time,
+				</if>
+			 	<if test=" null != delStatus ">
+					del_status,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != bizId and ''!= bizId  ">
+					 	#{bizId},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != userMobile and ''!= userMobile  ">
+					 	#{userMobile},
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					 	#{userName},
+				</if>
+			 	<if test=" null != feeAmount ">
+					 	#{feeAmount},
+				</if>
+			 	<if test=" null != recommendPeople ">
+					 	#{recommendPeople},
+				</if>
+			 	<if test=" null != recommendInvest ">
+					 	#{recommendInvest},
+				</if>
+			 	<if test=" null != month and ''!= month  ">
+					 	#{month},
+				</if>
+			 	<if test=" null != billStatus ">
+					 	#{billStatus},
+				</if>
+			 	<if test=" null != auditTime ">
+					 	#{auditTime},
+				</if>
+			 	<if test=" null != delStatus ">
+					 	#{delStatus},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.tc.fee.model.TCFeebalance" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcim_feebalance
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != bizId and ''!= bizId  ">
+					biz_id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != userMobile and ''!= userMobile  ">
+					user_mobile,
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					user_name,
+				</if>
+			 	<if test=" null != feeAmount ">
+					fee_amount,
+				</if>
+			 	<if test=" null != recommendPeople ">
+					recommend_people,
+				</if>
+			 	<if test=" null != recommendInvest ">
+					recommend_invest,
+				</if>
+			 	<if test=" null != month and ''!= month  ">
+					month,
+				</if>
+			 	<if test=" null != billStatus ">
+					bill_status,
+				</if>
+			 	<if test=" null != auditTime ">
+					audit_time,
+				</if>
+			 	<if test=" null != delStatus ">
+					del_status,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != bizId and ''!= bizId  ">
+					 	#{bizId},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != userMobile and ''!= userMobile  ">
+					 	#{userMobile},
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					 	#{userName},
+				</if>
+			 	<if test=" null != feeAmount ">
+					 	#{feeAmount},
+				</if>
+			 	<if test=" null != recommendPeople ">
+					 	#{recommendPeople},
+				</if>
+			 	<if test=" null != recommendInvest ">
+					 	#{recommendInvest},
+				</if>
+			 	<if test=" null != month and ''!= month  ">
+					 	#{month},
+				</if>
+			 	<if test=" null != billStatus ">
+					 	#{billStatus},
+				</if>
+			 	<if test=" null != auditTime ">
+					 	#{auditTime},
+				</if>
+			 	<if test=" null != delStatus ">
+					 	#{delStatus},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.tc.fee.model.TCFeebalance" >
+  		UPDATE tcim_feebalance
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != bizId and ''!= bizId  ">
+						biz_id = #{bizId},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != userMobile and ''!= userMobile  ">
+						user_mobile = #{userMobile},
+					</if>
+					<if test=" null != userName and ''!= userName  ">
+						user_name = #{userName},
+					</if>
+					<if test=" null != feeAmount ">
+						fee_amount = #{feeAmount},
+					</if>
+					<if test=" null != recommendPeople ">
+						recommend_people = #{recommendPeople},
+					</if>
+					<if test=" null != recommendInvest ">
+						recommend_invest = #{recommendInvest},
+					</if>
+					<if test=" null != month and ''!= month  ">
+						month = #{month},
+					</if>
+					<if test=" null != billStatus ">
+						bill_status = #{billStatus},
+					</if>
+					<if test=" null != auditTime ">
+						audit_time = #{auditTime},
+					</if>
+					<if test=" null != delStatus ">
+						del_status = #{delStatus},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.tc.fee.model.TCFeebalance" >
+	    UPDATE tcim_feebalance
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != bizId and ''!= bizId  ">
+						biz_id = #{bizId},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != userMobile and ''!= userMobile  ">
+						user_mobile = #{userMobile},
+					</if>
+					<if test=" null != userName and ''!= userName  ">
+						user_name = #{userName},
+					</if>
+					<if test=" null != feeAmount ">
+						fee_amount = #{feeAmount},
+					</if>
+					<if test=" null != recommendPeople ">
+						recommend_people = #{recommendPeople},
+					</if>
+					<if test=" null != recommendInvest ">
+						recommend_invest = #{recommendInvest},
+					</if>
+					<if test=" null != month and ''!= month  ">
+						month = #{month},
+					</if>
+					<if test=" null != billStatus ">
+						bill_status = #{billStatus},
+					</if>
+					<if test=" null != auditTime ">
+						audit_time = #{auditTime},
+					</if>
+					<if test=" null != delStatus ">
+						del_status = #{delStatus},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+	  
+	<!-- 获取本月需要佣金汇总的数量 -->
+	<select id="getFeebalanceByMonthCount" resultType="int">
+				select count(*) from (
+				SELECT
+					t.profit_cfplanner_id
+				FROM
+					tcim_feedetail t
+				WHERE
+					t.create_time BETWEEN #{beginTime}
+				AND #{endTime} AND t.balance_status = 0
+				GROUP BY
+					t.profit_cfplanner_id)a
+	</select>
+	
+	<select id="getFeePayCount" resultType="int">
+				SELECT
+					count(*)
+				FROM
+					tcim_feebalance fb
+				WHERE
+					fb.`month`  = #{month}
+	</select>
+
+	
+	<!-- 保存月度佣金结算明细 -->
+	<insert id="insertFeebalances">
+		INSERT INTO tcim_feebalance
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+				biz_id,
+				user_id,
+				user_mobile,
+				user_name,
+				fee_amount,
+				recommend_people,
+				recommend_invest,
+				month,
+				create_time,
+				update_time,
+		</trim>
+		VALUES
+		<foreach item="item" index="index" collection="feebalances" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				 #{item.bizId},
+				 #{item.userId},
+				 #{item.userMobile},
+				 #{item.userName},
+				 #{item.feeAmount},
+				 #{item.recommendPeople},
+				 #{item.recommendInvest},
+				 #{item.month},
+				 #{item.createTime},
+				 #{item.updateTime},
+			</trim>
+		</foreach>
+	</insert>
+	
+		<!-- 获取月度佣金结算明细 -->
+	  <select id="getFeebalanceByMonth" resultMap="BaseResultMap">
+	  	SELECT
+			a.cfplanner userId,
+			u.user_name userName,
+			u.mobile userMobile,
+			IFNULL(a.feeAmount, 0) feeAmount,
+			IFNULL(a.recommendAmount, 0) recommendInvest,
+			IFNULL(b.recommendPeople, 0) recommendPeople
+		FROM
+			(
+				SELECT
+					sum(t.fee_amount) feeAmount,
+					sum(t.product_amount) recommendAmount,
+					t.profit_cfplanner_id cfplanner
+				FROM
+					tcim_feedetail t
+				WHERE
+					t.create_time BETWEEN #{beginTime}
+				AND #{endTime} AND t.balance_status = 0
+				GROUP BY
+					t.profit_cfplanner_id
+			) a
+		LEFT JOIN (
+			SELECT
+				IFNULL(COUNT(t.user_id), 0) recommendPeople,
+				t.cfplanner
+			FROM
+				tcrm_investor t
+			WHERE
+				t.del_status = 0
+			AND t.create_time BETWEEN #{beginTime}
+			AND #{endTime}
+			GROUP BY
+				t.cfplanner
+		) b ON a.cfplanner = b.cfplanner
+		LEFT JOIN tcrm_user_info u ON a.cfplanner = u.user_id
+	  </select>
+	
+	
+	<!-- 保存佣金汇总日志 -->
+	<insert id="insertFeeSummarylog" >
+		INSERT INTO tcim_feesummarylog
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	biz_id,result_code,result_msg,total_time,create_time,
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+				#{bizId},#{code},#{msg},#{time},now(),
+		</trim>
+	</insert>
+	
+	<!-- 保存月度或季度佣金汇总明细 -->
+	<insert id="insertFeeSummary" >
+		INSERT INTO tcim_feesummary (
+			biz_id,
+			type,
+			YEAR,
+			moth,
+			total_profit,
+			fee_profit,
+			recommend_profit,
+			avg_fee_profit,
+			create_time
+		) SELECT
+			'${bizId}','${type}','${year}','${moth}',
+			ifnull(sum(f.fee_amount), 0) f_total_profit,
+			ifnull(
+				sum(
+					CASE
+					WHEN f.fee_type = '1001' THEN
+						f.fee_amount
+					ELSE
+						0
+					END
+				),
+				0
+			) f_fee_profit,
+			ifnull(
+				sum(
+					CASE
+					WHEN f.fee_type = '1002' THEN
+						f.fee_amount
+					ELSE
+						0
+					END
+				),
+				0
+			) f_recommend_profit,
+			ifnull(sum(f.fee_amount) / '${count}', 0) avg_fee_profit,
+			now() create_time
+		FROM
+			tcim_feedetail f
+		WHERE
+			f.balance_number IN (
+				SELECT
+					fb.biz_id
+				FROM
+					tcim_feebalance fb
+				LEFT JOIN tcim_fee_pay fp ON fb.biz_id = fp.bill_id
+				WHERE
+					fb.`month` = ${bizId}
+				AND fp.`status` = 2
+			)
+
+		
+	
+		<!-- INSERT INTO tcim_feesummary (
+				biz_id,type,year,moth,total_profit,fee_profit,recommend_profit,avg_fee_profit,create_time
+			) SELECT 
+						'${bizId}','${type}','${year}','${moth}',
+						 ifnull(sum(f.fee_amount), 0)  f_total_profit, 
+			      sum(case when f.fee_type = '1001' then ifnull(f.fee_amount, 0) else 0 end)  f_fee_profit,
+			      sum(case when f.fee_type = '1002' then ifnull(f.fee_amount, 0) else 0 end)  f_recommend_profit ,sum(ifnull(f.fee_amount, 0))/'${count}',now()						
+			 FROM tcim_feedetail f where f.create_time BETWEEN #{beginTime}
+							AND #{endTime} AND f.balance_status = 2 -->
+	</insert>
+	
+	<!-- 查询月度是否汇总 -->
+	<select id="isFeeSummary" resultType="boolean">
+		SELECT COUNT(fs.biz_id) FROM tcim_feesummary fs where fs.biz_id=#{bizId} AND type=0
+	</select>
+
+	
+	<select id="getFeebalanceListByMonth" resultType="com.linkwee.web.response.tc.FeebalanceListResponse">
+		SELECT
+			fb.user_mobile mobile,
+			fb.user_name NAME,
+			fb.month time,
+			IFNULL(fb.fee_amount, 0) amount
+		FROM
+			tcim_feebalance fb
+		WHERE
+			fb.`month` = #{month}
+	</select>
+	
+	
+	
+	<select id="getFeebalanceList" resultType="com.linkwee.web.response.tc.FeebalanceListResponse">
+		SELECT
+			<!-- fb.user_id userId, -->
+			fp.user_mobile mobile,
+			fp.user_name name,
+			IFNULL(SUM(fp.fee_amount), 0) amount,
+			count(fp.bill_id) count,
+			MAX(fp.`month`) time,
+			MAX(fp.create_time) sendTime
+		FROM
+			tcim_fee_pay fp 
+			<where>
+				1=1
+				<if test=" null != mobile and ''!= mobile  ">
+					AND fp.user_mobile = #{mobile}
+				</if>
+			</where>
+		GROUP BY
+			fp.user_mobile
+	</select>
+	
+	<select id="getFeebalanceRecordByMobile" resultType="com.linkwee.web.response.tc.FeebalanceListResponse">
+		SELECT
+			<!-- fb.user_id userId, -->
+			fp.user_mobile mobile,
+			fp.user_name name,
+			IFNULL(fp.fee_amount,0) amount,
+			fp.`month` time,
+			fp.create_time sendTime,
+			fp.status
+		FROM
+			tcim_fee_pay fp 
+			<where>
+				fp.user_mobile = #{mobile}
+				<if test=" null != month and ''!= month  ">
+					AND fp.`month`=#{month}
+				</if>
+			</where>
+	</select>
+	
+	<select id="getFeeDetailRecord" resultType="com.linkwee.web.response.tc.FeeDetailRecordResponse">
+		SELECT
+			u.user_name name,
+			u.mobile mobile,
+			p.product_name productName,
+			fd.product_amount investAmt,
+			fd.fee_amount feeAmt,
+			fd.fee_rate rate,
+			fd.fee_type type,
+			fd.remark remark, 
+			fd.create_time time
+		FROM
+			`tcim_fee_pay` fp
+		LEFT JOIN tcim_feedetail fd ON fp.bill_id = fd.balance_number
+
+		LEFT JOIN tcim_product p ON p.product_id = fd.product_id
+		LEFT JOIN tcrm_user_info u ON fd.investor_id = u.user_id
+		<where>
+			fp.user_mobile = #{mobile}
+			AND fp.`month` =  #{month}
+			<if test=" null != customerMobile and ''!= customerMobile  ">
+				AND u.mobile=#{customerMobile}
+			</if>
+			<if test=" null != startTime and null != endTime">
+				AND fd.create_time  BETWEEN #{startTime} AND #{endTime}
+			</if>
+		</where>
+	</select>
+</mapper>

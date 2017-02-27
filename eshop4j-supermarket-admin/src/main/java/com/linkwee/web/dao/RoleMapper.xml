@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.linkwee.web.model.Role" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="role_sign" property="roleSign" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role_name, role_sign, description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsys_role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectListAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsys_role
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tsys_role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.linkwee.web.model.Role" >
+    insert into tsys_role (id, role_name, role_sign, 
+      description)
+    values (#{id,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleSign,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.Role" >
+    insert into tsys_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roleName != null" >
+        role_name,
+      </if>
+      <if test="roleSign != null" >
+        role_sign,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleSign != null" >
+        #{roleSign,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.Role" >
+    update tsys_role
+    <set >
+      <if test="roleName != null" >
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleSign != null" >
+        role_sign = #{roleSign,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.Role" >
+    update tsys_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      role_sign = #{roleSign,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!-- 通过用户id 查询用户 拥有的角色 -->
+    <select id="selectRolesByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT
+        r.*
+		FROM tsys_role r LEFT JOIN tsys_user_role ur ON r.id = ur.role_id
+        WHERE ur.user_id = #{userId,jdbcType=BIGINT}
+    </select>
+    <!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        select
+        <include refid="Base_Column_List" />
+        from tsys_role
+        <where> 
+        <if test="dt.search!=null">  
+                role_name like CONCAT('%','${dt.search.value}','%' )  
+		        or 
+		        role_sign like CONCAT('%','${dt.search.value}','%' )  
+		        or
+		        description like CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir}
+                </foreach>
+         </if>  
+        </where>
+    </select>
+    <!-- 删除用户的角色 -->
+     <delete id="deleteUserRolesByUserid" parameterType="java.lang.Integer" >
+	    delete from tsys_user_role
+	    where user_id = #{userId,jdbcType=INTEGER}
+	  </delete>
+	  <!-- 插入用户的角色 -->
+	  <insert id="insertUserRole"  >
+	    INSERT INTO tsys_user_role (user_id, role_id) VALUES  (#{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR})
+	  </insert>
+</mapper>

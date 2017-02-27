@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CimProductSaleRewardMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.CimProductSaleReward" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="product_id" property="productId" jdbcType="VARCHAR"/>
+		<result column="sale_reward" property="saleReward" jdbcType="VARCHAR"/>
+		<result column="reward_begin_time" property="rewardBeginTime" jdbcType="TIMESTAMP"/>
+		<result column="reward_end_time" property="rewardEndTime" jdbcType="TIMESTAMP"/>
+		<result column="is_reward" property="isReward" jdbcType="VARCHAR"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	product_id,
+	    	sale_reward,
+	    	reward_begin_time,
+	    	reward_end_time,
+	    	is_reward,
+	    	remark,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != productId and ''!= productId  ">
+			and product_id = #{productId}
+		</if>
+		<if test=" null != saleReward and ''!= saleReward  ">
+			and sale_reward = #{saleReward}
+		</if>
+		<if test=" null != rewardBeginTime ">
+			and reward_begin_time = #{rewardBeginTime}
+		</if>
+		<if test=" null != rewardEndTime ">
+			and reward_end_time = #{rewardEndTime}
+		</if>
+		<if test=" null != isReward and ''!= isReward  ">
+			and is_reward = #{isReward}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimProductSaleReward">
+		select <include refid="Base_Column_List" /> from tcim_product_sale_reward 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimProductSaleReward">
+		select <include refid="Base_Column_List" /> from tcim_product_sale_reward 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_product_sale_reward
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_product_sale_reward
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.CimProductSaleReward" >
+    INSERT INTO tcim_product_sale_reward
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != saleReward and ''!= saleReward  ">
+					sale_reward,
+				</if>
+			 	<if test=" null != rewardBeginTime ">
+					reward_begin_time,
+				</if>
+			 	<if test=" null != rewardEndTime ">
+					reward_end_time,
+				</if>
+			 	<if test=" null != isReward and ''!= isReward  ">
+					is_reward,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != saleReward and ''!= saleReward  ">
+					 	#{saleReward},
+				</if>
+			 	<if test=" null != rewardBeginTime ">
+					 	#{rewardBeginTime},
+				</if>
+			 	<if test=" null != rewardEndTime ">
+					 	#{rewardEndTime},
+				</if>
+			 	<if test=" null != isReward and ''!= isReward  ">
+					 	#{isReward},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.CimProductSaleReward" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcim_product_sale_reward
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != saleReward and ''!= saleReward  ">
+					sale_reward,
+				</if>
+			 	<if test=" null != rewardBeginTime ">
+					reward_begin_time,
+				</if>
+			 	<if test=" null != rewardEndTime ">
+					reward_end_time,
+				</if>
+			 	<if test=" null != isReward and ''!= isReward  ">
+					is_reward,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != saleReward and ''!= saleReward  ">
+					 	#{saleReward},
+				</if>
+			 	<if test=" null != rewardBeginTime ">
+					 	#{rewardBeginTime},
+				</if>
+			 	<if test=" null != rewardEndTime ">
+					 	#{rewardEndTime},
+				</if>
+			 	<if test=" null != isReward and ''!= isReward  ">
+					 	#{isReward},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.CimProductSaleReward" >
+  		UPDATE tcim_product_sale_reward
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != saleReward and ''!= saleReward  ">
+						sale_reward = #{saleReward},
+					</if>
+					<if test=" null != rewardBeginTime ">
+						reward_begin_time = #{rewardBeginTime},
+					</if>
+					<if test=" null != rewardEndTime ">
+						reward_end_time = #{rewardEndTime},
+					</if>
+					<if test=" null != isReward and ''!= isReward  ">
+						is_reward = #{isReward},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.CimProductSaleReward" >
+	    UPDATE tcim_product_sale_reward
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != saleReward and ''!= saleReward  ">
+						sale_reward = #{saleReward},
+					</if>
+					<if test=" null != rewardBeginTime ">
+						reward_begin_time = #{rewardBeginTime},
+					</if>
+					<if test=" null != rewardEndTime ">
+						reward_end_time = #{rewardEndTime},
+					</if>
+					<if test=" null != isReward and ''!= isReward  ">
+						is_reward = #{isReward},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcim_product_sale_reward
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+</mapper>

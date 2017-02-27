@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.PermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.linkwee.web.model.Permission" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="permission_name" property="permissionName" jdbcType="VARCHAR" />
+    <result column="permission_sign" property="permissionSign" jdbcType="VARCHAR" />
+    <result column="permission_category" property="permissionCategory" jdbcType="VARCHAR"/>
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, permission_name, permission_sign, permission_category,description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsys_permission
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsys_permission
+    where permission_name = #{permissionName}
+  </select>
+  
+  <!-- 无条件查询所有 -->
+  <select id="selectListAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsys_permission
+  </select>
+  
+  <select id="selectList" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsys_permission
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tsys_permission
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.linkwee.web.model.Permission" >
+    insert into tsys_permission (id, permission_name, permission_sign, 
+      permission_category,description)
+    values (#{id,jdbcType=INTEGER}, #{permissionName,jdbcType=VARCHAR}, #{permissionSign,jdbcType=VARCHAR}, #{permissionCategory,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.Permission" >
+    insert into tsys_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="permissionName != null" >
+        permission_name,
+      </if>
+      <if test="permissionSign != null" >
+        permission_sign,
+      </if>
+      <if test="permissionCategory != null" >
+        permission_category,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="permissionName != null" >
+        #{permissionName,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionSign != null" >
+        #{permissionSign,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionCategory != null" >
+        #{permissionCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.Permission" >
+    update tsys_permission
+    <set >
+      <if test="permissionName != null" >
+        permission_name = #{permissionName,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionSign != null" >
+        permission_sign = #{permissionSign,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionCategory != null" >
+        permission_category = #{permissionCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.Permission" >
+    update tsys_permission
+    set permission_name = #{permissionName,jdbcType=VARCHAR},
+      permission_sign = #{permissionSign,jdbcType=VARCHAR},
+      permission_category = #{permissionCategory,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!-- 通过角色id 查询角色 拥有的权限 -->
+    <select id="selectPermissionsByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT p.* FROM tsys_permission p LEFT JOIN tsys_role_permission rp ON rp.permission_id = p.id
+        WHERE rp.role_id =#{id,jdbcType=BIGINT} order by permission_category
+    </select>
+  <!-- 删除角色的权限 -->
+  <delete id="deleteRolePermissionsByRoleid" parameterType="java.lang.Integer" >
+    delete from tsys_role_permission
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </delete>
+  <!-- 插入角色的权限 -->
+  <insert id="insertRolePermission"  >
+    INSERT INTO tsys_role_permission (role_id, permission_id) VALUES  (#{roleId,jdbcType=VARCHAR}, #{permissionId,jdbcType=VARCHAR})
+  </insert>
+  <delete id="deleteRolePermissionsByPermissionId" parameterType="java.lang.Integer" >
+    delete from tsys_role_permission
+    where permission_id = #{permissionId,jdbcType=INTEGER}
+  </delete>
+</mapper>

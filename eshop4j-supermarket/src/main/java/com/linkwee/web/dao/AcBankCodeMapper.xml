@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.AcBankCodeMappingMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.acc.AcBankCode" id="BaseResultMap">
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="provider_name" property="providerName" jdbcType="VARCHAR"/>
+		<result column="bank_id" property="bankId" jdbcType="INTEGER"/>
+		<result column="bank_code" property="bankCode" jdbcType="VARCHAR"/>
+		<result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+		<result column="record_limit_amount" property="recordLimitAmount" jdbcType="BIGINT"/>
+		<result column="day_limit_amount" property="dayLimitAmount" jdbcType="BIGINT"/>
+		<result column="month_limit_amount" property="monthLimitAmount" jdbcType="BIGINT"/>
+		<result column="service_phone" property="servicePhone" jdbcType="VARCHAR"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+	<resultMap  type="com.linkwee.api.response.acc.AcBankCodeResponse" id="BankResultMap">
+		<result column="bank_id" property="bankId" jdbcType="INTEGER"/>
+		<result column="bank_code" property="bankCode" jdbcType="VARCHAR"/>
+		<result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	status,
+	    	provider_name,
+	    	bank_id,
+	    	bank_code,
+	    	bank_name,
+	    	record_limit_amount,
+	    	day_limit_amount,
+	    	month_limit_amount,
+	    	service_phone,
+	    	remark,
+	    	create_time,
+	    	last_update_time,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+		<if test=" null != providerName and ''!= providerName  ">
+			and provider_name = #{providerName}
+		</if>
+		<if test=" null != bankId ">
+			and bank_id = #{bankId}
+		</if>
+		<if test=" null != bankCode and ''!= bankCode  ">
+			and bank_code = #{bankCode}
+		</if>
+		<if test=" null != bankName and ''!= bankName  ">
+			and bank_name = #{bankName}
+		</if>
+		<if test=" null != recordLimitAmount ">
+			and record_limit_amount = #{recordLimitAmount}
+		</if>
+		<if test=" null != dayLimitAmount ">
+			and day_limit_amount = #{dayLimitAmount}
+		</if>
+		<if test=" null != monthLimitAmount ">
+			and month_limit_amount = #{monthLimitAmount}
+		</if>
+		<if test=" null != servicePhone and ''!= servicePhone  ">
+			and service_phone = #{servicePhone}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != lastUpdateTime ">
+			and last_update_time = #{lastUpdateTime}
+		</if>
+  </sql>
+  
+  <select id="queryBankByName" resultMap="BankResultMap"  parameterType="com.linkwee.api.response.acc.AcBankCodeResponse">
+		select <include refid="Base_Column_List" /> from tac_bank_code_mapping 
+		where bank_name = #{bankName}
+  </select>
+  
+  <select id="queryBankById" resultMap="BankResultMap"  parameterType="com.linkwee.api.response.acc.AcBankCodeResponse">
+		select <include refid="Base_Column_List" /> from tac_bank_code_mapping 
+		where bank_id=#{bankId}
+  </select>
+  
+  <select id="queryAllBank" resultMap="BankResultMap"  parameterType="com.linkwee.api.response.acc.AcBankCodeResponse">
+		select <include refid="Base_Column_List" /> from tac_bank_code_mapping 
+		where status=1
+  </select>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.acc.AcBankCode">
+		select <include refid="Base_Column_List" /> from tac_bank_code_mapping 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.acc.AcBankCode">
+		select <include refid="Base_Column_List" /> from tac_bank_code_mapping 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tac_bank_code_mapping
+    where  bank_code = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tac_bank_code_mapping
+    where bank_code = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.acc.AcBankCode" >
+    INSERT INTO tac_bank_code_mapping
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != providerName and ''!= providerName  ">
+					provider_name,
+				</if>
+			 	<if test=" null != bankId ">
+					bank_id,
+				</if>
+			 	<if test=" null != bankCode and ''!= bankCode  ">
+					bank_code,
+				</if>
+			 	<if test=" null != bankName and ''!= bankName  ">
+					bank_name,
+				</if>
+			 	<if test=" null != recordLimitAmount ">
+					record_limit_amount,
+				</if>
+			 	<if test=" null != dayLimitAmount ">
+					day_limit_amount,
+				</if>
+			 	<if test=" null != monthLimitAmount ">
+					month_limit_amount,
+				</if>
+			 	<if test=" null != servicePhone and ''!= servicePhone  ">
+					service_phone,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					last_update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != providerName and ''!= providerName  ">
+					 	#{providerName},
+				</if>
+			 	<if test=" null != bankId ">
+					 	#{bankId},
+				</if>
+			 	<if test=" null != bankCode and ''!= bankCode  ">
+					 	#{bankCode},
+				</if>
+			 	<if test=" null != bankName and ''!= bankName  ">
+					 	#{bankName},
+				</if>
+			 	<if test=" null != recordLimitAmount ">
+					 	#{recordLimitAmount},
+				</if>
+			 	<if test=" null != dayLimitAmount ">
+					 	#{dayLimitAmount},
+				</if>
+			 	<if test=" null != monthLimitAmount ">
+					 	#{monthLimitAmount},
+				</if>
+			 	<if test=" null != servicePhone and ''!= servicePhone  ">
+					 	#{servicePhone},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					 	#{lastUpdateTime},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.acc.AcBankCode" useGeneratedKeys="true" keyProperty="bankCode" >
+		INSERT INTO tac_bank_code_mapping
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != providerName and ''!= providerName  ">
+					provider_name,
+				</if>
+			 	<if test=" null != bankId ">
+					bank_id,
+				</if>
+			 	<if test=" null != bankCode and ''!= bankCode  ">
+					bank_code,
+				</if>
+			 	<if test=" null != bankName and ''!= bankName  ">
+					bank_name,
+				</if>
+			 	<if test=" null != recordLimitAmount ">
+					record_limit_amount,
+				</if>
+			 	<if test=" null != dayLimitAmount ">
+					day_limit_amount,
+				</if>
+			 	<if test=" null != monthLimitAmount ">
+					month_limit_amount,
+				</if>
+			 	<if test=" null != servicePhone and ''!= servicePhone  ">
+					service_phone,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					last_update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != providerName and ''!= providerName  ">
+					 	#{providerName},
+				</if>
+			 	<if test=" null != bankId ">
+					 	#{bankId},
+				</if>
+			 	<if test=" null != bankCode and ''!= bankCode  ">
+					 	#{bankCode},
+				</if>
+			 	<if test=" null != bankName and ''!= bankName  ">
+					 	#{bankName},
+				</if>
+			 	<if test=" null != recordLimitAmount ">
+					 	#{recordLimitAmount},
+				</if>
+			 	<if test=" null != dayLimitAmount ">
+					 	#{dayLimitAmount},
+				</if>
+			 	<if test=" null != monthLimitAmount ">
+					 	#{monthLimitAmount},
+				</if>
+			 	<if test=" null != servicePhone and ''!= servicePhone  ">
+					 	#{servicePhone},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					 	#{lastUpdateTime},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.acc.AcBankCode" >
+  		UPDATE tac_bank_code_mapping
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != providerName and ''!= providerName  ">
+						provider_name = #{providerName},
+					</if>
+					<if test=" null != bankName and ''!= bankName  ">
+						bank_name = #{bankName},
+					</if>
+					<if test=" null != recordLimitAmount ">
+						record_limit_amount = #{recordLimitAmount},
+					</if>
+					<if test=" null != dayLimitAmount ">
+						day_limit_amount = #{dayLimitAmount},
+					</if>
+					<if test=" null != monthLimitAmount ">
+						month_limit_amount = #{monthLimitAmount},
+					</if>
+					<if test=" null != servicePhone and ''!= servicePhone  ">
+						service_phone = #{servicePhone},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != lastUpdateTime ">
+						last_update_time = #{lastUpdateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 bank_id = #{bankId} bank_code = #{bankCode}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.acc.AcBankCode" >
+	    UPDATE tac_bank_code_mapping
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != providerName and ''!= providerName  ">
+						provider_name = #{providerName},
+					</if>
+					<if test=" null != bankName and ''!= bankName  ">
+						bank_name = #{bankName},
+					</if>
+					<if test=" null != recordLimitAmount ">
+						record_limit_amount = #{recordLimitAmount},
+					</if>
+					<if test=" null != dayLimitAmount ">
+						day_limit_amount = #{dayLimitAmount},
+					</if>
+					<if test=" null != monthLimitAmount ">
+						month_limit_amount = #{monthLimitAmount},
+					</if>
+					<if test=" null != servicePhone and ''!= servicePhone  ">
+						service_phone = #{servicePhone},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != lastUpdateTime ">
+						last_update_time = #{lastUpdateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			bank_code = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tac_bank_code_mapping
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+</mapper>

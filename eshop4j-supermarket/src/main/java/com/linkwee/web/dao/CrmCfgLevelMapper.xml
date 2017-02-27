@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CrmCfgLevelMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.crm.CrmCfgLevel" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="code" property="code" jdbcType="VARCHAR"/>
+		<result column="name" property="name" jdbcType="VARCHAR"/>
+		<result column="individual_performance" property="individualPerformance" jdbcType="DECIMAL"/>
+		<result column="team_performance" property="teamPerformance" jdbcType="DECIMAL"/>
+		<result column="team_count" property="teamCount" jdbcType="INTEGER"/>
+		<result column="target_text" property="targetText" jdbcType="VARCHAR"/>
+		<result column="quarter_yearpur_amount" property="quarterYearpurAmount" jdbcType="INTEGER"/>
+		<result column="allowance" property="allowance" jdbcType="DECIMAL"/>
+		<result column="sort" property="sort" jdbcType="INTEGER"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	code,
+	    	name,
+	    	individual_performance,
+	    	team_performance,
+	    	team_count,
+	    	target_text,
+	    	quarter_yearpur_amount,
+	    	allowance,
+	    	sort,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != code and ''!= code  ">
+			and code = #{code}
+		</if>
+		<if test=" null != name and ''!= name  ">
+			and name = #{name}
+		</if>
+		<if test=" null != individualPerformance ">
+			and individual_performance = #{individualPerformance}
+		</if>
+		<if test=" null != teamPerformance ">
+			and team_performance = #{teamPerformance}
+		</if>
+		<if test=" null != teamCount ">
+			and team_count = #{teamCount}
+		</if>
+		<if test=" null != targetText and ''!= targetText  ">
+			and target_text = #{targetText}
+		</if>
+		<if test=" null != quarterYearpurAmount ">
+			and quarter_yearpur_amount = #{quarterYearpurAmount}
+		</if>
+		<if test=" null != allowance ">
+			and allowance = #{allowance}
+		</if>
+		<if test=" null != sort ">
+			and sort = #{sort}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.crm.CrmCfgLevel">
+		select <include refid="Base_Column_List" /> from tcrm_cfg_level 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.crm.CrmCfgLevel">
+		select <include refid="Base_Column_List" /> from tcrm_cfg_level 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcrm_cfg_level
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcrm_cfg_level
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.crm.CrmCfgLevel" >
+    INSERT INTO tcrm_cfg_level
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != code and ''!= code  ">
+					code,
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					name,
+				</if>
+			 	<if test=" null != individualPerformance ">
+					individual_performance,
+				</if>
+			 	<if test=" null != teamPerformance ">
+					team_performance,
+				</if>
+			 	<if test=" null != teamCount ">
+					team_count,
+				</if>
+			 	<if test=" null != targetText and ''!= targetText  ">
+					target_text,
+				</if>
+			 	<if test=" null != quarterYearpurAmount ">
+					quarter_yearpur_amount,
+				</if>
+			 	<if test=" null != allowance ">
+					allowance,
+				</if>
+			 	<if test=" null != sort ">
+					sort,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != code and ''!= code  ">
+					 	#{code},
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					 	#{name},
+				</if>
+			 	<if test=" null != individualPerformance ">
+					 	#{individualPerformance},
+				</if>
+			 	<if test=" null != teamPerformance ">
+					 	#{teamPerformance},
+				</if>
+			 	<if test=" null != teamCount ">
+					 	#{teamCount},
+				</if>
+			 	<if test=" null != targetText and ''!= targetText  ">
+					 	#{targetText},
+				</if>
+			 	<if test=" null != quarterYearpurAmount ">
+					 	#{quarterYearpurAmount},
+				</if>
+			 	<if test=" null != allowance ">
+					 	#{allowance},
+				</if>
+			 	<if test=" null != sort ">
+					 	#{sort},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.crm.CrmCfgLevel" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcrm_cfg_level
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != code and ''!= code  ">
+					code,
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					name,
+				</if>
+			 	<if test=" null != individualPerformance ">
+					individual_performance,
+				</if>
+			 	<if test=" null != teamPerformance ">
+					team_performance,
+				</if>
+			 	<if test=" null != teamCount ">
+					team_count,
+				</if>
+			 	<if test=" null != targetText and ''!= targetText  ">
+					target_text,
+				</if>
+			 	<if test=" null != quarterYearpurAmount ">
+					quarter_yearpur_amount,
+				</if>
+			 	<if test=" null != allowance ">
+					allowance,
+				</if>
+			 	<if test=" null != sort ">
+					sort,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != code and ''!= code  ">
+					 	#{code},
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					 	#{name},
+				</if>
+			 	<if test=" null != individualPerformance ">
+					 	#{individualPerformance},
+				</if>
+			 	<if test=" null != teamPerformance ">
+					 	#{teamPerformance},
+				</if>
+			 	<if test=" null != teamCount ">
+					 	#{teamCount},
+				</if>
+			 	<if test=" null != targetText and ''!= targetText  ">
+					 	#{targetText},
+				</if>
+			 	<if test=" null != quarterYearpurAmount ">
+					 	#{quarterYearpurAmount},
+				</if>
+			 	<if test=" null != allowance ">
+					 	#{allowance},
+				</if>
+			 	<if test=" null != sort ">
+					 	#{sort},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.crm.CrmCfgLevel" >
+  		UPDATE tcrm_cfg_level
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != code and ''!= code  ">
+						code = #{code},
+					</if>
+					<if test=" null != name and ''!= name  ">
+						name = #{name},
+					</if>
+					<if test=" null != individualPerformance ">
+						individual_performance = #{individualPerformance},
+					</if>
+					<if test=" null != teamPerformance ">
+						team_performance = #{teamPerformance},
+					</if>
+					<if test=" null != teamCount ">
+						team_count = #{teamCount},
+					</if>
+					<if test=" null != targetText and ''!= targetText  ">
+						target_text = #{targetText},
+					</if>
+					<if test=" null != quarterYearpurAmount ">
+						quarter_yearpur_amount = #{quarterYearpurAmount},
+					</if>
+					<if test=" null != allowance ">
+						allowance = #{allowance},
+					</if>
+					<if test=" null != sort ">
+						sort = #{sort},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.crm.CrmCfgLevel" >
+	    UPDATE tcrm_cfg_level
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != code and ''!= code  ">
+						code = #{code},
+					</if>
+					<if test=" null != name and ''!= name  ">
+						name = #{name},
+					</if>
+					<if test=" null != individualPerformance ">
+						individual_performance = #{individualPerformance},
+					</if>
+					<if test=" null != teamPerformance ">
+						team_performance = #{teamPerformance},
+					</if>
+					<if test=" null != teamCount ">
+						team_count = #{teamCount},
+					</if>
+					<if test=" null != targetText and ''!= targetText  ">
+						target_text = #{targetText},
+					</if>
+					<if test=" null != quarterYearpurAmount ">
+						quarter_yearpur_amount = #{quarterYearpurAmount},
+					</if>
+					<if test=" null != allowance ">
+						allowance = #{allowance},
+					</if>
+					<if test=" null != sort ">
+						sort = #{sort},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+</mapper>

@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CrmUserInfoMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.CrmUserInfo" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="user_name" property="userName" jdbcType="VARCHAR"/>
+		<result column="email" property="email" jdbcType="VARCHAR"/>
+		<result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+		<result column="idcard" property="idcard" jdbcType="VARCHAR"/>
+		<result column="password" property="password" jdbcType="VARCHAR"/>
+		<result column="sign_pwd" property="signPwd" jdbcType="VARCHAR"/>
+		<result column="enable" property="enable" jdbcType="TINYINT"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		<result column="del_status" property="delStatus" jdbcType="TINYINT"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	user_id,
+	    	user_name,
+	    	email,
+	    	mobile,
+	    	idcard,
+	    	password,
+	    	sign_pwd,
+	    	enable,
+	    	create_time,
+	    	update_time,
+	    	del_status,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != userId and ''!= userId  ">
+			and user_id = #{userId}
+		</if>
+		<if test=" null != userName and ''!= userName  ">
+			and user_name = #{userName}
+		</if>
+		<if test=" null != email and ''!= email  ">
+			and email = #{email}
+		</if>
+		<if test=" null != mobile and ''!= mobile  ">
+			and mobile = #{mobile}
+		</if>
+		<if test=" null != idcard and ''!= idcard  ">
+			and idcard = #{idcard}
+		</if>
+		<if test=" null != password and ''!= password  ">
+			and password = #{password}
+		</if>
+		<if test=" null != signPwd and ''!= signPwd  ">
+			and sign_pwd = #{signPwd}
+		</if>
+		<if test=" null != enable ">
+			and enable = #{enable}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+		<if test=" null != delStatus ">
+			and del_status = #{delStatus}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CrmUserInfo">
+		select <include refid="Base_Column_List" /> from tcrm_user_info 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CrmUserInfo">
+		select <include refid="Base_Column_List" /> from tcrm_user_info 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcrm_user_info
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcrm_user_info
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.CrmUserInfo" >
+    INSERT INTO tcrm_user_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					user_name,
+				</if>
+			 	<if test=" null != email and ''!= email  ">
+					email,
+				</if>
+			 	<if test=" null != mobile and ''!= mobile  ">
+					mobile,
+				</if>
+			 	<if test=" null != idcard and ''!= idcard  ">
+					idcard,
+				</if>
+			 	<if test=" null != password and ''!= password  ">
+					password,
+				</if>
+			 	<if test=" null != signPwd and ''!= signPwd  ">
+					sign_pwd,
+				</if>
+			 	<if test=" null != enable ">
+					enable,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != delStatus ">
+					del_status,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					 	#{userName},
+				</if>
+			 	<if test=" null != email and ''!= email  ">
+					 	#{email},
+				</if>
+			 	<if test=" null != mobile and ''!= mobile  ">
+					 	#{mobile},
+				</if>
+			 	<if test=" null != idcard and ''!= idcard  ">
+					 	#{idcard},
+				</if>
+			 	<if test=" null != password and ''!= password  ">
+					 	#{password},
+				</if>
+			 	<if test=" null != signPwd and ''!= signPwd  ">
+					 	#{signPwd},
+				</if>
+			 	<if test=" null != enable ">
+					 	#{enable},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != delStatus ">
+					 	#{delStatus},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.CrmUserInfo" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcrm_user_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					user_name,
+				</if>
+			 	<if test=" null != email and ''!= email  ">
+					email,
+				</if>
+			 	<if test=" null != mobile and ''!= mobile  ">
+					mobile,
+				</if>
+			 	<if test=" null != idcard and ''!= idcard  ">
+					idcard,
+				</if>
+			 	<if test=" null != password and ''!= password  ">
+					password,
+				</if>
+			 	<if test=" null != signPwd and ''!= signPwd  ">
+					sign_pwd,
+				</if>
+			 	<if test=" null != enable ">
+					enable,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != delStatus ">
+					del_status,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					 	#{userName},
+				</if>
+			 	<if test=" null != email and ''!= email  ">
+					 	#{email},
+				</if>
+			 	<if test=" null != mobile and ''!= mobile  ">
+					 	#{mobile},
+				</if>
+			 	<if test=" null != idcard and ''!= idcard  ">
+					 	#{idcard},
+				</if>
+			 	<if test=" null != password and ''!= password  ">
+					 	#{password},
+				</if>
+			 	<if test=" null != signPwd and ''!= signPwd  ">
+					 	#{signPwd},
+				</if>
+			 	<if test=" null != enable ">
+					 	#{enable},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != delStatus ">
+					 	#{delStatus},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.CrmUserInfo" >
+  		UPDATE tcrm_user_info
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != userName and ''!= userName  ">
+						user_name = #{userName},
+					</if>
+					<if test=" null != email and ''!= email  ">
+						email = #{email},
+					</if>
+					<if test=" null != mobile and ''!= mobile  ">
+						mobile = #{mobile},
+					</if>
+					<if test=" null != idcard and ''!= idcard  ">
+						idcard = #{idcard},
+					</if>
+					<if test=" null != password and ''!= password  ">
+						password = #{password},
+					</if>
+					<if test=" null != signPwd and ''!= signPwd  ">
+						sign_pwd = #{signPwd},
+					</if>
+					<if test=" null != enable ">
+						enable = #{enable},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != delStatus ">
+						del_status = #{delStatus},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+	
+	<update id="updateByUserId" parameterType="com.linkwee.web.model.CrmUserInfo" >
+  		UPDATE tcrm_user_info
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != userName and ''!= userName  ">
+						user_name = #{userName},
+					</if>
+					<if test=" null != email and ''!= email  ">
+						email = #{email},
+					</if>
+					<if test=" null != mobile and ''!= mobile  ">
+						mobile = #{mobile},
+					</if>
+					<if test=" null != idcard and ''!= idcard  ">
+						idcard = #{idcard},
+					</if>
+					<if test=" null != password and ''!= password  ">
+						password = #{password},
+					</if>
+					<if test=" null != signPwd and ''!= signPwd  ">
+						sign_pwd = #{signPwd},
+					</if>
+					<if test=" null != enable ">
+						enable = #{enable},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != delStatus ">
+						del_status = #{delStatus},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 user_id = #{userId}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.CrmUserInfo" >
+	    UPDATE tcrm_user_info
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != userName and ''!= userName  ">
+						user_name = #{userName},
+					</if>
+					<if test=" null != email and ''!= email  ">
+						email = #{email},
+					</if>
+					<if test=" null != mobile and ''!= mobile  ">
+						mobile = #{mobile},
+					</if>
+					<if test=" null != idcard and ''!= idcard  ">
+						idcard = #{idcard},
+					</if>
+					<if test=" null != password and ''!= password  ">
+						password = #{password},
+					</if>
+					<if test=" null != signPwd and ''!= signPwd  ">
+						sign_pwd = #{signPwd},
+					</if>
+					<if test=" null != enable ">
+						enable = #{enable},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != delStatus ">
+						del_status = #{delStatus},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcrm_user_info
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+	<select id="selectRegCustomers" resultType="java.lang.String">
+		SELECT mobile from tcrm_user_info
+		<where>
+			<foreach item="item" index="index" collection="array"
+				open=" mobile in (" separator="," close=") ">
+				#{item}
+			</foreach>
+		</where>
+	</select>
+
+	<select id="investorPageList" resultType="com.linkwee.api.response.crm.InvotateListResponse" parameterType="com.linkwee.api.request.crm.InvotationRequest">
+		SELECT
+			tui.user_id customerId,
+			tui.mobile customerMobile,
+			tui.user_name customerName,
+			tui.create_time registerDate,
+			(
+				SELECT
+					count(*)
+				FROM
+					tcim_product_invest_record tpir
+				WHERE
+					tpir.user_id = tui.user_id
+			) AS investFlag
+		FROM
+			tcrm_user_info tui
+		WHERE
+			tui.user_id IN (
+				SELECT
+					ti.user_id
+				FROM
+					tcrm_investor ti
+				WHERE
+					ti.ref_user = #{userId,jdbcType=VARCHAR}
+			)
+
+	</select>
+	
+	<!-- 根据电话号码批量查用户信息 -->
+	<select id="queryUserListByMobileList" resultMap="BaseResultMap">
+		SELECT * from tcrm_user_info
+		<where>
+			<foreach item="item" index="index" collection="mobileList"
+				open=" mobile in (" separator="," close=") ">
+				#{item}
+			</foreach>
+		</where>
+	</select>
+	
+</mapper>

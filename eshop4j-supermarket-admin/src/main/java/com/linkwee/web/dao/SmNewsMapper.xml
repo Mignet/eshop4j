@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.SmNewsMapper">
+	<!-- Result Map -->
+	<resultMap type="com.linkwee.web.model.SmNews" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="app_type" property="appType" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="type_code" property="typeCode" jdbcType="VARCHAR" />
+		<result column="type_name" property="typeName" jdbcType="VARCHAR" />
+		<result column="img" property="img" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="summary" property="summary" jdbcType="VARCHAR" />
+		<result column="link_url" property="linkUrl" jdbcType="VARCHAR" />
+		<result column="content" property="content" jdbcType="LONGVARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="creator" property="creator" jdbcType="VARCHAR" />
+		<result column="crt_time" property="crtTime" jdbcType="TIMESTAMP" />
+		<result column="show_inx" property="showInx" jdbcType="INTEGER" />
+		<result column="valid_begin" property="validBegin" jdbcType="TIMESTAMP" />
+		<result column="valid_end" property="validEnd" jdbcType="TIMESTAMP" />
+		<result column="modifiy_time" property="modifiyTime" jdbcType="TIMESTAMP" />
+		<result column="is_stick" property="isStick" jdbcType="SMALLINT" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		<trim suffixOverrides=",">
+			id,
+			app_type,
+			name,
+			type_code,
+			type_name,
+			img,
+			title,
+			summary,
+			link_url,
+			content,
+			status,
+			creator,
+			crt_time,
+			show_inx,
+			valid_begin,
+			valid_end,
+			modifiy_time,
+			is_stick,
+		</trim>
+	</sql>
+
+	<sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != appType ">
+			and app_type = #{appType}
+		</if>
+		<if test=" null != name and ''!= name  ">
+			and name = #{name}
+		</if>
+		<if test=" null != typeCode and ''!= typeCode  ">
+			and type_code = #{typeCode}
+		</if>
+		<if test=" null != typeName and ''!= typeName  ">
+			and type_name = #{typeName}
+		</if>
+		<if test=" null != img and ''!= img  ">
+			and img = #{img}
+		</if>
+		<if test=" null != title and ''!= title  ">
+			and title = #{title}
+		</if>
+		<if test=" null != summary and ''!= summary  ">
+			and summary = #{summary}
+		</if>
+		<if test=" null != linkUrl and ''!= linkUrl  ">
+			and link_url = #{linkUrl}
+		</if>
+		<if test=" null != content and ''!= content  ">
+			and content = #{content}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+		<if test=" null != creator and ''!= creator  ">
+			and creator = #{creator}
+		</if>
+		<if test=" null != crtTime ">
+			and crt_time = #{crtTime}
+		</if>
+		<if test=" null != showInx ">
+			and show_inx = #{showInx}
+		</if>
+		<if test=" null != validBegin ">
+			and valid_begin = #{validBegin}
+		</if>
+		<if test=" null != validEnd ">
+			and valid_end = #{validEnd}
+		</if>
+		<if test=" null != modifiyTime ">
+			and modifiy_time = #{modifiyTime}
+		</if>
+		<if test=" null != isStick ">
+			and is_stick = #{isStick}
+		</if>
+	</sql>
+
+	<select id="selectOneByCondition" resultMap="BaseResultMap"
+		parameterType="com.linkwee.web.model.SmNews">
+		select
+		<include refid="Base_Column_List" />
+		from tsm_news
+		where 1=1
+		<include refid="Base_Condition" />
+	</select>
+
+	<select id="selectByCondition" resultMap="BaseResultMap"
+		parameterType="com.linkwee.web.model.SmNews">
+		select
+		<include refid="Base_Column_List" />
+		from tsm_news
+		where 1=1
+		<include refid="Base_Condition" />
+	</select>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from tsm_news
+		where id = #{0}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from tsm_news
+		where id = #{0}
+	</delete>
+
+	<insert id="insert" parameterType="com.linkwee.web.model.SmNews">
+		INSERT INTO tsm_news
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test=" null != id ">
+				id,
+			</if>
+			<if test=" null != appType ">
+				app_type,
+			</if>
+			<if test=" null != name and ''!= name  ">
+				name,
+			</if>
+			<if test=" null != typeCode and ''!= typeCode  ">
+				type_code,
+			</if>
+			<if test=" null != typeName and ''!= typeName  ">
+				type_name,
+			</if>
+			<if test=" null != img and ''!= img  ">
+				img,
+			</if>
+			<if test=" null != title and ''!= title  ">
+				title,
+			</if>
+			<if test=" null != summary and ''!= summary  ">
+				summary,
+			</if>
+			<if test=" null != linkUrl and ''!= linkUrl  ">
+				link_url,
+			</if>
+			<if test=" null != content and ''!= content  ">
+				content,
+			</if>
+			<if test=" null != status ">
+				status,
+			</if>
+			<if test=" null != creator and ''!= creator  ">
+				creator,
+			</if>
+			<if test=" null != crtTime ">
+				crt_time,
+			</if>
+			<if test=" null != showInx ">
+				show_inx,
+			</if>
+			<if test=" null != validBegin ">
+				valid_begin,
+			</if>
+			<if test=" null != validEnd ">
+				valid_end,
+			</if>
+			<if test=" null != modifiyTime ">
+				modifiy_time,
+			</if>
+			<if test=" null != isStick ">
+				is_stick,
+			</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			<if test=" null != id ">
+				#{id},
+			</if>
+			<if test=" null != appType ">
+				#{appType},
+			</if>
+			<if test=" null != name and ''!= name  ">
+				#{name},
+			</if>
+			<if test=" null != typeCode and ''!= typeCode  ">
+				#{typeCode},
+			</if>
+			<if test=" null != typeName and ''!= typeName  ">
+				#{typeName},
+			</if>
+			<if test=" null != img and ''!= img  ">
+				#{img},
+			</if>
+			<if test=" null != title and ''!= title  ">
+				#{title},
+			</if>
+			<if test=" null != summary and ''!= summary  ">
+				#{summary},
+			</if>
+			<if test=" null != linkUrl and ''!= linkUrl  ">
+				#{linkUrl},
+			</if>
+			<if test=" null != content and ''!= content  ">
+				#{content},
+			</if>
+			<if test=" null != status ">
+				#{status},
+			</if>
+			<if test=" null != creator and ''!= creator  ">
+				#{creator},
+			</if>
+			<if test=" null != crtTime ">
+				#{crtTime},
+			</if>
+			<if test=" null != showInx ">
+				#{showInx},
+			</if>
+			<if test=" null != validBegin ">
+				#{validBegin},
+			</if>
+			<if test=" null != validEnd ">
+				#{validEnd},
+			</if>
+			<if test=" null != modifiyTime ">
+				#{modifiyTime},
+			</if>
+			<if test=" null != isStick ">
+				#{isStick},
+			</if>
+		</trim>
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.linkwee.web.model.SmNews"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tsm_news
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test=" null != id ">
+				id,
+			</if>
+			<if test=" null != appType ">
+				app_type,
+			</if>
+			<if test=" null != name and ''!= name  ">
+				name,
+			</if>
+			<if test=" null != typeCode and ''!= typeCode  ">
+				type_code,
+			</if>
+			<if test=" null != typeName and ''!= typeName  ">
+				type_name,
+			</if>
+			<if test=" null != img and ''!= img  ">
+				img,
+			</if>
+			<if test=" null != title and ''!= title  ">
+				title,
+			</if>
+			<if test=" null != summary and ''!= summary  ">
+				summary,
+			</if>
+			<if test=" null != linkUrl and ''!= linkUrl  ">
+				link_url,
+			</if>
+			<if test=" null != content and ''!= content  ">
+				content,
+			</if>
+			<if test=" null != status ">
+				status,
+			</if>
+			<if test=" null != creator and ''!= creator  ">
+				creator,
+			</if>
+			<if test=" null != crtTime ">
+				crt_time,
+			</if>
+			<if test=" null != showInx ">
+				show_inx,
+			</if>
+			<if test=" null != validBegin ">
+				valid_begin,
+			</if>
+			<if test=" null != validEnd ">
+				valid_end,
+			</if>
+			<if test=" null != modifiyTime ">
+				modifiy_time,
+			</if>
+			<if test=" null != isStick ">
+				is_stick,
+			</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			<if test=" null != id ">
+				#{id},
+			</if>
+			<if test=" null != appType ">
+				#{appType},
+			</if>
+			<if test=" null != name and ''!= name  ">
+				#{name},
+			</if>
+			<if test=" null != typeCode and ''!= typeCode  ">
+				#{typeCode},
+			</if>
+			<if test=" null != typeName and ''!= typeName  ">
+				#{typeName},
+			</if>
+			<if test=" null != img and ''!= img  ">
+				#{img},
+			</if>
+			<if test=" null != title and ''!= title  ">
+				#{title},
+			</if>
+			<if test=" null != summary and ''!= summary  ">
+				#{summary},
+			</if>
+			<if test=" null != linkUrl and ''!= linkUrl  ">
+				#{linkUrl},
+			</if>
+			<if test=" null != content and ''!= content  ">
+				#{content},
+			</if>
+			<if test=" null != status ">
+				#{status},
+			</if>
+			<if test=" null != creator and ''!= creator  ">
+				#{creator},
+			</if>
+			<if test=" null != crtTime ">
+				#{crtTime},
+			</if>
+			<if test=" null != showInx ">
+				#{showInx},
+			</if>
+			<if test=" null != validBegin ">
+				#{validBegin},
+			</if>
+			<if test=" null != validEnd ">
+				#{validEnd},
+			</if>
+			<if test=" null != modifiyTime ">
+				#{modifiyTime},
+			</if>
+			<if test=" null != isStick ">
+				#{isStick},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.SmNews">
+		UPDATE tsm_news
+		<set>
+			<trim suffixOverrides=",">
+				<if test=" null != appType ">
+					app_type = #{appType},
+				</if>
+				<if test=" null != name and ''!= name  ">
+					name = #{name},
+				</if>
+				<if test=" null != typeCode and ''!= typeCode  ">
+					type_code = #{typeCode},
+				</if>
+				<if test=" null != typeName and ''!= typeName  ">
+					type_name = #{typeName},
+				</if>
+				<if test=" null != img and ''!= img  ">
+					img = #{img},
+				</if>
+				<if test=" null != title and ''!= title  ">
+					title = #{title},
+				</if>
+				<if test=" null != summary and ''!= summary  ">
+					summary = #{summary},
+				</if>
+				<if test=" null != linkUrl and ''!= linkUrl  ">
+					link_url = #{linkUrl},
+				</if>
+				<if test=" null != content and ''!= content  ">
+					content = #{content},
+				</if>
+				<if test=" null != status ">
+					status = #{status},
+				</if>
+				<if test=" null != creator and ''!= creator  ">
+					creator = #{creator},
+				</if>
+				<if test=" null != crtTime ">
+					crt_time = #{crtTime},
+				</if>
+				<if test=" null != showInx ">
+					show_inx = #{showInx},
+				</if>
+				<if test=" null != validBegin ">
+					valid_begin = #{validBegin},
+				</if>
+				<if test=" null != validEnd ">
+					valid_end = #{validEnd},
+				</if>
+				<if test=" null != modifiyTime ">
+					modifiy_time = #{modifiyTime},
+				</if>
+				<if test=" null != isStick ">
+					is_stick = #{isStick},
+				</if>
+			</trim>
+		</set>
+		<where>
+			id = #{id}
+		</where>
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.SmNews">
+		UPDATE tsm_news
+		<set>
+			<trim suffixOverrides=",">
+				<if test=" null != appType ">
+					app_type = #{appType},
+				</if>
+				<if test=" null != name and ''!= name  ">
+					name = #{name},
+				</if>
+				<if test=" null != typeCode and ''!= typeCode  ">
+					type_code = #{typeCode},
+				</if>
+				<if test=" null != typeName and ''!= typeName  ">
+					type_name = #{typeName},
+				</if>
+				<if test=" null != img and ''!= img  ">
+					img = #{img},
+				</if>
+				<if test=" null != title and ''!= title  ">
+					title = #{title},
+				</if>
+				<if test=" null != summary and ''!= summary  ">
+					summary = #{summary},
+				</if>
+				<if test=" null != linkUrl and ''!= linkUrl  ">
+					link_url = #{linkUrl},
+				</if>
+				<if test=" null != content and ''!= content  ">
+					content = #{content},
+				</if>
+				<if test=" null != status ">
+					status = #{status},
+				</if>
+				<if test=" null != creator and ''!= creator  ">
+					creator = #{creator},
+				</if>
+				<if test=" null != crtTime ">
+					crt_time = #{crtTime},
+				</if>
+				<if test=" null != showInx ">
+					show_inx = #{showInx},
+				</if>
+				<if test=" null != validBegin ">
+					valid_begin = #{validBegin},
+				</if>
+				<if test=" null != validEnd ">
+					valid_end = #{validEnd},
+				</if>
+				<if test=" null != modifiyTime ">
+					modifiy_time = #{modifiyTime},
+				</if>
+				<if test=" null != isStick ">
+					is_stick = #{isStick},
+				</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	</update>
+
+	<!-- 分页条件查询 -->
+	<select id="selectBySearchInfo" resultMap="BaseResultMap"
+		parameterType="com.linkwee.core.datatable.DataTable">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM tsm_news
+		<where>
+			<if test="dt.search!=null">
+				name LIKE CONCAT('%','${dt.search.value}','%' )
+			</if>
+			<if test="dt.order!=null">
+				<foreach collection="dt.order" index="index" item="item"
+					open="order by" separator="," close=" ">
+					${item.name} ${item.dir}
+				</foreach>
+			</if>
+		</where>
+	</select>
+
+	
+
+</mapper>

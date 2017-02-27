@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CfplannerManagerDao">
+
+<resultMap  type="com.linkwee.web.model.crm.CfpManagerDetailResp" id="LcsDetailResp">
+	<result column="id" property="id" />
+	<result column="user_name" property="userName" />
+	<result column="mobile" property="mobile" />
+	<result column="id_card" property="idCard" />
+	<result column="cfp_level" property="cfpLevel" />
+	<result column="parent_name" property="parentName" />
+	<result column="parent_mobile" property="parentMobile" />
+	<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+	<result column="bank_card" property="bankCard" />
+	<result column="bank_name" property="bankName" />
+	<result column="id_card" property="idCard" />
+	<result column="disabled_login_time" property="disabledLoginTime" />
+	<result column="user_id" property="userId" />
+</resultMap>
+
+
+
+<!-- 查询理财师列表 -->
+<select id="queryLcsList" resultMap="LcsDetailResp" >
+	select 
+	(select 
+		(select ifnull(count(1),0) from tcrm_cfplanner where parent_id=c.user_id) +
+		(select ifnull(count(1),0) from tcrm_cfplanner where parent_id in 
+		(select user_id from tcrm_cfplanner where parent_id=c.user_id))) team_member_count,
+	(select count(1) from tcrm_investor where cfplanner=c.user_id) customer_count,
+	t.mobile as parent_mobile,
+	t.user_name as parent_name,
+	u.user_name,c.* 
+	from tcrm_cfplanner c 
+	left join tcrm_user_info u on c.user_id=u.user_id
+	left join tcrm_user_info t on t.user_id=c.parent_id
+	<where>
+	 	1=1
+	 	<if test=" null != query.nameOrmobile and ''!= query.nameOrmobile ">
+	 		and c.mobile  = #{query.nameOrmobile} or u.user_name =#{query.nameOrmobile}
+		</if>
+		<if test=" null != query.startDate">
+			and DATE_FORMAT(c.create_time, '%Y-%m-%d') &gt;=  DATE_FORMAT(#{query.startDate}, '%Y-%m-%d')
+		</if>
+		<if test=" null != query.endDate">
+			and DATE_FORMAT(c.create_time, '%Y-%m-%d') &lt;=  DATE_FORMAT(#{query.endDate}, '%Y-%m-%d')
+		</if>
+	 </where>
+	 order BY c.id
+</select>
+
+
+<!-- 查询理财师详情 -->
+<select id="queryLcsDetail" resultMap="LcsDetailResp" >
+	SELECT a.bank_card,a.bank_name,a.id_card, a.user_name,
+	t.mobile as parent_mobile,
+	t.user_name as parent_name,
+	c.* from tcrm_cfplanner c LEFT JOIN tac_account_bind a on c.user_id=a.user_id
+	left join tcrm_user_info t on t.user_id=c.parent_id
+	where c.mobile=#{mobile}
+</select>
+
+<!--查询理财师团队信息-->
+<select id="queryCfpTeamList" resultType="com.linkwee.web.response.CfpTeamListResp">
+	SELECT
+	  ms.user_id as `number`,
+	  ms.mobile as mobile,
+	  ms.user_name as `name`,
+	  ms.level,
+	  ms.create_time as createTime,
+		t2.fee_amount as feeAmount,
+		t3.total_count as totalNums,
+		t3.total_invest as totalAmount
+FROM (
+		SELECT s.user_id,s.mobile,u.user_name,'v1' as level,s.parent_id,s.create_time , s.user_id tttt FROM  tcrm_cfplanner s LEFT JOIN tcrm_user_info u on u.user_id=s.user_id WHERE  s.parent_id =#{query.userId}
+		UNION ALL SELECT t.user_id,t.mobile,u.user_name,'v2',t.parent_id,t.create_time, t.parent_id tttt FROM tcrm_cfplanner t LEFT JOIN tcrm_user_info u on u.user_id=t.user_id 
+		WHERE t.parent_id IN (SELECT a.user_id FROM  tcrm_cfplanner a WHERE  a.parent_id =#{query.userId})
+		ORDER BY  tttt, level
+	   ) ms 
+LEFT JOIN 
+		(SELECT origin_cfplanner_id, IFNULL(sum(fee_amount),0) as fee_amount from tcim_feedetail 
+		where 1=1
+		and fee_type=1002
+		and profit_cfplanner_id=#{query.userId} 
+		GROUP BY
+		origin_cfplanner_id
+		) t2
+on t2.origin_cfplanner_id=ms.user_id
+LEFT JOIN 
+		(
+		SELECT IFNULL(sum(r.invest_amt),0) total_invest , IFNULL(count(r.id),0) total_count,i.cfplanner  from tcim_product_invest_record r LEFT JOIN tcrm_investor i
+		on r.user_id=i.user_id
+		LEFT JOIN tcrm_cfplanner c on c.user_id=i.cfplanner
+		where c.parent_id=#{query.userId} or c.parent_id in 
+		(SELECT user_id from tcrm_cfplanner where parent_id=#{query.userId} )
+		GROUP BY i.cfplanner
+		) t3
+on t3.cfplanner=ms.user_id
+	     WHERE 1=1
+	  <if test="query.searchText!=null and query.searchText!=''"> AND (ms.mobile =#{query.searchText} OR ms.user_name LIKE CONCAT(CONCAT('%',#{query.searchText}),'%'))</if>
+	  ORDER BY null
+</select>
+
+<!--理财师的客户列表-->
+<select id="queryCfpCustomerProfitList" resultType="com.linkwee.web.response.CfpCustomerProfitListResp">
+	SELECT
+			u.user_name as customerName,
+			a.mobile as customerMobile,
+			a.create_time as createTime,
+			IFNULL(b.investmentTotalAmount, 0) AS totalAmount,
+			IFNULL(b.investmentCount, 0) AS totalNums,
+			IFNULL(c.nowInvestmentAmount, 0) AS curAmount,
+			IFNULL(c.nowInvestmentCount, 0) AS curNums,
+			IFNULL(b.tfee, 0) AS feeAmount,
+			IF(a.is_free_customer=0,'邀请','自由客户')AS orgName,
+			ac.id_card as idCard
+	FROM tcrm_investor a 
+	LEFT JOIN 
+		tcrm_user_info u on u.user_id=a.user_id
+	LEFT JOIN 
+		tac_account_bind ac on ac.user_id=a.user_id
+	LEFT JOIN
+	    (SELECT 
+	      SUM(product_amount) AS investmentTotalAmount,
+	      COUNT(investor_id) AS investmentCount,
+	      SUM(fee_amount) AS tfee,
+	      investor_id 
+	    FROM
+	      tcim_feedetail 
+	    WHERE profit_cfplanner_id = #{query.userId}
+			and fee_type='1001'
+	    GROUP BY investor_id 
+	    ORDER BY NULL) b 
+	    ON a.user_id = b.investor_id 
+	    LEFT JOIN 
+	    (SELECT 
+	      SUM(invest_amt) AS nowInvestmentAmount,
+	      COUNT(invest_id) AS nowInvestmentCount,
+	      invest_id
+	    FROM
+	      tcim_product_invest_record a left join tcrm_investor b on a.user_id=b.user_id
+	    WHERE b.cfplanner = #{query.userId}
+	      AND a.`status`=2
+	    GROUP BY invest_id 
+	    ORDER BY NULL) c 
+	    ON c.invest_id = b.investor_id
+	    <where>
+	   		 a.cfplanner =#{query.userId}
+			<if test="query.searchText!=null and query.searchText!=''"> 
+			AND  (u.user_name = #{query.searchText} OR a.mobile = #{query.searchText})
+			</if>
+	  	</where>
+			ORDER BY a.create_time DESC
+
+</select>
+
+
+
+<!-- 数据图表start -->
+<!-- 根据日期查询理财师数据 -->
+<select id="getLcsDateStatic"  resultType="map" >
+	SELECT DATE_FORMAT(create_time,'%Y-%m-%d')as date,COUNT(1)as count FROM tcrm_cfplanner  
+	<where>
+		1=1
+		<choose>
+			<when test="null != startDate or null != endDate">
+					<if test=" null != startDate">
+						AND DATE_FORMAT(create_time, '%Y-%m-%d') &gt;=  DATE_FORMAT(#{startDate}, '%Y-%m-%d')
+					</if>
+					<if test=" null != endDate">
+						AND DATE_FORMAT(#{endDate}, '%Y-%m-%d') &gt;=  DATE_FORMAT(create_time, '%Y-%m-%d')
+					</if>
+			</when>
+			<otherwise>
+				AND  create_time BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND  CURDATE()
+			</otherwise>
+		
+		</choose>
+	</where>
+	GROUP BY DATE_FORMAT(create_time,'%Y-%m-%d')
+</select>
+
+<!-- 查询理财师数量 -->
+<select id="getLcsDateStaticCount"  resultType="map" >
+	SELECT a.*,b.*,c.*,d.* FROM
+	(SELECT COUNT(1)AS curday FROM tcrm_cfplanner WHERE  DATE_FORMAT(create_time,'%Y-%m-%d')=CURDATE())a,
+	(SELECT COUNT(1)AS curWeek FROM  tcrm_cfplanner WHERE  create_time BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND  CURDATE())b,   
+	(SELECT COUNT(1)AS curmonth FROM tcrm_cfplanner WHERE  DATE_FORMAT(create_time,'%Y-%m')=DATE_FORMAT(CURDATE(),'%Y-%m'))c,
+	(SELECT COUNT(1)AS total FROM tcrm_cfplanner )d
+</select>
+
+<!-- 根据日期查询理财师数据 -->
+<select id="getValidLcsDateStatic"  resultType="map" >
+	SELECT DATE_FORMAT(create_time,'%Y-%m-%d')as date,COUNT(1)as count FROM tcrm_cfplanner  
+	<where>
+		1=1 
+		AND cfp_level!='PROBATION'
+		<choose>
+			<when test="null != startDate or null != endDate">
+					<if test=" null != startDate">
+						AND DATE_FORMAT(create_time, '%Y-%m-%d') &gt;=  DATE_FORMAT(#{startDate}, '%Y-%m-%d')
+					</if>
+					<if test=" null != endDate">
+						AND DATE_FORMAT(#{endDate}, '%Y-%m-%d') &gt;=  DATE_FORMAT(create_time, '%Y-%m-%d')
+					</if>
+			</when>
+			<otherwise>
+				AND  create_time BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND  CURDATE()
+			</otherwise>
+		
+		</choose>
+	</where>
+	GROUP BY DATE_FORMAT(create_time,'%Y-%m-%d')
+</select>
+
+<!-- 查询有效理财师数量 -->
+<select id="getValidLcsDateStaticCount"  resultType="map" >
+SELECT a.*,b.*,c.*,d.* FROM
+
+(SELECT COUNT(1)AS curday FROM tcrm_cfplanner WHERE 1=1 AND cfp_level!='PROBATION' AND DATE_FORMAT(create_time,'%Y-%m-%d')=CURDATE())a,
+
+(SELECT COUNT(1)AS curWeek FROM  tcrm_cfplanner WHERE 1=1 AND cfp_level!='PROBATION' AND  create_time BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND  CURDATE())b,   
+
+(SELECT COUNT(1)AS curmonth FROM tcrm_cfplanner WHERE 1=1 AND cfp_level!='PROBATION' AND  DATE_FORMAT(create_time,'%Y-%m')=DATE_FORMAT(CURDATE(),'%Y-%m'))c,
+
+(SELECT COUNT(1)AS total FROM tcrm_cfplanner  WHERE 1=1 AND cfp_level!='PROBATION')d
+</select>
+<!-- 数据图表end -->
+
+
+</mapper>

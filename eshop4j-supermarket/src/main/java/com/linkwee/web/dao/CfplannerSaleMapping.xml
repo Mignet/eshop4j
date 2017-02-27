@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CfplannerSaleDao">
+
+<resultMap  type="com.linkwee.web.model.crm.CfplannerSaleResp" id="CfplannerSaleResp">
+	<result column="id" property="id" />
+	<result column="user_id" property="userId" />
+	<result column="user_name" property="userName" />
+	<result column="mobile" property="mobile" />
+	<result column="totalSales" property="totalSales" />
+	<result column="countSales" property="countSales" />
+	<result column="fee" property="fee" />
+	<result column="allowance" property="allowance" />
+	<result column="activityReward" property="activityReward" />
+	<result column="currInvestAmount" property="currInvestAmount" />
+</resultMap>
+
+<!-- 理财师销售与收益 -->
+<select id="selectCfplannerSaleList" resultMap="CfplannerSaleResp" >
+     SELECT c.id,c.user_id,c.mobile, u.user_name ,
+(SELECT IFNULL(sum(product_amount),0) from tcim_fee where profit_cfplanner_id=c.user_id and fee_type='1001') totalSales,
+(SELECT count(id) from tcim_fee where profit_cfplanner_id=c.user_id and fee_type='1001') countSales,
+(SELECT IFNULL(sum(fee_amount),0) from tcim_fee where profit_cfplanner_id=c.user_id and fee_type='1001') fee,
+(SELECT IFNULL(sum(fee_amount),0) from tcim_fee where profit_cfplanner_id=c.user_id and fee_type='1002') allowance,
+(SELECT IFNULL(sum(fee_amount),0) from tcim_fee where profit_cfplanner_id=c.user_id and fee_type='1008') activityReward,
+(SELECT IFNULL(sum(invest_amt),0) from tcim_product_invest_record where user_id=c.user_id and status=1) currInvestAmount
+      from tcrm_cfplanner c left join tcrm_user_info u on u.user_id=c.user_id 
+     where 1=1
+     <if test=" null != query.name and ''!= query.name ">
+		and c.mobile  = #{query.name} or u.user_name =#{query.name}
+  		</if>
+      order by c.id 
+</select>
+
+<!-- 佣金明细 -->
+<select id="selectFeeDetailList" resultType="com.linkwee.web.model.crm.CfpFeeDetailResp" >
+    SELECT f.id,f.investor_id as userId,u.user_name as userName,u.mobile , f.product_amount as saleAmount,f.fee_rate as feeRate, f.fee_amount as feeAmount,f.create_time as createTime,
+	 		p.product_name as productName,p.org_number as platfrom,o.`name` as platfromName ,
+			p.is_fixed_deadline AS isFixedDeadline,
+			p.dead_line_min_value AS deadLineMinValue,
+			p.dead_line_max_value AS deadLineMaxValue,
+			p.dead_line_min_self_defined AS deadLineMinSelfDefined,
+			p.dead_line_max_self_defined AS deadLineMaxSelfDefined 
+	from tcim_fee f
+	LEFT JOIN tcim_product p on f.product_id=p.product_id
+	LEFT JOIN tcim_org_info o on p.org_number=o.org_number
+	LEFT JOIN tcrm_user_info u on f.investor_id=u.user_id
+	where f.profit_cfplanner_id=#{query.userId}
+	and f.fee_type='1001'
+     <if test=" null != query.name and ''!= query.name ">
+		and (u.user_name = #{query.name}  or u.mobile= #{query.name})
+  		</if>
+  		<if test=" null != query.startTimeForSearch">
+			and DATE_FORMAT(f.create_time, '%Y-%m-%d') &gt;=  DATE_FORMAT(#{query.startTimeForSearch}, '%Y-%m-%d')
+		</if>
+		<if test=" null != query.endTimeForSearch">
+			and DATE_FORMAT(f.create_time, '%Y-%m-%d') &lt;=  DATE_FORMAT(#{query.endTimeForSearch}, '%Y-%m-%d')
+		</if>
+      order by f.id desc
+</select>
+
+<!--收益明细 -->
+<select id="selectAllowanceDetailList" resultType="com.linkwee.web.model.crm.AllowanceDetailListResp" >
+    SELECT f.id,f.investor_id as userId,u.user_name as userName,u.mobile , f.product_amount as saleAmount,f.fee_rate as allowanceRate, f.fee_amount as allowance,f.create_time as createTime,
+	 		p.product_name as productName,p.org_number as platfrom,o.`name` as platfromName ,
+			p.is_fixed_deadline AS isFixedDeadline,
+			p.dead_line_min_value AS deadLineMinValue,
+			p.dead_line_max_value AS deadLineMaxValue,
+			p.dead_line_min_self_defined AS deadLineMinSelfDefined,
+			p.dead_line_max_self_defined AS deadLineMaxSelfDefined ,
+			(CASE  WHEN fee_rate=5 THEN '二级' ELSE '一级' END)as relLevel
+	from tcim_fee f
+	LEFT JOIN tcim_product p on f.product_id=p.product_id
+	LEFT JOIN tcim_org_info o on p.org_number=o.org_number
+	LEFT JOIN tcrm_user_info u on f.investor_id=u.user_id
+	where f.profit_cfplanner_id=#{query.userId}
+	and f.fee_type='1002'
+     <if test=" null != query.name and ''!= query.name ">
+		and (u.user_name = #{query.name}  or u.mobile= #{query.name})
+  		</if>
+  		<if test=" null != query.startTimeForSearch">
+			and DATE_FORMAT(f.create_time, '%Y-%m-%d') &gt;=  DATE_FORMAT(#{query.startTimeForSearch}, '%Y-%m-%d')
+		</if>
+		<if test=" null != query.endTimeForSearch">
+			and DATE_FORMAT(f.create_time, '%Y-%m-%d') &lt;=  DATE_FORMAT(#{query.endTimeForSearch}, '%Y-%m-%d')
+		</if>
+      order by f.id desc
+</select>
+
+
+<!-- 活动奖励 -->
+<select id="selectActivityRewardList" resultType="com.linkwee.web.model.crm.ActivityRewardListResp" >
+    SELECT f.id,f.fee_amount as amount,f.create_time as createTime,
+	 		p.activity_name as activityName
+	from tcim_fee f
+	LEFT JOIN tsm_activity_list p on f.bill_id=p.activity_code
+	LEFT JOIN tcrm_user_info u on f.investor_id=u.user_id
+	where f.profit_cfplanner_id=#{query.userId}
+	and f.fee_type='1008'
+     <if test=" null != query.name and ''!= query.name ">
+		and p.activity_name = #{query.name}
+  		</if>
+  		<if test=" null != query.startTimeForSearch">
+			and DATE_FORMAT(f.create_time, '%Y-%m-%d') &gt;=  DATE_FORMAT(#{query.startTimeForSearch}, '%Y-%m-%d')
+		</if>
+		<if test=" null != query.endTimeForSearch">
+			and DATE_FORMAT(f.create_time, '%Y-%m-%d') &lt;=  DATE_FORMAT(#{query.endTimeForSearch}, '%Y-%m-%d')
+		</if>
+      order by f.id desc
+</select>
+
+<!-- 客户在投记录 -->
+<select id="selectCustomerInvestList" resultType="com.linkwee.web.model.crm.CustomerInvestListResp" >
+    SELECT f.id,f.user_id as userId,u.user_name as userName,u.mobile , f.invest_amt as saleAmount,f.create_time as createTime,f.end_time endTime,
+	 		p.product_name as productName,p.org_number as platfrom,o.`name` as platfromName ,
+			p.is_fixed_deadline AS isFixedDeadline,
+			p.dead_line_min_value AS deadLineMinValue,
+			p.dead_line_max_value AS deadLineMaxValue,
+			p.dead_line_min_self_defined AS deadLineMinSelfDefined,
+			p.dead_line_max_self_defined AS deadLineMaxSelfDefined 
+	from tcim_product_invest_record f
+	LEFT JOIN tcim_product p on f.product_id=p.product_id
+	LEFT JOIN tcim_org_info o on p.org_number=o.org_number
+	LEFT JOIN tcrm_user_info u on f.user_id=u.user_id
+	LEFT JOIN tcrm_investor i on i.user_id=f.user_id
+	where i.cfplanner=#{query.userId}
+	and f.`status`=1
+     <if test=" null != query.name and ''!= query.name ">
+		and (u.user_name = #{query.name}  or u.mobile= #{query.name})
+  		</if>
+  		<if test=" null != query.startTimeForSearch">
+			and DATE_FORMAT(f.create_time, '%Y-%m-%d') &gt;=  DATE_FORMAT(#{query.startTimeForSearch}, '%Y-%m-%d')
+		</if>
+		<if test=" null != query.endTimeForSearch">
+			and DATE_FORMAT(f.create_time, '%Y-%m-%d') &lt;=  DATE_FORMAT(#{query.endTimeForSearch}, '%Y-%m-%d')
+		</if>
+      order by f.id desc
+</select>
+
+
+
+
+</mapper>

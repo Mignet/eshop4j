@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.SysPushMessageMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.mc.SysPushMessage" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="BIGINT"/>
+		<result column="module_id" property="moduleId" jdbcType="VARCHAR"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="device_token" property="deviceToken" jdbcType="VARCHAR"/>
+		<result column="os_type" property="osType" jdbcType="VARCHAR"/>
+		<result column="title" property="title" jdbcType="VARCHAR"/>
+		<result column="content" property="content" jdbcType="VARCHAR"/>
+		<result column="handle" property="handle" jdbcType="INTEGER"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="app_type" property="appType" jdbcType="INTEGER"/>
+		<result column="status_desc" property="statusDesc" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="extend1" property="extend1" jdbcType="VARCHAR"/>
+		<result column="extend2" property="extend2" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	module_id,
+	    	user_id,
+	    	device_token,
+	    	os_type,
+	    	title,
+	    	content,
+	    	handle,
+	    	status,
+	    	app_type,
+	    	status_desc,
+	    	create_time,
+	    	update_time,
+	    	remark,
+	    	extend1,
+	    	extend2,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != moduleId and ''!= moduleId  ">
+			and module_id = #{moduleId}
+		</if>
+		<if test=" null != userId and ''!= userId  ">
+			and user_id = #{userId}
+		</if>
+		<if test=" null != deviceToken and ''!= deviceToken  ">
+			and device_token = #{deviceToken}
+		</if>
+		<if test=" null != osType and ''!= osType  ">
+			and os_type = #{osType}
+		</if>
+		<if test=" null != title and ''!= title  ">
+			and title = #{title}
+		</if>
+		<if test=" null != content and ''!= content  ">
+			and content = #{content}
+		</if>
+		<if test=" null != handle ">
+			and handle = #{handle}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+		<if test=" null != statusDesc and ''!= statusDesc  ">
+			and status_desc = #{statusDesc}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+		<if test=" null != extend1 and ''!= extend1  ">
+			and extend1 = #{extend1}
+		</if>
+		<if test=" null != extend2 and ''!= extend2  ">
+			and extend2 = #{extend2}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.mc.SysPushMessage">
+		select <include refid="Base_Column_List" /> from tsys_push_message 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.mc.SysPushMessage">
+		select <include refid="Base_Column_List" /> from tsys_push_message 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsys_push_message
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tsys_push_message
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.mc.SysPushMessage" >
+    INSERT INTO tsys_push_message
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != moduleId and ''!= moduleId  ">
+					module_id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != deviceToken and ''!= deviceToken  ">
+					device_token,
+				</if>
+			 	<if test=" null != osType and ''!= osType  ">
+					os_type,
+				</if>
+			 	<if test=" null != title and ''!= title  ">
+					title,
+				</if>
+			 	<if test=" null != content and ''!= content  ">
+					content,
+				</if>
+			 	<if test=" null != handle ">
+					handle,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+				<if test=" null != appType ">
+					app_type,
+				</if>
+			 	<if test=" null != statusDesc and ''!= statusDesc  ">
+					status_desc,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != extend1 and ''!= extend1  ">
+					extend1,
+				</if>
+			 	<if test=" null != extend2 and ''!= extend2  ">
+					extend2,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != moduleId and ''!= moduleId  ">
+					 	#{moduleId},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != deviceToken and ''!= deviceToken  ">
+					 	#{deviceToken},
+				</if>
+			 	<if test=" null != osType and ''!= osType  ">
+					 	#{osType},
+				</if>
+			 	<if test=" null != title and ''!= title  ">
+					 	#{title},
+				</if>
+			 	<if test=" null != content and ''!= content  ">
+					 	#{content},
+				</if>
+			 	<if test=" null != handle ">
+					 	#{handle},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+				<if test=" null != appType ">
+					#{appType},
+				</if>
+			 	<if test=" null != statusDesc and ''!= statusDesc  ">
+					 	#{statusDesc},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != extend1 and ''!= extend1  ">
+					 	#{extend1},
+				</if>
+			 	<if test=" null != extend2 and ''!= extend2  ">
+					 	#{extend2},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.mc.SysPushMessage" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tsys_push_message
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != moduleId and ''!= moduleId  ">
+					module_id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != deviceToken and ''!= deviceToken  ">
+					device_token,
+				</if>
+			 	<if test=" null != osType and ''!= osType  ">
+					os_type,
+				</if>
+			 	<if test=" null != title and ''!= title  ">
+					title,
+				</if>
+			 	<if test=" null != content and ''!= content  ">
+					content,
+				</if>
+			 	<if test=" null != handle ">
+					handle,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+				<if test=" null != appType ">
+					app_type,
+				</if>
+			 	<if test=" null != statusDesc and ''!= statusDesc  ">
+					status_desc,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != extend1 and ''!= extend1  ">
+					extend1,
+				</if>
+			 	<if test=" null != extend2 and ''!= extend2  ">
+					extend2,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != moduleId and ''!= moduleId  ">
+					 	#{moduleId},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != deviceToken and ''!= deviceToken  ">
+					 	#{deviceToken},
+				</if>
+			 	<if test=" null != osType and ''!= osType  ">
+					 	#{osType},
+				</if>
+			 	<if test=" null != title and ''!= title  ">
+					 	#{title},
+				</if>
+			 	<if test=" null != content and ''!= content  ">
+					 	#{content},
+				</if>
+			 	<if test=" null != handle ">
+					 	#{handle},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+				<if test=" null != appType ">
+					#{appType},
+				</if>
+			 	<if test=" null != statusDesc and ''!= statusDesc  ">
+					 	#{statusDesc},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != extend1 and ''!= extend1  ">
+					 	#{extend1},
+				</if>
+			 	<if test=" null != extend2 and ''!= extend2  ">
+					 	#{extend2},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.mc.SysPushMessage" >
+  		UPDATE tsys_push_message
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != moduleId and ''!= moduleId  ">
+						module_id = #{moduleId},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != deviceToken and ''!= deviceToken  ">
+						device_token = #{deviceToken},
+					</if>
+					<if test=" null != osType and ''!= osType  ">
+						os_type = #{osType},
+					</if>
+					<if test=" null != title and ''!= title  ">
+						title = #{title},
+					</if>
+					<if test=" null != content and ''!= content  ">
+						content = #{content},
+					</if>
+					<if test=" null != handle ">
+						handle = #{handle},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != statusDesc and ''!= statusDesc  ">
+						status_desc = #{statusDesc},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != extend1 and ''!= extend1  ">
+						extend1 = #{extend1},
+					</if>
+					<if test=" null != extend2 and ''!= extend2  ">
+						extend2 = #{extend2},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.mc.SysPushMessage" >
+	    UPDATE tsys_push_message
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != moduleId and ''!= moduleId  ">
+						module_id = #{moduleId},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != deviceToken and ''!= deviceToken  ">
+						device_token = #{deviceToken},
+					</if>
+					<if test=" null != osType and ''!= osType  ">
+						os_type = #{osType},
+					</if>
+					<if test=" null != title and ''!= title  ">
+						title = #{title},
+					</if>
+					<if test=" null != content and ''!= content  ">
+						content = #{content},
+					</if>
+					<if test=" null != handle ">
+						handle = #{handle},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != statusDesc and ''!= statusDesc  ">
+						status_desc = #{statusDesc},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != extend1 and ''!= extend1  ">
+						extend1 = #{extend1},
+					</if>
+					<if test=" null != extend2 and ''!= extend2  ">
+						extend2 = #{extend2},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tsys_push_message
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+    
+    <select id="querySysPushMessageList" resultMap="BaseResultMap">
+    	 SELECT
+        <include refid="Base_Column_List" />
+        FROM tsys_push_message t
+        <where> 
+        t.handle = 0 and t.status = 0
+        <if test="null != userId and '' != userId  ">  
+              and t.user_id = #{userId}
+         </if>  
+         <if test="null != moduleId and '' != moduleId  ">  
+              and t.module_id = #{moduleId}
+         </if>
+         <if test="null != extend2 and '' != extend2  ">  
+              and t.extend2 = #{extend2}
+         </if>   
+         
+        </where>
+        order by  t.create_time ASC        
+    
+    </select>
+    <!-- 批量修改 -->
+
+
+	<update id="updateBatch" parameterType="java.util.List">
+		update tsys_push_message set handle = 1,update_time = now(),	
+			`status` =  (CASE id
+			<foreach item="item" collection="list">
+				when ${item.id} then ${item.status}
+			</foreach>
+			END),
+			status_desc =(CASE id	
+			<foreach item="item" collection="list">
+				when ${item.id} then '${item.statusDesc}'
+			</foreach>
+			END)			
+		
+		<where>
+			id 
+		<foreach item="item" open="IN (" close=")" separator="," collection="list">
+			#{item.id}
+		</foreach>
+		</where>
+		
+	</update>
+
+	<insert id="saveBatch" parameterType="java.util.List">
+		insert into tsys_push_message(
+			module_id,
+	    	user_id,
+	    	device_token,
+	    	os_type,
+	    	title,
+	    	content,
+	    	handle,
+	    	status,
+	    	app_type,
+	    	status_desc,
+	    	create_time,
+	    	update_time,
+	    	remark,
+	    	extend1,
+	    	extend2
+		)	VALUES
+		<foreach item="item" index="index" collection="list" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.moduleId,jdbcType=VARCHAR},
+				#{item.userId,jdbcType=VARCHAR},
+				#{item.deviceToken,jdbcType=VARCHAR},
+				#{item.osType,jdbcType=VARCHAR},
+				#{item.title,jdbcType=VARCHAR},
+				#{item.content,jdbcType=VARCHAR},
+				#{item.handle,jdbcType=INTEGER},
+				#{item.status,jdbcType=INTEGER},
+				#{item.appType,jdbcType=INTEGER},
+				#{item.statusDesc,jdbcType=VARCHAR},
+				#{item.createTime,jdbcType=TIMESTAMP},
+				#{item.updateTime,jdbcType=TIMESTAMP},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.extend1,jdbcType=VARCHAR},
+				#{item.extend2,jdbcType=VARCHAR},
+			</trim>
+		</foreach>
+	</insert>
+	
+	
+	
+
+
+</mapper>

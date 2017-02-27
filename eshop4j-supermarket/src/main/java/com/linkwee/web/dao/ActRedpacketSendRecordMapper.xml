@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.ActRedpacketSendRecordMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.act.redpacket.model.ActRedpacketSendRecord" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="redpacket_id" property="redpacketId" jdbcType="VARCHAR"/>
+		<result column="send_id" property="sendId" jdbcType="VARCHAR"/>
+		<result column="expires_time" property="expiresTime" jdbcType="TIMESTAMP"/>
+		<result column="expires_day" property="expiresDay" jdbcType="INTEGER"/>
+		<result column="send_count" property="sendCount" jdbcType="INTEGER"/>
+		<result column="send_money" property="sendMoney" jdbcType="DECIMAL"/>
+		<result column="send_number" property="sendNumber" jdbcType="INTEGER"/>
+		<result column="send_time" property="sendTime" jdbcType="TIMESTAMP"/>
+		<result column="expires_status" property="expiresStatus" jdbcType="INTEGER"/>
+		<result column="operator" property="operator" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	redpacket_id,
+	    	send_id,
+	    	expires_time,
+	    	send_count,
+	    	send_money,
+	    	send_number,
+	    	send_time,
+	    	expires_status,
+	    	operator,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != redpacketId and ''!= redpacketId  ">
+			and redpacket_id = #{redpacketId}
+		</if>
+		<if test=" null != sendId and ''!= sendId  ">
+			and send_id = #{sendId}
+		</if>
+		<if test=" null != expiresTime ">
+			and expires_time = #{expiresTime}
+		</if>
+		<if test=" null != sendCount ">
+			and send_count = #{sendCount}
+		</if>
+		<if test=" null != sendMoney ">
+			and send_money = #{sendMoney}
+		</if>
+		<if test=" null != sendNumber ">
+			and send_number = #{sendNumber}
+		</if>
+		<if test=" null != sendTime ">
+			and send_time = #{sendTime}
+		</if>
+		<if test=" null != expiresStatus ">
+			and expires_status = #{expiresStatus}
+		</if>
+		<if test=" null != operator and ''!= operator  ">
+			and operator = #{operator}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.act.redpacket.model.ActRedpacketSendRecord">
+		select <include refid="Base_Column_List" /> from tact_redpacket_send_record 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.act.redpacket.model.ActRedpacketSendRecord">
+		select <include refid="Base_Column_List" /> from tact_redpacket_send_record 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tact_redpacket_send_record
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tact_redpacket_send_record
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.act.redpacket.model.ActRedpacketSendRecord" >
+    INSERT INTO tact_redpacket_send_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					redpacket_id,
+				</if>
+			 	<if test=" null != sendId and ''!= sendId  ">
+					send_id,
+				</if>
+			 	<if test=" null != expiresTime ">
+					expires_time,
+				</if>
+			 	<if test=" null != sendCount ">
+					send_count,
+				</if>
+			 	<if test=" null != sendMoney ">
+					send_money,
+				</if>
+			 	<if test=" null != sendNumber ">
+					send_number,
+				</if>
+			 	<if test=" null != sendTime ">
+					send_time,
+				</if>
+			 	<if test=" null != expiresStatus ">
+					expires_status,
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					operator,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					 	#{redpacketId},
+				</if>
+			 	<if test=" null != sendId and ''!= sendId  ">
+					 	#{sendId},
+				</if>
+			 	<if test=" null != expiresTime ">
+					 	#{expiresTime},
+				</if>
+			 	<if test=" null != sendCount ">
+					 	#{sendCount},
+				</if>
+			 	<if test=" null != sendMoney ">
+					 	#{sendMoney},
+				</if>
+			 	<if test=" null != sendNumber ">
+					 	#{sendNumber},
+				</if>
+			 	<if test=" null != sendTime ">
+					 	#{sendTime},
+				</if>
+			 	<if test=" null != expiresStatus ">
+					 	#{expiresStatus},
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					 	#{operator},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.act.redpacket.model.ActRedpacketSendRecord" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tact_redpacket_send_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					redpacket_id,
+				</if>
+			 	<if test=" null != sendId and ''!= sendId  ">
+					send_id,
+				</if>
+			 	<if test=" null != expiresTime ">
+					expires_time,
+				</if>
+			 	<if test=" null != sendCount ">
+					send_count,
+				</if>
+			 	<if test=" null != sendMoney ">
+					send_money,
+				</if>
+			 	<if test=" null != sendNumber ">
+					send_number,
+				</if>
+			 	<if test=" null != sendTime ">
+					send_time,
+				</if>
+			 	<if test=" null != expiresStatus ">
+					expires_status,
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					operator,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					 	#{redpacketId},
+				</if>
+			 	<if test=" null != sendId and ''!= sendId  ">
+					 	#{sendId},
+				</if>
+			 	<if test=" null != expiresTime ">
+					 	#{expiresTime},
+				</if>
+			 	<if test=" null != sendCount ">
+					 	#{sendCount},
+				</if>
+			 	<if test=" null != sendMoney ">
+					 	#{sendMoney},
+				</if>
+			 	<if test=" null != sendNumber ">
+					 	#{sendNumber},
+				</if>
+			 	<if test=" null != sendTime ">
+					 	#{sendTime},
+				</if>
+			 	<if test=" null != expiresStatus ">
+					 	#{expiresStatus},
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					 	#{operator},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.act.redpacket.model.ActRedpacketSendRecord" >
+  		UPDATE tact_redpacket_send_record
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != redpacketId and ''!= redpacketId  ">
+						redpacket_id = #{redpacketId},
+					</if>
+					<if test=" null != sendId and ''!= sendId  ">
+						send_id = #{sendId},
+					</if>
+					<if test=" null != expiresTime ">
+						expires_time = #{expiresTime},
+					</if>
+					<if test=" null != sendCount ">
+						send_count = #{sendCount},
+					</if>
+					<if test=" null != sendMoney ">
+						send_money = #{sendMoney},
+					</if>
+					<if test=" null != sendNumber ">
+						send_number = #{sendNumber},
+					</if>
+					<if test=" null != sendTime ">
+						send_time = #{sendTime},
+					</if>
+					<if test=" null != expiresStatus ">
+						expires_status = #{expiresStatus},
+					</if>
+					<if test=" null != operator and ''!= operator  ">
+						operator = #{operator},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.act.redpacket.model.ActRedpacketSendRecord" >
+	    UPDATE tact_redpacket_send_record
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != redpacketId and ''!= redpacketId  ">
+						redpacket_id = #{redpacketId},
+					</if>
+					<if test=" null != sendId and ''!= sendId  ">
+						send_id = #{sendId},
+					</if>
+					<if test=" null != expiresTime ">
+						expires_time = #{expiresTime},
+					</if>
+					<if test=" null != sendCount ">
+						send_count = #{sendCount},
+					</if>
+					<if test=" null != sendMoney ">
+						send_money = #{sendMoney},
+					</if>
+					<if test=" null != sendNumber ">
+						send_number = #{sendNumber},
+					</if>
+					<if test=" null != sendTime ">
+						send_time = #{sendTime},
+					</if>
+					<if test=" null != expiresStatus ">
+						expires_status = #{expiresStatus},
+					</if>
+					<if test=" null != operator and ''!= operator  ">
+						operator = #{operator},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+	  
+	  <!-- 更新发送记录状态 -->
+	  <update id="updateExpiresStatus"  >
+	    UPDATE tact_redpacket_send_record
+	   <set>
+			expires_status=1
+		</set>
+		<where>
+			send_id 
+			<foreach collection="sendIds" item="sendId" open="in (" separator="," close=")">
+				#{sendId}
+			</foreach>
+		</where>
+	  </update>
+	  
+	  <!-- 获取过期红包 -->
+	  <select id="getExpiresRedpacket" resultType="string">
+	  	SELECT send_id FROM tact_redpacket_send_record WHERE expires_status=0 AND now() >= expires_time
+	  </select>
+	  
+	  
+	   <!-- 获取固定日期过期红包 -->
+	  <select id="getAdvanceExpiresRemindMobiles" resultType="string">
+	  	SELECT
+			 r.user_mobile mobile
+		FROM
+			tact_redpacket_detail r
+		WHERE
+			r.send_id IN (
+				SELECT
+					send_id
+				FROM
+					tact_redpacket_send_record
+				WHERE
+					expires_status = 0
+				AND  #{expireDate} = expires_time
+			)  AND r.`status`=2 GROUP BY  r.user_mobile
+		
+		UNION 
+		
+		SELECT
+			 r.cfplanner_mobile  mobile
+		FROM
+			tact_redpacket_detail r
+		WHERE
+			r.send_id IN (
+				SELECT
+					send_id
+				FROM
+					tact_redpacket_send_record
+				WHERE
+					expires_status = 0
+				AND  #{expireDate} = expires_time
+			) AND r.`status`=1 GROUP BY  r.user_mobile
+	  
+	  
+	  <!-- 	SELECT send_id FROM tact_redpacket_send_record WHERE expires_status=0 AND #{expireDate} = expires_time -->
+	  </select>  
+		
+		
+	<select id="getRedpacketSendRecords" resultMap="BaseResultMap">
+			SELECT 
+				redpacket_id,
+		    	send_id,
+		    	expires_time,
+		    	expires_day
+	    	FROM 
+	    		tact_redpacket_send_record
+	    	<where>
+	    		<foreach collection="sendIds" item="sendId" open="send_id in (" separator="," close=")">
+					#{sendId}
+				</foreach>	
+	    	</where>
+	</select>
+	
+	
+	 <update id="updateSendRedpackets" >
+	  		update tact_redpacket_send_record set send_count = send_count+1,send_number = send_number +1 ,send_time = now(),	
+			`send_money` =  (CASE send_id
+			<foreach item="item" collection="redpackets">
+				when #{item.sendId} then `send_money`+ #{item.money}
+			</foreach>
+			END)	
+			<where>
+				<foreach item="item" open="send_id IN (" close=")" separator="," collection="redpackets">
+					#{item.sendId}
+				</foreach>
+			</where>
+	  </update>
+		
+</mapper>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.InvestmentDistributionMapper">
+
+	<select id="getFeeTotalData" resultType="map">
+	<![CDATA[
+	SELECT 
+			 COUNT(CASE WHEN f.yearpur_amount>0 AND f.yearpur_amount<=1000 THEN 1 ELSE null END) lev1,
+		  COUNT(CASE WHEN f.yearpur_amount>1000 AND f.yearpur_amount<=5000 THEN 1 ELSE null END) lev2,
+		  COUNT(CASE WHEN f.yearpur_amount>5000 AND f.yearpur_amount<=10000 THEN 1 ELSE null END) lev3,
+			COUNT(CASE WHEN f.yearpur_amount>10000 AND f.yearpur_amount<=20000 THEN 1 ELSE null END) lev4,
+		  COUNT(CASE WHEN f.yearpur_amount>20000 AND f.yearpur_amount<=50000 THEN 1 ELSE null END) lev5,
+			COUNT(CASE WHEN f.yearpur_amount>50000 AND f.yearpur_amount<=100000 THEN 1 ELSE null END) lev6,
+			COUNT(CASE WHEN f.yearpur_amount>100000 AND f.yearpur_amount<=500000 THEN 1 ELSE null END) lev7,
+			COUNT(CASE WHEN f.yearpur_amount>500000  THEN 1 ELSE null END) lev8
+			FROM (
+				SELECT
+				SUM(f.yearpur_amount) yearpur_amount,
+				f.profit_cfplanner_id
+				FROM tcim_fee f 
+				where f.fee_type=1001
+				GROUP BY f.investor_id
+			)f 
+			]]>
+	</select>
+	
+	
+	<select id="getFeeDataDetail" resultType="map">
+		<![CDATA[
+		SELECT 
+ 			COUNT(CASE WHEN f.yearpur_amount>0 AND f.yearpur_amount<=1000 THEN 1 ELSE null END) lev1,
+		  COUNT(CASE WHEN f.yearpur_amount>1000 AND f.yearpur_amount<=5000 THEN 1 ELSE null END) lev2,
+		  COUNT(CASE WHEN f.yearpur_amount>5000 AND f.yearpur_amount<=10000 THEN 1 ELSE null END) lev3,
+			COUNT(CASE WHEN f.yearpur_amount>10000 AND f.yearpur_amount<=20000 THEN 1 ELSE null END) lev4,
+		  COUNT(CASE WHEN f.yearpur_amount>20000 AND f.yearpur_amount<=50000 THEN 1 ELSE null END) lev5,
+			COUNT(CASE WHEN f.yearpur_amount>50000 AND f.yearpur_amount<=100000 THEN 1 ELSE null END) lev6,
+			COUNT(CASE WHEN f.yearpur_amount>100000 AND f.yearpur_amount<=500000 THEN 1 ELSE null END) lev7,
+			COUNT(CASE WHEN f.yearpur_amount>500000  THEN 1 ELSE null END) lev8,
+			f.showdate]]>
+			FROM
+				(SELECT
+								SUM(f.yearpur_amount) yearpur_amount,
+								f.showdate
+				FROM
+				
+				(
+				SELECT
+					f.yearpur_amount,
+					<if test="type==0">
+						DATE_FORMAT(create_time,'%Y年第%u周') showdate,
+					</if>
+					<if test="type==1">
+						DATE_FORMAT(create_time,'%Y年第%m月') showdate,
+					</if>
+					<if test="type==2">
+						DATE_FORMAT(create_time,'%Y年第%m月第%d日') showdate,
+					</if>
+					f.investor_id
+				FROM
+					tcim_fee f
+				WHERE
+					f.create_time BETWEEN #{start} AND #{end} AND f.fee_type=1001
+					<if test=" null != org and ''!= org  ">
+						AND f.product_org_id=#{org}
+					</if>
+				)f GROUP BY f.showdate,f.investor_id)f GROUP BY f.showdate
+	</select>
+	
+	
+	<select id="getTop"  resultType="com.linkwee.web.response.tc.InvestmentTopDetailResponse">
+		SELECT
+			IFNULL(SUM(f.yearpur_amount),0)/10000 yearpurAmount,
+			IFNULL(sum(f.product_amount),0)/10000 productAmount,
+			u.user_name userName,
+			u.mobile,
+			cu.mobile  cfpMobile,
+			cu.user_name cfpName,
+			a.city cfpCity
+		FROM
+			tcim_fee f
+			LEFT JOIN tcrm_user_info u ON f.investor_id = u.user_id
+		LEFT JOIN tcrm_user_info cu ON f.profit_cfplanner_id = cu.user_id
+		LEFT JOIN tsys_mobile_area a ON a.mobile = LEFT (cu.mobile, 7)
+		WHERE 
+		f.create_time BETWEEN #{start} AND #{end}
+		<if test=" null != org and ''!= org  ">
+		AND f.product_org_id=#{org}
+		</if>
+		AND  f.fee_type=1001
+		GROUP BY
+			f.investor_id
+		ORDER BY
+			yearpurAmount DESC
+		LIMIT 100
+	</select>
+	
+	<select id="getFeeDistributionRatioCount" resultType="long">
+		SELECT
+			COUNT(f.investor_id)
+		FROM
+			(
+				SELECT
+					IFNULL(SUM(f.yearpur_amount), 0) amt,
+					f.investor_id
+				FROM
+					tcim_fee f
+				WHERE
+					f.fee_type=1001
+					and f.create_time BETWEEN #{start} AND #{end}
+					<if test=" null != org and ''!= org  ">
+						AND f.product_org_id=#{org}
+					</if>
+				GROUP BY
+					f.investor_id
+			) f
+	
+	</select>
+	
+	
+	
+	
+	<select id="getFeeDistributionRatio" resultType="map">
+		SELECT
+			f.amt,
+			COUNT(f.investor_id) count
+		FROM
+			(
+				SELECT
+					IFNULL(SUM(f.yearpur_amount), 0) amt,
+					f.investor_id
+				FROM
+					tcim_fee f
+				WHERE
+					f.fee_type=1001
+					and f.create_time BETWEEN #{start} AND #{end}
+					<if test=" null != org and ''!= org  ">
+						AND f.product_org_id=#{org}
+					</if>
+				GROUP BY
+					f.investor_id
+			) f
+		GROUP BY
+			f.amt
+	
+	</select>
+	
+	
+</mapper>

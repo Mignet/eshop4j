@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CimProductEditMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.CimProductEdit" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="org_number" property="orgNumber" jdbcType="VARCHAR"/>
+		<result column="product_name" property="productName" jdbcType="VARCHAR"/>
+		<result column="product_desc" property="productDesc" jdbcType="LONGVARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	org_number,
+	    	product_name,
+	    	product_desc,
+    </trim>
+  </sql>  
+  
+  <sql id="Column_List_WithOrgName">
+    <trim suffixOverrides=",">
+	    	tpe.id,
+	    	tpe.org_number,
+	    	tpe.product_name as productName,
+	    	toi.name as orgName,
+    </trim>
+  </sql>
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != orgNumber and ''!= orgNumber  ">
+			and org_number = #{orgNumber}
+		</if>
+		<if test=" null != productName and ''!= productName  ">
+			and product_name = #{productName}
+		</if>
+		<if test=" null != productDesc and ''!= productDesc  ">
+			and product_desc = #{productDesc}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimProductEdit">
+		select <include refid="Base_Column_List" /> from tcim_product_edit 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimProductEdit">
+		select <include refid="Base_Column_List" /> from tcim_product_edit 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_product_edit
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_product_edit
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.CimProductEdit" >
+    INSERT INTO tcim_product_edit
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					org_number,
+				</if>
+			 	<if test=" null != productName and ''!= productName  ">
+					product_name,
+				</if>
+			 	<if test=" null != productDesc and ''!= productDesc  ">
+					product_desc,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					 	#{orgNumber},
+				</if>
+			 	<if test=" null != productName and ''!= productName  ">
+					 	#{productName},
+				</if>
+			 	<if test=" null != productDesc and ''!= productDesc  ">
+					 	#{productDesc},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.CimProductEdit" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcim_product_edit
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					org_number,
+				</if>
+			 	<if test=" null != productName and ''!= productName  ">
+					product_name,
+				</if>
+			 	<if test=" null != productDesc and ''!= productDesc  ">
+					product_desc,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					 	#{orgNumber},
+				</if>
+			 	<if test=" null != productName and ''!= productName  ">
+					 	#{productName},
+				</if>
+			 	<if test=" null != productDesc and ''!= productDesc  ">
+					 	#{productDesc},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.CimProductEdit" >
+  		UPDATE tcim_product_edit
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != orgNumber and ''!= orgNumber  ">
+						org_number = #{orgNumber},
+					</if>
+					<if test=" null != productName and ''!= productName  ">
+						product_name = #{productName},
+					</if>
+					<if test=" null != productDesc and ''!= productDesc  ">
+						product_desc = #{productDesc},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.CimProductEdit" >
+	    UPDATE tcim_product_edit
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != orgNumber and ''!= orgNumber  ">
+						org_number = #{orgNumber},
+					</if>
+					<if test=" null != productName and ''!= productName  ">
+						product_name = #{productName},
+					</if>
+					<if test=" null != productDesc and ''!= productDesc  ">
+						product_desc = #{productDesc},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcim_product_edit
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+	<!-- 根据条件查询CimProductEdit列表 -->
+    <select id="findProductEditList" resultType="com.linkwee.web.response.CimProductEditResponse" parameterType="com.linkwee.web.request.CimProductEditDataTableRequest">
+        SELECT
+        <include refid="Column_List_WithOrgName" />
+        FROM tcim_product_edit tpe,tcim_org_info toi
+        <where> 
+        1=1
+        and toi.org_number = tpe.org_number
+        <if test=" null != orgNumber and ''!= orgNumber  ">
+			and tpe.org_number = #{orgNumber}
+		</if>
+		<if test=" null != productName and ''!= productName  ">
+			and tpe.product_name LIKE CONCAT('%','${productName}','%' )  
+		</if> 
+         <if test="order!=null and order.size != 0">  
+               <foreach collection="order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+</mapper>

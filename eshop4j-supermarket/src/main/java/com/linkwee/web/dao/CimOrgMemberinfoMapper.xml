@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CimOrgMemberinfoMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.CimOrgMemberInfo" id="BaseResultMap">
+		<result column="tid" property="tid" jdbcType="INTEGER"/>
+		<result column="orgid" property="orgId" jdbcType="INTEGER"/>
+		<result column="org_icon" property="orgIcon" jdbcType="VARCHAR"/>
+		<result column="org_membergrade" property="orgMemberGrade" jdbcType="VARCHAR"/>
+		<result column="org_membername" property="orgMemberName" jdbcType="VARCHAR"/>
+		<result column="org_describe" property="orgDescribe" jdbcType="LONGVARCHAR"/>
+		<result column="sort" property="sort" jdbcType="INTEGER"/>
+		<result column="isshow" property="isshow" jdbcType="INTEGER"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	tid,
+	    	orgid,
+	    	org_icon,
+	    	org_membergrade,
+	    	org_membername,
+	    	org_describe,
+	    	sort,
+	    	isshow,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != tid ">
+			and tid = #{tid}
+		</if>
+		<if test=" null != orgId ">
+			and orgid = #{orgId}
+		</if>
+		<if test=" null != orgIcon and ''!= orgIcon  ">
+			and org_icon = #{orgIcon}
+		</if>
+		<if test=" null != orgMemberGrade and ''!= orgMemberGrade  ">
+			and org_membergrade = #{orgMemberGrade}
+		</if>
+		<if test=" null != orgMemberName and ''!= orgMemberName  ">
+			and org_membername = #{orgMemberName}
+		</if>
+		<if test=" null != orgDescribe and ''!= orgDescribe  ">
+			and org_describe = #{orgDescribe}
+		</if>
+		<if test=" null != sort ">
+			and sort = #{sort}
+		</if>
+		<if test=" null != isshow ">
+			and isshow = #{isshow}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimOrgMemberInfo">
+		select <include refid="Base_Column_List" /> from tcim_org_memberinfo 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimOrgMemberInfo">
+		select <include refid="Base_Column_List" /> from tcim_org_memberinfo 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_org_memberinfo
+    where  tid = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_org_memberinfo
+    where tid = #{0}
+  </delete>
+
+  <insert id="insertBatch" parameterType="java.util.List">
+	   INSERT INTO tcim_org_memberinfo
+	   (
+					orgid,
+					org_icon,
+					org_membergrade,
+					org_membername,
+					org_describe,
+					sort,
+					isshow
+		)
+		values
+	    <foreach collection="list" item="team" index="index" separator="," >
+	        (
+					 	#{team.orgId},
+					 	#{team.orgIcon},
+					 	#{team.orgMemberGrade},
+					 	#{team.orgMemberName},
+					 	#{team.orgDescribe},
+					 	#{team.sort},
+					 	#{team.isshow}
+	        
+	        )
+	    </foreach>
+	    
+  </insert>
+  
+  
+  <insert id="insert" parameterType="com.linkwee.web.model.CimOrgMemberInfo" >
+    INSERT INTO tcim_org_memberinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != tid ">
+					tid,
+				</if>
+			 	<if test=" null != orgId ">
+					orgid,
+				</if>
+			 	<if test=" null != orgIcon and ''!= orgIcon  ">
+					org_icon,
+				</if>
+			 	<if test=" null != orgMemberGrade and ''!= orgMemberGrade  ">
+					org_membergrade,
+				</if>
+			 	<if test=" null != orgMemberName and ''!= orgMemberName  ">
+					org_membername,
+				</if>
+			 	<if test=" null != orgDescribe and ''!= orgDescribe  ">
+					org_describe,
+				</if>
+			 	<if test=" null != sort ">
+					sort,
+				</if>
+			 	<if test=" null != isshow ">
+					isshow,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != tid ">
+					 	#{tid},
+				</if>
+			 	<if test=" null != orgId ">
+					 	#{orgId},
+				</if>
+			 	<if test=" null != orgIcon and ''!= orgIcon  ">
+					 	#{orgIcon},
+				</if>
+			 	<if test=" null != orgMemberGrade and ''!= orgMemberGrade  ">
+					 	#{orgMemberGrade},
+				</if>
+			 	<if test=" null != orgMemberName and ''!= orgMemberName  ">
+					 	#{orgMemberName},
+				</if>
+			 	<if test=" null != orgDescribe and ''!= orgDescribe  ">
+					 	#{orgDescribe},
+				</if>
+			 	<if test=" null != sort ">
+					 	#{sort},
+				</if>
+			 	<if test=" null != isshow ">
+					 	#{isshow},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.CimOrgMemberInfo" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcim_org_memberinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != tid ">
+					tid,
+				</if>
+			 	<if test=" null != orgId ">
+					orgid,
+				</if>
+			 	<if test=" null != orgIcon and ''!= orgIcon  ">
+					org_icon,
+				</if>
+			 	<if test=" null != orgMemberGrade and ''!= orgMemberGrade  ">
+					org_membergrade,
+				</if>
+			 	<if test=" null != orgMemberName and ''!= orgMemberName  ">
+					org_membername,
+				</if>
+			 	<if test=" null != orgDescribe and ''!= orgDescribe  ">
+					org_describe,
+				</if>
+			 	<if test=" null != sort ">
+					sort,
+				</if>
+			 	<if test=" null != isshow ">
+					isshow,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != tid ">
+					 	#{tid},
+				</if>
+			 	<if test=" null != orgId ">
+					 	#{orgId},
+				</if>
+			 	<if test=" null != orgIcon and ''!= orgIcon  ">
+					 	#{orgIcon},
+				</if>
+			 	<if test=" null != orgMemberGrade and ''!= orgMemberGrade  ">
+					 	#{orgMemberGrade},
+				</if>
+			 	<if test=" null != orgMemberName and ''!= orgMemberName  ">
+					 	#{orgMemberName},
+				</if>
+			 	<if test=" null != orgDescribe and ''!= orgDescribe  ">
+					 	#{orgDescribe},
+				</if>
+			 	<if test=" null != sort ">
+					 	#{sort},
+				</if>
+			 	<if test=" null != isshow ">
+					 	#{isshow},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.CimOrgMemberInfo" >
+  		UPDATE tcim_org_memberinfo
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != orgId ">
+						orgid = #{orgId},
+					</if>
+					<if test=" null != orgIcon and ''!= orgIcon  ">
+						org_icon = #{orgIcon},
+					</if>
+					<if test=" null != orgMemberGrade and ''!= orgMemberGrade  ">
+						org_membergrade = #{orgMemberGrade},
+					</if>
+					<if test=" null != orgMemberName and ''!= orgMemberName  ">
+						org_membername = #{orgMemberName},
+					</if>
+					<if test=" null != orgDescribe and ''!= orgDescribe  ">
+						org_describe = #{orgDescribe},
+					</if>
+					<if test=" null != sort ">
+						sort = #{sort},
+					</if>
+					<if test=" null != isshow ">
+						isshow = #{isshow},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 tid = #{tid}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.CimOrgMemberInfo" >
+	    UPDATE tcim_org_memberinfo
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != orgId ">
+						orgid = #{orgId},
+					</if>
+					<if test=" null != orgIcon and ''!= orgIcon  ">
+						org_icon = #{orgIcon},
+					</if>
+					<if test=" null != orgMemberGrade and ''!= orgMemberGrade  ">
+						org_membergrade = #{orgMemberGrade},
+					</if>
+					<if test=" null != orgMemberName and ''!= orgMemberName  ">
+						org_membername = #{orgMemberName},
+					</if>
+					<if test=" null != orgDescribe and ''!= orgDescribe  ">
+						org_describe = #{orgDescribe},
+					</if>
+					<if test=" null != sort ">
+						sort = #{sort},
+					</if>
+					<if test=" null != isshow ">
+						isshow = #{isshow},
+					</if>
+			</trim>
+		</set>
+		<where>
+			tid = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcim_org_memberinfo
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+	
+	<!-- 团队信息批量更新 -->
+	<update id="updateBatchTeam" parameterType="java.util.List">
+		update tcim_org_memberinfo 
+			set 			
+				org_icon =  (CASE tid
+				<foreach item="item" collection="list">
+					when #{item.tid} then #{item.orgIcon}
+				</foreach>
+				END),
+				org_membergrade =(CASE tid	
+				<foreach item="item" collection="list">
+					when #{item.tid} then #{item.orgMemberGrade}
+				</foreach>
+				END),
+				org_membername =(CASE tid	
+				<foreach item="item" collection="list">
+					when #{item.tid} then #{item.orgMemberName}
+				</foreach>
+				END),
+				org_describe =(CASE tid	
+				<foreach item="item" collection="list">
+					when #{item.tid} then #{item.orgDescribe}
+				</foreach>
+				END)			
+		
+		<where>
+			tid 
+		<foreach item="item" open="IN (" close=")" separator="," collection="list">
+			#{item.tid}
+		</foreach>
+		</where>
+		
+	</update>
+	
+</mapper>

@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.AcCityListMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.acc.AcCityList" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="BIGINT"/>
+		<result column="province_id" property="provinceId" jdbcType="VARCHAR"/>
+		<result column="province_name" property="provinceName" jdbcType="VARCHAR"/>
+		<result column="city_id" property="cityId" jdbcType="VARCHAR"/>
+		<result column="city_name" property="cityName" jdbcType="VARCHAR"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+	<resultMap  type="com.linkwee.web.response.acc.CityInfoResponse" id="ProvinceCodeResultMap">
+		<result column="province_id" property="provinceId" jdbcType="VARCHAR"/>
+		<result column="city_id" property="cityId" jdbcType="VARCHAR"/>
+		<result column="city_name" property="cityName" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	province_id,
+	    	province_name,
+	    	city_id,
+	    	city_name,
+	    	remark,
+	    	create_date,
+	    	update_date,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != provinceId and ''!= provinceId  ">
+			and province_id = #{provinceId}
+		</if>
+		<if test=" null != provinceName and ''!= provinceName  ">
+			and province_name = #{provinceName}
+		</if>
+		<if test=" null != cityId and ''!= cityId  ">
+			and city_id = #{cityId}
+		</if>
+		<if test=" null != cityName and ''!= cityName  ">
+			and city_name = #{cityName}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+		<if test=" null != createDate ">
+			and create_date = #{createDate}
+		</if>
+		<if test=" null != updateDate ">
+			and update_date = #{updateDate}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.acc.AcCityList">
+		select <include refid="Base_Column_List" /> from tac_city_list 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByProvinceCode" resultMap="ProvinceCodeResultMap"  parameterType="com.linkwee.web.response.acc.CityInfoResponse">
+		select <include refid="Base_Column_List" /> from tac_city_list 
+		where province_id = #{ provinceId}
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.acc.AcCityList">
+		select <include refid="Base_Column_List" /> from tac_city_list 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tac_city_list
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tac_city_list
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.acc.AcCityList" >
+    INSERT INTO tac_city_list
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != provinceId and ''!= provinceId  ">
+					province_id,
+				</if>
+			 	<if test=" null != provinceName and ''!= provinceName  ">
+					province_name,
+				</if>
+			 	<if test=" null != cityId and ''!= cityId  ">
+					city_id,
+				</if>
+			 	<if test=" null != cityName and ''!= cityName  ">
+					city_name,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != createDate ">
+					create_date,
+				</if>
+			 	<if test=" null != updateDate ">
+					update_date,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != provinceId and ''!= provinceId  ">
+					 	#{provinceId},
+				</if>
+			 	<if test=" null != provinceName and ''!= provinceName  ">
+					 	#{provinceName},
+				</if>
+			 	<if test=" null != cityId and ''!= cityId  ">
+					 	#{cityId},
+				</if>
+			 	<if test=" null != cityName and ''!= cityName  ">
+					 	#{cityName},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != createDate ">
+					 	#{createDate},
+				</if>
+			 	<if test=" null != updateDate ">
+					 	#{updateDate},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.acc.AcCityList" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tac_city_list
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != provinceId and ''!= provinceId  ">
+					province_id,
+				</if>
+			 	<if test=" null != provinceName and ''!= provinceName  ">
+					province_name,
+				</if>
+			 	<if test=" null != cityId and ''!= cityId  ">
+					city_id,
+				</if>
+			 	<if test=" null != cityName and ''!= cityName  ">
+					city_name,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != createDate ">
+					create_date,
+				</if>
+			 	<if test=" null != updateDate ">
+					update_date,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != provinceId and ''!= provinceId  ">
+					 	#{provinceId},
+				</if>
+			 	<if test=" null != provinceName and ''!= provinceName  ">
+					 	#{provinceName},
+				</if>
+			 	<if test=" null != cityId and ''!= cityId  ">
+					 	#{cityId},
+				</if>
+			 	<if test=" null != cityName and ''!= cityName  ">
+					 	#{cityName},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != createDate ">
+					 	#{createDate},
+				</if>
+			 	<if test=" null != updateDate ">
+					 	#{updateDate},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.acc.AcCityList" >
+  		UPDATE tac_city_list
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != provinceId and ''!= provinceId  ">
+						province_id = #{provinceId},
+					</if>
+					<if test=" null != provinceName and ''!= provinceName  ">
+						province_name = #{provinceName},
+					</if>
+					<if test=" null != cityId and ''!= cityId  ">
+						city_id = #{cityId},
+					</if>
+					<if test=" null != cityName and ''!= cityName  ">
+						city_name = #{cityName},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != createDate ">
+						create_date = #{createDate},
+					</if>
+					<if test=" null != updateDate ">
+						update_date = #{updateDate},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.acc.AcCityList" >
+	    UPDATE tac_city_list
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != provinceId and ''!= provinceId  ">
+						province_id = #{provinceId},
+					</if>
+					<if test=" null != provinceName and ''!= provinceName  ">
+						province_name = #{provinceName},
+					</if>
+					<if test=" null != cityId and ''!= cityId  ">
+						city_id = #{cityId},
+					</if>
+					<if test=" null != cityName and ''!= cityName  ">
+						city_name = #{cityName},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != createDate ">
+						create_date = #{createDate},
+					</if>
+					<if test=" null != updateDate ">
+						update_date = #{updateDate},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tac_city_list
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+</mapper>

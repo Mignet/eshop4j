@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CimOrgPictureMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.CimOrgPicture" id="BaseResultMap">
+		<result column="pid" property="pid" jdbcType="INTEGER"/>
+		<result column="org_number" property="orgNumber" jdbcType="VARCHAR"/>
+		<result column="org_picture" property="orgPicture" jdbcType="VARCHAR"/>
+		<result column="org_picture_url" property="orgPictureUrl" jdbcType="VARCHAR"/>
+		<result column="org_picture_type" property="orgPictureType" jdbcType="INTEGER"/>
+		<result column="sort" property="sort" jdbcType="INTEGER"/>
+		<result column="isshow" property="isshow" jdbcType="INTEGER"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="source" property="source" jdbcType="INTEGER"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	pid,
+	    	org_number,
+	    	org_picture,
+	    	org_picture_url,
+	    	org_picture_type,
+	    	sort,
+	    	isshow,
+	    	remark,
+	    	source,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != pid ">
+			and pid = #{pid}
+		</if>
+		<if test=" null != orgNumber and ''!= orgNumber  ">
+			and org_number = #{orgNumber}
+		</if>
+		<if test=" null != orgPicture and ''!= orgPicture  ">
+			and org_picture = #{orgPicture}
+		</if>
+		<if test=" null != orgPictureUrl and ''!= orgPictureUrl  ">
+			and org_picture_url = #{orgPictureUrl}
+		</if>
+		<if test=" null != orgPictureType ">
+			and org_picture_type = #{orgPictureType}
+		</if>
+		<if test=" null != sort ">
+			and sort = #{sort}
+		</if>
+		<if test=" null != isshow ">
+			and isshow = #{isshow}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+		<if test=" null != source ">
+			and source = #{source}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimOrgPicture">
+		select <include refid="Base_Column_List" /> from tcim_org_picture 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimOrgPicture">
+		select <include refid="Base_Column_List" /> from tcim_org_picture 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_org_picture
+    where  pid = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_org_picture
+    where pid = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.CimOrgPicture" >
+    INSERT INTO tcim_org_picture
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != pid ">
+					pid,
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					org_number,
+				</if>
+			 	<if test=" null != orgPicture and ''!= orgPicture  ">
+					org_picture,
+				</if>
+			 	<if test=" null != orgPictureUrl and ''!= orgPictureUrl  ">
+					org_picture_url,
+				</if>
+			 	<if test=" null != orgPictureType ">
+					org_picture_type,
+				</if>
+			 	<if test=" null != sort ">
+					sort,
+				</if>
+			 	<if test=" null != isshow ">
+					isshow,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != source">
+					source,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != pid ">
+					 	#{pid},
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					 	#{orgNumber},
+				</if>
+			 	<if test=" null != orgPicture and ''!= orgPicture  ">
+					 	#{orgPicture},
+				</if>
+			 	<if test=" null != orgPictureUrl and ''!= orgPictureUrl  ">
+					 	#{orgPictureUrl},
+				</if>
+			 	<if test=" null != orgPictureType ">
+					 	#{orgPictureType},
+				</if>
+			 	<if test=" null != sort ">
+					 	#{sort},
+				</if>
+			 	<if test=" null != isshow ">
+					 	#{isshow},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != source ">
+					 	#{source},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.CimOrgPicture" useGeneratedKeys="true" keyProperty="pid" >
+		INSERT INTO tcim_org_picture
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != pid ">
+					pid,
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					org_number,
+				</if>
+			 	<if test=" null != orgPicture and ''!= orgPicture  ">
+					org_picture,
+				</if>
+			 	<if test=" null != orgPictureUrl and ''!= orgPictureUrl  ">
+					org_picture_url,
+				</if>
+			 	<if test=" null != orgPictureType ">
+					org_picture_type,
+				</if>
+			 	<if test=" null != sort ">
+					sort,
+				</if>
+			 	<if test=" null != isshow ">
+					isshow,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+				<if test=" null != source">
+					source,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != pid ">
+					 	#{pid},
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					 	#{orgNumber},
+				</if>
+			 	<if test=" null != orgPicture and ''!= orgPicture  ">
+					 	#{orgPicture},
+				</if>
+			 	<if test=" null != orgPictureUrl and ''!= orgPictureUrl  ">
+					 	#{orgPictureUrl},
+				</if>
+			 	<if test=" null != orgPictureType ">
+					 	#{orgPictureType},
+				</if>
+			 	<if test=" null != sort ">
+					 	#{sort},
+				</if>
+			 	<if test=" null != isshow ">
+					 	#{isshow},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+				<if test=" null != source">
+						#{source},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.CimOrgPicture" >
+  		UPDATE tcim_org_picture
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != orgNumber and ''!= orgNumber  ">
+						org_number = #{orgNumber},
+					</if>
+					<if test=" null != orgPicture and ''!= orgPicture  ">
+						org_picture = #{orgPicture},
+					</if>
+					<if test=" null != orgPictureUrl and ''!= orgPictureUrl  ">
+						org_picture_url = #{orgPictureUrl},
+					</if>
+					<if test=" null != orgPictureType ">
+						org_picture_type = #{orgPictureType},
+					</if>
+					<if test=" null != sort ">
+						sort = #{sort},
+					</if>
+					<if test=" null != isshow ">
+						isshow = #{isshow},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != source ">
+						source = #{source},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 pid = #{pid}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.CimOrgPicture" >
+	    UPDATE tcim_org_picture
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != orgNumber and ''!= orgNumber  ">
+						org_number = #{orgNumber},
+					</if>
+					<if test=" null != orgPicture and ''!= orgPicture  ">
+						org_picture = #{orgPicture},
+					</if>
+					<if test=" null != orgPictureUrl and ''!= orgPictureUrl  ">
+						org_picture_url = #{orgPictureUrl},
+					</if>
+					<if test=" null != orgPictureType ">
+						org_picture_type = #{orgPictureType},
+					</if>
+					<if test=" null != sort ">
+						sort = #{sort},
+					</if>
+					<if test=" null != isshow ">
+						isshow = #{isshow},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != source ">
+						source = #{source},
+					</if>
+			</trim>
+		</set>
+		<where>
+			pid = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcim_org_picture
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+	<!-- 根据图片类型查询该机构所有图片 -->
+    <select id="queryOrgPictureList" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from tcim_org_picture 
+		where org_number = #{orgNumber}
+		and source = #{source}
+		and org_picture_type = #{pictureType}
+  	</select>
+  	
+  	<!-- 批量插入图片 -->
+  	<insert id="insertBatchPicture" parameterType="java.util.List">
+	   INSERT INTO tcim_org_picture
+	   (
+					org_number,
+			    	org_picture,
+			    	org_picture_url,
+			    	org_picture_type,
+			    	sort,
+			    	isshow,
+			    	remark,
+			    	source
+		)
+		VALUES
+	    <foreach collection="list" item="pic" index="index" separator="," >
+	        (
+					 	#{pic.orgNumber},
+					 	#{pic.orgPicture},
+					 	#{pic.orgPictureUrl},
+					 	#{pic.orgPictureType},
+					 	#{pic.sort},
+					 	#{pic.isshow},
+					 	#{pic.remark},
+					 	#{pic.source}
+	        
+	        )
+	    </foreach>
+	    
+  </insert>
+  
+  	<!-- 图片批量更新 -->
+  <update id="updateBatchPicture" parameterType="java.util.List">
+		update tcim_org_picture 
+			set 			
+				org_number =  (CASE pid
+				<foreach item="item" collection="list">
+					when #{item.pid} then #{item.orgNumber}
+				</foreach>
+				END),
+				org_picture =(CASE pid	
+				<foreach item="item" collection="list">
+					when #{item.pid} then #{item.orgPicture}
+				</foreach>
+				END),
+				org_picture_url =(CASE pid	
+				<foreach item="item" collection="list">
+					when #{item.pid} then #{item.orgPictureUrl}
+				</foreach>
+				END)		
+		<where>
+				pid 
+			<foreach item="item" open="IN (" close=")" separator="," collection="list">
+				#{item.pid}
+			</foreach>
+		
+		</where>
+		
+	</update>
+  	
+</mapper>

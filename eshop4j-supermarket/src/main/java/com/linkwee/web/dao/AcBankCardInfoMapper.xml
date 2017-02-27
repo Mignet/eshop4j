@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.AcBankCardInfoMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.acc.AcBankCardInfo" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="bank_card_id" property="bankCardId" jdbcType="VARCHAR"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="user_name" property="userName" jdbcType="VARCHAR"/>
+		<result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+		<result column="bank_card" property="bankCard" jdbcType="VARCHAR"/>
+		<result column="bank_card_short_number" property="bankCardShortNumber" jdbcType="VARCHAR"/>
+		<result column="bank_code" property="bankCode" jdbcType="VARCHAR"/>
+		<result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+		<result column="city" property="city" jdbcType="VARCHAR"/>
+		<result column="kai_hu_hang" property="kaiHuHang" jdbcType="VARCHAR"/>
+		<result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+		<result column="settle_flag" property="settleFlag" jdbcType="VARCHAR"/>
+		<result column="bank_id" property="bankId" jdbcType="INTEGER"/>
+		<result column="pay_token" property="payToken" jdbcType="VARCHAR"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	bank_card_id,
+	    	user_id,
+	    	user_name,
+	    	mobile,
+	    	bank_card,
+	    	bank_card_short_number,
+	    	bank_code,
+	    	bank_name,
+	    	city,
+	    	kai_hu_hang,
+	    	id_card,
+	    	settle_flag,
+	    	bank_id,
+	    	pay_token,
+	    	remark,
+	    	create_time,
+	    	last_update_time,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != bankCardId and ''!= bankCardId  ">
+			and bank_card_id = #{bankCardId}
+		</if>
+		<if test=" null != userId and ''!= userId  ">
+			and user_id = #{userId}
+		</if>
+		<if test=" null != userName and ''!= userName  ">
+			and user_name = #{userName}
+		</if>
+		<if test=" null != mobile and ''!= mobile  ">
+			and mobile = #{mobile}
+		</if>
+		<if test=" null != bankCard and ''!= bankCard  ">
+			and bank_card = #{bankCard}
+		</if>
+		<if test=" null != bankCardShortNumber and ''!= bankCardShortNumber  ">
+			and bank_card_short_number = #{bankCardShortNumber}
+		</if>
+		<if test=" null != bankCode and ''!= bankCode  ">
+			and bank_code = #{bankCode}
+		</if>
+		<if test=" null != bankName and ''!= bankName  ">
+			and bank_name = #{bankName}
+		</if>
+		<if test=" null != city and ''!= city  ">
+			and city = #{city}
+		</if>
+		<if test=" null != kaiHuHang and ''!= kaiHuHang  ">
+			and kai_hu_hang = #{kaiHuHang}
+		</if>
+		<if test=" null != idCard and ''!= idCard  ">
+			and id_card = #{idCard}
+		</if>
+		<if test=" null != settleFlag and ''!= settleFlag  ">
+			and settle_flag = #{settleFlag}
+		</if>
+		<if test=" null != bankId ">
+			and bank_id = #{bankId}
+		</if>
+		<if test=" null != payToken and ''!= payToken  ">
+			and pay_token = #{payToken}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != lastUpdateTime ">
+			and last_update_time = #{lastUpdateTime}
+		</if>
+  </sql>
+  
+  <select id="selectBankCardInfoByUserId" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.acc.AcBankCardInfo">
+		select <include refid="Base_Column_List" /> from tac_bank_card_info 
+		where 1=1  
+		<if test=" null != userId and ''!= userId  ">
+					and user_id = #{userId}
+		</if>
+		<if test=" null != bankCard and ''!= bankCard  ">
+					and bank_card = #{bankCard}
+		</if>
+  </select>
+  
+  <select id="selectByBankCardId" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.acc.AcBankCardInfo">
+		select <include refid="Base_Column_List" /> from tac_bank_card_info 
+		where bank_card_id = #{bankCardId}
+  </select>
+  
+  <select id="selectByBankCard" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.acc.AcBankCardInfo">
+		select <include refid="Base_Column_List" /> from tac_bank_card_info 
+		where bank_card = #{bankCard}
+  </select>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.acc.AcBankCardInfo">
+		select <include refid="Base_Column_List" /> from tac_bank_card_info 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.acc.AcBankCardInfo">
+		select <include refid="Base_Column_List" /> from tac_bank_card_info 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tac_bank_card_info
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tac_bank_card_info
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.acc.AcBankCardInfo" >
+    INSERT INTO tac_bank_card_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != bankCardId and ''!= bankCardId  ">
+					bank_card_id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					user_name,
+				</if>
+			 	<if test=" null != mobile and ''!= mobile  ">
+					mobile,
+				</if>
+			 	<if test=" null != bankCard and ''!= bankCard  ">
+					bank_card,
+				</if>
+			 	<if test=" null != bankCardShortNumber and ''!= bankCardShortNumber  ">
+					bank_card_short_number,
+				</if>
+			 	<if test=" null != bankCode and ''!= bankCode  ">
+					bank_code,
+				</if>
+			 	<if test=" null != bankName and ''!= bankName  ">
+					bank_name,
+				</if>
+			 	<if test=" null != city and ''!= city  ">
+					city,
+				</if>
+			 	<if test=" null != kaiHuHang and ''!= kaiHuHang  ">
+					kai_hu_hang,
+				</if>
+			 	<if test=" null != idCard and ''!= idCard  ">
+					id_card,
+				</if>
+			 	<if test=" null != settleFlag and ''!= settleFlag  ">
+					settle_flag,
+				</if>
+			 	<if test=" null != bankId ">
+					bank_id,
+				</if>
+			 	<if test=" null != payToken and ''!= payToken  ">
+					pay_token,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					last_update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != bankCardId and ''!= bankCardId  ">
+					 	#{bankCardId},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					 	#{userName},
+				</if>
+			 	<if test=" null != mobile and ''!= mobile  ">
+					 	#{mobile},
+				</if>
+			 	<if test=" null != bankCard and ''!= bankCard  ">
+					 	#{bankCard},
+				</if>
+			 	<if test=" null != bankCardShortNumber and ''!= bankCardShortNumber  ">
+					 	#{bankCardShortNumber},
+				</if>
+			 	<if test=" null != bankCode and ''!= bankCode  ">
+					 	#{bankCode},
+				</if>
+			 	<if test=" null != bankName and ''!= bankName  ">
+					 	#{bankName},
+				</if>
+			 	<if test=" null != city and ''!= city  ">
+					 	#{city},
+				</if>
+			 	<if test=" null != kaiHuHang and ''!= kaiHuHang  ">
+					 	#{kaiHuHang},
+				</if>
+			 	<if test=" null != idCard and ''!= idCard  ">
+					 	#{idCard},
+				</if>
+			 	<if test=" null != settleFlag and ''!= settleFlag  ">
+					 	#{settleFlag},
+				</if>
+			 	<if test=" null != bankId ">
+					 	#{bankId},
+				</if>
+			 	<if test=" null != payToken and ''!= payToken  ">
+					 	#{payToken},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					 	#{lastUpdateTime},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.acc.AcBankCardInfo" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tac_bank_card_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != bankCardId and ''!= bankCardId  ">
+					bank_card_id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					user_name,
+				</if>
+			 	<if test=" null != mobile and ''!= mobile  ">
+					mobile,
+				</if>
+			 	<if test=" null != bankCard and ''!= bankCard  ">
+					bank_card,
+				</if>
+			 	<if test=" null != bankCardShortNumber and ''!= bankCardShortNumber  ">
+					bank_card_short_number,
+				</if>
+			 	<if test=" null != bankCode and ''!= bankCode  ">
+					bank_code,
+				</if>
+			 	<if test=" null != bankName and ''!= bankName  ">
+					bank_name,
+				</if>
+			 	<if test=" null != city and ''!= city  ">
+					city,
+				</if>
+			 	<if test=" null != kaiHuHang and ''!= kaiHuHang  ">
+					kai_hu_hang,
+				</if>
+			 	<if test=" null != idCard and ''!= idCard  ">
+					id_card,
+				</if>
+			 	<if test=" null != settleFlag and ''!= settleFlag  ">
+					settle_flag,
+				</if>
+			 	<if test=" null != bankId ">
+					bank_id,
+				</if>
+			 	<if test=" null != payToken and ''!= payToken  ">
+					pay_token,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					last_update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != bankCardId and ''!= bankCardId  ">
+					 	#{bankCardId},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					 	#{userName},
+				</if>
+			 	<if test=" null != mobile and ''!= mobile  ">
+					 	#{mobile},
+				</if>
+			 	<if test=" null != bankCard and ''!= bankCard  ">
+					 	#{bankCard},
+				</if>
+			 	<if test=" null != bankCardShortNumber and ''!= bankCardShortNumber  ">
+					 	#{bankCardShortNumber},
+				</if>
+			 	<if test=" null != bankCode and ''!= bankCode  ">
+					 	#{bankCode},
+				</if>
+			 	<if test=" null != bankName and ''!= bankName  ">
+					 	#{bankName},
+				</if>
+			 	<if test=" null != city and ''!= city  ">
+					 	#{city},
+				</if>
+			 	<if test=" null != kaiHuHang and ''!= kaiHuHang  ">
+					 	#{kaiHuHang},
+				</if>
+			 	<if test=" null != idCard and ''!= idCard  ">
+					 	#{idCard},
+				</if>
+			 	<if test=" null != settleFlag and ''!= settleFlag  ">
+					 	#{settleFlag},
+				</if>
+			 	<if test=" null != bankId ">
+					 	#{bankId},
+				</if>
+			 	<if test=" null != payToken and ''!= payToken  ">
+					 	#{payToken},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					 	#{lastUpdateTime},
+				</if>
+		</trim>
+	</insert>
+	
+	
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.acc.AcBankCardInfo" >
+  		UPDATE tac_bank_card_info
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != bankCardId and ''!= bankCardId  ">
+						bank_card_id = #{bankCardId},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != userName and ''!= userName  ">
+						user_name = #{userName},
+					</if>
+					<if test=" null != mobile and ''!= mobile  ">
+						mobile = #{mobile},
+					</if>
+					<if test=" null != bankCard and ''!= bankCard  ">
+						bank_card = #{bankCard},
+					</if>
+					<if test=" null != bankCardShortNumber and ''!= bankCardShortNumber  ">
+						bank_card_short_number = #{bankCardShortNumber},
+					</if>
+					<if test=" null != bankCode and ''!= bankCode  ">
+						bank_code = #{bankCode},
+					</if>
+					<if test=" null != bankName and ''!= bankName  ">
+						bank_name = #{bankName},
+					</if>
+					<if test=" null != city and ''!= city  ">
+						city = #{city},
+					</if>
+					<if test=" null != kaiHuHang and ''!= kaiHuHang  ">
+						kai_hu_hang = #{kaiHuHang},
+					</if>
+					<if test=" null != idCard and ''!= idCard  ">
+						id_card = #{idCard},
+					</if>
+					<if test=" null != settleFlag and ''!= settleFlag  ">
+						settle_flag = #{settleFlag},
+					</if>
+					<if test=" null != bankId ">
+						bank_id = #{bankId},
+					</if>
+					<if test=" null != payToken and ''!= payToken  ">
+						pay_token = #{payToken},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != lastUpdateTime ">
+						last_update_time = #{lastUpdateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 user_id = #{userId} and bank_card = #{bankCard}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.acc.AcBankCardInfo" >
+	    UPDATE tac_bank_card_info
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != bankCardId and ''!= bankCardId  ">
+						bank_card_id = #{bankCardId},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != userName and ''!= userName  ">
+						user_name = #{userName},
+					</if>
+					<if test=" null != mobile and ''!= mobile  ">
+						mobile = #{mobile},
+					</if>
+					<if test=" null != bankCard and ''!= bankCard  ">
+						bank_card = #{bankCard},
+					</if>
+					<if test=" null != bankCardShortNumber and ''!= bankCardShortNumber  ">
+						bank_card_short_number = #{bankCardShortNumber},
+					</if>
+					<if test=" null != bankCode and ''!= bankCode  ">
+						bank_code = #{bankCode},
+					</if>
+					<if test=" null != bankName and ''!= bankName  ">
+						bank_name = #{bankName},
+					</if>
+					<if test=" null != city and ''!= city  ">
+						city = #{city},
+					</if>
+					<if test=" null != kaiHuHang and ''!= kaiHuHang  ">
+						kai_hu_hang = #{kaiHuHang},
+					</if>
+					<if test=" null != idCard and ''!= idCard  ">
+						id_card = #{idCard},
+					</if>
+					<if test=" null != settleFlag and ''!= settleFlag  ">
+						settle_flag = #{settleFlag},
+					</if>
+					<if test=" null != bankId ">
+						bank_id = #{bankId},
+					</if>
+					<if test=" null != payToken and ''!= payToken  ">
+						pay_token = #{payToken},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != lastUpdateTime ">
+						last_update_time = #{lastUpdateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tac_bank_card_info
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+</mapper>

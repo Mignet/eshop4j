@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CustomerMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.crm.MycustomersResp" id="MycustomersResp">
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+		<result column="register_time" property="registerTime" jdbcType="TIMESTAMP"/>
+		<result column="is_important" property="important" jdbcType="INTEGER"/>
+		<result column="is_free_customer" property="freecustomer" jdbcType="INTEGER"/>
+		<result column="user_name" property="userName" jdbcType="VARCHAR"/>
+		<result column="near_invest_time" property="nearInvestDate" jdbcType="TIMESTAMP"/>
+		<result column="near_invest_amt" property="nearInvestAmt" jdbcType="DECIMAL"/>
+		<result column="invest_count" property="totalInvestCount" jdbcType="INTEGER"/>
+		<result column="total_invest_amount" property="totalInvestAmt" jdbcType="DECIMAL"/>
+		<result column="near_end_time" property="nearEndDate" jdbcType="TIMESTAMP"/>
+		<result column="head_image" property="headImage" jdbcType="VARCHAR"/>
+		<result column="easemob_acct" property="easemobAcct" jdbcType="VARCHAR"/>
+		<result column="isRead" property="isRead" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<!-- 客户列表 -->
+	<select id="queryMycustomerList" resultMap="MycustomersResp" parameterType="HashMap">
+		select a.user_id,a.mobile,a.register_time,a.is_important,a.is_free_customer,a.user_name, a.head_image,a.easemob_acct,
+		b.near_invest_time,IFNULL(b.near_invest_amt,0) as near_invest_amt, c.invest_count,
+		(case when a.register_time >= #{date} then 0 else 1 end) as isRead,
+		IFNULL(c.total_invest_amount,0) as total_invest_amount,d.near_end_time from 
+		(
+		select a1.user_id, a1.mobile, a1.create_time as register_time,a1.is_important,a1.is_free_customer,a1.head_image, a1.easemob_acct,a2.user_name 
+		from tcrm_investor a1 left join tcrm_user_info a2 on a1.user_id=a2.user_id where cfplanner= #{userId,jdbcType=VARCHAR}
+		) a
+		left join 
+		(
+		select a1.biz_time as  near_invest_time,a1.invest_amt as near_invest_amt,a1.user_id   from tcim_product_invest_record a1 join
+		(select max(t1.biz_time) maxtime,t1.user_id from tcim_product_invest_record t1 left join tcrm_investor t2 on t1.user_id=t2.user_id 
+		where t2.cfplanner= #{userId,jdbcType=VARCHAR} group by t1.user_id) b1
+		on a1.biz_time=b1.maxtime and a1.user_id=b1.user_id
+		group by a1.biz_time ,a1.user_id
+		) b
+		on a.user_id=b.user_id
+		left join
+		(
+		select count(1) as invest_count,sum(t1.invest_amt) total_invest_amount, t1.user_id from tcim_product_invest_record t1 
+		left join  tcrm_investor t2 on t1.user_id=t2.user_id where t2.cfplanner= #{userId,jdbcType=VARCHAR} group by t1.user_id
+		) c
+		on a.user_id=c.user_id
+		left join
+		(
+		select min(t1.biz_time) as near_end_time,t1.user_id from tcim_product_invest_record t1 
+		left join tcrm_investor t2 on t1.user_id=t2.user_id where t2.cfplanner= #{userId,jdbcType=VARCHAR} and t1.status=2 group by t1.user_id
+		) d
+		on a.user_id=d.user_id where 1=1
+		<if test=" null != userName and ''!= userName ">
+			and (a.user_name like '%${userName}%' or a.mobile like '%${userName}%')
+		</if>
+		<if test=" null != customerType ">
+		 	<!-- 投资客户 -->
+			<if test=" 1 == customerType ">
+				and  EXISTS (SELECT 1 FROM tcim_product_invest_record m WHERE a.user_id = m.user_id )
+			</if>
+			<!-- 未投资客户 -->
+			<if test=" 2 == customerType ">
+				and not EXISTS (SELECT 1 FROM tcim_product_invest_record m WHERE a.user_id = m.user_id )
+			</if>
+			<!-- 重要客户 -->
+			<if test=" 3 == customerType ">
+				and a.is_important = 1
+			</if>
+		</if>
+		<if test=" null != sort and  null != order">
+			ORDER BY 
+			<if test="sort ==  1">
+				total_invest_amount
+			</if>
+			<if test="sort ==  2">
+				register_time
+			</if>
+			<if test="sort ==  3">
+				near_invest_time
+			</if>
+			<if test="sort ==  4">
+				near_end_time
+			</if>
+			<if test="sort ==  5">
+				is_important
+			</if>
+			<if test="order ==  1">
+				DESC
+			</if>
+			<if test="order ==  2">
+				ASC
+			</if>
+		</if>
+		
+	</select>
+	
+	<!-- 客户数量 -->
+	<select id="queryMycustomersCount" resultType="int" >
+		<![CDATA[
+		select count(1) from tcrm_investor a1 where cfplanner= #{userId,jdbcType=VARCHAR}
+		]]> 
+	</select>
+	
+	<!-- 客户累计投资统计 -->
+	<select id="queryTotalInvestAmt" resultType="DOUBLE" >
+		<![CDATA[
+		select ifnull(sum(invest_amt),0) total_invest_amt from tcim_product_invest_record r
+		left join tcrm_investor u on r.user_id=u.user_id
+		where u.cfplanner=#{userId,jdbcType=VARCHAR}
+		]]> 
+	</select>
+	
+	<!-- 客户本月投资统计 -->
+	<select id="queryMonthInvestAmt" resultType="DOUBLE" >
+		<![CDATA[
+		select ifnull(sum(invest_amt),0) total_invest_amt from tcim_product_invest_record r
+		left join tcrm_investor u on r.user_id=u.user_id
+		where u.cfplanner=#{userId,jdbcType=VARCHAR} and r.biz_time >=DATE_ADD(curdate(),interval -day(curdate())+1 day)
+		]]> 
+	</select>
+	
+	<!-- 客户今日投资统计 -->
+	<select id="queryDayInvestAmt" resultType="DOUBLE" >
+		<![CDATA[
+		select ifnull(sum(invest_amt),0) total_invest_amt from tcim_product_invest_record r
+		left join tcrm_investor u on r.user_id=u.user_id
+		where u.cfplanner=#{userId,jdbcType=VARCHAR} and date_format(r.biz_time,'%y-%m-%d') = date_format(now(),'%y-%m-%d')
+		]]> 
+	</select>
+	
+	<!-- 未读客户数量 -->
+	<select id="queryNewCustomerCount" resultType="int" >
+		<![CDATA[
+		SELECT  count(1) from tcrm_investor where cfplanner=#{userId,jdbcType=VARCHAR}
+		and create_time > #{date}
+		]]> 
+	</select>
+	
+	<!-- 客户投资最早时间 -->
+	<select id="queryInvestMinTime" resultType="Date" >
+		<![CDATA[
+		SELECT min(r.create_time) from tcim_product_invest_record r 
+		LEFT JOIN tcrm_investor i on r.user_id=i.user_id where i.cfplanner=#{userId,jdbcType=VARCHAR}
+		]]> 
+	</select>
+	
+	<!-- 查理财师的某用户提供的佣金 -->
+	<select id="queryFeeAmtByCfpAndInvestor" resultType="Double" >
+		<![CDATA[
+		SELECT IFNULL(SUM(fee_amount),0) from tcim_feedetail 
+		where fee_type=1001
+		and profit_cfplanner_id=#{cfplanner,jdbcType=VARCHAR}
+		and investor_id=#{investor,jdbcType=VARCHAR}
+		]]> 
+	</select>
+	
+	
+</mapper>

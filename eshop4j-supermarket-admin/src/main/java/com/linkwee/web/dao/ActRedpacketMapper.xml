@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.ActRedpacketMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.act.redpacket.model.ActRedpacket" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="redpacket_id" property="redpacketId" jdbcType="VARCHAR"/>
+		<result column="name" property="name" jdbcType="VARCHAR"/>
+		<result column="money" property="money" jdbcType="DECIMAL"/>
+		<result column="type" property="type" jdbcType="INTEGER"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="send_count" property="sendCount" jdbcType="INTEGER"/>
+		<result column="is_activity" property="isActivity" jdbcType="INTEGER"/>
+		<result column="activity_code" property="activityCode" jdbcType="VARCHAR"/>
+		<result column="activity_name" property="activityName" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		<result column="operator" property="operator" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	redpacket_id,
+	    	name,
+	    	money,
+	    	type,
+	    	remark,
+	    	send_count,
+	    	is_activity,
+	    	activity_code,
+	    	activity_name,
+	    	create_time,
+	    	update_time,
+	    	operator,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != redpacketId and ''!= redpacketId  ">
+			and redpacket_id = #{redpacketId}
+		</if>
+		<if test=" null != name and ''!= name  ">
+			and name = #{name}
+		</if>
+		<if test=" null != money ">
+			and money = #{money}
+		</if>
+		<if test=" null != type ">
+			and type = #{type}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+		<if test=" null != sendCount ">
+			and send_count = #{sendCount}
+		</if>
+		<if test=" null != isActivity ">
+			and is_activity = #{isActivity}
+		</if>
+		<if test=" null != activityCode and ''!= activityCode  ">
+			and activity_code = #{activityCode}
+		</if>
+		<if test=" null != activityName and ''!= activityName  ">
+			and activity_name = #{activityName}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+		<if test=" null != operator and ''!= operator  ">
+			and operator = #{operator}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.act.redpacket.model.ActRedpacket">
+		select <include refid="Base_Column_List" /> from tact_redpacket 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.act.redpacket.model.ActRedpacket">
+		select <include refid="Base_Column_List" /> from tact_redpacket 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tact_redpacket
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tact_redpacket
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.act.redpacket.model.ActRedpacket" >
+    INSERT INTO tact_redpacket
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					redpacket_id,
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					name,
+				</if>
+			 	<if test=" null != money ">
+					money,
+				</if>
+			 	<if test=" null != type ">
+					type,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != sendCount ">
+					send_count,
+				</if>
+			 	<if test=" null != isActivity ">
+					is_activity,
+				</if>
+			 	<if test=" null != activityCode and ''!= activityCode  ">
+					activity_code,
+				</if>
+			 	<if test=" null != activityName and ''!= activityName  ">
+					activity_name,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					operator,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					 	#{redpacketId},
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					 	#{name},
+				</if>
+			 	<if test=" null != money ">
+					 	#{money},
+				</if>
+			 	<if test=" null != type ">
+					 	#{type},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != sendCount ">
+					 	#{sendCount},
+				</if>
+			 	<if test=" null != isActivity ">
+					 	#{isActivity},
+				</if>
+			 	<if test=" null != activityCode and ''!= activityCode  ">
+					 	#{activityCode},
+				</if>
+			 	<if test=" null != activityName and ''!= activityName  ">
+					 	#{activityName},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					 	#{operator},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.act.redpacket.model.ActRedpacket" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tact_redpacket
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					redpacket_id,
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					name,
+				</if>
+			 	<if test=" null != money ">
+					money,
+				</if>
+			 	<if test=" null != type ">
+					type,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != sendCount ">
+					send_count,
+				</if>
+			 	<if test=" null != isActivity ">
+					is_activity,
+				</if>
+			 	<if test=" null != activityCode and ''!= activityCode  ">
+					activity_code,
+				</if>
+			 	<if test=" null != activityName and ''!= activityName  ">
+					activity_name,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					operator,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					 	#{redpacketId},
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					 	#{name},
+				</if>
+			 	<if test=" null != money ">
+					 	#{money},
+				</if>
+			 	<if test=" null != type ">
+					 	#{type},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != sendCount ">
+					 	#{sendCount},
+				</if>
+			 	<if test=" null != isActivity ">
+					 	#{isActivity},
+				</if>
+			 	<if test=" null != activityCode and ''!= activityCode  ">
+					 	#{activityCode},
+				</if>
+			 	<if test=" null != activityName and ''!= activityName  ">
+					 	#{activityName},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					 	#{operator},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.act.redpacket.model.ActRedpacket" >
+  		UPDATE tact_redpacket
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != redpacketId and ''!= redpacketId  ">
+						redpacket_id = #{redpacketId},
+					</if>
+					<if test=" null != name and ''!= name  ">
+						name = #{name},
+					</if>
+					<if test=" null != money ">
+						money = #{money},
+					</if>
+					<if test=" null != type ">
+						type = #{type},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != sendCount ">
+						send_count = #{sendCount},
+					</if>
+					<if test=" null != isActivity ">
+						is_activity = #{isActivity},
+					</if>
+					<if test=" null != activityCode and ''!= activityCode  ">
+						activity_code = #{activityCode},
+					</if>
+					<if test=" null != activityName and ''!= activityName  ">
+						activity_name = #{activityName},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != operator and ''!= operator  ">
+						operator = #{operator},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.act.redpacket.model.ActRedpacket" >
+	    UPDATE tact_redpacket
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != redpacketId and ''!= redpacketId  ">
+						redpacket_id = #{redpacketId},
+					</if>
+					<if test=" null != name and ''!= name  ">
+						name = #{name},
+					</if>
+					<if test=" null != money ">
+						money = #{money},
+					</if>
+					<if test=" null != type ">
+						type = #{type},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != sendCount ">
+						send_count = #{sendCount},
+					</if>
+					<if test=" null != isActivity ">
+						is_activity = #{isActivity},
+					</if>
+					<if test=" null != activityCode and ''!= activityCode  ">
+						activity_code = #{activityCode},
+					</if>
+					<if test=" null != activityName and ''!= activityName  ">
+						activity_name = #{activityName},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != operator and ''!= operator  ">
+						operator = #{operator},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+	  
+	 <!-- 更新红包 -->
+	<update id="updateRedpacket" parameterType="com.linkwee.act.redpacket.model.ActRedpacket" >
+	    UPDATE tact_redpacket
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != name and ''!= name  ">
+						name = #{name},
+					</if>
+					<if test=" null != money ">
+						money = #{money},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != isActivity ">
+						is_activity = #{isActivity},
+					</if>
+					<if test=" null != activityCode and ''!= activityCode  ">
+						activity_code = #{activityCode},
+					</if>
+					<if test=" null != activityName and ''!= activityName  ">
+						activity_name = #{activityName},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != operator and ''!= operator  ">
+						operator = #{operator},
+					</if>
+			</trim>
+		</set>
+		<where>
+			redpacket_id = #{redpacketId}
+		</where>
+	  </update>
+	  
+	  <update id="updateSendRedpacket" parameterType="com.linkwee.act.redpacket.model.ActRedpacket" >
+	    UPDATE tact_redpacket
+	   <set>
+			<trim suffixOverrides=",">
+					send_count = send_count+1,
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != operator and ''!= operator  ">
+						operator = #{operator},
+					</if>
+			</trim>
+		</set>
+		<where>
+			redpacket_id = #{redpacketId}
+		</where>
+	  </update>
+	  
+	   <update id="updateSendRedpackets" >
+		    UPDATE tact_redpacket
+		   <set>
+				<trim suffixOverrides=",">
+						send_count = send_count+1,update_time = now(),
+				</trim>
+			</set>
+			<where>
+				<foreach collection="redpacketIds" item="redpacketId" open="redpacket_id in (" separator="," close=")">
+					#{redpacketId}
+				</foreach>
+			</where>
+	  </update>
+
+	
+	<!-- 红包是否存在 -->
+	<select id="isExistRedpacket" resultType="boolean"> 
+		select count(redpacket_id) from tact_redpacket where redpacket_id=#{redpacketId}
+	</select>
+	
+	<!-- 获取红包列表 -->
+	<select id="getRedpacketList" resultType="com.linkwee.web.response.act.RedpacketListResponse">
+		SELECT
+			r.redpacket_id redpacketId,
+			r.`name`,
+			r.money,
+			IFNULL(sum(s.send_count),0) sendCount,
+			r.update_time sendTime,
+			IFNULL(sum(s.send_number),0) sendNum,
+			MIN(s.expires_time) minExpiresTime,
+			MAX(s.expires_time) maxExpiresTime,
+			r.create_time createTime,
+			r.operator operator
+		FROM
+			tact_redpacket r
+		LEFT JOIN tact_redpacket_send_record s ON r.redpacket_id = s.redpacket_id
+		GROUP BY
+			r.redpacket_id ORDER BY r.create_time DESC
+	</select>
+	
+	<select id="getRedpacketStatistics" resultType="com.linkwee.web.response.act.RedpacketStatisticsResponse"> 
+			SELECT
+				a.*, b.*
+			FROM
+				(
+					SELECT
+						count(
+							DISTINCT (
+								CASE
+								WHEN rd.cfplanner_id IS NOT NULL THEN
+									rd.cfplanner_id
+								ELSE
+									NULL
+								END
+							)
+						) cfplannerNum,
+						count(
+							CASE
+							WHEN rd.cfplanner_id IS NOT NULL THEN
+								rd.redpacket_detail_id
+							ELSE
+								NULL
+							END
+						) cfplannerRedpacketCount,
+						IFNULL(
+							sum(
+								(
+									CASE
+									WHEN rd.cfplanner_id IS NOT NULL THEN
+										rd.money
+									ELSE
+										0
+									END
+								)
+							),
+							0
+						) cfplannerRedpacketMoney,
+						count(
+							DISTINCT (
+								CASE
+								WHEN rd.cfplanner_id IS NULL THEN
+									rd.user_id
+								ELSE
+									NULL
+								END
+							)
+						) customerNum,
+						count(
+							CASE
+							WHEN rd.cfplanner_id IS NULL THEN
+								rd.redpacket_detail_id
+							ELSE
+								NULL
+							END
+						) customerRedpacketCount,
+						IFNULL(
+							sum(
+								(
+									CASE
+									WHEN rd.cfplanner_id IS NULL THEN
+										rd.money
+									ELSE
+										0
+									END
+								)
+							),
+							0
+						) customerRedpacketMoney
+					FROM
+						tact_redpacket_detail rd
+					WHERE
+						rd.create_time BETWEEN #{start}
+							AND #{end}
+				) a,
+				(
+					SELECT
+						count(DISTINCT ru.user_id) useNum,
+						count(ru.invest_id) useCount,
+						IFNULL(SUM(ru.money), 0) totalMoney
+					FROM
+						`tact_redpacket_use_record` ru
+					WHERE
+						ru.use_date BETWEEN #{start}
+							AND #{end}
+				) b
+	</select>
+	
+	<!-- 获取一组红包 -->
+	<select id="getRedpackets" resultMap="BaseResultMap">
+		select 
+			redpacket_id,
+	    	name,
+	    	money,
+	    	type,
+	    	remark,
+	    	send_count,
+	    	is_activity,
+	    	activity_code,
+	    	activity_name,
+	    	operator
+		 from tact_redpacket 
+		<where>
+			<foreach collection="redpacketIds" item="redpacketId" open="redpacket_id in (" separator="," close=")">
+				#{redpacketId}
+			</foreach>	
+		</where>
+	
+	</select>
+
+</mapper>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.AcAccountTypeMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.acc.AcAccountType" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="type_name" property="typeName" jdbcType="VARCHAR"/>
+		<result column="type_value" property="typeValue" jdbcType="INTEGER"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="user_type" property="userType" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	
+	<resultMap  type="com.linkwee.web.response.acc.AcAccountTypeReponse" id="AccountTypeResultMap">
+		<result column="type_name" property="typeName" jdbcType="VARCHAR"/>
+		<result column="type_value" property="typeValue" jdbcType="INTEGER"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	type_name,
+	    	type_value,
+	    	status,
+	    	create_time,
+	    	remark,
+	    	user_type,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != typeName and ''!= typeName  ">
+			and type_name = #{typeName}
+		</if>
+		<if test=" null != typeValue ">
+			and type_value = #{typeValue}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+		<if test=" null != userType and ''!= userType  ">
+			and user_type = #{userType}
+		</if>
+  </sql>
+  
+  <select id="queryAllAccountType" resultMap="AccountTypeResultMap"  parameterType="com.linkwee.web.response.acc.AcAccountTypeReponse">
+		select <include refid="Base_Column_List" /> from tac_account_type where status=1 and (user_type=0 or user_type=#{userType}) ORDER BY type_value
+  </select>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.acc.AcAccountType">
+		select <include refid="Base_Column_List" /> from tac_account_type 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.acc.AcAccountType">
+		select <include refid="Base_Column_List" /> from tac_account_type 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tac_account_type
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tac_account_type
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.acc.AcAccountType" >
+    INSERT INTO tac_account_type
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != typeName and ''!= typeName  ">
+					type_name,
+				</if>
+			 	<if test=" null != typeValue ">
+					type_value,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+				<if test=" null != userType and ''!= userType  ">
+					user_type,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != typeName and ''!= typeName  ">
+					 	#{typeName},
+				</if>
+			 	<if test=" null != typeValue ">
+					 	#{typeValue},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+				<if test=" null != userType and ''!= userType  ">
+					 	#{userType},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.acc.AcAccountType" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tac_account_type
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != typeName and ''!= typeName  ">
+					type_name,
+				</if>
+			 	<if test=" null != typeValue ">
+					type_value,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+				<if test=" null != userType and ''!= userType  ">
+					user_type,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != typeName and ''!= typeName  ">
+					 	#{typeName},
+				</if>
+			 	<if test=" null != typeValue ">
+					 	#{typeValue},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+				<if test=" null != userType and ''!= userType  ">
+					 	#{userType},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.acc.AcAccountType" >
+  		UPDATE tac_account_type
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != typeName and ''!= typeName  ">
+						type_name = #{typeName},
+					</if>
+					<if test=" null != typeValue ">
+						type_value = #{typeValue},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != userType and ''!= userType  ">
+						user_type = #{userType},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.acc.AcAccountType" >
+	    UPDATE tac_account_type
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != typeName and ''!= typeName  ">
+						type_name = #{typeName},
+					</if>
+					<if test=" null != typeValue ">
+						type_value = #{typeValue},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != userType and ''!= userType  ">
+						user_type = #{userType},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tac_account_type
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+</mapper>

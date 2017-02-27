@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.SmWeixinmsgTemplateMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.weixin.SmWeixinmsgTemplate" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="type" property="type" jdbcType="INTEGER"/>
+		<result column="app_type" property="appType" jdbcType="INTEGER"/>
+		<result column="temkey" property="temkey" jdbcType="VARCHAR"/>
+		<result column="template_id" property="templateId" jdbcType="VARCHAR"/>
+		<result column="title" property="title" jdbcType="VARCHAR"/>
+		<result column="first" property="first" jdbcType="LONGVARCHAR"/>
+		<result column="remark" property="remark" jdbcType="LONGVARCHAR"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="create_person" property="createPerson" jdbcType="VARCHAR"/>
+		<result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP"/>
+		<result column="last_update_person" property="lastUpdatePerson" jdbcType="VARCHAR"/>
+		<result column="example" property="example" jdbcType="LONGVARCHAR"/>
+		<result column="link_url" property="linkUrl" jdbcType="LONGVARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	type,
+	    	app_type,
+	    	temkey,
+	    	template_id,
+	    	title,
+	    	first,
+	    	remark,
+	    	status,
+	    	create_time,
+	    	create_person,
+	    	last_update_time,
+	    	last_update_person,
+	    	example,
+	    	link_url,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != type ">
+			and type = #{type}
+		</if>
+		<if test=" null != appType ">
+			and app_type = #{appType}
+		</if>
+		<if test=" null != temkey and ''!= temkey  ">
+			and temkey = #{temkey}
+		</if>
+		<if test=" null != templateId and ''!= templateId  ">
+			and template_id = #{templateId}
+		</if>
+		<if test=" null != title and ''!= title  ">
+			and title = #{title}
+		</if>
+		<if test=" null != first and ''!= first  ">
+			and first = #{first}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != createPerson and ''!= createPerson  ">
+			and create_person = #{createPerson}
+		</if>
+		<if test=" null != lastUpdateTime ">
+			and last_update_time = #{lastUpdateTime}
+		</if>
+		<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+			and last_update_person = #{lastUpdatePerson}
+		</if>
+		<if test=" null != example and ''!= example  ">
+			and example = #{example}
+		</if>
+		<if test=" null != linkUrl and ''!= linkUrl  ">
+			and link_url = #{linkUrl}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.weixin.SmWeixinmsgTemplate">
+		select <include refid="Base_Column_List" /> from tsm_weixinmsg_template 
+		where status=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.weixin.SmWeixinmsgTemplate">
+		select <include refid="Base_Column_List" /> from tsm_weixinmsg_template 
+		where status=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsm_weixinmsg_template
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tsm_weixinmsg_template
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.weixin.SmWeixinmsgTemplate" >
+    INSERT INTO tsm_weixinmsg_template
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != type ">
+					type,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+			 	<if test=" null != temkey and ''!= temkey  ">
+					temkey,
+				</if>
+			 	<if test=" null != templateId and ''!= templateId  ">
+					template_id,
+				</if>
+			 	<if test=" null != title and ''!= title  ">
+					title,
+				</if>
+			 	<if test=" null != first and ''!= first  ">
+					first,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != createPerson and ''!= createPerson  ">
+					create_person,
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					last_update_time,
+				</if>
+			 	<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+					last_update_person,
+				</if>
+			 	<if test=" null != example and ''!= example  ">
+					example,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != type ">
+					 	#{type},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+			 	<if test=" null != temkey and ''!= temkey  ">
+					 	#{temkey},
+				</if>
+			 	<if test=" null != templateId and ''!= templateId  ">
+					 	#{templateId},
+				</if>
+			 	<if test=" null != title and ''!= title  ">
+					 	#{title},
+				</if>
+			 	<if test=" null != first and ''!= first  ">
+					 	#{first},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != createPerson and ''!= createPerson  ">
+					 	#{createPerson},
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					 	#{lastUpdateTime},
+				</if>
+			 	<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+					 	#{lastUpdatePerson},
+				</if>
+			 	<if test=" null != example and ''!= example  ">
+					 	#{example},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.weixin.SmWeixinmsgTemplate" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tsm_weixinmsg_template
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != type ">
+					type,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+			 	<if test=" null != temkey and ''!= temkey  ">
+					temkey,
+				</if>
+			 	<if test=" null != templateId and ''!= templateId  ">
+					template_id,
+				</if>
+			 	<if test=" null != title and ''!= title  ">
+					title,
+				</if>
+			 	<if test=" null != first and ''!= first  ">
+					first,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != createPerson and ''!= createPerson  ">
+					create_person,
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					last_update_time,
+				</if>
+			 	<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+					last_update_person,
+				</if>
+			 	<if test=" null != example and ''!= example  ">
+					example,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != type ">
+					 	#{type},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+			 	<if test=" null != temkey and ''!= temkey  ">
+					 	#{temkey},
+				</if>
+			 	<if test=" null != templateId and ''!= templateId  ">
+					 	#{templateId},
+				</if>
+			 	<if test=" null != title and ''!= title  ">
+					 	#{title},
+				</if>
+			 	<if test=" null != first and ''!= first  ">
+					 	#{first},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != createPerson and ''!= createPerson  ">
+					 	#{createPerson},
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					 	#{lastUpdateTime},
+				</if>
+			 	<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+					 	#{lastUpdatePerson},
+				</if>
+			 	<if test=" null != example and ''!= example  ">
+					 	#{example},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.weixin.SmWeixinmsgTemplate" >
+  		UPDATE tsm_weixinmsg_template
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != type ">
+						type = #{type},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != temkey and ''!= temkey  ">
+						temkey = #{temkey},
+					</if>
+					<if test=" null != templateId and ''!= templateId  ">
+						template_id = #{templateId},
+					</if>
+					<if test=" null != title and ''!= title  ">
+						title = #{title},
+					</if>
+					<if test=" null != first and ''!= first  ">
+						first = #{first},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != createPerson and ''!= createPerson  ">
+						create_person = #{createPerson},
+					</if>
+					<if test=" null != lastUpdateTime ">
+						last_update_time = #{lastUpdateTime},
+					</if>
+					<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+						last_update_person = #{lastUpdatePerson},
+					</if>
+					<if test=" null != example and ''!= example  ">
+						example = #{example},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.weixin.SmWeixinmsgTemplate" >
+	    UPDATE tsm_weixinmsg_template
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != type ">
+						type = #{type},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != temkey and ''!= temkey  ">
+						temkey = #{temkey},
+					</if>
+					<if test=" null != templateId and ''!= templateId  ">
+						template_id = #{templateId},
+					</if>
+					<if test=" null != title and ''!= title  ">
+						title = #{title},
+					</if>
+					<if test=" null != first and ''!= first  ">
+						first = #{first},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != createPerson and ''!= createPerson  ">
+						create_person = #{createPerson},
+					</if>
+					<if test=" null != lastUpdateTime ">
+						last_update_time = #{lastUpdateTime},
+					</if>
+					<if test=" null != lastUpdatePerson and ''!= lastUpdatePerson  ">
+						last_update_person = #{lastUpdatePerson},
+					</if>
+					<if test=" null != example and ''!= example  ">
+						example = #{example},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tsm_weixinmsg_template
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+</mapper>

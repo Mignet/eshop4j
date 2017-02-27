@@ -1,0 +1,898 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.JpPlatformMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.jpressPlatform.JpPlatform" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="BIGINT"/>
+		<result column="name" property="name" jdbcType="VARCHAR"/>
+		<result column="summary" property="summary" jdbcType="LONGVARCHAR"/>
+		<result column="capital" property="capital" jdbcType="VARCHAR"/>
+		<result column="up_time" property="upTime" jdbcType="TIMESTAMP"/>
+		<result column="city" property="city" jdbcType="VARCHAR"/>
+		<result column="context" property="context" jdbcType="VARCHAR"/>
+		<result column="trusteeship" property="trusteeship" jdbcType="VARCHAR"/>
+		<result column="security_model" property="securityModel" jdbcType="VARCHAR"/>
+		<result column="bid_security" property="bidSecurity" jdbcType="VARCHAR"/>
+		<result column="is_transfer" property="isTransfer" jdbcType="BIT"/>
+		<result column="grade" property="grade" jdbcType="INTEGER"/>
+		<result column="min_profit" property="minProfit" jdbcType="DECIMAL"/>
+		<result column="max_profit" property="maxProfit" jdbcType="DECIMAL"/>
+		<result column="min_dead_line" property="minDeadLine" jdbcType="INTEGER"/>
+		<result column="max_dead_line" property="maxDeadLine" jdbcType="INTEGER"/>		
+		<result column="dead_line_self_defined" property="deadLineSelfDefined" jdbcType="VARCHAR"/>
+		<result column="platform_detail_img" property="platformDetailImg" jdbcType="VARCHAR"/>
+		<result column="brief_introduction" property="briefIntroduction" jdbcType="LONGVARCHAR"/>
+		<result column="team_introduction" property="teamIntroduction" jdbcType="LONGVARCHAR"/>
+		<result column="site_record" property="siteRecord" jdbcType="LONGVARCHAR"/>
+		<result column="contact_us" property="contactUs" jdbcType="LONGVARCHAR"/>
+		<result column="pic_info" property="picInfo" jdbcType="LONGVARCHAR"/>
+		<result column="style" property="style" jdbcType="VARCHAR"/>
+		<result column="user_id" property="userId" jdbcType="BIGINT"/>
+		<result column="order_number" property="orderNumber" jdbcType="INTEGER"/>
+		<result column="status" property="status" jdbcType="VARCHAR"/>
+		<result column="created" property="created" jdbcType="TIMESTAMP"/>
+		<result column="modified" property="modified" jdbcType="TIMESTAMP"/>
+		<result column="view_count" property="viewCount" jdbcType="INTEGER"/>
+		<result column="slug" property="slug" jdbcType="VARCHAR"/>
+		<result column="meta_keywords" property="metaKeywords" jdbcType="VARCHAR"/>
+		<result column="meta_description" property="metaDescription" jdbcType="VARCHAR"/>
+		<result column="remarks" property="remarks" jdbcType="LONGVARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	name,
+	    	summary,
+	    	capital,
+	    	up_time,
+	    	city,
+	    	context,
+	    	trusteeship,
+	    	security_model,
+	    	bid_security,
+	    	is_transfer,
+	    	grade,
+	    	min_profit,
+	    	max_profit,
+	    	min_dead_line,
+	    	max_dead_line,
+	    	platform_detail_img,
+	    	brief_introduction,
+	    	team_introduction,
+	    	site_record,
+	    	contact_us,
+	    	pic_info,
+	    	style,
+	    	user_id,
+	    	order_number,
+	    	status,
+	    	created,
+	    	modified,
+	    	view_count,
+	    	slug,
+	    	meta_keywords,
+	    	meta_description,
+	    	remarks,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != name and ''!= name  ">
+			and name = #{name}
+		</if>
+		<if test=" null != summary and ''!= summary  ">
+			and summary = #{summary}
+		</if>
+		<if test=" null != capital and ''!= capital  ">
+			and capital = #{capital}
+		</if>
+		<if test=" null != upTime ">
+			and up_time = #{upTime}
+		</if>
+		<if test=" null != city and ''!= city  ">
+			and city = #{city}
+		</if>
+		<if test=" null != context and ''!= context  ">
+			and context = #{context}
+		</if>
+		<if test=" null != trusteeship and ''!= trusteeship  ">
+			and trusteeship = #{trusteeship}
+		</if>
+		<if test=" null != securityModel and ''!= securityModel  ">
+			and security_model = #{securityModel}
+		</if>
+		<if test=" null != bidSecurity and ''!= bidSecurity  ">
+			and bid_security = #{bidSecurity}
+		</if>
+		<if test=" null != isTransfer ">
+			and is_transfer = #{isTransfer}
+		</if>
+		<if test=" null != grade ">
+			and grade = #{grade}
+		</if>
+		<if test=" null != minProfit ">
+			and min_profit = #{minProfit}
+		</if>
+		<if test=" null != maxProfit ">
+			and max_profit = #{maxProfit}
+		</if>
+		<if test=" null != minDeadLine ">
+			and min_dead_line = #{minDeadLine}
+		</if>
+		<if test=" null != maxDeadLine ">
+			and max_dead_line = #{maxDeadLine}
+		</if>
+		<if test=" null != platformDetailImg and ''!= platformDetailImg  ">
+			and platform_detail_img = #{platformDetailImg}
+		</if>
+		<if test=" null != briefIntroduction and ''!= briefIntroduction  ">
+			and brief_introduction = #{briefIntroduction}
+		</if>
+		<if test=" null != teamIntroduction and ''!= teamIntroduction  ">
+			and team_introduction = #{teamIntroduction}
+		</if>
+		<if test=" null != siteRecord and ''!= siteRecord  ">
+			and site_record = #{siteRecord}
+		</if>
+		<if test=" null != contactUs and ''!= contactUs  ">
+			and contact_us = #{contactUs}
+		</if>
+		<if test=" null != picInfo and ''!= picInfo  ">
+			and pic_info = #{picInfo}
+		</if>
+		<if test=" null != style and ''!= style  ">
+			and style = #{style}
+		</if>
+		<if test=" null != userId ">
+			and user_id = #{userId}
+		</if>
+		<if test=" null != orderNumber ">
+			and order_number = #{orderNumber}
+		</if>
+		<if test=" null != status and ''!= status  ">
+			and status = #{status}
+		</if>
+		<if test=" null != created ">
+			and created = #{created}
+		</if>
+		<if test=" null != modified ">
+			and modified = #{modified}
+		</if>
+		<if test=" null != viewCount ">
+			and view_count = #{viewCount}
+		</if>
+		<if test=" null != slug and ''!= slug  ">
+			and slug = #{slug}
+		</if>
+		<if test=" null != metaKeywords and ''!= metaKeywords  ">
+			and meta_keywords = #{metaKeywords}
+		</if>
+		<if test=" null != metaDescription and ''!= metaDescription  ">
+			and meta_description = #{metaDescription}
+		</if>
+		<if test=" null != remarks and ''!= remarks  ">
+			and remarks = #{remarks}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.jpressPlatform.JpPlatform">
+		select <include refid="Base_Column_List" /> from tjp_platform 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.jpressPlatform.JpPlatform">
+		select <include refid="Base_Column_List" /> from tjp_platform 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tjp_platform
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tjp_platform
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.jpressPlatform.JpPlatform" >
+    INSERT INTO tjp_platform
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					name,
+				</if>
+			 	<if test=" null != summary and ''!= summary  ">
+					summary,
+				</if>
+			 	<if test=" null != capital and ''!= capital  ">
+					capital,
+				</if>
+			 	<if test=" null != upTime ">
+					up_time,
+				</if>
+			 	<if test=" null != city and ''!= city  ">
+					city,
+				</if>
+			 	<if test=" null != context and ''!= context  ">
+					context,
+				</if>
+			 	<if test=" null != trusteeship and ''!= trusteeship  ">
+					trusteeship,
+				</if>
+			 	<if test=" null != securityModel and ''!= securityModel  ">
+					security_model,
+				</if>
+			 	<if test=" null != bidSecurity and ''!= bidSecurity  ">
+					bid_security,
+				</if>
+			 	<if test=" null != isTransfer ">
+					is_transfer,
+				</if>
+			 	<if test=" null != grade ">
+					grade,
+				</if>
+			 	<if test=" null != minProfit ">
+					min_profit,
+				</if>
+			 	<if test=" null != maxProfit ">
+					max_profit,
+				</if>
+			 	<if test=" null != minDeadLine ">
+					min_dead_line,
+				</if>
+			 	<if test=" null != maxDeadLine ">
+					max_dead_line,
+				</if>
+			 	<if test=" null != platformDetailImg and ''!= platformDetailImg  ">
+					platform_detail_img,
+				</if>
+			 	<if test=" null != briefIntroduction and ''!= briefIntroduction  ">
+					brief_introduction,
+				</if>
+			 	<if test=" null != teamIntroduction and ''!= teamIntroduction  ">
+					team_introduction,
+				</if>
+			 	<if test=" null != siteRecord and ''!= siteRecord  ">
+					site_record,
+				</if>
+			 	<if test=" null != contactUs and ''!= contactUs  ">
+					contact_us,
+				</if>
+			 	<if test=" null != picInfo and ''!= picInfo  ">
+					pic_info,
+				</if>
+			 	<if test=" null != style and ''!= style  ">
+					style,
+				</if>
+			 	<if test=" null != userId ">
+					user_id,
+				</if>
+			 	<if test=" null != orderNumber ">
+					order_number,
+				</if>
+			 	<if test=" null != status and ''!= status  ">
+					status,
+				</if>
+			 	<if test=" null != created ">
+					created,
+				</if>
+			 	<if test=" null != modified ">
+					modified,
+				</if>
+			 	<if test=" null != viewCount ">
+					view_count,
+				</if>
+			 	<if test=" null != slug and ''!= slug  ">
+					slug,
+				</if>
+			 	<if test=" null != metaKeywords and ''!= metaKeywords  ">
+					meta_keywords,
+				</if>
+			 	<if test=" null != metaDescription and ''!= metaDescription  ">
+					meta_description,
+				</if>
+			 	<if test=" null != remarks and ''!= remarks  ">
+					remarks,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					 	#{name},
+				</if>
+			 	<if test=" null != summary and ''!= summary  ">
+					 	#{summary},
+				</if>
+			 	<if test=" null != capital and ''!= capital  ">
+					 	#{capital},
+				</if>
+			 	<if test=" null != upTime ">
+					 	#{upTime},
+				</if>
+			 	<if test=" null != city and ''!= city  ">
+					 	#{city},
+				</if>
+			 	<if test=" null != context and ''!= context  ">
+					 	#{context},
+				</if>
+			 	<if test=" null != trusteeship and ''!= trusteeship  ">
+					 	#{trusteeship},
+				</if>
+			 	<if test=" null != securityModel and ''!= securityModel  ">
+					 	#{securityModel},
+				</if>
+			 	<if test=" null != bidSecurity and ''!= bidSecurity  ">
+					 	#{bidSecurity},
+				</if>
+			 	<if test=" null != isTransfer ">
+					 	#{isTransfer},
+				</if>
+			 	<if test=" null != grade ">
+					 	#{grade},
+				</if>
+			 	<if test=" null != minProfit ">
+					 	#{minProfit},
+				</if>
+			 	<if test=" null != maxProfit ">
+					 	#{maxProfit},
+				</if>
+			 	<if test=" null != minDeadLine ">
+					 	#{minDeadLine},
+				</if>
+			 	<if test=" null != maxDeadLine ">
+					 	#{maxDeadLine},
+				</if>
+			 	<if test=" null != platformDetailImg and ''!= platformDetailImg  ">
+					 	#{platformDetailImg},
+				</if>
+			 	<if test=" null != briefIntroduction and ''!= briefIntroduction  ">
+					 	#{briefIntroduction},
+				</if>
+			 	<if test=" null != teamIntroduction and ''!= teamIntroduction  ">
+					 	#{teamIntroduction},
+				</if>
+			 	<if test=" null != siteRecord and ''!= siteRecord  ">
+					 	#{siteRecord},
+				</if>
+			 	<if test=" null != contactUs and ''!= contactUs  ">
+					 	#{contactUs},
+				</if>
+			 	<if test=" null != picInfo and ''!= picInfo  ">
+					 	#{picInfo},
+				</if>
+			 	<if test=" null != style and ''!= style  ">
+					 	#{style},
+				</if>
+			 	<if test=" null != userId ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != orderNumber ">
+					 	#{orderNumber},
+				</if>
+			 	<if test=" null != status and ''!= status  ">
+					 	#{status},
+				</if>
+			 	<if test=" null != created ">
+					 	#{created},
+				</if>
+			 	<if test=" null != modified ">
+					 	#{modified},
+				</if>
+			 	<if test=" null != viewCount ">
+					 	#{viewCount},
+				</if>
+			 	<if test=" null != slug and ''!= slug  ">
+					 	#{slug},
+				</if>
+			 	<if test=" null != metaKeywords and ''!= metaKeywords  ">
+					 	#{metaKeywords},
+				</if>
+			 	<if test=" null != metaDescription and ''!= metaDescription  ">
+					 	#{metaDescription},
+				</if>
+			 	<if test=" null != remarks and ''!= remarks  ">
+					 	#{remarks},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.jpressPlatform.JpPlatform" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tjp_platform
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					name,
+				</if>
+			 	<if test=" null != summary and ''!= summary  ">
+					summary,
+				</if>
+			 	<if test=" null != capital and ''!= capital  ">
+					capital,
+				</if>
+			 	<if test=" null != upTime ">
+					up_time,
+				</if>
+			 	<if test=" null != city and ''!= city  ">
+					city,
+				</if>
+			 	<if test=" null != context and ''!= context  ">
+					context,
+				</if>
+			 	<if test=" null != trusteeship and ''!= trusteeship  ">
+					trusteeship,
+				</if>
+			 	<if test=" null != securityModel and ''!= securityModel  ">
+					security_model,
+				</if>
+			 	<if test=" null != bidSecurity and ''!= bidSecurity  ">
+					bid_security,
+				</if>
+			 	<if test=" null != isTransfer ">
+					is_transfer,
+				</if>
+			 	<if test=" null != grade ">
+					grade,
+				</if>
+			 	<if test=" null != minProfit ">
+					min_profit,
+				</if>
+			 	<if test=" null != maxProfit ">
+					max_profit,
+				</if>
+			 	<if test=" null != minDeadLine ">
+					min_dead_line,
+				</if>
+			 	<if test=" null != maxDeadLine ">
+					max_dead_line,
+				</if>
+			 	<if test=" null != platformDetailImg and ''!= platformDetailImg  ">
+					platform_detail_img,
+				</if>
+			 	<if test=" null != briefIntroduction and ''!= briefIntroduction  ">
+					brief_introduction,
+				</if>
+			 	<if test=" null != teamIntroduction and ''!= teamIntroduction  ">
+					team_introduction,
+				</if>
+			 	<if test=" null != siteRecord and ''!= siteRecord  ">
+					site_record,
+				</if>
+			 	<if test=" null != contactUs and ''!= contactUs  ">
+					contact_us,
+				</if>
+			 	<if test=" null != picInfo and ''!= picInfo  ">
+					pic_info,
+				</if>
+			 	<if test=" null != style and ''!= style  ">
+					style,
+				</if>
+			 	<if test=" null != userId ">
+					user_id,
+				</if>
+			 	<if test=" null != orderNumber ">
+					order_number,
+				</if>
+			 	<if test=" null != status and ''!= status  ">
+					status,
+				</if>
+			 	<if test=" null != created ">
+					created,
+				</if>
+			 	<if test=" null != modified ">
+					modified,
+				</if>
+			 	<if test=" null != viewCount ">
+					view_count,
+				</if>
+			 	<if test=" null != slug and ''!= slug  ">
+					slug,
+				</if>
+			 	<if test=" null != metaKeywords and ''!= metaKeywords  ">
+					meta_keywords,
+				</if>
+			 	<if test=" null != metaDescription and ''!= metaDescription  ">
+					meta_description,
+				</if>
+			 	<if test=" null != remarks and ''!= remarks  ">
+					remarks,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					 	#{name},
+				</if>
+			 	<if test=" null != summary and ''!= summary  ">
+					 	#{summary},
+				</if>
+			 	<if test=" null != capital and ''!= capital  ">
+					 	#{capital},
+				</if>
+			 	<if test=" null != upTime ">
+					 	#{upTime},
+				</if>
+			 	<if test=" null != city and ''!= city  ">
+					 	#{city},
+				</if>
+			 	<if test=" null != context and ''!= context  ">
+					 	#{context},
+				</if>
+			 	<if test=" null != trusteeship and ''!= trusteeship  ">
+					 	#{trusteeship},
+				</if>
+			 	<if test=" null != securityModel and ''!= securityModel  ">
+					 	#{securityModel},
+				</if>
+			 	<if test=" null != bidSecurity and ''!= bidSecurity  ">
+					 	#{bidSecurity},
+				</if>
+			 	<if test=" null != isTransfer ">
+					 	#{isTransfer},
+				</if>
+			 	<if test=" null != grade ">
+					 	#{grade},
+				</if>
+			 	<if test=" null != minProfit ">
+					 	#{minProfit},
+				</if>
+			 	<if test=" null != maxProfit ">
+					 	#{maxProfit},
+				</if>
+			 	<if test=" null != minDeadLine ">
+					 	#{minDeadLine},
+				</if>
+			 	<if test=" null != maxDeadLine ">
+					 	#{maxDeadLine},
+				</if>
+			 	<if test=" null != platformDetailImg and ''!= platformDetailImg  ">
+					 	#{platformDetailImg},
+				</if>
+			 	<if test=" null != briefIntroduction and ''!= briefIntroduction  ">
+					 	#{briefIntroduction},
+				</if>
+			 	<if test=" null != teamIntroduction and ''!= teamIntroduction  ">
+					 	#{teamIntroduction},
+				</if>
+			 	<if test=" null != siteRecord and ''!= siteRecord  ">
+					 	#{siteRecord},
+				</if>
+			 	<if test=" null != contactUs and ''!= contactUs  ">
+					 	#{contactUs},
+				</if>
+			 	<if test=" null != picInfo and ''!= picInfo  ">
+					 	#{picInfo},
+				</if>
+			 	<if test=" null != style and ''!= style  ">
+					 	#{style},
+				</if>
+			 	<if test=" null != userId ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != orderNumber ">
+					 	#{orderNumber},
+				</if>
+			 	<if test=" null != status and ''!= status  ">
+					 	#{status},
+				</if>
+			 	<if test=" null != created ">
+					 	#{created},
+				</if>
+			 	<if test=" null != modified ">
+					 	#{modified},
+				</if>
+			 	<if test=" null != viewCount ">
+					 	#{viewCount},
+				</if>
+			 	<if test=" null != slug and ''!= slug  ">
+					 	#{slug},
+				</if>
+			 	<if test=" null != metaKeywords and ''!= metaKeywords  ">
+					 	#{metaKeywords},
+				</if>
+			 	<if test=" null != metaDescription and ''!= metaDescription  ">
+					 	#{metaDescription},
+				</if>
+			 	<if test=" null != remarks and ''!= remarks  ">
+					 	#{remarks},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.jpressPlatform.JpPlatform" >
+  		UPDATE tjp_platform
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != name and ''!= name  ">
+						name = #{name},
+					</if>
+					<if test=" null != summary and ''!= summary  ">
+						summary = #{summary},
+					</if>
+					<if test=" null != capital and ''!= capital  ">
+						capital = #{capital},
+					</if>
+					<if test=" null != upTime ">
+						up_time = #{upTime},
+					</if>
+					<if test=" null != city and ''!= city  ">
+						city = #{city},
+					</if>
+					<if test=" null != context and ''!= context  ">
+						context = #{context},
+					</if>
+					<if test=" null != trusteeship and ''!= trusteeship  ">
+						trusteeship = #{trusteeship},
+					</if>
+					<if test=" null != securityModel and ''!= securityModel  ">
+						security_model = #{securityModel},
+					</if>
+					<if test=" null != bidSecurity and ''!= bidSecurity  ">
+						bid_security = #{bidSecurity},
+					</if>
+					<if test=" null != isTransfer ">
+						is_transfer = #{isTransfer},
+					</if>
+					<if test=" null != grade ">
+						grade = #{grade},
+					</if>
+					<if test=" null != minProfit ">
+						min_profit = #{minProfit},
+					</if>
+					<if test=" null != maxProfit ">
+						max_profit = #{maxProfit},
+					</if>
+					<if test=" null != minDeadLine ">
+						min_dead_line = #{minDeadLine},
+					</if>
+					<if test=" null != maxDeadLine ">
+						max_dead_line = #{maxDeadLine},
+					</if>
+					<if test=" null != platformDetailImg and ''!= platformDetailImg  ">
+						platform_detail_img = #{platformDetailImg},
+					</if>
+					<if test=" null != briefIntroduction and ''!= briefIntroduction  ">
+						brief_introduction = #{briefIntroduction},
+					</if>
+					<if test=" null != teamIntroduction and ''!= teamIntroduction  ">
+						team_introduction = #{teamIntroduction},
+					</if>
+					<if test=" null != siteRecord and ''!= siteRecord  ">
+						site_record = #{siteRecord},
+					</if>
+					<if test=" null != contactUs and ''!= contactUs  ">
+						contact_us = #{contactUs},
+					</if>
+					<if test=" null != picInfo and ''!= picInfo  ">
+						pic_info = #{picInfo},
+					</if>
+					<if test=" null != style and ''!= style  ">
+						style = #{style},
+					</if>
+					<if test=" null != userId ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != orderNumber ">
+						order_number = #{orderNumber},
+					</if>
+					<if test=" null != status and ''!= status  ">
+						status = #{status},
+					</if>
+					<if test=" null != created ">
+						created = #{created},
+					</if>
+					<if test=" null != modified ">
+						modified = #{modified},
+					</if>
+					<if test=" null != viewCount ">
+						view_count = #{viewCount},
+					</if>
+					<if test=" null != slug and ''!= slug  ">
+						slug = #{slug},
+					</if>
+					<if test=" null != metaKeywords and ''!= metaKeywords  ">
+						meta_keywords = #{metaKeywords},
+					</if>
+					<if test=" null != metaDescription and ''!= metaDescription  ">
+						meta_description = #{metaDescription},
+					</if>
+					<if test=" null != remarks and ''!= remarks  ">
+						remarks = #{remarks},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.jpressPlatform.JpPlatform" >
+	    UPDATE tjp_platform
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != name and ''!= name  ">
+						name = #{name},
+					</if>
+					<if test=" null != summary and ''!= summary  ">
+						summary = #{summary},
+					</if>
+					<if test=" null != capital and ''!= capital  ">
+						capital = #{capital},
+					</if>
+					<if test=" null != upTime ">
+						up_time = #{upTime},
+					</if>
+					<if test=" null != city and ''!= city  ">
+						city = #{city},
+					</if>
+					<if test=" null != context and ''!= context  ">
+						context = #{context},
+					</if>
+					<if test=" null != trusteeship and ''!= trusteeship  ">
+						trusteeship = #{trusteeship},
+					</if>
+					<if test=" null != securityModel and ''!= securityModel  ">
+						security_model = #{securityModel},
+					</if>
+					<if test=" null != bidSecurity and ''!= bidSecurity  ">
+						bid_security = #{bidSecurity},
+					</if>
+					<if test=" null != isTransfer ">
+						is_transfer = #{isTransfer},
+					</if>
+					<if test=" null != grade ">
+						grade = #{grade},
+					</if>
+					<if test=" null != minProfit ">
+						min_profit = #{minProfit},
+					</if>
+					<if test=" null != maxProfit ">
+						max_profit = #{maxProfit},
+					</if>
+					<if test=" null != minDeadLine ">
+						min_dead_line = #{minDeadLine},
+					</if>
+					<if test=" null != maxDeadLine ">
+						max_dead_line = #{maxDeadLine},
+					</if>
+					<if test=" null != platformDetailImg and ''!= platformDetailImg  ">
+						platform_detail_img = #{platformDetailImg},
+					</if>
+					<if test=" null != briefIntroduction and ''!= briefIntroduction  ">
+						brief_introduction = #{briefIntroduction},
+					</if>
+					<if test=" null != teamIntroduction and ''!= teamIntroduction  ">
+						team_introduction = #{teamIntroduction},
+					</if>
+					<if test=" null != siteRecord and ''!= siteRecord  ">
+						site_record = #{siteRecord},
+					</if>
+					<if test=" null != contactUs and ''!= contactUs  ">
+						contact_us = #{contactUs},
+					</if>
+					<if test=" null != picInfo and ''!= picInfo  ">
+						pic_info = #{picInfo},
+					</if>
+					<if test=" null != style and ''!= style  ">
+						style = #{style},
+					</if>
+					<if test=" null != userId ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != orderNumber ">
+						order_number = #{orderNumber},
+					</if>
+					<if test=" null != status and ''!= status  ">
+						status = #{status},
+					</if>
+					<if test=" null != created ">
+						created = #{created},
+					</if>
+					<if test=" null != modified ">
+						modified = #{modified},
+					</if>
+					<if test=" null != viewCount ">
+						view_count = #{viewCount},
+					</if>
+					<if test=" null != slug and ''!= slug  ">
+						slug = #{slug},
+					</if>
+					<if test=" null != metaKeywords and ''!= metaKeywords  ">
+						meta_keywords = #{metaKeywords},
+					</if>
+					<if test=" null != metaDescription and ''!= metaDescription  ">
+						meta_description = #{metaDescription},
+					</if>
+					<if test=" null != remarks and ''!= remarks  ">
+						remarks = #{remarks},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	    <!-- APP平台列表分页 -->
+    <select id="queryPlatformList" resultMap="BaseResultMap">
+	SELECT p.id, p.`name`, p.platform_detail_img,
+	p.grade,
+	p.min_profit,
+	p.max_profit,
+	p.min_dead_line,
+	p.max_dead_line,
+	p.capital,
+	p.city,
+	p.context,
+	p.trusteeship,
+	p.bid_security,
+	p.security_model,
+	CASE p.is_transfer
+	WHEN 0 THEN
+	'不支持'
+	WHEN 1 THEN
+	'支持'
+	ELSE
+	'未定义'
+	END is_transfer,
+	p.up_time,
+	p.dead_line_self_defined
+	FROM
+	tjp_platform p
+	WHERE
+	p.`status` = 'normal'
+	
+	<!-- 机构name -->
+	<if test=" null != platformName and ''!= platformName ">						
+						AND p.`name` like  CONCAT('%','${platformName}','%' )
+	</if>
+	<!-- 机构评级 -->
+	<if test=" null != securityLevel and ''!= securityLevel ">
+						<![CDATA[
+							AND p.grade ${securityLevel}
+						]]>
+	</if>
+
+	<!-- 机构产品期限 -->
+	<if
+		test=" null != minDeadLine and ''!= minDeadLine and null != maxDeadLine and ''!= maxDeadLine ">
+						<![CDATA[
+							AND (
+								   (p.min_dead_line <= #{minDeadLine} AND p.max_dead_line >= #{maxDeadLine})
+								OR (p.min_dead_line >= #{minDeadLine} AND p.min_dead_line <= #{maxDeadLine}) 
+								OR (p.max_dead_line >= #{minDeadLine} AND p.max_dead_line <= #{maxDeadLine})  
+								OR (p.min_dead_line >= #{minDeadLine} AND p.max_dead_line <= #{maxDeadLine})
+							)
+						]]>
+	</if>
+
+	<!-- 机构年化收益 -->
+	<if
+		test=" null != minYearProfit and ''!= minYearProfit and null != maxYearProfit and ''!= maxYearProfit ">
+						<![CDATA[
+							AND (
+									(p.min_profit <= #{minYearProfit} AND p.max_profit >= #{maxYearProfit}) 
+								 OR (p.min_profit >= #{minYearProfit} AND p.min_profit <= #{maxYearProfit})
+								 OR (p.max_profit >= #{minYearProfit} AND p.max_profit <= #{maxYearProfit})  
+								 OR (p.min_profit >= #{minYearProfit} AND p.max_profit <= #{maxYearProfit})
+							)
+						]]>
+	</if>
+
+	ORDER BY p.id desc 
+    </select>
+</mapper>

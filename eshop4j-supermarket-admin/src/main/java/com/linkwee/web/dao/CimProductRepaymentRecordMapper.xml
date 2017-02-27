@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CimProductRepaymentRecordMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.cim.CimProductRepaymentRecord" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="repayment_id" property="repaymentId" jdbcType="VARCHAR"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="invest_record_id" property="investRecordId" jdbcType="VARCHAR"/>
+		<result column="product_id" property="productId" jdbcType="VARCHAR"/>
+		<result column="third_product_id" property="thirdProductId" jdbcType="VARCHAR"/>
+		<result column="repayment_time" property="repaymentTime" jdbcType="TIMESTAMP"/>
+		<result column="repayment_amt" property="repaymentAmount" jdbcType="DECIMAL"/>
+		<result column="profit" property="profit" jdbcType="DECIMAL"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	repayment_id,
+	    	user_id,
+	    	invest_record_id,
+	    	product_id,
+	    	third_product_id,
+	    	repayment_time,
+	    	repayment_amt,
+	    	profit,
+	    	create_time,
+	    	status,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != repaymentId and ''!= repaymentId  ">
+			and repayment_id = #{repaymentId}
+		</if>
+		<if test=" null != userId and ''!= userId  ">
+			and user_id = #{userId}
+		</if>
+		<if test=" null != investRecordId and ''!= investRecordId  ">
+			and invest_record_id = #{investRecordId}
+		</if>
+		<if test=" null != productId and ''!= productId  ">
+			and product_id = #{productId}
+		</if>
+		<if test=" null != thirdProductId and ''!= thirdProductId  ">
+			and third_product_id = #{thirdProductId}
+		</if>
+		<if test=" null != repaymentTime ">
+			and repayment_time = #{repaymentTime}
+		</if>
+		<if test=" null != repaymentAmount ">
+			and repayment_amt = #{repaymentAmount}
+		</if>
+		<if test=" null != profit ">
+			and profit = #{profit}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.cim.CimProductRepaymentRecord">
+		select <include refid="Base_Column_List" /> from tcim_product_repayment_record 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.cim.CimProductRepaymentRecord">
+		select <include refid="Base_Column_List" /> from tcim_product_repayment_record 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_product_repayment_record
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_product_repayment_record
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.cim.CimProductRepaymentRecord" >
+    INSERT INTO tcim_product_repayment_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != repaymentId and ''!= repaymentId  ">
+					repayment_id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != investRecordId and ''!= investRecordId  ">
+					invest_record_id,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != thirdProductId and ''!= thirdProductId  ">
+					third_product_id,
+				</if>
+			 	<if test=" null != repaymentTime ">
+					repayment_time,
+				</if>
+			 	<if test=" null != repaymentAmount ">
+					repayment_amt,
+				</if>
+			 	<if test=" null != profit ">
+					profit,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != repaymentId and ''!= repaymentId  ">
+					 	#{repaymentId},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != investRecordId and ''!= investRecordId  ">
+					 	#{investRecordId},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != thirdProductId and ''!= thirdProductId  ">
+					 	#{thirdProductId},
+				</if>
+			 	<if test=" null != repaymentTime ">
+					 	#{repaymentTime},
+				</if>
+			 	<if test=" null != repaymentAmount ">
+					 	#{repaymentAmount},
+				</if>
+			 	<if test=" null != profit ">
+					 	#{profit},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.cim.CimProductRepaymentRecord" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcim_product_repayment_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != repaymentId and ''!= repaymentId  ">
+					repayment_id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != investRecordId and ''!= investRecordId  ">
+					invest_record_id,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != thirdProductId and ''!= thirdProductId  ">
+					third_product_id,
+				</if>
+			 	<if test=" null != repaymentTime ">
+					repayment_time,
+				</if>
+			 	<if test=" null != repaymentAmount ">
+					repayment_amt,
+				</if>
+			 	<if test=" null != profit ">
+					profit,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != repaymentId and ''!= repaymentId  ">
+					 	#{repaymentId},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != investRecordId and ''!= investRecordId  ">
+					 	#{investRecordId},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != thirdProductId and ''!= thirdProductId  ">
+					 	#{thirdProductId},
+				</if>
+			 	<if test=" null != repaymentTime ">
+					 	#{repaymentTime},
+				</if>
+			 	<if test=" null != repaymentAmount ">
+					 	#{repaymentAmount},
+				</if>
+			 	<if test=" null != profit ">
+					 	#{profit},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.cim.CimProductRepaymentRecord" >
+  		UPDATE tcim_product_repayment_record
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != repaymentId and ''!= repaymentId  ">
+						repayment_id = #{repaymentId},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != investRecordId and ''!= investRecordId  ">
+						invest_record_id = #{investRecordId},
+					</if>
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != thirdProductId and ''!= thirdProductId  ">
+						third_product_id = #{thirdProductId},
+					</if>
+					<if test=" null != repaymentTime ">
+						repayment_time = #{repaymentTime},
+					</if>
+					<if test=" null != repaymentAmount ">
+						repayment_amt = #{repaymentAmount},
+					</if>
+					<if test=" null != profit ">
+						profit = #{profit},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.cim.CimProductRepaymentRecord" >
+	    UPDATE tcim_product_repayment_record
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != repaymentId and ''!= repaymentId  ">
+						repayment_id = #{repaymentId},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != investRecordId and ''!= investRecordId  ">
+						invest_record_id = #{investRecordId},
+					</if>
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != thirdProductId and ''!= thirdProductId  ">
+						third_product_id = #{thirdProductId},
+					</if>
+					<if test=" null != repaymentTime ">
+						repayment_time = #{repaymentTime},
+					</if>
+					<if test=" null != repaymentAmount ">
+						repayment_amt = #{repaymentAmount},
+					</if>
+					<if test=" null != profit ">
+						profit = #{profit},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+</mapper>

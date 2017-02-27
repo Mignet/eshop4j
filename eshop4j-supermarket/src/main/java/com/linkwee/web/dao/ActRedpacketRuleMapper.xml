@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.ActRedpacketRuleMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.act.redpacket.model.ActRedpacketRule" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="rule_id" property="ruleId" jdbcType="VARCHAR"/>
+		<result column="redpacket_id" property="redpacketId" jdbcType="VARCHAR"/>
+		<result column="rule_type" property="ruleType" jdbcType="INTEGER"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="operator" property="operator" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<resultMap  type="com.linkwee.act.redpacket.model.ActRedpacketRuleDetail" id="redpacketRuleDetail">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="redpacket_id" property="redpacketId" jdbcType="VARCHAR"/>
+		<result column="rule_id" property="ruleId" jdbcType="VARCHAR"/>
+		<result column="platform_limit" property="platformLimit" jdbcType="BIT"/>
+		<result column="platform_id" property="platformId" jdbcType="VARCHAR"/>
+		<result column="product_limit" property="productLimit" jdbcType="INTEGER"/>
+		<result column="product_id" property="productId" jdbcType="VARCHAR"/>
+		<result column="product_deadline" property="productDeadline" jdbcType="INTEGER"/>
+		<result column="product_type" property="productType" jdbcType="INTEGER"/>
+		<result column="invest_limit" property="investLlimit" jdbcType="INTEGER"/>
+		<result column="amount_limit" property="amountLimit" jdbcType="INTEGER"/>
+		<result column="amount" property="amount" jdbcType="DECIMAL"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		<result column="operator" property="operator" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	rule_id,
+	    	redpacket_id,
+	    	rule_type,
+	    	create_time,
+	    	operator,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != ruleId and ''!= ruleId  ">
+			and rule_id = #{ruleId}
+		</if>
+		<if test=" null != redpacketId and ''!= redpacketId  ">
+			and redpacket_id = #{redpacketId}
+		</if>
+		<if test=" null != ruleType ">
+			and rule_type = #{ruleType}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != operator and ''!= operator  ">
+			and operator = #{operator}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.act.redpacket.model.ActRedpacketRule">
+		select <include refid="Base_Column_List" /> from tact_redpacket_rule 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.act.redpacket.model.ActRedpacketRule">
+		select <include refid="Base_Column_List" /> from tact_redpacket_rule 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tact_redpacket_rule
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tact_redpacket_rule
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.act.redpacket.model.ActRedpacketRule" >
+    INSERT INTO tact_redpacket_rule
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != ruleId and ''!= ruleId  ">
+					rule_id,
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					redpacket_id,
+				</if>
+			 	<if test=" null != ruleType ">
+					rule_type,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					operator,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != ruleId and ''!= ruleId  ">
+					 	#{ruleId},
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					 	#{redpacketId},
+				</if>
+			 	<if test=" null != ruleType ">
+					 	#{ruleType},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					 	#{operator},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.act.redpacket.model.ActRedpacketRule" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tact_redpacket_rule
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != ruleId and ''!= ruleId  ">
+					rule_id,
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					redpacket_id,
+				</if>
+			 	<if test=" null != ruleType ">
+					rule_type,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					operator,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != ruleId and ''!= ruleId  ">
+					 	#{ruleId},
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					 	#{redpacketId},
+				</if>
+			 	<if test=" null != ruleType ">
+					 	#{ruleType},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					 	#{operator},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.act.redpacket.model.ActRedpacketRule" >
+  		UPDATE tact_redpacket_rule
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != ruleId and ''!= ruleId  ">
+						rule_id = #{ruleId},
+					</if>
+					<if test=" null != redpacketId and ''!= redpacketId  ">
+						redpacket_id = #{redpacketId},
+					</if>
+					<if test=" null != ruleType ">
+						rule_type = #{ruleType},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != operator and ''!= operator  ">
+						operator = #{operator},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.act.redpacket.model.ActRedpacketRule" >
+	    UPDATE tact_redpacket_rule
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != ruleId and ''!= ruleId  ">
+						rule_id = #{ruleId},
+					</if>
+					<if test=" null != redpacketId and ''!= redpacketId  ">
+						redpacket_id = #{redpacketId},
+					</if>
+					<if test=" null != ruleType ">
+						rule_type = #{ruleType},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != operator and ''!= operator  ">
+						operator = #{operator},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+		
+	<!-- 根据红包编号获取红包使用规则  -->
+	<select id="getRedpacketUseRulesByRedPacketId" resultMap="redpacketRuleDetail">
+		SELECT r.redpacket_id,d.platform_limit,d.platform_id,d.product_limit,d.product_id,d.product_type,d.product_deadline,d.amount_limit,d.amount,d.invest_limit FROM  tact_redpacket_rule r LEFT JOIN tact_redpacket_rule_detail d 
+		ON r.rule_id=d.rule_id  WHERE r.rule_type=2 AND r.redpacket_id 
+		 <foreach item="redpacketId" collection="redpacketIds" open=" IN (" close=")" separator=",">
+		 		#{redpacketId}
+		 </foreach>
+	</select>
+</mapper>

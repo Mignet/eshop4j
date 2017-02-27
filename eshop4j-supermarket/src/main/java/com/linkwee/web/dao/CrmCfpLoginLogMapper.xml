@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CrmCfpLoginLogMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.CrmCfpLoginLog" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="log_id" property="logId" jdbcType="VARCHAR"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="device_id" property="deviceId" jdbcType="VARCHAR"/>
+		<result column="device_type" property="deviceType" jdbcType="VARCHAR"/>
+		<result column="device_detail" property="deviceDetail" jdbcType="VARCHAR"/>
+		<result column="device_resolution" property="deviceResolution" jdbcType="VARCHAR"/>
+		<result column="system_version" property="systemVersion" jdbcType="VARCHAR"/>
+		<result column="app_version" property="appVersion" jdbcType="VARCHAR"/>
+		<result column="from_url" property="fromUrl" jdbcType="VARCHAR"/>
+		<result column="access_url" property="accessUrl" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	log_id,
+	    	user_id,
+	    	device_id,
+	    	device_type,
+	    	device_detail,
+	    	device_resolution,
+	    	system_version,
+	    	app_version,
+	    	from_url,
+	    	access_url,
+	    	create_time,
+	    	last_update_time,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != logId and ''!= logId  ">
+			and log_id = #{logId}
+		</if>
+		<if test=" null != userId and ''!= userId  ">
+			and user_id = #{userId}
+		</if>
+		<if test=" null != deviceId and ''!= deviceId  ">
+			and device_id = #{deviceId}
+		</if>
+		<if test=" null != deviceType and ''!= deviceType  ">
+			and device_type = #{deviceType}
+		</if>
+		<if test=" null != deviceDetail and ''!= deviceDetail  ">
+			and device_detail = #{deviceDetail}
+		</if>
+		<if test=" null != deviceResolution and ''!= deviceResolution  ">
+			and device_resolution = #{deviceResolution}
+		</if>
+		<if test=" null != systemVersion and ''!= systemVersion  ">
+			and system_version = #{systemVersion}
+		</if>
+		<if test=" null != appVersion and ''!= appVersion  ">
+			and app_version = #{appVersion}
+		</if>
+		<if test=" null != fromUrl and ''!= fromUrl  ">
+			and from_url = #{fromUrl}
+		</if>
+		<if test=" null != accessUrl and ''!= accessUrl  ">
+			and access_url = #{accessUrl}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != lastUpdateTime ">
+			and last_update_time = #{lastUpdateTime}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CrmCfpLoginLog">
+		select <include refid="Base_Column_List" /> from tcrm_cfp_login_log 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CrmCfpLoginLog">
+		select <include refid="Base_Column_List" /> from tcrm_cfp_login_log 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcrm_cfp_login_log
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcrm_cfp_login_log
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.CrmCfpLoginLog" >
+    INSERT INTO tcrm_cfp_login_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != deviceId and ''!= deviceId  ">
+					device_id,
+				</if>
+			 	<if test=" null != deviceType and ''!= deviceType  ">
+					device_type,
+				</if>
+			 	<if test=" null != deviceDetail and ''!= deviceDetail  ">
+					device_detail,
+				</if>
+			 	<if test=" null != deviceResolution and ''!= deviceResolution  ">
+					device_resolution,
+				</if>
+			 	<if test=" null != systemVersion and ''!= systemVersion  ">
+					system_version,
+				</if>
+			 	<if test=" null != appVersion and ''!= appVersion  ">
+					app_version,
+				</if>
+			 	<if test=" null != fromUrl and ''!= fromUrl  ">
+					from_url,
+				</if>
+			 	<if test=" null != accessUrl and ''!= accessUrl  ">
+					access_url,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					last_update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != deviceId and ''!= deviceId  ">
+					 	#{deviceId},
+				</if>
+			 	<if test=" null != deviceType and ''!= deviceType  ">
+					 	#{deviceType},
+				</if>
+			 	<if test=" null != deviceDetail and ''!= deviceDetail  ">
+					 	#{deviceDetail},
+				</if>
+			 	<if test=" null != deviceResolution and ''!= deviceResolution  ">
+					 	#{deviceResolution},
+				</if>
+			 	<if test=" null != systemVersion and ''!= systemVersion  ">
+					 	#{systemVersion},
+				</if>
+			 	<if test=" null != appVersion and ''!= appVersion  ">
+					 	#{appVersion},
+				</if>
+			 	<if test=" null != fromUrl and ''!= fromUrl  ">
+					 	#{fromUrl},
+				</if>
+			 	<if test=" null != accessUrl and ''!= accessUrl  ">
+					 	#{accessUrl},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					 	#{lastUpdateTime},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.CrmCfpLoginLog" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcrm_cfp_login_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != logId and ''!= logId  ">
+					log_id,
+				</if>
+				<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != deviceId and ''!= deviceId  ">
+					device_id,
+				</if>
+			 	<if test=" null != deviceType and ''!= deviceType  ">
+					device_type,
+				</if>
+			 	<if test=" null != deviceDetail and ''!= deviceDetail  ">
+					device_detail,
+				</if>
+			 	<if test=" null != deviceResolution and ''!= deviceResolution  ">
+					device_resolution,
+				</if>
+			 	<if test=" null != systemVersion and ''!= systemVersion  ">
+					system_version,
+				</if>
+			 	<if test=" null != appVersion and ''!= appVersion  ">
+					app_version,
+				</if>
+			 	<if test=" null != fromUrl and ''!= fromUrl  ">
+					from_url,
+				</if>
+			 	<if test=" null != accessUrl and ''!= accessUrl  ">
+					access_url,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					last_update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != logId and ''!= logId  ">
+					 	#{logId},
+				</if>
+				<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != deviceId and ''!= deviceId  ">
+					 	#{deviceId},
+				</if>
+			 	<if test=" null != deviceType and ''!= deviceType  ">
+					 	#{deviceType},
+				</if>
+			 	<if test=" null != deviceDetail and ''!= deviceDetail  ">
+					 	#{deviceDetail},
+				</if>
+			 	<if test=" null != deviceResolution and ''!= deviceResolution  ">
+					 	#{deviceResolution},
+				</if>
+			 	<if test=" null != systemVersion and ''!= systemVersion  ">
+					 	#{systemVersion},
+				</if>
+			 	<if test=" null != appVersion and ''!= appVersion  ">
+					 	#{appVersion},
+				</if>
+			 	<if test=" null != fromUrl and ''!= fromUrl  ">
+					 	#{fromUrl},
+				</if>
+			 	<if test=" null != accessUrl and ''!= accessUrl  ">
+					 	#{accessUrl},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != lastUpdateTime ">
+					 	#{lastUpdateTime},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.CrmCfpLoginLog" >
+  		UPDATE tcrm_cfp_login_log
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != deviceId and ''!= deviceId  ">
+						device_id = #{deviceId},
+					</if>
+					<if test=" null != deviceType and ''!= deviceType  ">
+						device_type = #{deviceType},
+					</if>
+					<if test=" null != deviceDetail and ''!= deviceDetail  ">
+						device_detail = #{deviceDetail},
+					</if>
+					<if test=" null != deviceResolution and ''!= deviceResolution  ">
+						device_resolution = #{deviceResolution},
+					</if>
+					<if test=" null != systemVersion and ''!= systemVersion  ">
+						system_version = #{systemVersion},
+					</if>
+					<if test=" null != appVersion and ''!= appVersion  ">
+						app_version = #{appVersion},
+					</if>
+					<if test=" null != fromUrl and ''!= fromUrl  ">
+						from_url = #{fromUrl},
+					</if>
+					<if test=" null != accessUrl and ''!= accessUrl  ">
+						access_url = #{accessUrl},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != lastUpdateTime ">
+						last_update_time = #{lastUpdateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.CrmCfpLoginLog" >
+	    UPDATE tcrm_cfp_login_log
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != deviceId and ''!= deviceId  ">
+						device_id = #{deviceId},
+					</if>
+					<if test=" null != deviceType and ''!= deviceType  ">
+						device_type = #{deviceType},
+					</if>
+					<if test=" null != deviceDetail and ''!= deviceDetail  ">
+						device_detail = #{deviceDetail},
+					</if>
+					<if test=" null != deviceResolution and ''!= deviceResolution  ">
+						device_resolution = #{deviceResolution},
+					</if>
+					<if test=" null != systemVersion and ''!= systemVersion  ">
+						system_version = #{systemVersion},
+					</if>
+					<if test=" null != appVersion and ''!= appVersion  ">
+						app_version = #{appVersion},
+					</if>
+					<if test=" null != fromUrl and ''!= fromUrl  ">
+						from_url = #{fromUrl},
+					</if>
+					<if test=" null != accessUrl and ''!= accessUrl  ">
+						access_url = #{accessUrl},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != lastUpdateTime ">
+						last_update_time = #{lastUpdateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcrm_cfp_login_log
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<models>
+	<model class="com.linkwee.act.redpacket.model.RedpacketImportModel">
+		<property name="mobile"  excelTitleName="手机号码"  datatype="int" maxlength="15"   />
+	</model>
+	
+	<model class="com.linkwee.web.model.crm.SalesOrgCfpImport">
+		<property name="mobile"  excelTitleName="手机号码"  datatype="int" maxlength="15"   />
+	</model>
+	
+	<model class="com.linkwee.web.model.crm.RewardDataImport">
+		<property name="mobile"  excelTitleName="手机号码"  datatype="int" maxlength="15"   />
+		<property name="amount"  excelTitleName="金额"  datatype="int" maxlength="15"   />
+	</model>
+	
+</models>

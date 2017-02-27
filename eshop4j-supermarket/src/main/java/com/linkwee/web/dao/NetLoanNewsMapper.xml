@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.NetLoanNewsMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.crm.MycustomersResp" id="MycustomersResp">
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+		<result column="register_time" property="registerTime" jdbcType="TIMESTAMP"/>
+		<result column="is_important" property="important" jdbcType="INTEGER"/>
+		<result column="is_free_customer" property="freecustomer" jdbcType="INTEGER"/>
+		<result column="user_name" property="userName" jdbcType="VARCHAR"/>
+		<result column="near_invest_time" property="nearInvestDate" jdbcType="TIMESTAMP"/>
+		<result column="near_invest_amt" property="nearInvestAmt" jdbcType="DECIMAL"/>
+		<result column="invest_count" property="totalInvestCount" jdbcType="INTEGER"/>
+		<result column="total_invest_amount" property="totalInvestAmt" jdbcType="DECIMAL"/>
+		<result column="near_end_time" property="nearEndDate" jdbcType="TIMESTAMP"/>
+		<result column="head_image" property="headImage" jdbcType="VARCHAR"/>
+		<result column="easemob_acct" property="easemobAcct" jdbcType="VARCHAR"/>
+		<result column="isRead" property="isRead" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	
+	<!-- 首页资讯列表-->
+	<select id="queryHomepageNetNewsList" resultType="com.linkwee.web.model.news.HomepageNetNewsListResp" >
+		SELECT c.title, c.text as content,c.slug as url from tjp_content c 
+		LEFT JOIN tjp_mapping m 
+		on c.id=m.content_id
+		LEFT JOIN tjp_taxonomy t
+		on m.taxonomy_id=t.id
+		where t.type='category'
+		and c.status ='normal'
+		<if test=" null != type and ''!= type  ">
+			and t.slug=#{type}
+		</if>
+		 ORDER BY c.created desc limit 3
+	</select>
+	
+	
+</mapper>

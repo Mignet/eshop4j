@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.ActRedpacketUseRecordMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.act.redpacket.model.ActRedpacketUseRecord" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="redpacket_id" property="redpacketId" jdbcType="VARCHAR"/>
+		<result column="redpacket_send_id" property="redpacketSendId" jdbcType="VARCHAR"/>
+		<result column="redpacket_detail_id" property="redpacketDetailId" jdbcType="VARCHAR"/>
+		<result column="recharge_id" property="rechargeId" jdbcType="VARCHAR"/>
+		<result column="invest_id" property="investId" jdbcType="VARCHAR"/>
+		<result column="invest_money" property="investMoney" jdbcType="DECIMAL"/>
+		<result column="product_id" property="productId" jdbcType="VARCHAR"/>
+		<result column="name" property="name" jdbcType="VARCHAR"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="type" property="type" jdbcType="INTEGER"/>
+		<result column="money" property="money" jdbcType="DECIMAL"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="user_mobile" property="userMobile" jdbcType="VARCHAR"/>
+		<result column="user_name" property="userName" jdbcType="VARCHAR"/>
+		<result column="cfplanner_id" property="cfplannerId" jdbcType="VARCHAR"/>
+		<result column="cfplanner_mobile" property="cfplannerMobile" jdbcType="VARCHAR"/>
+		<result column="cfplanner_name" property="cfplannerName" jdbcType="VARCHAR"/>
+		<result column="use_date" property="useDate" jdbcType="TIMESTAMP"/>
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	redpacket_id,
+	    	redpacket_send_id,
+	    	redpacket_detail_id,
+	    	recharge_id,
+	    	invest_id,
+	    	invest_money,
+	    	product_id,
+	    	name,
+	    	remark,
+	    	type,
+	    	money,
+	    	user_id,
+	    	user_mobile,
+	    	user_name,
+	    	cfplanner_id,
+	    	cfplanner_mobile,
+	    	cfplanner_name,
+	    	use_date,
+	    	create_date,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != redpacketId and ''!= redpacketId  ">
+			and redpacket_id = #{redpacketId}
+		</if>
+		<if test=" null != redpacketSendId and ''!= redpacketSendId  ">
+			and redpacket_send_id = #{redpacketSendId}
+		</if>
+		<if test=" null != redpacketDetailId and ''!= redpacketDetailId  ">
+			and redpacket_detail_id = #{redpacketDetailId}
+		</if>
+		<if test=" null != rechargeId and ''!= rechargeId  ">
+			and recharge_id = #{rechargeId}
+		</if>
+		<if test=" null != investId and ''!= investId  ">
+			and invest_id = #{investId}
+		</if>
+		<if test=" null != investMoney ">
+			and invest_money = #{investMoney}
+		</if>
+		<if test=" null != productId and ''!= productId  ">
+			and product_id = #{productId}
+		</if>
+		<if test=" null != name and ''!= name  ">
+			and name = #{name}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+		<if test=" null != type ">
+			and type = #{type}
+		</if>
+		<if test=" null != money ">
+			and money = #{money}
+		</if>
+		<if test=" null != userId and ''!= userId  ">
+			and user_id = #{userId}
+		</if>
+		<if test=" null != userMobile and ''!= userMobile  ">
+			and user_mobile = #{userMobile}
+		</if>
+		<if test=" null != userName and ''!= userName  ">
+			and user_name = #{userName}
+		</if>
+		<if test=" null != cfplannerId and ''!= cfplannerId  ">
+			and cfplanner_id = #{cfplannerId}
+		</if>
+		<if test=" null != cfplannerMobile and ''!= cfplannerMobile  ">
+			and cfplanner_mobile = #{cfplannerMobile}
+		</if>
+		<if test=" null != cfplannerName and ''!= cfplannerName  ">
+			and cfplanner_name = #{cfplannerName}
+		</if>
+		<if test=" null != useDate ">
+			and use_date = #{useDate}
+		</if>
+		<if test=" null != createDate ">
+			and create_date = #{createDate}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.act.redpacket.model.ActRedpacketUseRecord">
+		select <include refid="Base_Column_List" /> from tact_redpacket_use_record 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.act.redpacket.model.ActRedpacketUseRecord">
+		select <include refid="Base_Column_List" /> from tact_redpacket_use_record 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tact_redpacket_use_record
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tact_redpacket_use_record
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.act.redpacket.model.ActRedpacketUseRecord" >
+    INSERT INTO tact_redpacket_use_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					redpacket_id,
+				</if>
+			 	<if test=" null != redpacketSendId and ''!= redpacketSendId  ">
+					redpacket_send_id,
+				</if>
+			 	<if test=" null != redpacketDetailId and ''!= redpacketDetailId  ">
+					redpacket_detail_id,
+				</if>
+			 	<if test=" null != rechargeId and ''!= rechargeId  ">
+					recharge_id,
+				</if>
+			 	<if test=" null != investId and ''!= investId  ">
+					invest_id,
+				</if>
+			 	<if test=" null != investMoney ">
+					invest_money,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					name,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != type ">
+					type,
+				</if>
+			 	<if test=" null != money ">
+					money,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != userMobile and ''!= userMobile  ">
+					user_mobile,
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					user_name,
+				</if>
+			 	<if test=" null != cfplannerId and ''!= cfplannerId  ">
+					cfplanner_id,
+				</if>
+			 	<if test=" null != cfplannerMobile and ''!= cfplannerMobile  ">
+					cfplanner_mobile,
+				</if>
+			 	<if test=" null != cfplannerName and ''!= cfplannerName  ">
+					cfplanner_name,
+				</if>
+			 	<if test=" null != useDate ">
+					use_date,
+				</if>
+			 	<if test=" null != createDate ">
+					create_date,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					 	#{redpacketId},
+				</if>
+			 	<if test=" null != redpacketSendId and ''!= redpacketSendId  ">
+					 	#{redpacketSendId},
+				</if>
+			 	<if test=" null != redpacketDetailId and ''!= redpacketDetailId  ">
+					 	#{redpacketDetailId},
+				</if>
+			 	<if test=" null != rechargeId and ''!= rechargeId  ">
+					 	#{rechargeId},
+				</if>
+			 	<if test=" null != investId and ''!= investId  ">
+					 	#{investId},
+				</if>
+			 	<if test=" null != investMoney ">
+					 	#{investMoney},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					 	#{name},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != type ">
+					 	#{type},
+				</if>
+			 	<if test=" null != money ">
+					 	#{money},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != userMobile and ''!= userMobile  ">
+					 	#{userMobile},
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					 	#{userName},
+				</if>
+			 	<if test=" null != cfplannerId and ''!= cfplannerId  ">
+					 	#{cfplannerId},
+				</if>
+			 	<if test=" null != cfplannerMobile and ''!= cfplannerMobile  ">
+					 	#{cfplannerMobile},
+				</if>
+			 	<if test=" null != cfplannerName and ''!= cfplannerName  ">
+					 	#{cfplannerName},
+				</if>
+			 	<if test=" null != useDate ">
+					 	#{useDate},
+				</if>
+			 	<if test=" null != createDate ">
+					 	#{createDate},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.act.redpacket.model.ActRedpacketUseRecord" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tact_redpacket_use_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					redpacket_id,
+				</if>
+			 	<if test=" null != redpacketSendId and ''!= redpacketSendId  ">
+					redpacket_send_id,
+				</if>
+			 	<if test=" null != redpacketDetailId and ''!= redpacketDetailId  ">
+					redpacket_detail_id,
+				</if>
+			 	<if test=" null != rechargeId and ''!= rechargeId  ">
+					recharge_id,
+				</if>
+			 	<if test=" null != investId and ''!= investId  ">
+					invest_id,
+				</if>
+			 	<if test=" null != investMoney ">
+					invest_money,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					name,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != type ">
+					type,
+				</if>
+			 	<if test=" null != money ">
+					money,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != userMobile and ''!= userMobile  ">
+					user_mobile,
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					user_name,
+				</if>
+			 	<if test=" null != cfplannerId and ''!= cfplannerId  ">
+					cfplanner_id,
+				</if>
+			 	<if test=" null != cfplannerMobile and ''!= cfplannerMobile  ">
+					cfplanner_mobile,
+				</if>
+			 	<if test=" null != cfplannerName and ''!= cfplannerName  ">
+					cfplanner_name,
+				</if>
+			 	<if test=" null != useDate ">
+					use_date,
+				</if>
+			 	<if test=" null != createDate ">
+					create_date,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					 	#{redpacketId},
+				</if>
+			 	<if test=" null != redpacketSendId and ''!= redpacketSendId  ">
+					 	#{redpacketSendId},
+				</if>
+			 	<if test=" null != redpacketDetailId and ''!= redpacketDetailId  ">
+					 	#{redpacketDetailId},
+				</if>
+			 	<if test=" null != rechargeId and ''!= rechargeId  ">
+					 	#{rechargeId},
+				</if>
+			 	<if test=" null != investId and ''!= investId  ">
+					 	#{investId},
+				</if>
+			 	<if test=" null != investMoney ">
+					 	#{investMoney},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					 	#{name},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != type ">
+					 	#{type},
+				</if>
+			 	<if test=" null != money ">
+					 	#{money},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != userMobile and ''!= userMobile  ">
+					 	#{userMobile},
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					 	#{userName},
+				</if>
+			 	<if test=" null != cfplannerId and ''!= cfplannerId  ">
+					 	#{cfplannerId},
+				</if>
+			 	<if test=" null != cfplannerMobile and ''!= cfplannerMobile  ">
+					 	#{cfplannerMobile},
+				</if>
+			 	<if test=" null != cfplannerName and ''!= cfplannerName  ">
+					 	#{cfplannerName},
+				</if>
+			 	<if test=" null != useDate ">
+					 	#{useDate},
+				</if>
+			 	<if test=" null != createDate ">
+					 	#{createDate},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.act.redpacket.model.ActRedpacketUseRecord" >
+  		UPDATE tact_redpacket_use_record
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != redpacketId and ''!= redpacketId  ">
+						redpacket_id = #{redpacketId},
+					</if>
+					<if test=" null != redpacketSendId and ''!= redpacketSendId  ">
+						redpacket_send_id = #{redpacketSendId},
+					</if>
+					<if test=" null != redpacketDetailId and ''!= redpacketDetailId  ">
+						redpacket_detail_id = #{redpacketDetailId},
+					</if>
+					<if test=" null != rechargeId and ''!= rechargeId  ">
+						recharge_id = #{rechargeId},
+					</if>
+					<if test=" null != investId and ''!= investId  ">
+						invest_id = #{investId},
+					</if>
+					<if test=" null != investMoney ">
+						invest_money = #{investMoney},
+					</if>
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != name and ''!= name  ">
+						name = #{name},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != type ">
+						type = #{type},
+					</if>
+					<if test=" null != money ">
+						money = #{money},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != userMobile and ''!= userMobile  ">
+						user_mobile = #{userMobile},
+					</if>
+					<if test=" null != userName and ''!= userName  ">
+						user_name = #{userName},
+					</if>
+					<if test=" null != cfplannerId and ''!= cfplannerId  ">
+						cfplanner_id = #{cfplannerId},
+					</if>
+					<if test=" null != cfplannerMobile and ''!= cfplannerMobile  ">
+						cfplanner_mobile = #{cfplannerMobile},
+					</if>
+					<if test=" null != cfplannerName and ''!= cfplannerName  ">
+						cfplanner_name = #{cfplannerName},
+					</if>
+					<if test=" null != useDate ">
+						use_date = #{useDate},
+					</if>
+					<if test=" null != createDate ">
+						create_date = #{createDate},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.act.redpacket.model.ActRedpacketUseRecord" >
+	    UPDATE tact_redpacket_use_record
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != redpacketId and ''!= redpacketId  ">
+						redpacket_id = #{redpacketId},
+					</if>
+					<if test=" null != redpacketSendId and ''!= redpacketSendId  ">
+						redpacket_send_id = #{redpacketSendId},
+					</if>
+					<if test=" null != redpacketDetailId and ''!= redpacketDetailId  ">
+						redpacket_detail_id = #{redpacketDetailId},
+					</if>
+					<if test=" null != rechargeId and ''!= rechargeId  ">
+						recharge_id = #{rechargeId},
+					</if>
+					<if test=" null != investId and ''!= investId  ">
+						invest_id = #{investId},
+					</if>
+					<if test=" null != investMoney ">
+						invest_money = #{investMoney},
+					</if>
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != name and ''!= name  ">
+						name = #{name},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != type ">
+						type = #{type},
+					</if>
+					<if test=" null != money ">
+						money = #{money},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != userMobile and ''!= userMobile  ">
+						user_mobile = #{userMobile},
+					</if>
+					<if test=" null != userName and ''!= userName  ">
+						user_name = #{userName},
+					</if>
+					<if test=" null != cfplannerId and ''!= cfplannerId  ">
+						cfplanner_id = #{cfplannerId},
+					</if>
+					<if test=" null != cfplannerMobile and ''!= cfplannerMobile  ">
+						cfplanner_mobile = #{cfplannerMobile},
+					</if>
+					<if test=" null != cfplannerName and ''!= cfplannerName  ">
+						cfplanner_name = #{cfplannerName},
+					</if>
+					<if test=" null != useDate ">
+						use_date = #{useDate},
+					</if>
+					<if test=" null != createDate ">
+						create_date = #{createDate},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+</mapper>

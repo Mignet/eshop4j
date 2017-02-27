@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.TcInvestMapper">
+	
+	<select id="queryCustomerInvestStatistics" resultType="com.linkwee.web.model.CustomerInvestStatistics">
+		SELECT
+			u.user_id userId,
+			u.user_name name,
+			u.mobile mobile,
+			i.rect_invest_time rectInvestTime,
+			IFNULL(SUM(a.invest_amt), 0) totalAmt,
+			IFNULL(
+				SUM(
+					CASE
+					WHEN a.`status` = 1 THEN
+						a.invest_amt
+					ELSE
+						0
+					END
+				),
+				0
+			) investamt,
+			COUNT(a.invest_id) investCount,
+			IFNULL(SUM(a.profit), 0) profitamt,
+			IFNULL(SUM(c.fee_amount), 0) saleamt
+		FROM tcim_product_invest_record a
+		LEFT JOIN tcrm_investor i on a.user_id = i.user_id
+		LEFT JOIN tcrm_user_info u ON a.user_id = u.user_id
+		LEFT JOIN tcim_org_fee_gather c ON a.invest_id = c.invest_id
+		WHERE  1 = 1
+		<if test=" null != platfrom and  platfrom != '99'  ">
+			AND a.platfrom = #{platfrom,jdbcType=VARCHAR}
+		</if>
+		<if test="null !=nameOrMobile or ''!=nameOrMobile">
+			AND a.user_id IN (
+				SELECT
+					u.user_id
+				FROM
+					tcrm_user_info u
+				WHERE
+					u.mobile LIKE CONCAT('%','${nameOrMobile}','%' ) 
+				OR u.user_name LIKE CONCAT('%','${nameOrMobile}','%' )
+			 )
+		</if>
+		GROUP BY a.user_id ORDER BY rectInvestTime DESC
+	</select>
+  	
+  	<select id="queryCustomerInvestDetail" resultType="com.linkwee.web.model.CustomerInvestDetail">
+		SELECT
+			p.product_name productName,
+			p.is_flow isflow,
+			p.flow_min_rate flowMinRate,
+			p.flow_max_rate flowMaxRate,
+			a.invest_amt investAmt,
+			a.profit,
+			a.start_time startTime,
+			a.end_time endTime,
+			a.status status,
+			c.fee_amount feeAmt
+		FROM
+			tcim_product_invest_record a 
+		LEFT JOIN tcim_product p on a.product_id=p.product_id
+		LEFT JOIN tcim_org_fee_gather c ON a.invest_id = c.invest_id
+		WHERE a.user_id = #{userId}
+		<if test=" null != platfrom and  platfrom != '99'  ">
+			AND a.platfrom = #{platfrom,jdbcType=VARCHAR}
+		</if>		
+		 ORDER BY a.start_time DESC
+  	</select>
+
+
+  	<select id="getInvestmentStatisticsTotal" resultType="BigDecimal">
+
+  		 SELECT
+			IFNULL(SUM(i.invest_amt), 0) value
+		FROM
+			tcim_org_info o
+		LEFT JOIN tcim_product_invest_record i ON o.org_number = i.platfrom
+		<where>
+			 1=1
+			<if test=" null != platfrom and  platfrom != '' ">
+				AND o.org_number = #{platfrom}
+			</if>
+			<if test=" null != startTime and  startTime != '' ">
+				AND DATE_FORMAT(i.start_time,'%Y-%m-%d')  <![CDATA[   >= ]]> #{startTime}
+			</if>
+			<if test=" null != endTime and  endTime != '' ">
+				AND DATE_FORMAT(i.start_time,'%Y-%m-%d')  <![CDATA[   <= ]]> #{endTime}
+			</if>
+		</where>
+  	</select>
+  	
+  	
+  	 <select id="getInvestmentStatisticsList" resultType="map">
+  		 SELECT
+			IFNULL(SUM(i.invest_amt), 0)/10000 value,
+			count(i.id) investCount,
+			count(DISTINCT i.user_id) personCount,
+			IFNULL(sum(case i.`status` when 1 then i.invest_amt else 0 end), 0)/10000 holdAmount,
+			IFNULL(sum(case i.`status` when 2 then i.invest_amt else 0 end), 0)/10000 returningAmount,
+			IFNULL(sum(case i.`status` when 3 then i.invest_amt else 0 end), 0)/10000 returnedAmount,
+			o.`name`
+		FROM
+			tcim_org_info o
+		LEFT JOIN tcim_product_invest_record i ON o.org_number = i.platfrom
+		<where>
+			 o.`status` = 1
+			<if test=" null != platfrom and  platfrom != '' ">
+				AND o.org_number = #{platfrom}
+			</if>
+			<if test=" null != startTime and  startTime != '' ">
+				AND DATE_FORMAT(i.start_time,'%Y-%m-%d')  <![CDATA[   >= ]]> #{startTime}
+			</if>
+			<if test=" null != endTime and  endTime != '' ">
+				AND DATE_FORMAT(i.start_time,'%Y-%m-%d')  <![CDATA[   <= ]]> #{endTime}
+			</if>
+		</where>
+		
+		GROUP BY
+			o.org_number
+		ORDER BY
+			value DESC
+  	</select>
+  	
+  	
+  	<select id="getInvestStatisticsByPlatfromTotal" resultType="BigDecimal">		
+  		 SELECT
+			IFNULL(SUM(a.amt),0) amt
+		FROM
+			(
+				SELECT
+					SUM(i.invest_amt) amt,
+					CONCAT(
+						p.dead_line_min_value,
+						'-',
+						dead_line_max_value
+					) deadLine
+				FROM
+				tcim_product 	 p
+				LEFT JOIN tcim_product_invest_record i ON i.product_id = p.product_id
+				<where>
+					 p.org_number =#{platfrom}
+					<if test=" null != startTime and  startTime != '' ">
+						AND DATE_FORMAT(i.start_time,'%Y-%m-%d')  <![CDATA[   >= ]]> #{startTime}
+					</if>
+					<if test=" null != endTime and  endTime != '' ">
+						AND DATE_FORMAT(i.start_time,'%Y-%m-%d')  <![CDATA[   <= ]]> #{endTime}
+					</if>
+				</where>
+				GROUP BY
+					 p.product_id
+			) a 
+  	</select>
+  	
+  	<select id="getInvestStatisticsByPlatfrom" resultType="map">
+  		 SELECT
+			IFNULL( SUM(a.amt),0) value,
+			a.deadLine name
+		FROM
+			(
+				SELECT
+					SUM(i.invest_amt) amt,
+					CONCAT(
+						p.dead_line_min_value,
+						'-',
+						dead_line_max_value
+					) deadLine
+				FROM
+				tcim_product 	 p
+				LEFT JOIN tcim_product_invest_record i ON i.product_id = p.product_id
+				
+				<where>
+					 p.org_number =#{platfrom}
+					<if test=" null != startTime and  startTime != '' ">
+						AND DATE_FORMAT(i.start_time,'%Y-%m-%d')  <![CDATA[   >= ]]> DATE_FORMAT(#{startTime},'%Y-%m-%d') 
+					</if>
+					<if test=" null != endTime and  endTime != '' ">
+						AND DATE_FORMAT(i.start_time,'%Y-%m-%d')  <![CDATA[   <= ]]> DATE_FORMAT(#{endTime},'%Y-%m-%d') 
+					</if>
+				</where>
+				GROUP BY
+					 p.product_id
+			) a
+		GROUP BY
+			a.deadLine ORDER BY value DESC 
+  	</select>
+  	
+  	<!-- 即将回款 -->
+	<select id="customerImpendRepayment" resultType="com.linkwee.web.response.tc.InvestorRepaymentResponse">
+	
+		SELECT
+			i.user_id investorId,
+			iu.mobile investorMobiel,
+			iu.user_name investorName,
+			cu.user_name cfpName,
+			cu.mobile cfpMobile,
+			IFNULL(SUM(i.invest_amt),0) repaymentTotalAmt,
+			COUNT(i.invest_id) productCount,
+			IFNULL(SUM(CASE WHEN i.`status`=1 THEN i.invest_amt ELSE 0 END ),0) investAmt,
+			IFNULL(SUM(CASE WHEN i.`status`=3 THEN i.invest_amt ELSE 0 END ),0) completionInvestAmt,
+			IFNULL(SUM(i.profit),0) profit,
+			${isExport} isExport
+		FROM
+			tcim_product_invest_record i
+		LEFT JOIN tcrm_investor investor ON investor.user_id = i.user_id
+		LEFT JOIN tcrm_user_info iu ON i.user_id = iu.user_id
+		LEFT JOIN tcrm_user_info cu ON investor.cfplanner = cu.user_id
+	
+		
+		<where>
+			1=1 
+			<if test="mobileOrName!=null and mobileOrName!='' ">
+					<if test="type == 0" >
+						AND (iu.mobile=#{mobileOrName} OR iu.user_name=#{mobileOrName})
+					</if>
+					<if test="type == 1" >
+						AND (cu.mobile=#{mobileOrName} OR cu.user_name=#{mobileOrName})
+					</if>
+			</if>
+			
+			AND i.end_time BETWEEN #{startTime} AND #{endTime}
+		</where>
+			
+		GROUP BY
+			i.user_id
+		
+	</select>
+	
+	
+	<!-- 即将回款 -->
+	<select id="getCustomerImpendRepaymentList" resultType="com.linkwee.web.response.tc.InvestorRepaymentResponse">
+	
+		SELECT
+			i.user_id investorId,
+			iu.mobile investorMobiel,
+			iu.user_name investorName,
+			cu.user_name cfpName,
+			cu.mobile cfpMobile,
+			IFNULL(SUM(i.invest_amt),0) repaymentTotalAmt,
+			COUNT(i.invest_id) productCount,
+			IFNULL(SUM(CASE WHEN i.`status`=1 THEN i.invest_amt ELSE 0 END ),0) investAmt,
+			IFNULL(SUM(CASE WHEN i.`status`=3 THEN i.invest_amt ELSE 0 END ),0) completionInvestAmt,
+			IFNULL(SUM(i.profit),0) profit,
+			${isExport} isExport
+		FROM
+			tcim_product_invest_record i
+		LEFT JOIN tcrm_investor investor ON investor.user_id = i.user_id
+		LEFT JOIN tcrm_user_info iu ON i.user_id = iu.user_id
+		LEFT JOIN tcrm_user_info cu ON investor.cfplanner = cu.user_id
+	
+		
+		<where>
+			1=1 
+			<if test="mobileOrName!=null and mobileOrName!='' ">
+					<if test="type == 0" >
+						AND (iu.mobile=#{mobileOrName} OR iu.user_name=#{mobileOrName})
+					</if>
+					<if test="type == 1" >
+						AND (cu.mobile=#{mobileOrName} OR cu.user_name=#{mobileOrName})
+					</if>
+			</if>
+			
+			AND i.end_time BETWEEN #{startTime} AND #{endTime}
+		</where>
+			
+		GROUP BY
+			i.user_id
+		
+	</select>
+</mapper>

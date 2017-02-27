@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.ActInvestscratchWinningRecordMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.ActInvestscratchWinningRecord" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+		<result column="winning_amt" property="winningAmt" jdbcType="DECIMAL"/>
+		<result column="isshaved" property="isshaved" jdbcType="INTEGER"/>
+		<result column="winning_time" property="winningTime" jdbcType="TIMESTAMP"/>
+		<result column="investscratch_id" property="investscratchId" jdbcType="VARCHAR"/>
+		<result column="extends1" property="extends1" jdbcType="VARCHAR"/>
+		<result column="extends2" property="extends2" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	user_id,
+	    	mobile,
+	    	winning_amt,
+	    	isshaved,
+	    	winning_time,
+	    	investscratch_id,
+	    	extends1,
+	    	extends2,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != userId and ''!= userId  ">
+			and user_id = #{userId}
+		</if>
+		<if test=" null != mobile and ''!= mobile  ">
+			and mobile = #{mobile}
+		</if>
+		<if test=" null != winningAmt ">
+			and winning_amt = #{winningAmt}
+		</if>
+		<if test=" null != isshaved ">
+			and isshaved = #{isshaved}
+		</if>
+		<if test=" null != winningTime ">
+			and winning_time = #{winningTime}
+		</if>
+		<if test=" null != investscratchId and ''!= investscratchId  ">
+			and investscratch_id = #{investscratchId}
+		</if>
+		<if test=" null != extends1 and ''!= extends1  ">
+			and extends1 = #{extends1}
+		</if>
+		<if test=" null != extends2 and ''!= extends2  ">
+			and extends2 = #{extends2}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.ActInvestscratchWinningRecord">
+		select <include refid="Base_Column_List" /> from tact_investscratch_winning_record 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.ActInvestscratchWinningRecord">
+		select <include refid="Base_Column_List" /> from tact_investscratch_winning_record 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tact_investscratch_winning_record
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tact_investscratch_winning_record
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.ActInvestscratchWinningRecord" >
+    INSERT INTO tact_investscratch_winning_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != mobile and ''!= mobile  ">
+					mobile,
+				</if>
+			 	<if test=" null != winningAmt ">
+					winning_amt,
+				</if>
+			 	<if test=" null != isshaved ">
+					isshaved,
+				</if>
+			 	<if test=" null != winningTime ">
+					winning_time,
+				</if>
+			 	<if test=" null != investscratchId and ''!= investscratchId  ">
+					investscratch_id,
+				</if>
+			 	<if test=" null != extends1 and ''!= extends1  ">
+					extends1,
+				</if>
+			 	<if test=" null != extends2 and ''!= extends2  ">
+					extends2,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != mobile and ''!= mobile  ">
+					 	#{mobile},
+				</if>
+			 	<if test=" null != winningAmt ">
+					 	#{winningAmt},
+				</if>
+			 	<if test=" null != isshaved ">
+					 	#{isshaved},
+				</if>
+			 	<if test=" null != winningTime ">
+					 	#{winningTime},
+				</if>
+			 	<if test=" null != investscratchId and ''!= investscratchId  ">
+					 	#{investscratchId},
+				</if>
+			 	<if test=" null != extends1 and ''!= extends1  ">
+					 	#{extends1},
+				</if>
+			 	<if test=" null != extends2 and ''!= extends2  ">
+					 	#{extends2},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.ActInvestscratchWinningRecord" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tact_investscratch_winning_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != mobile and ''!= mobile  ">
+					mobile,
+				</if>
+			 	<if test=" null != winningAmt ">
+					winning_amt,
+				</if>
+			 	<if test=" null != isshaved ">
+					isshaved,
+				</if>
+			 	<if test=" null != winningTime ">
+					winning_time,
+				</if>
+			 	<if test=" null != investscratchId and ''!= investscratchId  ">
+					investscratch_id,
+				</if>
+			 	<if test=" null != extends1 and ''!= extends1  ">
+					extends1,
+				</if>
+			 	<if test=" null != extends2 and ''!= extends2  ">
+					extends2,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != mobile and ''!= mobile  ">
+					 	#{mobile},
+				</if>
+			 	<if test=" null != winningAmt ">
+					 	#{winningAmt},
+				</if>
+			 	<if test=" null != isshaved ">
+					 	#{isshaved},
+				</if>
+			 	<if test=" null != winningTime ">
+					 	#{winningTime},
+				</if>
+			 	<if test=" null != investscratchId and ''!= investscratchId  ">
+					 	#{investscratchId},
+				</if>
+			 	<if test=" null != extends1 and ''!= extends1  ">
+					 	#{extends1},
+				</if>
+			 	<if test=" null != extends2 and ''!= extends2  ">
+					 	#{extends2},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.ActInvestscratchWinningRecord" >
+  		UPDATE tact_investscratch_winning_record
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != mobile and ''!= mobile  ">
+						mobile = #{mobile},
+					</if>
+					<if test=" null != winningAmt ">
+						winning_amt = #{winningAmt},
+					</if>
+					<if test=" null != isshaved ">
+						isshaved = #{isshaved},
+					</if>
+					<if test=" null != winningTime ">
+						winning_time = #{winningTime},
+					</if>
+					<if test=" null != investscratchId and ''!= investscratchId  ">
+						investscratch_id = #{investscratchId},
+					</if>
+					<if test=" null != extends1 and ''!= extends1  ">
+						extends1 = #{extends1},
+					</if>
+					<if test=" null != extends2 and ''!= extends2  ">
+						extends2 = #{extends2},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.ActInvestscratchWinningRecord" >
+	    UPDATE tact_investscratch_winning_record
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != mobile and ''!= mobile  ">
+						mobile = #{mobile},
+					</if>
+					<if test=" null != winningAmt ">
+						winning_amt = #{winningAmt},
+					</if>
+					<if test=" null != isshaved ">
+						isshaved = #{isshaved},
+					</if>
+					<if test=" null != winningTime ">
+						winning_time = #{winningTime},
+					</if>
+					<if test=" null != investscratchId and ''!= investscratchId  ">
+						investscratch_id = #{investscratchId},
+					</if>
+					<if test=" null != extends1 and ''!= extends1  ">
+						extends1 = #{extends1},
+					</if>
+					<if test=" null != extends2 and ''!= extends2  ">
+						extends2 = #{extends2},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tact_investscratch_winning_record
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+    
+    <select id="queryWinningRecordOfLastFifty" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tact_investscratch_winning_record WHERE isshaved = 1 
+        ORDER BY winning_time DESC LIMIT 50
+    </select>
+    
+    <select id="queryWinningUserNumber" resultType="Integer">
+        SELECT COUNT(DISTINCT user_id) FROM tact_investscratch_winning_record
+    </select>
+    
+	<select id="queryScratchedTime" resultType="Integer">
+        SELECT
+        count(*)
+        FROM tact_investscratch_winning_record WHERE isshaved = 1
+        AND user_id = #{userId} 
+    </select>
+    
+    <select id="queryTotalScratchTime" resultType="Integer">
+    	<![CDATA[
+		SELECT
+			CASE
+		WHEN result.number > 2 THEN
+			3
+		WHEN result.number > 1 THEN
+			2
+		ELSE
+			0
+		END AS totalScratchTime
+		FROM
+			(
+				SELECT
+					COUNT(DISTINCT tpir.platfrom) AS number
+				FROM
+					tcim_product_invest_record tpir
+				WHERE
+					tpir.is_platfrom_first_invest = 1
+				AND tpir.invest_amt >= 5000
+				AND tpir.create_time between '2016-09-01 00:00:00' and '2016-10-01 00:00:00'
+				AND tpir.user_id = #{userId}
+			) result
+			]]>
+    </select>
+
+</mapper>

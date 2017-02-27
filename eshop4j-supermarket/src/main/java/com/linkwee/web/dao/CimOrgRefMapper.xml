@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CimOrgRefMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.CimOrgRef" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="sale_user_id" property="saleUserId" jdbcType="VARCHAR"/>
+		<result column="org_number" property="orgNumber" jdbcType="VARCHAR"/>
+		<result column="recommend_time" property="recommendTime" jdbcType="TIMESTAMP"/>
+		<result column="investor_user_id" property="investorUserId" jdbcType="VARCHAR"/>
+		<result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	sale_user_id,
+	    	org_number,
+	    	recommend_time,
+	    	investor_user_id,
+	    	remarks,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != saleUserId and ''!= saleUserId  ">
+			and sale_user_id = #{saleUserId}
+		</if>
+		<if test=" null != orgNumber and ''!= orgNumber  ">
+			and org_number = #{orgNumber}
+		</if>
+		<if test=" null != recommendTime ">
+			and recommend_time = #{recommendTime}
+		</if>
+		<if test=" null != investorUserId and ''!= investorUserId  ">
+			and investor_user_id = #{investorUserId}
+		</if>
+		<if test=" null != remarks and ''!= remarks  ">
+			and remarks = #{remarks}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimOrgRef">
+		select <include refid="Base_Column_List" /> from tcim_org_ref 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimOrgRef">
+		select <include refid="Base_Column_List" /> from tcim_org_ref 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_org_ref
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_org_ref
+    where id = #{0}
+  </delete>
+  
+  <delete id="deleteByCondition" parameterType="com.linkwee.web.model.CimProductRef" >
+    delete from tcim_org_ref
+    where 1=1 <include refid="Base_Condition" />
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.CimOrgRef" >
+    INSERT INTO tcim_org_ref
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != saleUserId and ''!= saleUserId  ">
+					sale_user_id,
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					org_number,
+				</if>
+			 	<if test=" null != recommendTime ">
+					recommend_time,
+				</if>
+			 	<if test=" null != investorUserId and ''!= investorUserId  ">
+					investor_user_id,
+				</if>
+			 	<if test=" null != remarks and ''!= remarks  ">
+					remarks,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != saleUserId and ''!= saleUserId  ">
+					 	#{saleUserId},
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					 	#{orgNumber},
+				</if>
+			 	<if test=" null != recommendTime ">
+					 	#{recommendTime},
+				</if>
+			 	<if test=" null != investorUserId and ''!= investorUserId  ">
+					 	#{investorUserId},
+				</if>
+			 	<if test=" null != remarks and ''!= remarks  ">
+					 	#{remarks},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.CimOrgRef" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcim_org_ref
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != saleUserId and ''!= saleUserId  ">
+					sale_user_id,
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					org_number,
+				</if>
+			 	<if test=" null != recommendTime ">
+					recommend_time,
+				</if>
+			 	<if test=" null != investorUserId and ''!= investorUserId  ">
+					investor_user_id,
+				</if>
+			 	<if test=" null != remarks and ''!= remarks  ">
+					remarks,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != saleUserId and ''!= saleUserId  ">
+					 	#{saleUserId},
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					 	#{orgNumber},
+				</if>
+			 	<if test=" null != recommendTime ">
+					 	#{recommendTime},
+				</if>
+			 	<if test=" null != investorUserId and ''!= investorUserId  ">
+					 	#{investorUserId},
+				</if>
+			 	<if test=" null != remarks and ''!= remarks  ">
+					 	#{remarks},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.CimOrgRef" >
+  		UPDATE tcim_org_ref
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != saleUserId and ''!= saleUserId  ">
+						sale_user_id = #{saleUserId},
+					</if>
+					<if test=" null != orgNumber and ''!= orgNumber  ">
+						org_number = #{orgNumber},
+					</if>
+					<if test=" null != recommendTime ">
+						recommend_time = #{recommendTime},
+					</if>
+					<if test=" null != investorUserId and ''!= investorUserId  ">
+						investor_user_id = #{investorUserId},
+					</if>
+					<if test=" null != remarks and ''!= remarks  ">
+						remarks = #{remarks},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.CimOrgRef" >
+	    UPDATE tcim_org_ref
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != saleUserId and ''!= saleUserId  ">
+						sale_user_id = #{saleUserId},
+					</if>
+					<if test=" null != orgNumber and ''!= orgNumber  ">
+						org_number = #{orgNumber},
+					</if>
+					<if test=" null != recommendTime ">
+						recommend_time = #{recommendTime},
+					</if>
+					<if test=" null != investorUserId and ''!= investorUserId  ">
+						investor_user_id = #{investorUserId},
+					</if>
+					<if test=" null != remarks and ''!= remarks  ">
+						remarks = #{remarks},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcim_org_ref
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+</mapper>

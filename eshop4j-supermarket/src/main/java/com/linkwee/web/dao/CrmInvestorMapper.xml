@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CrmInvestorMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.CrmInvestor" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+		<result column="qrcode" property="qrcode" jdbcType="VARCHAR"/>
+		<result column="cfplanner" property="cfplanner" jdbcType="VARCHAR"/>
+		<result column="ref_type" property="refType" jdbcType="TINYINT"/>
+		<result column="ref_user" property="refUser" jdbcType="VARCHAR"/>
+		<result column="head_image" property="headImage" jdbcType="VARCHAR"/>
+		<result column="rect_visit_time" property="rectVisitTime" jdbcType="TIMESTAMP"/>
+		<result column="rect_invest_time" property="rectInvestTime" jdbcType="TIMESTAMP"/>
+		<result column="first_invest_time" property="firstInvestTime" jdbcType="TIMESTAMP"/>
+		<result column="is_important" property="isImportant" jdbcType="TINYINT"/>
+		<result column="is_free_customer" property="isFreeCustomer" jdbcType="TINYINT"/>
+		<result column="easemob_acct" property="easemobAcct" jdbcType="VARCHAR"/>
+		<result column="easemob_password" property="easemobPassword" jdbcType="VARCHAR"/>
+		<result column="easemob_reg_status" property="easemobRegStatus" jdbcType="INTEGER"/>
+		<result column="easemob_nickname_status" property="easemobNicknameStatus" jdbcType="INTEGER"/>
+		<result column="is_locked" property="isLocked" jdbcType="TINYINT"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		<result column="del_status" property="delStatus" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<resultMap  type="com.linkwee.web.model.CrmInvestor" id="BaseResultMap2" extends="BaseResultMap">
+		<result column="user_name" property="userName" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	
+	<!-- 投资人的绑定的机构信息  -->
+	<resultMap  type="com.linkwee.web.model.crm.InvestorBindPlatformListResp" id="InvestorBindPlatformListResp">
+		<result column="org_number" property="orgNumber" jdbcType="VARCHAR"/>
+		<result column="name" property="orgName" jdbcType="VARCHAR"/>
+		<result column="org_account" property="orgAccount" jdbcType="VARCHAR"/>
+		<result column="org_account_type" property="orgAccountType" jdbcType="INTEGER"/>
+		<result column="is_new_user" property="isNewUser" jdbcType="INTEGER"/>
+		<result column="is_invested" property="isInvested" jdbcType="INTEGER"/>
+		<result column="creat_time" property="bindDate" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	user_id,
+	    	mobile,
+	    	qrcode,
+	    	cfplanner,
+	    	ref_type,
+	    	ref_user,
+	    	head_image,
+	    	rect_invest_time,
+	    	rect_visit_time,
+	    	first_invest_time,
+	    	is_important,
+	    	is_free_customer,
+	    	easemob_acct,
+	    	easemob_password,
+	    	easemob_reg_status,
+	    	easemob_nickname_status,
+	    	is_locked,
+	    	create_time,
+	    	update_time,
+	    	del_status,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and t.id = #{id}
+		</if>
+		<if test=" null != userId and ''!= userId  ">
+			and t.user_id = #{userId}
+		</if>
+		<if test=" null != mobile and ''!= mobile  ">
+			and t.mobile = #{mobile}
+		</if>
+		<if test=" null != qrcode and ''!= qrcode  ">
+			and t.qrcode = #{qrcode}
+		</if>
+		<if test=" null != cfplanner and ''!= cfplanner  ">
+			and t.cfplanner = #{cfplanner}
+		</if>
+		<if test=" null != refType ">
+			and t.ref_type = #{refType}
+		</if>
+		<if test=" null != refUser and ''!= refUser  ">
+			and t.ref_user = #{refUser}
+		</if>
+		<if test=" null != headImage and ''!= headImage  ">
+			and t.head_image = #{headImage}
+		</if>
+		<if test=" null != rectInvestTime ">
+			and t.rect_invest_time = #{rectInvestTime}
+		</if>
+		<if test=" null != rectVisitTime ">
+			and t.rect_visit_time = #{rectVisitTime}
+		</if>
+		<if test=" null != isImportant ">
+			and t.is_important = #{isImportant}
+		</if>
+		<if test=" null != isFreeCustomer ">
+			and t.is_free_customer = #{isFreeCustomer}
+		</if>
+		<if test=" null != easemobAcct and ''!= easemobAcct  ">
+			and t.easemob_acct = #{easemobAcct}
+		</if>
+		<if test=" null != easemobPassword and ''!= easemobPassword  ">
+			and t.easemob_password = #{easemobPassword}
+		</if>
+		<if test=" null != easemobRegStatus and ''!= easemobRegStatus  ">
+			and t.easemob_reg_status = #{easemobRegStatus}
+		</if>
+		<if test=" null != easemobNicknameStatus and ''!= easemobNicknameStatus  ">
+			and t.easemob_nickname_status = #{easemobNicknameStatus}
+		</if>
+		<if test=" null != isLocked ">
+			and t.is_locked = #{isLocked}
+		</if>
+		<if test=" null != createTime ">
+			and t.create_time = #{createTime}
+		</if>
+		<if test=" null != updateTime ">
+			and t.update_time = #{updateTime}
+		</if>
+		<if test=" null != delStatus ">
+			and t.del_status = #{delStatus}
+		</if>
+		<if test=" null != userName and ''!= userName  ">
+			and u.user_name = #{userName}
+		</if>
+  </sql>
+  
+    <sql id="Base_Condition_New">
+		<if test=" null != id ">
+			and t.id = #{id}
+		</if>
+		<if test=" null != userId and ''!= userId  ">
+			and t.user_id = #{userId}
+		</if>
+		<if test=" null != mobile and ''!= mobile  ">
+			and t.mobile = #{mobile}
+		</if>
+		<if test=" null != qrcode and ''!= qrcode  ">
+			and t.qrcode = #{qrcode}
+		</if>
+		<if test=" null != cfplanner and ''!= cfplanner  ">
+			and t.cfplanner = #{cfplanner}
+		</if>
+		<if test=" null != refType ">
+			and t.ref_type = #{refType}
+		</if>
+		<if test=" null != refUser and ''!= refUser  ">
+			and t.ref_user = #{refUser}
+		</if>
+		<if test=" null != headImage and ''!= headImage  ">
+			and t.head_image = #{headImage}
+		</if>
+		<if test=" null != rectInvestTime ">
+			and t.rect_invest_time = #{rectInvestTime}
+		</if>
+		<if test=" null != rectVisitTime ">
+			and t.rect_visit_time = #{rectVisitTime}
+		</if>
+		<if test=" null != isImportant ">
+			and t.is_important = #{isImportant}
+		</if>
+		<if test=" null != isFreeCustomer ">
+			and t.is_free_customer = #{isFreeCustomer}
+		</if>
+		<if test=" null != easemobAcct and ''!= easemobAcct  ">
+			and t.easemob_acct = #{easemobAcct}
+		</if>
+		<if test=" null != easemobPassword and ''!= easemobPassword  ">
+			and t.easemob_password = #{easemobPassword}
+		</if>
+		<if test=" null != easemobRegStatus and ''!= easemobRegStatus  ">
+			and t.easemob_reg_status = #{easemobRegStatus}
+		</if>
+		<if test=" null != easemobNicknameStatus and ''!= easemobNicknameStatus  ">
+			and t.easemob_nickname_status = #{easemobNicknameStatus}
+		</if>
+		<if test=" null != isLocked ">
+			and t.is_locked = #{isLocked}
+		</if>
+		<if test=" null != createTime ">
+			and t.create_time = #{createTime}
+		</if>
+		<if test=" null != updateTime ">
+			and t.update_time = #{updateTime}
+		</if>
+		<if test=" null != delStatus ">
+			and t.del_status = #{delStatus}
+		</if>
+		<if test=" null != userName and ''!= userName  ">
+		    and (u.user_name LIKE CONCAT('%','${userName}','%' ) or t.mobile LIKE CONCAT('%','${userName}','%' ))  
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap2"  parameterType="com.linkwee.web.model.CrmInvestor">
+		select t.*, u.user_name from tcrm_investor t join tcrm_user_info u on t.user_id=u.user_id
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap2"  parameterType="com.linkwee.web.model.CrmInvestor">
+		select t.*, u.user_name from tcrm_investor t join tcrm_user_info u on t.user_id=u.user_id
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+   <select id="selectListByConditionNew" resultMap="BaseResultMap2"  parameterType="com.linkwee.web.model.CrmInvestor">
+		select t.*, u.user_name from tcrm_investor t join tcrm_user_info u on t.user_id=u.user_id
+		where 1=1 <include refid="Base_Condition_New" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcrm_investor
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcrm_investor
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.CrmInvestor" >
+    INSERT INTO tcrm_investor
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != mobile and ''!= mobile  ">
+					mobile,
+				</if>
+			 	<if test=" null != qrcode and ''!= qrcode  ">
+					qrcode,
+				</if>
+			 	<if test=" null != cfplanner and ''!= cfplanner  ">
+					cfplanner,
+				</if>
+			 	<if test=" null != refType ">
+					ref_type,
+				</if>
+			 	<if test=" null != refUser and ''!= refUser  ">
+					ref_user,
+				</if>
+			 	<if test=" null != headImage and ''!= headImage  ">
+					head_image,
+				</if>
+			 	<if test=" null != rectVisitTime ">
+					rect_visit_time,
+				</if>
+			 	<if test=" null != isImportant ">
+					is_important,
+				</if>
+			 	<if test=" null != isFreeCustomer ">
+					is_free_customer,
+				</if>
+				<if test=" null != registerFromUrl ">
+					register_from_url,
+				</if>
+				<if test=" null != registerAccessUrl ">
+					register_access_url,
+				</if>
+				<if test=" null != easemobAcct and ''!= easemobAcct  ">
+					easemob_acct,
+				</if>
+				<if test=" null != easemobPassword and ''!= easemobPassword  ">
+					easemob_password,
+				</if>
+			 	<if test=" null != isLocked ">
+					is_locked,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != delStatus ">
+					del_status,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != mobile and ''!= mobile  ">
+					 	#{mobile},
+				</if>
+			 	<if test=" null != qrcode and ''!= qrcode  ">
+					 	#{qrcode},
+				</if>
+			 	<if test=" null != cfplanner and ''!= cfplanner  ">
+					 	#{cfplanner},
+				</if>
+			 	<if test=" null != refType ">
+					 	#{refType},
+				</if>
+			 	<if test=" null != refUser and ''!= refUser  ">
+					 	#{refUser},
+				</if>
+			 	<if test=" null != headImage and ''!= headImage  ">
+					 	#{headImage},
+				</if>
+			 	<if test=" null != rectVisitTime ">
+					 	#{rectVisitTime},
+				</if>
+			 	<if test=" null != isImportant ">
+					 	#{isImportant},
+				</if>
+			 	<if test=" null != isFreeCustomer ">
+					 	#{isFreeCustomer},
+				</if>
+				<if test=" null != registerFromUrl ">
+					 	#{registerFromUrl},
+				</if>
+				<if test=" null != registerAccessUrl ">
+					 	#{registerAccessUrl},
+				</if>
+				<if test=" null != easemobAcct and ''!= easemobAcct  ">
+						#{easemobAcct},
+				</if>
+				<if test=" null != easemobPassword and ''!= easemobPassword  ">
+						#{easemobPassword},
+				</if>
+			 	<if test=" null != isLocked ">
+					 	#{isLocked},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != delStatus ">
+					 	#{delStatus},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.CrmInvestor" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcrm_investor
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != mobile and ''!= mobile  ">
+					mobile,
+				</if>
+			 	<if test=" null != qrcode and ''!= qrcode  ">
+					qrcode,
+				</if>
+			 	<if test=" null != cfplanner and ''!= cfplanner  ">
+					cfplanner,
+				</if>
+			 	<if test=" null != refType ">
+					ref_type,
+				</if>
+			 	<if test=" null != refUser and ''!= refUser  ">
+					ref_user,
+				</if>
+			 	<if test=" null != headImage and ''!= headImage  ">
+					head_image,
+				</if>
+			 	<if test=" null != rectVisitTime ">
+					rect_visit_time,
+				</if>
+			 	<if test=" null != isImportant ">
+					is_important,
+				</if>
+			 	<if test=" null != isFreeCustomer ">
+					is_free_customer,
+				</if>
+				<if test=" null != registerFromUrl ">
+					register_from_url,
+				</if>
+				<if test=" null != registerAccessUrl ">
+					register_access_url,
+				</if>
+				<if test=" null != easemobAcct and ''!= easemobAcct  ">
+					easemob_acct,
+				</if>
+				<if test=" null != easemobPassword and ''!= easemobPassword  ">
+					easemob_password,
+				</if>
+			 	<if test=" null != isLocked ">
+					is_locked,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != delStatus ">
+					del_status,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != mobile and ''!= mobile  ">
+					 	#{mobile},
+				</if>
+			 	<if test=" null != qrcode and ''!= qrcode  ">
+					 	#{qrcode},
+				</if>
+			 	<if test=" null != cfplanner and ''!= cfplanner  ">
+					 	#{cfplanner},
+				</if>
+			 	<if test=" null != refType ">
+					 	#{refType},
+				</if>
+			 	<if test=" null != refUser and ''!= refUser  ">
+					 	#{refUser},
+				</if>
+			 	<if test=" null != headImage and ''!= headImage  ">
+					 	#{headImage},
+				</if>
+			 	<if test=" null != rectVisitTime ">
+					 	#{rectVisitTime},
+				</if>
+			 	<if test=" null != isImportant ">
+					 	#{isImportant},
+				</if>
+			 	<if test=" null != isFreeCustomer ">
+					 	#{isFreeCustomer},
+				</if>
+				<if test=" null != registerFromUrl ">
+					 	#{registerFromUrl},
+				</if>
+				<if test=" null != registerAccessUrl ">
+					 	#{registerAccessUrl},
+				</if>
+				<if test=" null != easemobAcct and ''!= easemobAcct  ">
+						#{easemobAcct},
+				</if>
+				<if test=" null != easemobPassword and ''!= easemobPassword  ">
+						#{easemobPassword},
+				</if>
+			 	<if test=" null != isLocked ">
+					 	#{isLocked},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != delStatus ">
+					 	#{delStatus},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.CrmInvestor" >
+  		UPDATE tcrm_investor
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != mobile and ''!= mobile  ">
+						mobile = #{mobile},
+					</if>
+					<if test=" null != qrcode and ''!= qrcode  ">
+						qrcode = #{qrcode},
+					</if>
+					<if test=" null != cfplanner and ''!= cfplanner  ">
+						cfplanner = #{cfplanner},
+					</if>
+					<if test=" null != refType ">
+						ref_type = #{refType},
+					</if>
+					<if test=" null != refUser and ''!= refUser  ">
+						ref_user = #{refUser},
+					</if>
+					<if test=" null != headImage and ''!= headImage  ">
+						head_image = #{headImage},
+					</if>
+					<if test=" null != rectVisitTime ">
+						rect_invest_time = #{rectVisitTime},
+					</if>
+					<if test=" null != isImportant ">
+						is_important = #{isImportant},
+					</if>
+					<if test=" null != isFreeCustomer ">
+						is_free_customer = #{isFreeCustomer},
+					</if>
+					<if test=" null != easemobAcct and ''!= easemobAcct  ">
+						easemob_acct = #{easemobAcct},
+					</if>
+					<if test=" null != easemobPassword and ''!= easemobPassword  ">
+						easemob_password = #{easemobPassword},
+					</if>
+					<if test=" null != easemobRegStatus and ''!= easemobRegStatus  ">
+						easemob_reg_status = #{easemobRegStatus},
+					</if>
+					<if test=" null != easemobNicknameStatus and ''!= easemobNicknameStatus  ">
+						easemob_nickname_status = #{easemobNicknameStatus},
+					</if>
+					<if test=" null != isLocked ">
+						is_locked = #{isLocked},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != delStatus ">
+						del_status = #{delStatus},
+					</if>
+			</trim>
+		</set>
+		 <where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.CrmInvestor" >
+	    UPDATE tcrm_investor
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != mobile and ''!= mobile  ">
+						mobile = #{mobile},
+					</if>
+					<if test=" null != qrcode and ''!= qrcode  ">
+						qrcode = #{qrcode},
+					</if>
+					<if test=" null != cfplanner and ''!= cfplanner  ">
+						cfplanner = #{cfplanner},
+					</if>
+					<if test=" null != refType ">
+						ref_type = #{refType},
+					</if>
+					<if test=" null != refUser and ''!= refUser  ">
+						ref_user = #{refUser},
+					</if>
+					<if test=" null != headImage and ''!= headImage  ">
+						head_image = #{headImage},
+					</if>
+					<if test=" null != rectVisitTime ">
+						rect_invest_time = #{rectVisitTime},
+					</if>
+					<if test=" null != isImportant ">
+						is_important = #{isImportant},
+					</if>
+					<if test=" null != isFreeCustomer ">
+						is_free_customer = #{isFreeCustomer},
+					</if>
+					<if test=" null != easemobAcct and ''!= easemobAcct  ">
+						easemob_acct = #{easemobAcct},
+					</if>
+					<if test=" null != easemobPassword and ''!= easemobPassword  ">
+						easemob_password = #{easemobPassword},
+					</if>
+					<if test=" null != easemobRegStatus and ''!= easemobRegStatus  ">
+						easemob_reg_status = #{easemobRegStatus},
+					</if>
+					<if test=" null != easemobNicknameStatus and ''!= easemobNicknameStatus  ">
+						easemob_nickname_status = #{easemobNicknameStatus},
+					</if>
+					<if test=" null != isLocked ">
+						is_locked = #{isLocked},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != delStatus ">
+						del_status = #{delStatus},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	</update>
+	
+	<update id="updateByUserId" parameterType="com.linkwee.web.model.CrmInvestor" >
+	    UPDATE tcrm_investor
+	   <set>
+			<trim suffixOverrides=",">					
+					<if test=" null != mobile and ''!= mobile  ">
+						mobile = #{mobile},
+					</if>
+					<if test=" null != qrcode and ''!= qrcode  ">
+						qrcode = #{qrcode},
+					</if>
+					<if test=" null != cfplanner and ''!= cfplanner  ">
+						cfplanner = #{cfplanner},
+					</if>
+					<if test=" null != refType ">
+						ref_type = #{refType},
+					</if>
+					<if test=" null != refUser and ''!= refUser  ">
+						ref_user = #{refUser},
+					</if>
+					<if test=" null != headImage and ''!= headImage  ">
+						head_image = #{headImage},
+					</if>
+					<if test=" null != rectVisitTime ">
+						rect_visit_time = #{rectVisitTime},
+					</if>
+					<if test=" null != rectInvestTime ">
+						rect_invest_time = #{rectInvestTime},
+					</if>
+					<if test=" null != firstInvestTime ">
+						first_invest_time = #{firstInvestTime},
+					</if>
+					<if test=" null != isImportant ">
+						is_important = #{isImportant},
+					</if>
+					<if test=" null != isFreeCustomer ">
+						is_free_customer = #{isFreeCustomer},
+					</if>
+					<if test=" null != easemobAcct and ''!= easemobAcct  ">
+						easemob_acct = #{easemobAcct},
+					</if>
+					<if test=" null != easemobPassword and ''!= easemobPassword  ">
+						easemob_password = #{easemobPassword},
+					</if>
+					<if test=" null != easemobRegStatus and ''!= easemobRegStatus  ">
+						easemob_reg_status = #{easemobRegStatus},
+					</if>
+					<if test=" null != easemobNicknameStatus and ''!= easemobNicknameStatus  ">
+						easemob_nickname_status = #{easemobNicknameStatus},
+					</if>
+					<if test=" null != isLocked ">
+						is_locked = #{isLocked},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != delStatus ">
+						del_status = #{delStatus},
+					</if>
+					<if test=" null != weiXinOpenId ">
+						weixin_openid = #{weiXinOpenId},
+					</if>
+			</trim>
+		</set>
+		<where>
+			user_id = #{userId}
+		</where>
+	</update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcrm_investor
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+    
+    <!--  根据环信帐号获取用户信息 -->
+	<select id="queryInvestorByEasemob" resultMap="BaseResultMap2"  >
+ 		select c.*, u.user_name from tcrm_investor c join tcrm_user_info u on c.user_id=u.user_id
+		<where>
+			<foreach item="item" index="index" collection="list"  open="(" separator="or" close=") ">
+				  c.easemob_acct  = #{item}
+			</foreach>
+		</where>
+	</select>
+    
+	<update id="updateInvQrByUserId" parameterType="com.linkwee.web.model.CrmInvestor">
+		update tcrm_investor
+		set qrcode = #{qrcode,jdbcType=VARCHAR}
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="selectRegInvestors" resultType="java.lang.String" >
+	  SELECT mobile from tcrm_investor 
+	  <where>
+		<foreach item="item" index="index" collection="array"  open=" mobile in (" separator="," close=") ">
+			   #{item}
+		</foreach>
+	  </where> 
+	</select>
+	
+	<select id="selectRefRegInvestors" resultType="java.lang.String"
+		parameterType="java.lang.String">
+		SELECT user_id from tcrm_investor where ref_user = #{userId,jdbcType=VARCHAR}
+	</select>
+	
+	
+	<!-- 更新环信管理员token -->
+	<update id="updateEaseToken" parameterType="String">
+		UPDATE tcrm_easemob_token set token = #{token},last_update_time=CURRENT_TIME() where id = 1;
+	</update>
+	<!-- 查环信管理员token -->
+	<select id="queryEaseToken" resultType="HashMap" >
+		select token as token, last_update_time as lastUpdateTime 
+		FROM tcrm_easemob_token where id = 1
+	</select>
+	
+	<!--用户首次投资时间 -->
+	<select id="queryFirstRcpDate" resultType="Date" >
+		SELECT min(create_time) from tcim_product_invest_record where user_id=#{userId}
+	</select>
+	
+	<!-- 删除用户的归属理财师 -->
+	<update id="removeCfplanner" parameterType="String">
+		UPDATE tcrm_investor set cfplanner = null where user_id=#{userId}
+	</update>
+	
+	<!-- 查询投资人的绑定的机构信息 -->
+	<select id="queryInvestorBindPlatformList" resultMap="InvestorBindPlatformListResp" parameterType="com.linkwee.web.model.crm.InvestorBindPlatformDatable">
+		SELECT 
+				o.name,
+				o.org_number,
+  				a.org_account_type,
+  				a.org_account,
+  				a.is_invested,
+  				a.is_new_user,
+  				a.creat_time
+		
+				FROM tcim_org_info o 
+				LEFT JOIN
+				(
+				SELECT * FROM tcrm_org_acct_rel r 
+				<if test="null != dt.mobile and ''!= dt.mobile">
+			  		WHERE r.user_id = (SELECT t.user_id  FROM tcrm_investor t WHERE t.mobile = #{dt.mobile})
+				</if>
+				) a
+				
+				ON o.org_number = a.org_number
+				WHERE 1=1 
+				AND a.org_account IS NOT NULL
+				ORDER BY a.creat_time DESC
+		
+	</select>
+	
+	<!-- 通过投资用户id查询用户的当前理财师 -->
+	<select id="queryPlannerByInvestUserId" resultMap="BaseResultMap">
+		select t.* from tcrm_investor t join tcrm_user_info u on t.user_id=u.user_id
+		where t.user_id = #{investUserId}
+  </select>
+  
+  	<!-- 根据客户条件筛选理财师所有客户 含是否推荐该产品信息 -->
+   <select id="selectCrmInvestorRecommend" parameterType="com.linkwee.api.request.cim.ProductRecommendChooseRequest" resultType="com.linkwee.web.model.CrmInvestorRecommend">
+		SELECT
+			t.*, u.user_name,
+			(
+				SELECT
+					COUNT(tpr.id)
+				FROM
+					tcim_product_ref tpr
+				WHERE
+					tpr.investor_user_id = t.user_id
+				AND tpr.sale_user_id = #{userId}
+				AND tpr.product_id = #{productId}
+			) AS ifRecommend
+		FROM
+			tcrm_investor t,
+			tcrm_user_info u
+		WHERE
+			t.user_id = u.user_id
+		and t.cfplanner = #{userId}
+		<if test=" null != searchValue and ''!= searchValue  ">
+		    and (u.user_name LIKE CONCAT('%','${searchValue}','%' ) or t.mobile LIKE CONCAT('%','${searchValue}','%' ))  
+		</if>
+    </select>
+    
+   <!-- 根据客户条件筛选理财师所有客户 含是否推荐该机构信息 -->
+   <select id="selectCrmInvestorRecommendOrg" parameterType="com.linkwee.web.request.orgInfo.OrgRecommendChooseRequest" resultType="com.linkwee.web.model.CrmInvestorRecommend">
+		SELECT
+			t.*, u.user_name,
+			(
+				SELECT
+					COUNT(tor.id)
+				FROM
+					tcim_org_ref tor
+				WHERE
+					tor.investor_user_id = t.user_id
+				AND tor.sale_user_id = #{userId}
+				AND tor.org_number = #{orgCode}
+			) AS ifRecommend
+		FROM
+			tcrm_investor t,
+			tcrm_user_info u
+		WHERE
+			t.user_id = u.user_id
+		and t.cfplanner = #{userId}
+		<if test=" null != searchValue and ''!= searchValue  ">
+		    and (u.user_name LIKE CONCAT('%','${searchValue}','%' ) or t.mobile LIKE CONCAT('%','${searchValue}','%' ))  
+		</if>
+    </select>
+    
+    <!-- 邀请客户记录 -->
+    <select id="queryInvitationCustomerRecord"  resultType="com.linkwee.web.model.crm.InvotateUserListResp" parameterType="com.linkwee.api.request.crm.InvotationRequest">
+    	SELECT
+			i.user_id userId,
+			i.mobile ,
+			u.user_name userName,
+			i.create_time registerDate,
+			case when i.rect_invest_time is null then '1' else '0' END investFlag
+		FROM
+			tcrm_investor i JOIN tcrm_user_info u on i.user_id=u.user_id 
+		LEFT JOIN tcrm_cfplanner c on i.user_id=c.user_id
+		WHERE
+			i.ref_user = #{userId,jdbcType=VARCHAR}
+			and c.id is null
+		order by i.id desc
+    </select>
+    
+    <!-- 邀请客户记录统计 -->
+    <select id="queryInvitationCustomerRecordStatistics"  resultType="HashMap" >
+    	SELECT 
+		( SELECT count(1) regiteredCount FROM tcrm_investor i JOIN tcrm_user_info u ON i.user_id = u.user_id 
+		LEFT JOIN tcrm_cfplanner c ON i.user_id = c.user_id WHERE i.ref_user = #{userId,jdbcType=VARCHAR} AND c.id IS NULL ) regiteredCount,
+		( SELECT count(1) investedCount FROM tcrm_investor i JOIN tcrm_user_info u ON i.user_id = u.user_id 
+		LEFT JOIN tcrm_cfplanner c ON i.user_id = c.user_id WHERE i.ref_user = #{userId,jdbcType=VARCHAR} AND c.id IS NULL AND i.rect_invest_time IS NOT NULL ) investedCount
+    </select>
+    
+    
+</mapper>

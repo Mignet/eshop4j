@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.ActRedpacketRuleDetailMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.act.redpacket.model.ActRedpacketRuleDetail" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="rule_id" property="ruleId" jdbcType="VARCHAR"/>
+		<result column="platform_limit" property="platformLimit" jdbcType="BIT"/>
+		<result column="platform_id" property="platformId" jdbcType="VARCHAR"/>
+		<result column="product_limit" property="productLimit" jdbcType="INTEGER"/>
+		<result column="product_id" property="productId" />
+		<result column="product_deadline" property="productDeadline" jdbcType="INTEGER"/>
+		<result column="product_type" property="productType" jdbcType="INTEGER"/>
+		<result column="invest_limit" property="investLlimit" jdbcType="INTEGER"/>
+		<result column="amount_limit" property="amountLimit" jdbcType="INTEGER"/>
+		<result column="amount" property="amount" jdbcType="DECIMAL"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		<result column="operator" property="operator" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	rule_id,
+	    	platform_limit,
+	    	platform_id,
+	    	product_limit,
+	    	product_id,
+	    	product_deadline,
+	    	product_type,
+	    	invest_limit,
+	    	amount_limit,
+	    	amount,
+	    	create_time,
+	    	update_time,
+	    	operator,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != ruleId and ''!= ruleId  ">
+			and rule_id = #{ruleId}
+		</if>
+		<if test=" null != platformLimit ">
+			and platform_limit = #{platformLimit}
+		</if>
+		<if test=" null != platformId and ''!= platformId  ">
+			and platform_id = #{platformId}
+		</if>
+		<if test=" null != productLimit ">
+			and product_limit = #{productLimit}
+		</if>
+		<if test=" null != productId and ''!= productId  ">
+			and product_id = #{productId}
+		</if>
+		<if test=" null != productDeadline ">
+			and product_deadline = #{productDeadline}
+		</if>
+		<if test=" null != productType ">
+			and product_type = #{productType}
+		</if>
+		<if test=" null != investLlimit ">
+			and invest_limit = #{investLlimit}
+		</if>
+		
+		<if test=" null != amountLimit ">
+			and amount_limit = #{amountLimit}
+		</if>
+		<if test=" null != amount ">
+			and amount = #{amount}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+		<if test=" null != operator and ''!= operator  ">
+			and operator = #{operator}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.act.redpacket.model.ActRedpacketRuleDetail">
+		select <include refid="Base_Column_List" /> from tact_redpacket_rule_detail 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.act.redpacket.model.ActRedpacketRuleDetail">
+		select <include refid="Base_Column_List" /> from tact_redpacket_rule_detail 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tact_redpacket_rule_detail
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tact_redpacket_rule_detail
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.act.redpacket.model.ActRedpacketRuleDetail" >
+    INSERT INTO tact_redpacket_rule_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != ruleId and ''!= ruleId  ">
+					rule_id,
+				</if>
+			 	<if test=" null != platformLimit ">
+					platform_limit,
+				</if>
+			 	<if test=" null != platformId and ''!= platformId  ">
+					platform_id,
+				</if>
+			 	<if test=" null != productLimit ">
+					product_limit,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != productDeadline ">
+					product_deadline,
+				</if>
+			 	<if test=" null != productType ">
+					product_type,
+				</if>
+				<if test=" null != investLlimit ">
+					invest_limit,
+				</if>
+			 	<if test=" null != amountLimit ">
+					amount_limit,
+				</if>
+			 	<if test=" null != amount ">
+					amount,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					operator,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != ruleId and ''!= ruleId  ">
+					 	#{ruleId},
+				</if>
+			 	<if test=" null != platformLimit ">
+					 	#{platformLimit},
+				</if>
+			 	<if test=" null != platformId and ''!= platformId  ">
+					 	#{platformId},
+				</if>
+			 	<if test=" null != productLimit ">
+					 	#{productLimit},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != productDeadline ">
+					 	#{productDeadline},
+				</if>
+			 	<if test=" null != productType ">
+					 	#{productType},
+				</if>
+				<if test=" null != investLlimit ">
+						#{investLlimit},
+				</if>
+			 	<if test=" null != amountLimit ">
+					 	#{amountLimit},
+				</if>
+			 	<if test=" null != amount ">
+					 	#{amount},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					 	#{operator},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.act.redpacket.model.ActRedpacketRuleDetail" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tact_redpacket_rule_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != ruleId and ''!= ruleId  ">
+					rule_id,
+				</if>
+			 	<if test=" null != platformLimit ">
+					platform_limit,
+				</if>
+			 	<if test=" null != platformId and ''!= platformId  ">
+					platform_id,
+				</if>
+			 	<if test=" null != productLimit ">
+					product_limit,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != productDeadline ">
+					product_deadline,
+				</if>
+			 	<if test=" null != productType ">
+					product_type,
+				</if>
+				<if test=" null != investLlimit ">
+					 invest_limit,
+				</if>
+			 	<if test=" null != amountLimit ">
+					amount_limit,
+				</if>
+			 	<if test=" null != amount ">
+					amount,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					operator,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != ruleId and ''!= ruleId  ">
+					 	#{ruleId},
+				</if>
+			 	<if test=" null != platformLimit ">
+					 	#{platformLimit},
+				</if>
+			 	<if test=" null != platformId and ''!= platformId  ">
+					 	#{platformId},
+				</if>
+			 	<if test=" null != productLimit ">
+					 	#{productLimit},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != productDeadline ">
+					 	#{productDeadline},
+				</if>
+			 	<if test=" null != productType ">
+					 	#{productType},
+				</if>
+				<if test=" null != investLlimit ">
+						 #{investLlimit},
+				</if>
+			 	<if test=" null != amountLimit ">
+					 	#{amountLimit},
+				</if>
+			 	<if test=" null != amount ">
+					 	#{amount},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != operator and ''!= operator  ">
+					 	#{operator},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.act.redpacket.model.ActRedpacketRuleDetail" >
+  		UPDATE tact_redpacket_rule_detail
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != ruleId and ''!= ruleId  ">
+						rule_id = #{ruleId},
+					</if>
+					<if test=" null != platformLimit ">
+						platform_limit = #{platformLimit},
+					</if>
+					<if test=" null != platformId and ''!= platformId  ">
+						platform_id = #{platformId},
+					</if>
+					<if test=" null != productLimit ">
+						product_limit = #{productLimit},
+					</if>
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != productDeadline ">
+						product_deadline = #{productDeadline},
+					</if>
+					<if test=" null != productType ">
+						product_type = #{productType},
+					</if>
+					<if test=" null != investLlimit ">
+						invest_limit = #{investLlimit},
+					</if>
+					<if test=" null != amountLimit ">
+						amount_limit = #{amountLimit},
+					</if>
+					<if test=" null != amount ">
+						amount = #{amount},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != operator and ''!= operator  ">
+						operator = #{operator},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.act.redpacket.model.ActRedpacketRuleDetail" >
+	    UPDATE tact_redpacket_rule_detail
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != ruleId and ''!= ruleId  ">
+						rule_id = #{ruleId},
+					</if>
+					<if test=" null != platformLimit ">
+						platform_limit = #{platformLimit},
+					</if>
+					<if test=" null != platformId and ''!= platformId  ">
+						platform_id = #{platformId},
+					</if>
+					<if test=" null != productLimit ">
+						product_limit = #{productLimit},
+					</if>
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != productDeadline ">
+						product_deadline = #{productDeadline},
+					</if>
+					<if test=" null != productType ">
+						product_type = #{productType},
+					</if>
+					<if test=" null != investLlimit ">
+						invest_limit = #{investLlimit},
+					</if>
+					<if test=" null != amountLimit ">
+						amount_limit = #{amountLimit},
+					</if>
+					<if test=" null != amount ">
+						amount = #{amount},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != operator and ''!= operator  ">
+						operator = #{operator},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+	  
+	  <update id="updateRedpacketRuleDetail" parameterType="com.linkwee.act.redpacket.model.ActRedpacketRuleDetail" >
+	    UPDATE tact_redpacket_rule_detail
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != platformLimit ">
+						platform_limit = #{platformLimit},
+					</if>
+					<if test=" null != platformId and ''!= platformId  ">
+						platform_id = #{platformId},
+					</if>
+					<if test=" null != productLimit ">
+						product_limit = #{productLimit},
+					</if>
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != productDeadline ">
+						product_deadline = #{productDeadline},
+					</if>
+					<if test=" null != productType ">
+						product_type = #{productType},
+					</if>
+					<if test=" null != investLlimit ">
+						invest_limit = #{investLlimit},
+					</if>
+					<if test=" null != amountLimit ">
+						amount_limit = #{amountLimit},
+					</if>
+					<if test=" null != amount ">
+						amount = #{amount},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != operator and ''!= operator  ">
+						operator = #{operator},
+					</if>
+			</trim>
+		</set>
+		<where>
+			rule_id = #{ruleId}
+		</where>
+	  </update>
+	  
+	  
+
+</mapper>

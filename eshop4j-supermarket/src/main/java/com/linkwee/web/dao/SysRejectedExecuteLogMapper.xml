@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.SysRejectedExecuteLogMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.SysRejectedExecuteLog" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="execute_id" property="executeId" jdbcType="VARCHAR"/>
+		<result column="service_name" property="serviceName" jdbcType="VARCHAR"/>
+		<result column="service_method" property="serviceMethod" jdbcType="VARCHAR"/>
+		<result column="service_parm" property="serviceParm" jdbcType="VARCHAR"/>
+		<result column="rejected_remark" property="rejectedRemark" jdbcType="VARCHAR"/>
+		<result column="faill_time" property="faillTime" jdbcType="TIMESTAMP"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	execute_id,
+	    	service_name,
+	    	service_method,
+	    	service_parm,
+	    	rejected_remark,
+	    	faill_time,
+	    	status,
+	    	create_time,
+	    	update_time,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != executeId and ''!= executeId ">
+			and execute_id = #{executeId}
+		</if>
+		<if test=" null != serviceName and ''!= serviceName  ">
+			and service_name = #{serviceName}
+		</if>
+		<if test=" null != serviceMethod and ''!= serviceMethod  ">
+			and service_method = #{serviceMethod}
+		</if>
+		<if test=" null != serviceParm and ''!= serviceParm  ">
+			and service_parm = #{serviceParm}
+		</if>
+		<if test=" null != rejectedRemark and ''!= rejectedRemark  ">
+			and rejected_remark = #{rejectedRemark}
+		</if>
+		<if test=" null != faillTime ">
+			and faill_time = #{faillTime}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.SysRejectedExecuteLog">
+		select <include refid="Base_Column_List" /> from tsys_rejected_execute_log 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.SysRejectedExecuteLog">
+		select <include refid="Base_Column_List" /> from tsys_rejected_execute_log 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsys_rejected_execute_log
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tsys_rejected_execute_log
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.SysRejectedExecuteLog" >
+    INSERT INTO tsys_rejected_execute_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+				<if test=" null != executeId and ''!= executeId ">
+					execute_id,
+				</if>
+			 	<if test=" null != serviceName and ''!= serviceName  ">
+					service_name,
+				</if>
+			 	<if test=" null != serviceMethod and ''!= serviceMethod  ">
+					service_method,
+				</if>
+			 	<if test=" null != serviceParm and ''!= serviceParm  ">
+					service_parm,
+				</if>
+			 	<if test=" null != rejectedRemark and ''!= rejectedRemark  ">
+					rejected_remark,
+				</if>
+			 	<if test=" null != faillTime ">
+					faill_time,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+				<if test=" null != executeId and ''!= executeId ">
+						#{executeId},
+				</if>
+			 	<if test=" null != serviceName and ''!= serviceName  ">
+					 	#{serviceName},
+				</if>
+			 	<if test=" null != serviceMethod and ''!= serviceMethod  ">
+					 	#{serviceMethod},
+				</if>
+			 	<if test=" null != serviceParm and ''!= serviceParm  ">
+					 	#{serviceParm},
+				</if>
+			 	<if test=" null != rejectedRemark and ''!= rejectedRemark  ">
+					 	#{rejectedRemark},
+				</if>
+			 	<if test=" null != faillTime ">
+					 	#{faillTime},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.SysRejectedExecuteLog" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tsys_rejected_execute_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test=" null != executeId and ''!= executeId ">
+					execute_id,
+				</if>
+			 	<if test=" null != serviceName and ''!= serviceName  ">
+					service_name,
+				</if>
+			 	<if test=" null != serviceMethod and ''!= serviceMethod  ">
+					service_method,
+				</if>
+			 	<if test=" null != serviceParm and ''!= serviceParm  ">
+					service_parm,
+				</if>
+			 	<if test=" null != rejectedRemark and ''!= rejectedRemark  ">
+					rejected_remark,
+				</if>
+			 	<if test=" null != faillTime ">
+					faill_time,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+				<if test=" null != executeId and ''!= executeId ">
+						#{executeId},
+				</if>
+			 	<if test=" null != serviceName and ''!= serviceName  ">
+					 	#{serviceName},
+				</if>
+			 	<if test=" null != serviceMethod and ''!= serviceMethod  ">
+					 	#{serviceMethod},
+				</if>
+			 	<if test=" null != serviceParm and ''!= serviceParm  ">
+					 	#{serviceParm},
+				</if>
+			 	<if test=" null != rejectedRemark and ''!= rejectedRemark  ">
+					 	#{rejectedRemark},
+				</if>
+			 	<if test=" null != faillTime ">
+					 	#{faillTime},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.SysRejectedExecuteLog" >
+  		UPDATE tsys_rejected_execute_log
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != serviceName and ''!= serviceName  ">
+						service_name = #{serviceName},
+					</if>
+					<if test=" null != serviceMethod and ''!= serviceMethod  ">
+						service_method = #{serviceMethod},
+					</if>
+					<if test=" null != serviceParm and ''!= serviceParm  ">
+						service_parm = #{serviceParm},
+					</if>
+					<if test=" null != rejectedRemark and ''!= rejectedRemark  ">
+						rejected_remark = #{rejectedRemark},
+					</if>
+					<if test=" null != faillTime ">
+						faill_time = #{faillTime},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+						<if test="status ==3 ">
+							faill_count = faill_count+1,
+						</if>
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 execute_id = #{executeId}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.SysRejectedExecuteLog" >
+	    UPDATE tsys_rejected_execute_log
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != serviceName and ''!= serviceName  ">
+						service_name = #{serviceName},
+					</if>
+					<if test=" null != serviceMethod and ''!= serviceMethod  ">
+						service_method = #{serviceMethod},
+					</if>
+					<if test=" null != serviceParm and ''!= serviceParm  ">
+						service_parm = #{serviceParm},
+					</if>
+					<if test=" null != rejectedRemark and ''!= rejectedRemark  ">
+						rejected_remark = #{rejectedRemark},
+					</if>
+					<if test=" null != faillTime ">
+						faill_time = #{faillTime},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 execute_id = #{executeId}
+		</where>
+	  </update>
+		
+		
+	 <select id="getRejectedExecuteLogs" resultMap="BaseResultMap">
+	 	SELECT
+			t.execute_id,
+			t.service_name,
+			t.service_method,
+			t.service_parm
+		FROM
+			tsys_rejected_execute_log t
+		WHERE
+			STATUS in (1,3)
+	 </select>
+
+</mapper>

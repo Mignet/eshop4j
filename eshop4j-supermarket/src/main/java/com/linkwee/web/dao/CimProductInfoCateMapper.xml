@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CimProductInfoCateMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.CimProductInfoCate" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="product_id" property="productId" jdbcType="VARCHAR"/>
+		<result column="cate_id" property="cateId" jdbcType="INTEGER"/>
+		<result column="sort" property="sort" jdbcType="INTEGER"/>
+		<result column="description" property="description" jdbcType="VARCHAR"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	product_id,
+	    	cate_id,
+	    	sort,
+	    	description,
+	    	update_time,
+    </trim>
+  </sql>
+  
+  <sql id="Base_Column_List_T">
+    <trim suffixOverrides=",">
+	    	t.id,
+	    	t.product_id,
+	    	t.cate_id,
+	    	t.sort,
+	    	t.description,
+	    	t.update_time,
+    </trim>
+  </sql>
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != productId and ''!= productId  ">
+			and product_id = #{productId}
+		</if>
+		<if test=" null != cateId ">
+			and cate_id = #{cateId}
+		</if>
+		<if test=" null != sort ">
+			and sort = #{sort}
+		</if>
+		<if test=" null != description and ''!= description  ">
+			and description = #{description}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+  </sql>
+  
+   <sql id="Base_Condition_T">
+		<if test=" null != id ">
+			and t.id = #{id}
+		</if>
+		<if test=" null != productId and ''!= productId  ">
+			and t.product_id = #{productId}
+		</if>
+		<if test=" null != cateId ">
+			and t.cate_id = #{cateId}
+		</if>
+		<if test=" null != sort ">
+			and t.sort = #{sort}
+		</if>
+		<if test=" null != description and ''!= description  ">
+			and t.description = #{description}
+		</if>
+		<if test=" null != updateTime ">
+			and t.update_time = #{updateTime}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimProductInfoCate">
+		select <include refid="Base_Column_List" /> from tcim_product_info_cate 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimProductInfoCate">
+		select <include refid="Base_Column_List" /> from tcim_product_info_cate 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_product_info_cate
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_product_info_cate
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.CimProductInfoCate" >
+    INSERT INTO tcim_product_info_cate
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != cateId ">
+					cate_id,
+				</if>
+			 	<if test=" null != sort ">
+					sort,
+				</if>
+			 	<if test=" null != description and ''!= description  ">
+					description,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != cateId ">
+					 	#{cateId},
+				</if>
+			 	<if test=" null != sort ">
+					 	#{sort},
+				</if>
+			 	<if test=" null != description and ''!= description  ">
+					 	#{description},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.CimProductInfoCate" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcim_product_info_cate
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != cateId ">
+					cate_id,
+				</if>
+			 	<if test=" null != sort ">
+					sort,
+				</if>
+			 	<if test=" null != description and ''!= description  ">
+					description,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != cateId ">
+					 	#{cateId},
+				</if>
+			 	<if test=" null != sort ">
+					 	#{sort},
+				</if>
+			 	<if test=" null != description and ''!= description  ">
+					 	#{description},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.CimProductInfoCate" >
+  		UPDATE tcim_product_info_cate
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != cateId ">
+						cate_id = #{cateId},
+					</if>
+					<if test=" null != sort ">
+						sort = #{sort},
+					</if>
+					<if test=" null != description and ''!= description  ">
+						description = #{description},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.CimProductInfoCate" >
+	    UPDATE tcim_product_info_cate
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != cateId ">
+						cate_id = #{cateId},
+					</if>
+					<if test=" null != sort ">
+						sort = #{sort},
+					</if>
+					<if test=" null != description and ''!= description  ">
+						description = #{description},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcim_product_info_cate
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+    
+   <!-- 根据产品id删除该产品所有分类 -->
+  <delete id="deleteAllByProductId" parameterType="java.lang.Long" >
+    delete from tcim_product_info_cate
+    where product_id = #{0}
+  </delete>
+  
+  <!--  根据cimProductInfoCate查询产品对应的可用分类 -->
+   <select id="selectCateListByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimProductInfoCate">
+		select <include refid="Base_Column_List_T" /> from tcim_product_info_cate t,tcim_product_cate tpc
+		where tpc.cate_id = t.cate_id and  tpc.disabled = 0 <include refid="Base_Condition_T" />
+  </select>
+</mapper>

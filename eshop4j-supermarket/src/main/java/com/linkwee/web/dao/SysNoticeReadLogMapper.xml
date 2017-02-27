@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.SysNoticeReadLogMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.mc.SysNoticeReadLog" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="notice_id" property="noticeId" jdbcType="INTEGER"/>
+		<result column="api_name" property="apiName" jdbcType="VARCHAR"/>
+		<result column="access_count" property="accessCount" jdbcType="INTEGER"/>
+		<result column="chg_time" property="chgTime" jdbcType="TIMESTAMP"/>
+		<result column="app_type" property="appType" jdbcType="INTEGER"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	user_id,
+	    	notice_id,
+	    	api_name,
+	    	access_count,
+	    	chg_time,
+	    	app_type,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != userId and ''!= userId  ">
+			and user_id = #{userId}
+		</if>
+		<if test=" null != noticeId ">
+			and notice_id = #{noticeId}
+		</if>
+		<if test=" null != apiName and ''!= apiName  ">
+			and api_name = #{apiName}
+		</if>
+		<if test=" null != accessCount ">
+			and access_count = #{accessCount}
+		</if>
+		<if test=" null != chgTime ">
+			and chg_time = #{chgTime}
+		</if>
+		<if test=" null != appType ">
+			and app_type = #{appType}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.mc.SysNoticeReadLog">
+		select <include refid="Base_Column_List" /> from tsys_notice_read_log 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.mc.SysNoticeReadLog">
+		select <include refid="Base_Column_List" /> from tsys_notice_read_log 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsys_notice_read_log
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tsys_notice_read_log
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.mc.SysNoticeReadLog" >
+    INSERT INTO tsys_notice_read_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != noticeId ">
+					notice_id,
+				</if>
+			 	<if test=" null != apiName and ''!= apiName  ">
+					api_name,
+				</if>
+			 	<if test=" null != accessCount ">
+					access_count,
+				</if>
+			 	<if test=" null != chgTime ">
+					chg_time,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != noticeId ">
+					 	#{noticeId},
+				</if>
+			 	<if test=" null != apiName and ''!= apiName  ">
+					 	#{apiName},
+				</if>
+			 	<if test=" null != accessCount ">
+					 	#{accessCount},
+				</if>
+			 	<if test=" null != chgTime ">
+					 	#{chgTime},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.mc.SysNoticeReadLog" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tsys_notice_read_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != noticeId ">
+					notice_id,
+				</if>
+			 	<if test=" null != apiName and ''!= apiName  ">
+					api_name,
+				</if>
+			 	<if test=" null != accessCount ">
+					access_count,
+				</if>
+			 	<if test=" null != chgTime ">
+					chg_time,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != noticeId ">
+					 	#{noticeId},
+				</if>
+			 	<if test=" null != apiName and ''!= apiName  ">
+					 	#{apiName},
+				</if>
+			 	<if test=" null != accessCount ">
+					 	#{accessCount},
+				</if>
+			 	<if test=" null != chgTime ">
+					 	#{chgTime},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.mc.SysNoticeReadLog" >
+  		UPDATE tsys_notice_read_log
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != noticeId ">
+						notice_id = #{noticeId},
+					</if>
+					<if test=" null != apiName and ''!= apiName  ">
+						api_name = #{apiName},
+					</if>
+					<if test=" null != accessCount ">
+						access_count = #{accessCount},
+					</if>
+					<if test=" null != chgTime ">
+						chg_time = #{chgTime},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.mc.SysNoticeReadLog" >
+	    UPDATE tsys_notice_read_log
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != noticeId ">
+						notice_id = #{noticeId},
+					</if>
+					<if test=" null != apiName and ''!= apiName  ">
+						api_name = #{apiName},
+					</if>
+					<if test=" null != accessCount ">
+						access_count = #{accessCount},
+					</if>
+					<if test=" null != chgTime ">
+						chg_time = #{chgTime},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tsys_notice_read_log
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+    
+    <insert id="addNoticeReadLogByUserId">
+    <![CDATA[ 
+	    INSERT INTO tsys_notice_read_log( user_id, notice_id, api_name, access_count,chg_time,app_type )
+	SELECT
+		#{userId},m.id,'msg.notice.detail',1,NOW(),#{appType}
+	FROM
+		tsys_notice m
+	LEFT JOIN tsys_notice_read_log l ON (
+		m.id = l.notice_id
+		AND l.user_id = #{userId}
+	)
+	WHERE
+		m. STATUS = 0
+	AND (m.app_type = 0 OR m.app_type = #{appType})
+	AND m.start_time <= NOW()
+	and l.id is null
+	]]>
+    </insert>
+
+</mapper>

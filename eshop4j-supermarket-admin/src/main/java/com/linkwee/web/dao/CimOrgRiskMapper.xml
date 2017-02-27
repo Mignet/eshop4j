@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CimOrgRiskMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.CimOrgRisk" id="BaseResultMap">
+		<result column="rid" property="rid" jdbcType="INTEGER"/>
+		<result column="org_number" property="orgNumber" jdbcType="VARCHAR"/>
+		<result column="org_name" property="orgName" jdbcType="VARCHAR"/>
+		<result column="indicator_name" property="indicatorName" jdbcType="VARCHAR"/>
+		<result column="indicator_score" property="indicatorScore" jdbcType="DECIMAL"/>
+		<result column="creator" property="creator" jdbcType="VARCHAR"/>
+		<result column="updater" property="updater" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		<result column="sort" property="sort" jdbcType="INTEGER"/>
+		<result column="isshow" property="isshow" jdbcType="INTEGER"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	rid,
+	    	org_number,
+	    	org_name,
+	    	indicator_name,
+	    	indicator_score,
+	    	creator,
+	    	updater,
+	    	create_time,
+	    	update_time,
+	    	sort,
+	    	isshow,
+	    	remark,
+    </trim>
+  </sql>
+  
+ <sql id="Base_Column_List_T">
+    <trim suffixOverrides=",">
+	    	t.rid,
+	    	t.org_number,
+	    	t.org_name,
+	    	t.indicator_name,
+	    	t.indicator_score,
+	    	t.creator,
+	    	t.updater,
+	    	t.create_time,
+	    	t.update_time,
+	    	t.sort,
+	    	t.isshow,
+	    	t.remark,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != rid ">
+			and rid = #{rid}
+		</if>
+		<if test=" null != orgNumber and ''!= orgNumber  ">
+			and org_number = #{orgNumber}
+		</if>
+		<if test=" null != orgName and ''!= orgName  ">
+			and org_name = #{orgName}
+		</if>
+		<if test=" null != indicatorName and ''!= indicatorName  ">
+			and indicator_name = #{indicatorName}
+		</if>
+		<if test=" null != indicatorScore ">
+			and indicator_score = #{indicatorScore}
+		</if>
+		<if test=" null != creator and ''!= creator  ">
+			and creator = #{creator}
+		</if>
+		<if test=" null != updater and ''!= updater  ">
+			and updater = #{updater}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+		<if test=" null != sort ">
+			and sort = #{sort}
+		</if>
+		<if test=" null != isshow ">
+			and isshow = #{isshow}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimOrgRisk">
+		select <include refid="Base_Column_List" /> from tcim_org_risk 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimOrgRisk">
+		select <include refid="Base_Column_List" /> from tcim_org_risk 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_org_risk
+    where  rid = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_org_risk
+    where rid = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.CimOrgRisk" >
+    INSERT INTO tcim_org_risk
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != rid ">
+					rid,
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					org_number,
+				</if>
+			 	<if test=" null != orgName and ''!= orgName  ">
+					org_name,
+				</if>
+			 	<if test=" null != indicatorName and ''!= indicatorName  ">
+					indicator_name,
+				</if>
+			 	<if test=" null != indicatorScore ">
+					indicator_score,
+				</if>
+			 	<if test=" null != creator and ''!= creator  ">
+					creator,
+				</if>
+			 	<if test=" null != updater and ''!= updater  ">
+					updater,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != sort ">
+					sort,
+				</if>
+			 	<if test=" null != isshow ">
+					isshow,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != rid ">
+					 	#{rid},
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					 	#{orgNumber},
+				</if>
+			 	<if test=" null != orgName and ''!= orgName  ">
+					 	#{orgName},
+				</if>
+			 	<if test=" null != indicatorName and ''!= indicatorName  ">
+					 	#{indicatorName},
+				</if>
+			 	<if test=" null != indicatorScore ">
+					 	#{indicatorScore},
+				</if>
+			 	<if test=" null != creator and ''!= creator  ">
+					 	#{creator},
+				</if>
+			 	<if test=" null != updater and ''!= updater  ">
+					 	#{updater},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != sort ">
+					 	#{sort},
+				</if>
+			 	<if test=" null != isshow ">
+					 	#{isshow},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.CimOrgRisk" useGeneratedKeys="true" keyProperty="rid" >
+		INSERT INTO tcim_org_risk
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != rid ">
+					rid,
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					org_number,
+				</if>
+			 	<if test=" null != orgName and ''!= orgName  ">
+					org_name,
+				</if>
+			 	<if test=" null != indicatorName and ''!= indicatorName  ">
+					indicator_name,
+				</if>
+			 	<if test=" null != indicatorScore ">
+					indicator_score,
+				</if>
+			 	<if test=" null != creator and ''!= creator  ">
+					creator,
+				</if>
+			 	<if test=" null != updater and ''!= updater  ">
+					updater,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != sort ">
+					sort,
+				</if>
+			 	<if test=" null != isshow ">
+					isshow,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != rid ">
+					 	#{rid},
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					 	#{orgNumber},
+				</if>
+			 	<if test=" null != orgName and ''!= orgName  ">
+					 	#{orgName},
+				</if>
+			 	<if test=" null != indicatorName and ''!= indicatorName  ">
+					 	#{indicatorName},
+				</if>
+			 	<if test=" null != indicatorScore ">
+					 	#{indicatorScore},
+				</if>
+			 	<if test=" null != creator and ''!= creator  ">
+					 	#{creator},
+				</if>
+			 	<if test=" null != updater and ''!= updater  ">
+					 	#{updater},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != sort ">
+					 	#{sort},
+				</if>
+			 	<if test=" null != isshow ">
+					 	#{isshow},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.CimOrgRisk" >
+  		UPDATE tcim_org_risk
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != orgNumber and ''!= orgNumber  ">
+						org_number = #{orgNumber},
+					</if>
+					<if test=" null != orgName and ''!= orgName  ">
+						org_name = #{orgName},
+					</if>
+					<if test=" null != indicatorName and ''!= indicatorName  ">
+						indicator_name = #{indicatorName},
+					</if>
+					<if test=" null != indicatorScore ">
+						indicator_score = #{indicatorScore},
+					</if>
+					<if test=" null != creator and ''!= creator  ">
+						creator = #{creator},
+					</if>
+					<if test=" null != updater and ''!= updater  ">
+						updater = #{updater},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != sort ">
+						sort = #{sort},
+					</if>
+					<if test=" null != isshow ">
+						isshow = #{isshow},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 rid = #{rid}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.CimOrgRisk" >
+	    UPDATE tcim_org_risk
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != orgNumber and ''!= orgNumber  ">
+						org_number = #{orgNumber},
+					</if>
+					<if test=" null != orgName and ''!= orgName  ">
+						org_name = #{orgName},
+					</if>
+					<if test=" null != indicatorName and ''!= indicatorName  ">
+						indicator_name = #{indicatorName},
+					</if>
+					<if test=" null != indicatorScore ">
+						indicator_score = #{indicatorScore},
+					</if>
+					<if test=" null != creator and ''!= creator  ">
+						creator = #{creator},
+					</if>
+					<if test=" null != updater and ''!= updater  ">
+						updater = #{updater},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != sort ">
+						sort = #{sort},
+					</if>
+					<if test=" null != isshow ">
+						isshow = #{isshow},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+			</trim>
+		</set>
+		<where>
+			rid = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcim_org_risk
+        <if test="null != dt.orgName and ''!= dt.orgName">  
+              where org_name LIKE CONCAT('%','${dt.orgName}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+    </select>
+    
+    
+    <!-- 根据机构编码查询机构风控信息 -->
+    <select id="queryOrgRiskInfoByOrgNumber" resultMap="BaseResultMap" parameterType="String">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcim_org_risk
+        <where> 
+       		 org_number = #{orgNumber}
+        </where>
+    </select>
+    
+     <!-- 查询机构风控信息 -->
+    <select id="queryOrgRiskInfo" resultMap="BaseResultMap">
+	    SELECT	
+	    		<include refid="Base_Column_List" />
+				FROM tcim_org_risk
+				WHERE rid = #{rid}
+    </select>
+	
+	<!-- 批量插入机构风控信息 -->
+  	<insert id="insertBatchRisk" parameterType="java.util.List">
+	   INSERT INTO tcim_org_risk
+	   (
+					org_number,
+			    	org_name,
+			    	indicator_name,
+			    	indicator_score,
+			    	creator,
+			    	updater,
+			    	create_time,
+			    	update_time,
+			    	sort,
+			    	isshow,
+			    	remark
+		)
+		VALUES
+	    <foreach collection="list" item="risk" index="index" separator="," >
+	        (
+					 	#{risk.orgNumber},
+					 	#{risk.orgName},
+					 	#{risk.indicatorName},
+					 	#{risk.indicatorScore},
+					 	#{risk.creator},
+					 	#{risk.updater},
+					 	#{risk.createTime},
+					 	#{risk.updateTime},
+					 	#{risk.sort},
+					 	#{risk.isshow},
+					 	#{risk.remark}
+	        
+	        )
+	    </foreach>
+	    
+  </insert>
+  
+</mapper>

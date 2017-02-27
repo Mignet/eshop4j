@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.TCFeeTypeConfigMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.tc.fee.model.TCFeeTypeConfig" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="config_code" property="configCode" jdbcType="VARCHAR"/>
+		<result column="config_name" property="configName" jdbcType="VARCHAR"/>
+		<result column="config_desc" property="configDesc" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	config_code,
+	    	config_name,
+	    	config_desc,
+	    	create_time,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != configCode and ''!= configCode  ">
+			and config_code = #{configCode}
+		</if>
+		<if test=" null != configName and ''!= configName  ">
+			and config_name = #{configName}
+		</if>
+		<if test=" null != configDesc and ''!= configDesc  ">
+			and config_desc = #{configDesc}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.tc.fee.model.TCFeeTypeConfig">
+		select <include refid="Base_Column_List" /> from tcim_fee_type_config 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.tc.fee.model.TCFeeTypeConfig">
+		select <include refid="Base_Column_List" /> from tcim_fee_type_config 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_fee_type_config
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_fee_type_config
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.tc.fee.model.TCFeeTypeConfig" >
+    INSERT INTO tcim_fee_type_config
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != configCode and ''!= configCode  ">
+					config_code,
+				</if>
+			 	<if test=" null != configName and ''!= configName  ">
+					config_name,
+				</if>
+			 	<if test=" null != configDesc and ''!= configDesc  ">
+					config_desc,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != configCode and ''!= configCode  ">
+					 	#{configCode},
+				</if>
+			 	<if test=" null != configName and ''!= configName  ">
+					 	#{configName},
+				</if>
+			 	<if test=" null != configDesc and ''!= configDesc  ">
+					 	#{configDesc},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.tc.fee.model.TCFeeTypeConfig" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcim_fee_type_config
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != configCode and ''!= configCode  ">
+					config_code,
+				</if>
+			 	<if test=" null != configName and ''!= configName  ">
+					config_name,
+				</if>
+			 	<if test=" null != configDesc and ''!= configDesc  ">
+					config_desc,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != configCode and ''!= configCode  ">
+					 	#{configCode},
+				</if>
+			 	<if test=" null != configName and ''!= configName  ">
+					 	#{configName},
+				</if>
+			 	<if test=" null != configDesc and ''!= configDesc  ">
+					 	#{configDesc},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.tc.fee.model.TCFeeTypeConfig" >
+  		UPDATE tcim_fee_type_config
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != configCode and ''!= configCode  ">
+						config_code = #{configCode},
+					</if>
+					<if test=" null != configName and ''!= configName  ">
+						config_name = #{configName},
+					</if>
+					<if test=" null != configDesc and ''!= configDesc  ">
+						config_desc = #{configDesc},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.tc.fee.model.TCFeeTypeConfig" >
+	    UPDATE tcim_fee_type_config
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != configCode and ''!= configCode  ">
+						config_code = #{configCode},
+					</if>
+					<if test=" null != configName and ''!= configName  ">
+						config_name = #{configName},
+					</if>
+					<if test=" null != configDesc and ''!= configDesc  ">
+						config_desc = #{configDesc},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+</mapper>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CimOrgFeeRuleMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.cim.CimOrgFeeRule" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="BIGINT"/>
+		<result column="fee_type_code" property="feeTypeCode" jdbcType="CHAR"/>
+		<result column="fee_attr" property="feeAttr" jdbcType="CHAR"/>
+		<result column="need_first_invest" property="needFirstInvest" jdbcType="CHAR"/>
+		<result column="interval_remark" property="intervalRemark" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	fee_type_code,
+	    	fee_attr,
+	    	need_first_invest,
+	    	interval_remark,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != feeTypeCode and ''!= feeTypeCode  ">
+			and fee_type_code = #{feeTypeCode}
+		</if>
+		<if test=" null != feeAttr and ''!= feeAttr  ">
+			and fee_attr = #{feeAttr}
+		</if>
+		<if test=" null != needFirstInvest and ''!= needFirstInvest  ">
+			and need_first_invest = #{needFirstInvest}
+		</if>
+		<if test=" null != intervalRemark and ''!= intervalRemark  ">
+			and interval_remark = #{intervalRemark}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.cim.CimOrgFeeRule">
+		select <include refid="Base_Column_List" /> from tcim_org_fee_rule 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.cim.CimOrgFeeRule">
+		select <include refid="Base_Column_List" /> from tcim_org_fee_rule 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_org_fee_rule
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_org_fee_rule
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.cim.CimOrgFeeRule" >
+    INSERT INTO tcim_org_fee_rule
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != feeTypeCode and ''!= feeTypeCode  ">
+					fee_type_code,
+				</if>
+			 	<if test=" null != feeAttr and ''!= feeAttr  ">
+					fee_attr,
+				</if>
+			 	<if test=" null != needFirstInvest and ''!= needFirstInvest  ">
+					need_first_invest,
+				</if>
+			 	<if test=" null != intervalRemark and ''!= intervalRemark  ">
+					interval_remark,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != feeTypeCode and ''!= feeTypeCode  ">
+					 	#{feeTypeCode},
+				</if>
+			 	<if test=" null != feeAttr and ''!= feeAttr  ">
+					 	#{feeAttr},
+				</if>
+			 	<if test=" null != needFirstInvest and ''!= needFirstInvest  ">
+					 	#{needFirstInvest},
+				</if>
+			 	<if test=" null != intervalRemark and ''!= intervalRemark  ">
+					 	#{intervalRemark},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.cim.CimOrgFeeRule" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcim_org_fee_rule
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != feeTypeCode and ''!= feeTypeCode  ">
+					fee_type_code,
+				</if>
+			 	<if test=" null != feeAttr and ''!= feeAttr  ">
+					fee_attr,
+				</if>
+			 	<if test=" null != needFirstInvest and ''!= needFirstInvest  ">
+					need_first_invest,
+				</if>
+			 	<if test=" null != intervalRemark and ''!= intervalRemark  ">
+					interval_remark,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != feeTypeCode and ''!= feeTypeCode  ">
+					 	#{feeTypeCode},
+				</if>
+			 	<if test=" null != feeAttr and ''!= feeAttr  ">
+					 	#{feeAttr},
+				</if>
+			 	<if test=" null != needFirstInvest and ''!= needFirstInvest  ">
+					 	#{needFirstInvest},
+				</if>
+			 	<if test=" null != intervalRemark and ''!= intervalRemark  ">
+					 	#{intervalRemark},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.cim.CimOrgFeeRule" >
+  		UPDATE tcim_org_fee_rule
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != feeTypeCode and ''!= feeTypeCode  ">
+						fee_type_code = #{feeTypeCode},
+					</if>
+					<if test=" null != feeAttr and ''!= feeAttr  ">
+						fee_attr = #{feeAttr},
+					</if>
+					<if test=" null != needFirstInvest and ''!= needFirstInvest  ">
+						need_first_invest = #{needFirstInvest},
+					</if>
+					<if test=" null != intervalRemark and ''!= intervalRemark  ">
+						interval_remark = #{intervalRemark},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.cim.CimOrgFeeRule" >
+	    UPDATE tcim_org_fee_rule
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != feeTypeCode and ''!= feeTypeCode  ">
+						fee_type_code = #{feeTypeCode},
+					</if>
+					<if test=" null != feeAttr and ''!= feeAttr  ">
+						fee_attr = #{feeAttr},
+					</if>
+					<if test=" null != needFirstInvest and ''!= needFirstInvest  ">
+						need_first_invest = #{needFirstInvest},
+					</if>
+					<if test=" null != intervalRemark and ''!= intervalRemark  ">
+						interval_remark = #{intervalRemark},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcim_org_fee_rule
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+    
+    	<select id="queryOrgFeeDetail" resultType="com.linkwee.web.model.cim.CimOrgFeeRuleDetail">
+		SELECT
+		t.org_number orgNumber,
+		t.fee_ratio feeRatio,
+		t.fee_val feeVal,
+		t1.id,
+		t1.fee_type_code feeTypeCode,
+
+		t1.fee_attr feeAttr,
+		t1.interval_max_val intervalMaxVal,
+		t1.interval_min_val intervalMinVal,
+		t1.interval_unit intervalUnit
+		FROM
+		tcim_org_fee_record t
+		LEFT JOIN tcim_org_fee_rule t1 ON t.fee_rule_id = t1.id
+		where t.org_number = #{orgNumber}
+	</select>
+
+</mapper>

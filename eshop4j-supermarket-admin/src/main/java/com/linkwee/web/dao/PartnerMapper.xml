@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.PartnerMapper">
+	<!-- Result Map-->
+	
+	<resultMap  type="com.linkwee.web.model.crm.PartnerListResp" id="PartnerListResp">
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="userName" property="userName" jdbcType="VARCHAR"/>
+		<result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+		<result column="registerTime" property="registerTime" jdbcType="TIMESTAMP"/>
+		<result column="allowance" property="allowance" jdbcType="DOUBLE"/>
+		<result column="childrenAllowance" property="childrenAllowance" jdbcType="DOUBLE"/>
+		<result column="childrenCount" property="childrenCount" jdbcType="INTEGER"/>
+		<result column="isRead" property="isRead" jdbcType="INTEGER"/>
+		<result column="newSubordinateCount" property="newSubordinateCount" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<resultMap  type="com.linkwee.web.model.crm.PartnerSaleRecordResp" id="PartnerSaleRecordResp">
+		<result column="product_name" property="productName" jdbcType="VARCHAR"/>
+		<result column="create_time" property="bizDate" jdbcType="TIMESTAMP"/>
+		<result column="product_amount" property="purAmount" jdbcType="DOUBLE"/>
+		<result column="fee_amount" property="allowance" jdbcType="DOUBLE"/>
+		<result column="fee_rate" property="feeRate" jdbcType="DOUBLE"/>
+		<result column="allowance_type" property="allowanceType" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<!-- 直接推荐人数 -->
+	<select id="queryMyRcCount" resultType="int" >
+		<![CDATA[
+		select count(1) from tcrm_cfplanner where parent_id=#{userId,jdbcType=VARCHAR}
+		]]> 
+	</select>
+	
+	<!-- 间接推荐人数 -->
+	<select id="queryChildrenRcCount" resultType="int" >
+		<![CDATA[
+		select count(1) from tcrm_cfplanner where parent_id in 
+		(select user_id from tcrm_cfplanner where parent_id=#{userId,jdbcType=VARCHAR})
+		]]> 
+	</select>
+	
+	<!-- 团队列表 -->
+	<select id="queryPartnerList" parameterType="HashMap" resultMap="PartnerListResp" >
+		<![CDATA[
+		select a.*,ifnull(b.childrenCount,0) as childrenCount, ifnull(c.allowance,0) as allowance,
+		ifnull(d.childrenAllowance,0) as childrenAllowance, ifnull(e.newSubordinateCount,0) as newSubordinateCount,
+		(case when a.registerTime >= #{date} then 0 else 1 end) as isRead
+		from
+		(
+		SELECT a1.user_id,a2.user_name as userName,a1.mobile,a1.cfp_reg_time as registerTime from tcrm_cfplanner a1 
+		JOIN tcrm_user_info a2 on a1.user_id=a2.user_id where a1.parent_id= #{userId,jdbcType=VARCHAR}
+		) a
+		LEFT JOIN
+		(
+		SELECT count(1) as childrenCount, b1.user_id from tcrm_cfplanner b1,tcrm_cfplanner b2
+		where b1.user_id=b2.parent_id
+		and b1.parent_id= #{userId,jdbcType=VARCHAR}
+		GROUP BY b1.user_id
+		) b
+		ON a.user_id=b.user_id
+		LEFT JOIN
+		(
+		select b.user_id ,sum(a.fee_amount) allowance 
+		from tcim_fee a,tcrm_cfplanner b       
+		where a.origin_cfplanner_id = b.user_id
+		  and a.profit_cfplanner_id = b.parent_id  
+		  and b.parent_id = #{userId,jdbcType=VARCHAR}
+		  and a.fee_type ='1002'
+		 group by b.user_id
+		) c
+		ON a.user_id=c.user_id
+		LEFT JOIN
+		(
+		select b.parent_id ,sum(a.fee_amount) childrenAllowance 
+		from tcim_fee a,tcrm_cfplanner b       
+		where a.origin_cfplanner_id = b.user_id
+		  and a.profit_cfplanner_id != b.parent_id  
+		  and a.profit_cfplanner_id != a.origin_cfplanner_id
+		  and a.profit_cfplanner_id = #{userId,jdbcType=VARCHAR}
+		  and a.fee_type ='1002'
+		 group by b.parent_id
+		) d
+		ON a.user_id=d.parent_id
+		LEFT JOIN
+		
+		(select a.user_id ,count(1) newSubordinateCount from tcrm_cfplanner a,tcrm_cfplanner b
+		where a.user_id = b.parent_id
+		  and a.parent_id = #{userId,jdbcType=VARCHAR}
+			and a.cfp_reg_time > #{date}
+		  group by a.user_id)
+		e
+		ON a.user_id=e.user_id
+		where 1=1
+		]]> 
+		<if test=" null != userName and '' !=  userName "> 
+ 			and mobile like '%${userName}%' or userName like '%${userName}%'
+ 		</if>
+		<if test=" null != sort and  null != order">
+			ORDER BY 
+			<if test="sort ==  1">
+				registerTime
+			</if>
+			<if test="sort ==  2">
+				allowance
+			</if>
+			<if test="sort ==  3">
+				childrenAllowance
+			</if>
+			<if test="order ==  1">
+				DESC
+			</if>
+			<if test="order ==  2">
+				ASC
+			</if>
+		</if>
+	</select>
+	
+	<!-- 成员销售首单时间 -->
+	<select id="queryFirstRcpDate" resultType="java.util.Date" >
+		<![CDATA[
+		select min(create_time) from tcim_fee where  profit_cfplanner_id=#{parentId,jdbcType=VARCHAR} and origin_cfplanner_id=#{userId,jdbcType=VARCHAR} and fee_type=1002
+		]]> 
+	</select>
+	
+	<!-- 直接津贴 -->
+	<select id="queryAllowance" resultType="Double" >
+		<![CDATA[
+		select ifnull(sum(fee_amount),0) from tcim_fee where  profit_cfplanner_id=#{parentId,jdbcType=VARCHAR} and origin_cfplanner_id=#{userId,jdbcType=VARCHAR} and fee_type=1002
+		]]> 
+	</select>
+	
+	<!-- 间接津贴 -->
+	<select id="queryChildrenAllowance" resultType="Double" >
+		<![CDATA[
+		select ifnull(sum(fee_amount),0) from tcim_fee where  profit_cfplanner_id=#{parentId,jdbcType=VARCHAR} and origin_cfplanner_id!=#{userId,jdbcType=VARCHAR} and fee_type=1002
+		]]> 
+	</select>
+	
+	<!-- 团队成员销售记录 -->
+	<select id="queryPartnerSaleRecord" parameterType="HashMap" resultMap="PartnerSaleRecordResp" >
+		select p.product_name, f.product_amount ,f.create_time,f.fee_amount,f.fee_rate,
+		(case when f.origin_cfplanner_id = tc.user_id then 1 else 2 end) as allowance_type
+		from tcim_fee f LEFT JOIN tcim_product p on f.product_id=p.product_id 
+		<if test=" null != userId and ''!= userId  ">
+			,tcrm_cfplanner tc <!-- 存参数用，为了是分页不报错 -->
+		</if>
+		where  profit_cfplanner_id=#{parentId,jdbcType=VARCHAR} and fee_type=1002
+		<if test=" null != userId and ''!= userId  ">
+			AND tc.user_id = #{userId,jdbcType=VARCHAR}
+		</if>
+		and (f.origin_cfplanner_id = #{userId,jdbcType=VARCHAR} 
+			or f.origin_cfplanner_id in
+				(select user_id from tcrm_cfplanner where parent_id=#{userId,jdbcType=VARCHAR}) 
+			)
+		order by f.id desc
+	</select>
+	
+	<!-- 未读团队成员数量 -->
+	<select id="queryNewPartnerCount" resultType="int" >
+		<![CDATA[
+		SELECT 
+		(SELECT IFNULL(count(1),0) from tcrm_cfplanner where parent_id=#{userId,jdbcType=VARCHAR} and create_time > #{date})
+		+
+		(SELECT IFNULL(count(1),0) from tcrm_cfplanner where parent_id in (SELECT user_id from tcrm_cfplanner where parent_id=#{userId,jdbcType=VARCHAR}) and create_time > #{date})
+		]]> 
+	</select>
+	
+	
+</mapper>

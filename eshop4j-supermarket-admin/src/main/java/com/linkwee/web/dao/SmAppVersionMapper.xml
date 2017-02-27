@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.SmAppVersionMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.SmAppVersion" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="name" property="name" jdbcType="VARCHAR"/>
+		<result column="version" property="version" jdbcType="VARCHAR"/>
+		<result column="min_version" property="minVersion" jdbcType="VARCHAR"/>
+		<result column="platform" property="platform" jdbcType="VARCHAR"/>
+		<result column="download_url" property="downloadUrl" jdbcType="VARCHAR"/>
+		<result column="reg_hints" property="regHints" jdbcType="VARCHAR"/>
+		<result column="update_hints" property="updateHints" jdbcType="VARCHAR"/>
+		<result column="open_reg" property="openReg" jdbcType="INTEGER"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="issue_time" property="issueTime" jdbcType="TIMESTAMP"/>
+		<result column="crt_time" property="crtTime" jdbcType="TIMESTAMP"/>
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+		<result column="app_type" property="appType" jdbcType="INTEGER"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	name,
+	    	version,
+	    	min_version,
+	    	platform,
+	    	download_url,
+	    	reg_hints,
+	    	update_hints,
+	    	open_reg,
+	    	status,
+	    	issue_time,
+	    	crt_time,
+	    	modify_time,
+	    	app_type,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != name and ''!= name  ">
+			and name = #{name}
+		</if>
+		<if test=" null != version and ''!= version  ">
+			and version = #{version}
+		</if>
+		<if test=" null != minVersion and ''!= minVersion  ">
+			and min_version = #{minVersion}
+		</if>
+		<if test=" null != platform and ''!= platform  ">
+			and platform = #{platform}
+		</if>
+		<if test=" null != downloadUrl and ''!= downloadUrl  ">
+			and download_url = #{downloadUrl}
+		</if>
+		<if test=" null != regHints and ''!= regHints  ">
+			and reg_hints = #{regHints}
+		</if>
+		<if test=" null != updateHints and ''!= updateHints  ">
+			and update_hints = #{updateHints}
+		</if>
+		<if test=" null != openReg ">
+			and open_reg = #{openReg}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+		<if test=" null != issueTime ">
+			and issue_time = #{issueTime}
+		</if>
+		<if test=" null != crtTime ">
+			and crt_time = #{crtTime}
+		</if>
+		<if test=" null != modifyTime ">
+			and modify_time = #{modifyTime}
+		</if>
+		<if test=" null != appType ">
+			and app_type = #{appType}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.SmAppVersion">
+		select <include refid="Base_Column_List" /> from tsm_app_version 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.SmAppVersion">
+		select <include refid="Base_Column_List" /> from tsm_app_version 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsm_app_version
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tsm_app_version
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.SmAppVersion" >
+    INSERT INTO tsm_app_version
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					name,
+				</if>
+			 	<if test=" null != version and ''!= version  ">
+					version,
+				</if>
+			 	<if test=" null != minVersion and ''!= minVersion  ">
+					min_version,
+				</if>
+			 	<if test=" null != platform and ''!= platform  ">
+					platform,
+				</if>
+			 	<if test=" null != downloadUrl and ''!= downloadUrl  ">
+					download_url,
+				</if>
+			 	<if test=" null != regHints and ''!= regHints  ">
+					reg_hints,
+				</if>
+			 	<if test=" null != updateHints and ''!= updateHints  ">
+					update_hints,
+				</if>
+			 	<if test=" null != openReg ">
+					open_reg,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != issueTime ">
+					issue_time,
+				</if>
+			 	<if test=" null != crtTime ">
+					crt_time,
+				</if>
+			 	<if test=" null != modifyTime ">
+					modify_time,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					 	#{name},
+				</if>
+			 	<if test=" null != version and ''!= version  ">
+					 	#{version},
+				</if>
+			 	<if test=" null != minVersion and ''!= minVersion  ">
+					 	#{minVersion},
+				</if>
+			 	<if test=" null != platform and ''!= platform  ">
+					 	#{platform},
+				</if>
+			 	<if test=" null != downloadUrl and ''!= downloadUrl  ">
+					 	#{downloadUrl},
+				</if>
+			 	<if test=" null != regHints and ''!= regHints  ">
+					 	#{regHints},
+				</if>
+			 	<if test=" null != updateHints and ''!= updateHints  ">
+					 	#{updateHints},
+				</if>
+			 	<if test=" null != openReg ">
+					 	#{openReg},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != issueTime ">
+					 	#{issueTime},
+				</if>
+			 	<if test=" null != crtTime ">
+					 	#{crtTime},
+				</if>
+			 	<if test=" null != modifyTime ">
+					 	#{modifyTime},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.SmAppVersion" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tsm_app_version
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					name,
+				</if>
+			 	<if test=" null != version and ''!= version  ">
+					version,
+				</if>
+			 	<if test=" null != minVersion and ''!= minVersion  ">
+					min_version,
+				</if>
+			 	<if test=" null != platform and ''!= platform  ">
+					platform,
+				</if>
+			 	<if test=" null != downloadUrl and ''!= downloadUrl  ">
+					download_url,
+				</if>
+			 	<if test=" null != regHints and ''!= regHints  ">
+					reg_hints,
+				</if>
+			 	<if test=" null != updateHints and ''!= updateHints  ">
+					update_hints,
+				</if>
+			 	<if test=" null != openReg ">
+					open_reg,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != issueTime ">
+					issue_time,
+				</if>
+			 	<if test=" null != crtTime ">
+					crt_time,
+				</if>
+			 	<if test=" null != modifyTime ">
+					modify_time,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					 	#{name},
+				</if>
+			 	<if test=" null != version and ''!= version  ">
+					 	#{version},
+				</if>
+			 	<if test=" null != minVersion and ''!= minVersion  ">
+					 	#{minVersion},
+				</if>
+			 	<if test=" null != platform and ''!= platform  ">
+					 	#{platform},
+				</if>
+			 	<if test=" null != downloadUrl and ''!= downloadUrl  ">
+					 	#{downloadUrl},
+				</if>
+			 	<if test=" null != regHints and ''!= regHints  ">
+					 	#{regHints},
+				</if>
+			 	<if test=" null != updateHints and ''!= updateHints  ">
+					 	#{updateHints},
+				</if>
+			 	<if test=" null != openReg ">
+					 	#{openReg},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != issueTime ">
+					 	#{issueTime},
+				</if>
+			 	<if test=" null != crtTime ">
+					 	#{crtTime},
+				</if>
+			 	<if test=" null != modifyTime ">
+					 	#{modifyTime},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.SmAppVersion" >
+  		UPDATE tsm_app_version
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != name and ''!= name  ">
+						name = #{name},
+					</if>
+					<if test=" null != version and ''!= version  ">
+						version = #{version},
+					</if>
+					<if test=" null != minVersion and ''!= minVersion  ">
+						min_version = #{minVersion},
+					</if>
+					<if test=" null != platform and ''!= platform  ">
+						platform = #{platform},
+					</if>
+					<if test=" null != downloadUrl and ''!= downloadUrl  ">
+						download_url = #{downloadUrl},
+					</if>
+					<if test=" null != regHints and ''!= regHints  ">
+						reg_hints = #{regHints},
+					</if>
+					<if test=" null != updateHints and ''!= updateHints  ">
+						update_hints = #{updateHints},
+					</if>
+					<if test=" null != openReg ">
+						open_reg = #{openReg},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != issueTime ">
+						issue_time = #{issueTime},
+					</if>
+					<if test=" null != crtTime ">
+						crt_time = #{crtTime},
+					</if>
+					<if test=" null != modifyTime ">
+						modify_time = #{modifyTime},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.SmAppVersion" >
+	    UPDATE tsm_app_version
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != name and ''!= name  ">
+						name = #{name},
+					</if>
+					<if test=" null != version and ''!= version  ">
+						version = #{version},
+					</if>
+					<if test=" null != minVersion and ''!= minVersion  ">
+						min_version = #{minVersion},
+					</if>
+					<if test=" null != platform and ''!= platform  ">
+						platform = #{platform},
+					</if>
+					<if test=" null != downloadUrl and ''!= downloadUrl  ">
+						download_url = #{downloadUrl},
+					</if>
+					<if test=" null != regHints and ''!= regHints  ">
+						reg_hints = #{regHints},
+					</if>
+					<if test=" null != updateHints and ''!= updateHints  ">
+						update_hints = #{updateHints},
+					</if>
+					<if test=" null != openReg ">
+						open_reg = #{openReg},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != issueTime ">
+						issue_time = #{issueTime},
+					</if>
+					<if test=" null != crtTime ">
+						crt_time = #{crtTime},
+					</if>
+					<if test=" null != modifyTime ">
+						modify_time = #{modifyTime},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tsm_app_version
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+	<select id="queryNewAppVersion" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tsm_app_version t,
+		(SELECT platform platform2,max(issue_time) time FROM `tsm_app_version`
+		where issue_time &lt;= now() and status =0
+		<if test=" null != appType ">
+			AND app_type = #{appType}
+		</if>
+		group by platform2) b
+		where t.issue_time = b.time
+		and t.platform= b.platform2
+		and (t.platform='android' or t.platform='ios')
+		<if test=" null != platform and ''!= platform  ">
+			AND t.platform = #{platform}
+		</if>
+		<if test=" null != appType ">
+			AND t.app_type = #{appType}
+		</if>
+	</select>
+
+</mapper>

@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.SmMessageQueueMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.SmMessageQueue" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="BIGINT"/>
+		<result column="type" property="type" jdbcType="INTEGER"/>
+		<result column="app_type" property="appType" jdbcType="INTEGER"/>
+		<result column="module_id" property="moduleId" jdbcType="VARCHAR"/>
+		<result column="send_to" property="sendTo" jdbcType="LONGVARCHAR"/>
+		<result column="title" property="title" jdbcType="VARCHAR"/>
+		<result column="content" property="content" jdbcType="LONGVARCHAR"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="send_time" property="sendTime" jdbcType="TIMESTAMP"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="msg_type" property="msgType" jdbcType="TINYINT"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	type,
+	    	app_type,
+	    	module_id,
+	    	send_to,
+	    	title,
+	    	content,
+	    	status,
+	    	send_time,
+	    	create_time,
+	    	remark,
+	    	msg_type,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != type ">
+			and type = #{type}
+		</if>
+		<if test=" null != appType ">
+			and app_type = #{appType}
+		</if>
+		<if test=" null != moduleId and ''!= moduleId  ">
+			and module_id = #{moduleId}
+		</if>
+		<if test=" null != sendTo and ''!= sendTo  ">
+			and send_to = #{sendTo}
+		</if>
+		<if test=" null != title and ''!= title  ">
+			and title = #{title}
+		</if>
+		<if test=" null != content and ''!= content  ">
+			and content = #{content}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+		<if test=" null != sendTime ">
+			and send_time = #{sendTime}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+		<if test=" null != msgType ">
+			and msg_type = #{msgType}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.SmMessageQueue">
+		select <include refid="Base_Column_List" /> from tsm_message_queue 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.SmMessageQueue">
+		select <include refid="Base_Column_List" /> from tsm_message_queue 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsm_message_queue
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tsm_message_queue
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.SmMessageQueue" >
+    INSERT INTO tsm_message_queue
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != type ">
+					type,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+				<if test=" null != moduleId and ''!= moduleId  ">
+					module_id,
+				</if>
+			 	<if test=" null != sendTo and ''!= sendTo  ">
+					send_to,
+				</if>
+			 	<if test=" null != title and ''!= title  ">
+					title,
+				</if>
+			 	<if test=" null != content and ''!= content  ">
+					content,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != sendTime ">
+					send_time,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != msgType ">
+					msg_type,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != type ">
+					 	#{type},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+				<if test=" null != moduleId and ''!= moduleId  ">
+					 	#{moduleId},
+				</if>
+			 	<if test=" null != sendTo and ''!= sendTo  ">
+					 	#{sendTo},
+				</if>
+			 	<if test=" null != title and ''!= title  ">
+					 	#{title},
+				</if>
+			 	<if test=" null != content and ''!= content  ">
+					 	#{content},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != sendTime ">
+					 	#{sendTime},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != msgType ">
+					 	#{msgType},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.SmMessageQueue" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tsm_message_queue
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != type ">
+					type,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+				<if test=" null != moduleId and ''!= moduleId  ">
+					module_id,
+				</if>
+			 	<if test=" null != sendTo and ''!= sendTo  ">
+					send_to,
+				</if>
+			 	<if test=" null != title and ''!= title  ">
+					title,
+				</if>
+			 	<if test=" null != content and ''!= content  ">
+					content,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != sendTime ">
+					send_time,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != msgType ">
+					msg_type,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != type ">
+					 	#{type},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+				<if test=" null != moduleId and ''!= moduleId  ">
+					 	#{moduleId},
+				</if>
+			 	<if test=" null != sendTo and ''!= sendTo  ">
+					 	#{sendTo},
+				</if>
+			 	<if test=" null != title and ''!= title  ">
+					 	#{title},
+				</if>
+			 	<if test=" null != content and ''!= content  ">
+					 	#{content},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != sendTime ">
+					 	#{sendTime},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != msgType ">
+					 	#{msgType},
+				</if>
+		</trim>
+	</insert>
+	
+	 <insert id="insertBatch" parameterType="java.util.List">
+	insert into tsm_message_queue 
+	<trim prefix="(" suffix=")" >
+			<include refid="Base_Column_List" />
+	</trim>
+	VALUES
+	<foreach item="item" index="index" collection="list" separator=",">
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id,jdbcType=INTEGER},
+				#{item.type,jdbcType=TINYINT},
+				#{item.appType,jdbcType=TINYINT},
+				#{item.moduleId,jdbcType=VARCHAR},
+				#{item.sendTo,jdbcType=VARCHAR},
+				#{item.title,jdbcType=VARCHAR},
+				#{item.content,jdbcType=VARCHAR},
+				#{item.status,jdbcType=TINYINT},
+				#{item.sendTime,jdbcType=TIMESTAMP},
+				#{item.createTime,jdbcType=TIMESTAMP},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.msgType,jdbcType=TINYINT},
+		</trim>
+	</foreach>
+</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.SmMessageQueue" >
+  		UPDATE tsm_message_queue
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != type ">
+						type = #{type},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != moduleId and ''!= moduleId  ">
+						module_id = #{moduleId},
+					</if>
+					<if test=" null != sendTo and ''!= sendTo  ">
+						send_to = #{sendTo},
+					</if>
+					<if test=" null != title and ''!= title  ">
+						title = #{title},
+					</if>
+					<if test=" null != content and ''!= content  ">
+						content = #{content},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != sendTime ">
+						send_time = #{sendTime},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != msgType ">
+						msg_type = #{msgType},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.SmMessageQueue" >
+	    UPDATE tsm_message_queue
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != type ">
+						type = #{type},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != moduleId and ''!= moduleId  ">
+						module_id = #{moduleId},
+					</if>
+					<if test=" null != sendTo and ''!= sendTo  ">
+						send_to = #{sendTo},
+					</if>
+					<if test=" null != title and ''!= title  ">
+						title = #{title},
+					</if>
+					<if test=" null != content and ''!= content  ">
+						content = #{content},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != sendTime ">
+						send_time = #{sendTime},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != msgType ">
+						msg_type = #{msgType},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+	<update id="updateBatch" parameterType="java.util.List">
+      <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update tsm_message_queue
+            <set>
+              	<trim suffixOverrides=",">
+					   <if test="item.type!=null and ''!= item.type  ">
+					        type = #{item.type,jdbcType=TINYINT},
+					   </if>
+					   <if test="item.appType!=null and ''!= item.appType  ">
+					        app_type = #{item.appType,jdbcType=TINYINT},
+					   </if>
+					   <if test="item.moduleId!=null and ''!=item.moduleId ">
+					        module_id = #{item.moduleId,jdbcType=VARCHAR},
+					   </if>
+					   <if test="item.sendTo!=null and ''!=item.sendTo ">
+					        send_to = #{item.sendTo,jdbcType=VARCHAR},
+					   </if>
+					   <if test="item.title!=null and ''!= item.title">
+					        title = #{item.title,jdbcType=VARCHAR},
+					   </if>
+					   <if test="item.content!=null and ''!= item.content ">
+					        content = #{item.content,jdbcType=VARCHAR},
+					   </if>
+					   <if test="item.status!=null ">
+					        status = #{item.status,jdbcType=TINYINT},
+					   </if>
+					   <if test="item.sendTime!=null ">
+					        send_time = #{item.sendTime,jdbcType=TIMESTAMP},
+					   </if>
+					   <if test="item.createTime!=null ">
+					        create_time = #{item.createTime,jdbcType=TIMESTAMP},
+					   </if>
+					   <if test="item.remark!=null and ''!= item.remark">
+					        remark = #{item.remark,jdbcType=VARCHAR},
+					   </if> 
+					   <if test="item.msgType!=null ">
+					        msg_type = #{item.msgType,jdbcType=TINYINT},
+					   </if>
+					   
+			   </trim>
+            </set>
+             where f_msg_id = #{item.id}
+     </foreach>
+</update>
+<!-- <update id="updateStatusBatch" parameterType="java.util.List">
+	update tsm_message_queue
+	<set>
+		<trim suffixOverrides=",">
+			<if test="item.status!=null ">
+				status = #{item.status,jdbcType=TINYINT},
+			</if>
+		</trim>
+	</set>
+	<where>
+		id
+		<foreach collection="list" item="item" index="index" open="in("
+			close=")" separator=",">
+			item.id
+		</foreach>
+	</where>
+
+</update> -->
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tsm_message_queue
+        <where> 
+        <if test="dt.search!=null">  
+                send_to LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+
+	<select id="checkVcode" resultMap="BaseResultMap"
+		parameterType="com.linkwee.web.model.SmMessageQueue">
+		select
+		<include refid="Base_Column_List" />
+		from tsm_message_queue
+		where 1=1
+		<include refid="Base_Condition" />
+		order by create_time desc 
+		limit 1
+	</select>
+    
+
+</mapper>

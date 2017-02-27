@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.InvestorInvestDao">
+
+<resultMap  type="com.linkwee.web.model.crm.InvestorInvestResp" id="InvestorInvestResp">
+	<result column="id" property="id" />
+	<result column="user_id" property="userId" />
+	<result column="user_name" property="userName" />
+	<result column="mobile" property="mobile" />
+	<result column="rect_invest_time" property="rectInvestTime" jdbcType="TIMESTAMP"/>
+	<result column="saleProfix" property="saleProfix" />
+	<result column="totalInvestAmount" property="totalInvestAmount" />
+	<result column="currInvestAmount" property="currInvestAmount" />
+	<result column="investCount" property="investCount" />
+	<result column="totalProfit" property="totalProfit" />
+	<result column="hongbaoAmount" property="hongbaoAmount" />
+	<result column="otherReward" property="otherReward" />
+</resultMap>
+
+<resultMap  type="com.linkwee.web.model.crm.InvestRecordResp" id="InvestRecordResp">
+	<result column="id" property="id" />
+	<result column="productName" property="productName" />
+	<result column="platfromName" property="platfromName" />
+	<result column="saleProfix" property="saleProfix" />
+	<result column="investAmt" property="invest_amt" />
+	<result column="profit" property="profit" />
+	<result column="bizTime" property="biz_time" jdbcType="TIMESTAMP"/>
+	<result column="startTime" property="start_time" jdbcType="TIMESTAMP"/>
+	<result column="endTime" property="end_time" jdbcType="TIMESTAMP"/>
+	<result column="status" property="status" />
+	<result column="flow_max_rate" property="flowMaxRate" />
+	<result column="flow_min_rate" property="flowMinRate" />
+	<result column="is_flow" property="isFlow" />
+	<result column="is_fixed_deadline" property="isFixedDeadline" />
+	<result column="dead_line_min_value" property="deadLineMinValue" />
+	<result column="dead_line_max_value" property="deadLineMaxValue" />
+	<result column="dead_line_min_self_defined" property="deadLineMinSelfDefined" />
+	<result column="dead_line_max_self_defined" property="deadLineMaxSelfDefined" />
+</resultMap>
+
+
+<!-- 用户投资与收益 -->
+<select id="selectInvestorInvest" resultMap="InvestorInvestResp" >
+    SELECT i.id,i.user_id,i.mobile, u.user_name ,i.rect_invest_time,
+     (SELECT IFNULL(sum(invest_amt),0) from tcim_product_invest_record where user_id=i.user_id ) totalInvestAmount,
+     (SELECT IFNULL(sum(invest_amt),0) from tcim_product_invest_record where user_id=i.user_id and `status`=1) currInvestAmount,
+     (SELECT count(1) from tcim_product_invest_record where user_id=i.user_id ) investCount,
+     (SELECT IFNULL(sum(profit),0) from tcim_product_repayment_record where user_id=i.user_id and `status`=3) totalProfit,
+     (SELECT IFNULL(sum(money),0) from tact_redpacket_use_record where user_id=i.user_id) as hongbaoAmount,
+     (SELECT IFNULL(sum(fee_amount),0) from tcim_org_fee_gather where user_id=i.user_id) as saleProfix,
+     0 as otherReward
+      from tcrm_investor i left join tcrm_user_info u on u.user_id=i.user_id 
+     where 1=1
+     <if test=" null != query.name and ''!= query.name ">
+		and i.mobile  = #{query.name} or u.user_name =#{query.name}
+  		</if>
+      order by i.id 
+</select>
+
+<!-- 用户投资记录 -->
+<select id="selectInvestRecord" resultMap="InvestRecordResp" >
+    SELECT p.product_name,
+   		p.is_fixed_deadline,
+		p.dead_line_min_value,
+		p.dead_line_max_value,
+		p.dead_line_min_self_defined,
+		p.dead_line_max_self_defined,
+	    p.flow_min_rate,
+	    p.flow_max_rate,
+	    p.is_flow,
+	    (SELECT IFNULL(sum(fee_amount),0) from tcim_org_fee_gather where invest_id=r.invest_id) as saleProfix,
+	    o.name as platfromName, r.* from 
+		tcim_product_invest_record  r 
+		LEFT JOIN tcim_product p on r.product_id=p.product_id 
+		LEFT JOIN tcim_org_info o on r.platfrom=o.org_number
+     where 1=1
+    and r.user_id=#{query.userId}
+     <if test=" null != query.name and ''!= query.name ">
+		and p.product_name = #{query.name}
+  		</if>
+  		<if test=" null != query.status and ''!= query.status ">
+		and r.status = #{query.status}
+  		</if>
+  		<if test=" null != query.startTimeForSearch">
+			and DATE_FORMAT(r.biz_time, '%Y-%m-%d') &gt;=  DATE_FORMAT(#{query.startTimeForSearch}, '%Y-%m-%d')
+		</if>
+		<if test=" null != query.endTimeForSearch">
+			and DATE_FORMAT(r.biz_time, '%Y-%m-%d') &lt;=  DATE_FORMAT(#{query.endTimeForSearch}, '%Y-%m-%d')
+		</if>
+      order by r.id desc
+</select>
+
+
+
+
+</mapper>

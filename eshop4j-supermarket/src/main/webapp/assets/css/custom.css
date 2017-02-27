@@ -1,0 +1,11 @@
+/* here you can put your own css to customize and override the theme 13267115656 */
+.ux-toolber{ padding: 8px 0;}
+.ui-redirect{ cursor: pointer;}
+.btn.btn-sm.btn-icon{ padding: 0px 8px 0px 0px;  font-size: 11px;    border-radius: 1px !important;}
+.btn.btn-sm.btn-icon i {
+    padding: 5px 6px;
+    font-size: 11px;
+    line-height: 1.5;
+    margin: 0;
+}
+.btn.btn.sm.btn-default.btn-icon{ background-color: #dbdbdd;color: #303641;}

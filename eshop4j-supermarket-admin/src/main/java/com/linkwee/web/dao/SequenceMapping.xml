@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.SequenceDao">
+
+<!-- 查询产品购买人数 -->
+<select id="getSequence"  resultType="java.lang.String">
+	select nextseq_new(#{tableName}) from dual
+</select>
+
+</mapper>

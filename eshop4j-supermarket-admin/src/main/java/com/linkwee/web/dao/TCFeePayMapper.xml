@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.TCFeePayMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.tc.fee.model.TCFeePay" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="bill_id" property="billId" jdbcType="VARCHAR"/>
+		<result column="department" property="department" jdbcType="VARCHAR"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="user_mobile" property="userMobile" jdbcType="VARCHAR"/>
+		<result column="user_name" property="userName" jdbcType="VARCHAR"/>
+		<result column="fee_amount" property="feeAmount" jdbcType="DECIMAL"/>
+		<result column="month" property="month" jdbcType="VARCHAR"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="result_code" property="resultCode" jdbcType="VARCHAR"/>
+		<result column="result_msg" property="resultMsg" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	bill_id,
+	    	department,
+	    	user_id,
+	    	user_mobile,
+	    	user_name,
+	    	fee_amount,
+	    	month,
+	    	status,
+	    	result_code,
+	    	result_msg,
+	    	create_time,
+	    	update_time,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != billId and ''!= billId  ">
+			and bill_id = #{billId}
+		</if>
+		<if test=" null != department and ''!= department  ">
+			and department = #{department}
+		</if>
+		<if test=" null != userId and ''!= userId  ">
+			and user_id = #{userId}
+		</if>
+		<if test=" null != userMobile and ''!= userMobile  ">
+			and user_mobile = #{userMobile}
+		</if>
+		<if test=" null != userName and ''!= userName  ">
+			and user_name = #{userName}
+		</if>
+		<if test=" null != feeAmount ">
+			and fee_amount = #{feeAmount}
+		</if>
+		<if test=" null != month and ''!= month  ">
+			and month = #{month}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+		<if test=" null != resultCode and ''!= resultCode  ">
+			and result_code = #{resultCode}
+		</if>
+		<if test=" null != resultMsg and ''!= resultMsg  ">
+			and result_msg = #{resultMsg}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.tc.fee.model.TCFeePay">
+		select <include refid="Base_Column_List" /> from tcim_fee_pay 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.tc.fee.model.TCFeePay">
+		select <include refid="Base_Column_List" /> from tcim_fee_pay 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_fee_pay
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_fee_pay
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.tc.fee.model.TCFeePay" >
+    INSERT INTO tcim_fee_pay
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != billId and ''!= billId  ">
+					bill_id,
+				</if>
+			 	<if test=" null != department and ''!= department  ">
+					department,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != userMobile and ''!= userMobile  ">
+					user_mobile,
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					user_name,
+				</if>
+			 	<if test=" null != feeAmount ">
+					fee_amount,
+				</if>
+			 	<if test=" null != month and ''!= month  ">
+					month,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != resultCode and ''!= resultCode  ">
+					result_code,
+				</if>
+			 	<if test=" null != resultMsg and ''!= resultMsg  ">
+					result_msg,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != billId and ''!= billId  ">
+					 	#{billId},
+				</if>
+			 	<if test=" null != department and ''!= department  ">
+					 	#{department},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != userMobile and ''!= userMobile  ">
+					 	#{userMobile},
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					 	#{userName},
+				</if>
+			 	<if test=" null != feeAmount ">
+					 	#{feeAmount},
+				</if>
+			 	<if test=" null != month and ''!= month  ">
+					 	#{month},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != resultCode and ''!= resultCode  ">
+					 	#{resultCode},
+				</if>
+			 	<if test=" null != resultMsg and ''!= resultMsg  ">
+					 	#{resultMsg},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.tc.fee.model.TCFeePay" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcim_fee_pay
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != billId and ''!= billId  ">
+					bill_id,
+				</if>
+			 	<if test=" null != department and ''!= department  ">
+					department,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != userMobile and ''!= userMobile  ">
+					user_mobile,
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					user_name,
+				</if>
+			 	<if test=" null != feeAmount ">
+					fee_amount,
+				</if>
+			 	<if test=" null != month and ''!= month  ">
+					month,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != resultCode and ''!= resultCode  ">
+					result_code,
+				</if>
+			 	<if test=" null != resultMsg and ''!= resultMsg  ">
+					result_msg,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != billId and ''!= billId  ">
+					 	#{billId},
+				</if>
+			 	<if test=" null != department and ''!= department  ">
+					 	#{department},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != userMobile and ''!= userMobile  ">
+					 	#{userMobile},
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					 	#{userName},
+				</if>
+			 	<if test=" null != feeAmount ">
+					 	#{feeAmount},
+				</if>
+			 	<if test=" null != month and ''!= month  ">
+					 	#{month},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != resultCode and ''!= resultCode  ">
+					 	#{resultCode},
+				</if>
+			 	<if test=" null != resultMsg and ''!= resultMsg  ">
+					 	#{resultMsg},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+		</trim>
+	</insert>
+	
+	
+ 
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.tc.fee.model.TCFeePay" >
+  		UPDATE tcim_fee_pay
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != billId and ''!= billId  ">
+						bill_id = #{billId},
+					</if>
+					<if test=" null != department and ''!= department  ">
+						department = #{department},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != userMobile and ''!= userMobile  ">
+						user_mobile = #{userMobile},
+					</if>
+					<if test=" null != userName and ''!= userName  ">
+						user_name = #{userName},
+					</if>
+					<if test=" null != feeAmount ">
+						fee_amount = #{feeAmount},
+					</if>
+					<if test=" null != month and ''!= month  ">
+						month = #{month},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != resultCode and ''!= resultCode  ">
+						result_code = #{resultCode},
+					</if>
+					<if test=" null != resultMsg and ''!= resultMsg  ">
+						result_msg = #{resultMsg},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.tc.fee.model.TCFeePay" >
+	    UPDATE tcim_fee_pay
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != billId and ''!= billId  ">
+						bill_id = #{billId},
+					</if>
+					<if test=" null != department and ''!= department  ">
+						department = #{department},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != userMobile and ''!= userMobile  ">
+						user_mobile = #{userMobile},
+					</if>
+					<if test=" null != userName and ''!= userName  ">
+						user_name = #{userName},
+					</if>
+					<if test=" null != feeAmount ">
+						fee_amount = #{feeAmount},
+					</if>
+					<if test=" null != month and ''!= month  ">
+						month = #{month},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != resultCode and ''!= resultCode  ">
+						result_code = #{resultCode},
+					</if>
+					<if test=" null != resultMsg and ''!= resultMsg  ">
+						result_msg = #{resultMsg},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+	  
+	<insert id="inserts">
+		INSERT INTO tcim_fee_pay
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			bill_id,user_id,user_mobile,user_name,	fee_amount,month,create_time,update_time,
+		</trim>
+		VALUES
+		<foreach item="item" index="index" collection="feebalances" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				 #{item.bizId},
+				 #{item.userId},
+				 #{item.userMobile},
+				 #{item.userName},
+				 #{item.feeAmount},
+				 #{item.month},
+				 #{item.createTime},
+				 #{item.updateTime},
+			</trim>
+		</foreach>
+	</insert>
+	
+  <update id="updateStatus" >
+	    UPDATE tcim_fee_pay
+	    <set>
+			status = #{status},
+			result_code = #{msgCode},
+			result_msg = #{msg},
+			update_time = now()
+		</set>
+		<where>
+			bill_id in 
+			<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+				 #{item}
+			</foreach>
+		</where>
+  </update>
+  
+  <select id="getNoPayFeeCount" resultType="int">
+  		SELECT count(*) FROM tcim_fee_pay fp WHERE fp.`month`= #{month} AND fp.`status` in (0,3)
+  </select>
+  
+   <select id="getNoPayFeeList" resultMap="BaseResultMap">
+  		SELECT
+			fp.bill_id,
+			fp.user_id,
+			fp.user_mobile,
+			fp.user_name,
+			fp.fee_amount,
+			fp.`month`
+		FROM
+			tcim_fee_pay fp
+		WHERE
+			fp.`month` = #{month}
+		AND fp.`status` IN (0, 3)
+  </select>
+	  
+
+</mapper>

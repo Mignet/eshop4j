@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.DataStatisticsMapper">
+
+	<select id="queryInvestorLcsAndInvestment" resultType="HashMap" parameterType="com.linkwee.web.request.DataStatisticsRequest">
+		SELECT
+			newInvestorCount.newInvestor AS newInvestor,
+			totalInvestorCount.totalInvestor AS totalInvestor,
+			newCfpCount.newCfp AS newCfp,
+			totalCfpCount.totalCfp AS totalCfp,
+			newInvestmentCount.newInvestment AS newInvestment,
+			totalInvestmentCount.totalInvestment AS totalInvestment
+		FROM
+			(
+				SELECT
+					count(DISTINCT user_id) AS newInvestor
+				FROM
+					tcrm_investor
+				WHERE
+					DATE_FORMAT(create_time, '%Y-%m-%d') BETWEEN DATE_FORMAT(#{startTime}, '%Y-%m-%d')
+				AND DATE_FORMAT(#{endTime}, '%Y-%m-%d')
+			) newInvestorCount,
+			(
+				SELECT
+					count(DISTINCT user_id) AS totalInvestor
+				FROM
+					tcrm_investor
+			) totalInvestorCount,
+			(
+				SELECT
+					count(DISTINCT user_id) AS newCfp
+				FROM
+					tcrm_cfplanner
+				WHERE
+					DATE_FORMAT(create_time, '%Y-%m-%d') BETWEEN DATE_FORMAT(#{startTime}, '%Y-%m-%d')
+				AND DATE_FORMAT(#{endTime}, '%Y-%m-%d')
+			) newCfpCount,
+			(
+				SELECT
+					count(DISTINCT user_id) AS totalCfp
+				FROM
+					tcrm_cfplanner
+			) totalCfpCount,
+			(
+				SELECT
+					sum(IFNULL(invest_amt, 0)) AS newInvestment
+				FROM
+					tcim_product_invest_record
+				WHERE
+					DATE_FORMAT(create_time, '%Y-%m-%d') BETWEEN DATE_FORMAT(#{startTime}, '%Y-%m-%d')
+				AND DATE_FORMAT(#{endTime}, '%Y-%m-%d')
+			) newInvestmentCount,
+			(
+				SELECT
+					sum(IFNULL(invest_amt, 0)) AS totalInvestment
+				FROM
+					tcim_product_invest_record
+			) totalInvestmentCount
+	</select>
+	
+	<select id="queryNewInvestorTable" resultType="HashMap" parameterType="com.linkwee.web.request.DataStatisticsRequest">
+		SELECT
+			count(DISTINCT user_id) AS registerInvestorNum,
+			DATE_FORMAT(create_time, #{dateFormat}) AS registerInvestorTime
+		FROM
+			tcrm_investor
+		WHERE
+			DATE_FORMAT(create_time, #{dateFormat}) BETWEEN DATE_FORMAT(#{startTime}, #{dateFormat})
+		AND DATE_FORMAT(#{endTime}, #{dateFormat})
+		GROUP BY
+			registerInvestorTime
+	</select>
+	
+	<select id="queryNewCfpTable" resultType="HashMap" parameterType="com.linkwee.web.request.DataStatisticsRequest">
+		SELECT
+			count(DISTINCT user_id) AS registerCfpNum,
+			DATE_FORMAT(create_time, #{dateFormat}) AS registerCfpTime
+		FROM
+			tcrm_cfplanner
+		WHERE
+			DATE_FORMAT(create_time, #{dateFormat}) BETWEEN DATE_FORMAT(#{startTime}, #{dateFormat})
+		AND DATE_FORMAT(#{endTime}, #{dateFormat})
+		GROUP BY
+			registerCfpTime
+	</select>
+	
+	<select id="queryCurrentInvestment" resultType="HashMap" parameterType="com.linkwee.web.request.DataStatisticsRequest">
+		SELECT
+			sum(IFNULL(invest_amt, 0)) AS currentInvestment,
+			DATE_FORMAT(create_time, #{dateFormat}) AS investTime
+		FROM
+			tcim_product_invest_record
+		WHERE
+			DATE_FORMAT(create_time, #{dateFormat}) BETWEEN DATE_FORMAT(#{startTime}, #{dateFormat})
+		AND DATE_FORMAT(#{endTime}, #{dateFormat})
+		GROUP BY
+			investTime
+	</select>
+
+</mapper>

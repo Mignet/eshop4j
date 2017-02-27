@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.MenuDao">
+
+    <!--*************************-->
+    <!--菜单列表查询-->
+    <!--*************************-->
+    <select id="findMenuList" resultType="com.linkwee.web.response.MenusResp">
+        SELECT m.id,m.menu_name as menuName,
+  m.menu_url as menuUrl,
+  m.add_time as addTime,
+  m.is_disable as isDisable,
+  m.parent_id as parentId,
+  m.permission_sign as permissionSign,
+  a.menu_name as parentName,
+        m.menu_icon as menuIcon,
+  m.sort
+FROM tsys_menus m LEFT JOIN (SELECT ms.id,ms.menu_name FROM  tsys_menus ms WHERE ms.parent_id = 0) as a ON  a.id = m.parent_id WHERE 1=1
+
+        <if test="query.params!=null and query.params.isDisable!=null"> AND m.is_disable = #{query.params.isDisable} </if>
+
+<if test="query.params !=null and query.params.parentId !=null and query.params.parentId >=0 "> AND m.parent_id = #{query.params.parentId}</if>
+        <if test="query.params !=null and query.params.menuName !=null and query.params.menuName!=''">
+            AND (m.menu_name LIKE CONCAT(CONCAT('%',#{query.params.menuName}),'%') OR m.menu_url LIKE CONCAT(CONCAT('%',#{query.params.menuName}),'%'))
+        </if>
+ORDER BY m.sort ASC
+    </select>
+
+    <!--*************************-->
+    <!--菜单详情查询 -->
+    <!--*************************-->
+    <select id="findMenuOne" resultType="com.linkwee.web.model.MenusModel">
+        SELECT m.id,m.menu_name as menuName,
+        m.menu_url as menuUrl,
+        m.add_time as addTime,
+        m.is_disable as isDisable,
+        m.parent_id as parentId,
+        m.permission_sign as permissionSign,
+        m.sort,
+        m.menu_icon as menuIcon
+        FROM tsys_menus m WHERE 1=1 AND id = #{query.id}
+    </select>
+
+    <!--*************************-->
+    <!--菜单批量删除-->
+    <!--*************************-->
+    <delete id="deleteMenus">
+        DELETE FROM tsys_menus WHERE id IN
+        <foreach item="iid" collection="iids" open="(" separator="," close=")">
+             #{iid}
+        </foreach>
+
+    </delete>
+
+    <!--*************************-->
+    <!--菜单列表查询更新-->
+    <!--*************************-->
+    <update id="updateMenus" parameterType="com.linkwee.web.model.MenusModel">
+        UPDATE `tsys_menus`
+        <set>
+            <if test="query.menuName!=null and query.menuName!=''">`menu_name`=#{query.menuName},</if>
+            <if test="query.menuUrl!=null and query.menuUrl!=''"> `menu_url`=#{query.menuUrl},</if>
+            <if test="query.parentId!=null"> `parent_id`=#{query.parentId},</if>
+            <if test="query.isDisable!=null"> `is_disable`=#{query.isDisable},</if>
+            <if test="query.sort!=null"> `sort`=#{query.sort},</if>
+            <if test="query.addTime!=null"> `add_time`=#{query.addTime},</if>
+            <if test="query.permissionSign!=null and query.permissionSign!=''"> `permission_sign`=#{query.permissionSign},</if>
+            <if test="query.menuIcon!=null and query.menuIcon!=''"> `menu_icon`=#{query.menuIcon},</if>
+        </set>
+
+        WHERE id = #{query.id}
+    </update>
+
+    <!--*************************-->
+    <!--菜单插入新记录-->
+    <!--*************************-->
+    <insert id="insertMenu" parameterType="com.linkwee.web.model.MenusModel">
+        INSERT INTO `tsys_menus` (
+        `menu_name`,
+        `menu_url`,
+       <if test="parentId !=null">`parent_id`,</if>
+       <if test="isDisable !=null">`is_disable`,</if>
+       <if test="sort !=null">`sort`,</if>
+        `add_time`,
+        `permission_sign`,`menu_icon`)
+        VALUES (
+        #{menuName},
+        #{menuUrl},
+        <if test="parentId !=null"> #{parentId},</if>
+        <if test="isDisable !=null"> #{isDisable},</if>
+        <if test="sort !=null"> #{sort},</if>
+         NOW(),
+         #{permissionSign},#{menuIcon});
+    </insert>
+
+</mapper>

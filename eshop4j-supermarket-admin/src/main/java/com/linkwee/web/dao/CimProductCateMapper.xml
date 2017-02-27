@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CimProductCateMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.CimProductCate" id="BaseResultMap">
+		<result column="cate_id" property="cateId" jdbcType="INTEGER"/>
+		<result column="cate_name" property="cateName" jdbcType="VARCHAR"/>
+		<result column="parent_cate_id" property="parentCateId" jdbcType="VARCHAR"/>
+		<result column="order_num" property="orderNum" jdbcType="INTEGER"/>
+		<result column="cate_logo_investor" property="cateLogoInvestor" jdbcType="VARCHAR"/>
+		<result column="cate_logo_channel" property="cateLogoChannel" jdbcType="VARCHAR"/>
+		<result column="disabled" property="disabled" jdbcType="CHAR"/>
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+		<result column="description" property="description" jdbcType="VARCHAR"/>
+		<result column="identifier" property="identifier" jdbcType="VARCHAR"/>
+		<result column="ispublic" property="ispublic" jdbcType="INTEGER"/>
+		<result column="if_show" property="ifShow" jdbcType="INTEGER"/>
+		<result column="url_link" property="urlLink" jdbcType="VARCHAR"/>
+		<result column="cate_declare" property="cateDeclare" jdbcType="VARCHAR"/>
+		<result column="cate_data" property="cateData" jdbcType="INTEGER"/>
+		<result column="major_recommendation_platform" property="majorRecommendationPlatform" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	cate_id,
+	    	cate_name,
+	    	parent_cate_id,
+	    	order_num,
+	    	cate_logo_investor,
+	    	cate_logo_channel,
+	    	disabled,
+	    	modify_time,
+	    	description,
+	    	identifier,
+	    	ispublic,
+	    	if_show,
+	    	url_link,
+	    	cate_declare,
+	    	cate_data,
+	    	major_recommendation_platform,
+    </trim>
+  </sql>
+  
+ <sql id="Base_Column_List_T">
+    <trim suffixOverrides=",">
+	    	t.cate_id,
+	    	t.cate_name,
+	    	t.parent_cate_id,
+	    	t.order_num,
+	    	t.cate_logo_investor,
+	    	t.cate_logo_channel,
+	    	t.disabled,
+	    	t.modify_time,
+	    	t.description,
+	    	t.identifier,
+	    	t.ispublic,
+	    	t.if_show,
+	    	t.url_link,
+	    	t.cate_declare,
+	    	t.cate_data,
+	    	t.major_recommendation_platform,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != cateId ">
+			and cate_id = #{cateId}
+		</if>
+		<if test=" null != cateName and ''!= cateName  ">
+			and cate_name = #{cateName}
+		</if>
+		<if test=" null != parentCateId and ''!= parentCateId  ">
+			and parent_cate_id = #{parentCateId}
+		</if>
+		<if test=" null != orderNum ">
+			and order_num = #{orderNum}
+		</if>
+		<if test=" null != cateLogoInvestor and ''!= cateLogoInvestor  ">
+			and cate_logo_investor = #{cateLogoInvestor}
+		</if>
+		<if test=" null != cateLogoChannel and ''!= cateLogoChannel  ">
+			and cate_logo_channel = #{cateLogoChannel}
+		</if>
+		<if test=" null != disabled and ''!= disabled  ">
+			and disabled = #{disabled}
+		</if>
+		<if test=" null != modifyTime ">
+			and modify_time = #{modifyTime}
+		</if>
+		<if test=" null != description and ''!= description  ">
+			and description = #{description}
+		</if>
+		<if test=" null != identifier and ''!= identifier  ">
+			and identifier = #{identifier}
+		</if>
+		<if test=" null != ispublic ">
+			and ispublic = #{ispublic}
+		</if>
+		<if test=" null != ifShow ">
+			and if_show = #{ifShow}
+		</if>
+		<if test=" null != urlLink and ''!= urlLink  ">
+			and url_link = #{urlLink}
+		</if>
+		<if test=" null != cateDeclare and ''!= cateDeclare  ">
+			and cate_declare = #{cateDeclare}
+		</if>
+		<if test=" null != cateData ">
+			and cate_data = #{cateData}
+		</if>
+		<if test=" null != majorRecommendationPlatform and ''!= majorRecommendationPlatform  ">
+			and major_recommendation_platform = #{majorRecommendationPlatform}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimProductCate">
+		select <include refid="Base_Column_List" /> from tcim_product_cate 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.CimProductCate">
+		select <include refid="Base_Column_List" /> from tcim_product_cate 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_product_cate
+    where  cate_id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_product_cate
+    where cate_id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.CimProductCate" >
+    INSERT INTO tcim_product_cate
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != cateId ">
+					cate_id,
+				</if>
+			 	<if test=" null != cateName and ''!= cateName  ">
+					cate_name,
+				</if>
+			 	<if test=" null != parentCateId and ''!= parentCateId  ">
+					parent_cate_id,
+				</if>
+			 	<if test=" null != orderNum ">
+					order_num,
+				</if>
+			 	<if test=" null != cateLogoInvestor and ''!= cateLogoInvestor  ">
+					cate_logo_investor,
+				</if>
+			 	<if test=" null != cateLogoChannel and ''!= cateLogoChannel  ">
+					cate_logo_channel,
+				</if>
+			 	<if test=" null != disabled and ''!= disabled  ">
+					disabled,
+				</if>
+			 	<if test=" null != modifyTime ">
+					modify_time,
+				</if>
+			 	<if test=" null != description and ''!= description  ">
+					description,
+				</if>
+			 	<if test=" null != identifier and ''!= identifier  ">
+					identifier,
+				</if>
+			 	<if test=" null != ispublic ">
+					ispublic,
+				</if>
+			 	<if test=" null != ifShow ">
+					if_show,
+				</if>
+			 	<if test=" null != urlLink and ''!= urlLink  ">
+					url_link,
+				</if>
+			 	<if test=" null != cateDeclare and ''!= cateDeclare  ">
+					cate_declare,
+				</if>
+			 	<if test=" null != cateData ">
+					cate_data,
+				</if>
+			 	<if test=" null != majorRecommendationPlatform and ''!= majorRecommendationPlatform  ">
+					major_recommendation_platform,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != cateId ">
+					 	#{cateId},
+				</if>
+			 	<if test=" null != cateName and ''!= cateName  ">
+					 	#{cateName},
+				</if>
+			 	<if test=" null != parentCateId and ''!= parentCateId  ">
+					 	#{parentCateId},
+				</if>
+			 	<if test=" null != orderNum ">
+					 	#{orderNum},
+				</if>
+			 	<if test=" null != cateLogoInvestor and ''!= cateLogoInvestor  ">
+					 	#{cateLogoInvestor},
+				</if>
+			 	<if test=" null != cateLogoChannel and ''!= cateLogoChannel  ">
+					 	#{cateLogoChannel},
+				</if>
+			 	<if test=" null != disabled and ''!= disabled  ">
+					 	#{disabled},
+				</if>
+			 	<if test=" null != modifyTime ">
+					 	#{modifyTime},
+				</if>
+			 	<if test=" null != description and ''!= description  ">
+					 	#{description},
+				</if>
+			 	<if test=" null != identifier and ''!= identifier  ">
+					 	#{identifier},
+				</if>
+			 	<if test=" null != ispublic ">
+					 	#{ispublic},
+				</if>
+			 	<if test=" null != ifShow ">
+					 	#{ifShow},
+				</if>
+			 	<if test=" null != urlLink and ''!= urlLink  ">
+					 	#{urlLink},
+				</if>
+			 	<if test=" null != cateDeclare and ''!= cateDeclare  ">
+					 	#{cateDeclare},
+				</if>
+			 	<if test=" null != cateData ">
+					 	#{cateData},
+				</if>
+			 	<if test=" null != majorRecommendationPlatform and ''!= majorRecommendationPlatform  ">
+					 	#{majorRecommendationPlatform},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.CimProductCate" useGeneratedKeys="true" keyProperty="cateId" >
+		INSERT INTO tcim_product_cate
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != cateId ">
+					cate_id,
+				</if>
+			 	<if test=" null != cateName and ''!= cateName  ">
+					cate_name,
+				</if>
+			 	<if test=" null != parentCateId and ''!= parentCateId  ">
+					parent_cate_id,
+				</if>
+			 	<if test=" null != orderNum ">
+					order_num,
+				</if>
+			 	<if test=" null != cateLogoInvestor and ''!= cateLogoInvestor  ">
+					cate_logo_investor,
+				</if>
+			 	<if test=" null != cateLogoChannel and ''!= cateLogoChannel  ">
+					cate_logo_channel,
+				</if>
+			 	<if test=" null != disabled and ''!= disabled  ">
+					disabled,
+				</if>
+			 	<if test=" null != modifyTime ">
+					modify_time,
+				</if>
+			 	<if test=" null != description and ''!= description  ">
+					description,
+				</if>
+			 	<if test=" null != identifier and ''!= identifier  ">
+					identifier,
+				</if>
+			 	<if test=" null != ispublic ">
+					ispublic,
+				</if>
+			 	<if test=" null != ifShow ">
+					if_show,
+				</if>
+			 	<if test=" null != urlLink and ''!= urlLink  ">
+					url_link,
+				</if>
+			 	<if test=" null != cateDeclare and ''!= cateDeclare  ">
+					cate_declare,
+				</if>
+			 	<if test=" null != cateData ">
+					cate_data,
+				</if>
+			 	<if test=" null != majorRecommendationPlatform and ''!= majorRecommendationPlatform  ">
+					major_recommendation_platform,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != cateId ">
+					 	#{cateId},
+				</if>
+			 	<if test=" null != cateName and ''!= cateName  ">
+					 	#{cateName},
+				</if>
+			 	<if test=" null != parentCateId and ''!= parentCateId  ">
+					 	#{parentCateId},
+				</if>
+			 	<if test=" null != orderNum ">
+					 	#{orderNum},
+				</if>
+			 	<if test=" null != cateLogoInvestor and ''!= cateLogoInvestor  ">
+					 	#{cateLogoInvestor},
+				</if>
+			 	<if test=" null != cateLogoChannel and ''!= cateLogoChannel  ">
+					 	#{cateLogoChannel},
+				</if>
+			 	<if test=" null != disabled and ''!= disabled  ">
+					 	#{disabled},
+				</if>
+			 	<if test=" null != modifyTime ">
+					 	#{modifyTime},
+				</if>
+			 	<if test=" null != description and ''!= description  ">
+					 	#{description},
+				</if>
+			 	<if test=" null != identifier and ''!= identifier  ">
+					 	#{identifier},
+				</if>
+			 	<if test=" null != ispublic ">
+					 	#{ispublic},
+				</if>
+			 	<if test=" null != ifShow ">
+					 	#{ifShow},
+				</if>
+			 	<if test=" null != urlLink and ''!= urlLink  ">
+					 	#{urlLink},
+				</if>
+			 	<if test=" null != cateDeclare and ''!= cateDeclare  ">
+					 	#{cateDeclare},
+				</if>
+			 	<if test=" null != cateData ">
+					 	#{cateData},
+				</if>
+			 	<if test=" null != majorRecommendationPlatform and ''!= majorRecommendationPlatform  ">
+					 	#{majorRecommendationPlatform},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.CimProductCate" >
+  		UPDATE tcim_product_cate
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != cateName and ''!= cateName  ">
+						cate_name = #{cateName},
+					</if>
+					<if test=" null != parentCateId and ''!= parentCateId  ">
+						parent_cate_id = #{parentCateId},
+					</if>
+					<if test=" null != orderNum ">
+						order_num = #{orderNum},
+					</if>
+					<if test=" null != cateLogoInvestor and ''!= cateLogoInvestor  ">
+						cate_logo_investor = #{cateLogoInvestor},
+					</if>
+					<if test=" null != cateLogoChannel and ''!= cateLogoChannel  ">
+						cate_logo_channel = #{cateLogoChannel},
+					</if>
+					<if test=" null != disabled and ''!= disabled  ">
+						disabled = #{disabled},
+					</if>
+					<if test=" null != modifyTime ">
+						modify_time = #{modifyTime},
+					</if>
+					<if test=" null != description and ''!= description  ">
+						description = #{description},
+					</if>
+					<if test=" null != identifier and ''!= identifier  ">
+						identifier = #{identifier},
+					</if>
+					<if test=" null != ispublic ">
+						ispublic = #{ispublic},
+					</if>
+					<if test=" null != ifShow ">
+						if_show = #{ifShow},
+					</if>
+					<if test=" null != urlLink and ''!= urlLink  ">
+						url_link = #{urlLink},
+					</if>
+					<if test=" null != cateDeclare and ''!= cateDeclare  ">
+						cate_declare = #{cateDeclare},
+					</if>
+					<if test=" null != cateData ">
+						cate_data = #{cateData},
+					</if>
+					<if test=" null != majorRecommendationPlatform and ''!= majorRecommendationPlatform  ">
+						major_recommendation_platform = #{majorRecommendationPlatform},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 cate_id = #{cateId}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.CimProductCate" >
+	    UPDATE tcim_product_cate
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != cateName and ''!= cateName  ">
+						cate_name = #{cateName},
+					</if>
+					<if test=" null != parentCateId and ''!= parentCateId  ">
+						parent_cate_id = #{parentCateId},
+					</if>
+					<if test=" null != orderNum ">
+						order_num = #{orderNum},
+					</if>
+					<if test=" null != cateLogoInvestor and ''!= cateLogoInvestor  ">
+						cate_logo_investor = #{cateLogoInvestor},
+					</if>
+					<if test=" null != cateLogoChannel and ''!= cateLogoChannel  ">
+						cate_logo_channel = #{cateLogoChannel},
+					</if>
+					<if test=" null != disabled and ''!= disabled  ">
+						disabled = #{disabled},
+					</if>
+					<if test=" null != modifyTime ">
+						modify_time = #{modifyTime},
+					</if>
+					<if test=" null != description and ''!= description  ">
+						description = #{description},
+					</if>
+					<if test=" null != identifier and ''!= identifier  ">
+						identifier = #{identifier},
+					</if>
+					<if test=" null != ispublic ">
+						ispublic = #{ispublic},
+					</if>
+					<if test=" null != ifShow ">
+						if_show = #{ifShow},
+					</if>
+					<if test=" null != urlLink and ''!= urlLink  ">
+						url_link = #{urlLink},
+					</if>
+					<if test=" null != cateDeclare and ''!= cateDeclare  ">
+						cate_declare = #{cateDeclare},
+					</if>
+					<if test=" null != cateData ">
+						cate_data = #{cateData},
+					</if>
+					<if test=" null != majorRecommendationPlatform and ''!= majorRecommendationPlatform  ">
+						major_recommendation_platform = #{majorRecommendationPlatform},
+					</if>
+			</trim>
+		</set>
+		<where>
+			cate_id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcim_product_cate
+        <where> 
+        <if test="dt.search!=null">  
+                cate_name LIKE CONCAT('%','${dt.search.value}','%' )  or  description LIKE CONCAT('%','${dt.search.value}','%' )
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+    
+    <!-- 管理后台-查询产品分类列表 -->
+    <select id="getCimProductCates" parameterType="com.linkwee.web.request.ProductCateDataRequest" resultType="com.linkwee.web.model.CimProductCateManager">
+        SELECT
+       	 	<include refid="Base_Column_List_T" />,
+		   (
+				SELECT
+					toi.`name`
+				FROM
+					tcim_org_info toi
+				WHERE
+					toi.org_number = t.major_recommendation_platform
+			) AS orgName,
+			(
+				SELECT
+					tc.config_value
+				FROM
+					tsys_config tc
+				WHERE
+					tc.config_key = 'img_server_url'
+				LIMIT 1
+			) AS imgServerUrl       	 	
+        FROM tcim_product_cate t
+        where 1=1
+        <if test="query.cateName!=null and query.cateName!='' ">  
+               and t.cate_name LIKE CONCAT('%','${query.cateName}','%' )
+        </if>
+        <if test="query.orgNumber!=null and query.orgNumber != '99' ">  
+              and t.major_recommendation_platform =#{query.orgNumber}
+        </if>          
+    </select>
+
+</mapper>

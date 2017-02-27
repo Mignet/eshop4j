@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.CimOrgFeeGatherMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.cim.CimOrgFeeGather" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="product_org_id" property="productOrgId" jdbcType="VARCHAR"/>
+		<result column="invest_time" property="investTime" jdbcType="TIMESTAMP"/>
+		<result column="feedetail_id" property="feedetailId" jdbcType="VARCHAR"/>
+		<result column="invest_id" property="investId" jdbcType="VARCHAR"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="product_id" property="productId" jdbcType="VARCHAR"/>
+		<result column="product_amount" property="productAmount" jdbcType="DECIMAL"/>
+		<result column="product_deadline" property="productDeadline" jdbcType="DECIMAL"/>
+		<result column="is_redemption" property="isRedemption" jdbcType="INTEGER"/>
+		<result column="redemption_date" property="redemptionDate" jdbcType="INTEGER"/>
+		<result column="yearpur_amount" property="yearpurAmount" jdbcType="DECIMAL"/>
+		<result column="is_first_invest" property="isFirstInvest" jdbcType="INTEGER"/>
+		<result column="fixed_amount" property="fixedAmount" jdbcType="DECIMAL"/>
+		<result column="float_fixed_amount" property="floatFixedAmount" jdbcType="DECIMAL"/>
+		<result column="proportion_ratio" property="proportionRatio" jdbcType="DECIMAL"/>
+		<result column="proportion_amount" property="proportionAmount" jdbcType="DECIMAL"/>
+		<result column="year_proportion_ratio" property="yearProportionRatio" jdbcType="DECIMAL"/>
+		<result column="year_proportion_amount" property="yearProportionAmount" jdbcType="DECIMAL"/>
+		<result column="fee_amount" property="feeAmount" jdbcType="DECIMAL"/>
+		<result column="repayment_time" property="repaymentTime" jdbcType="TIMESTAMP"/>
+		<result column="balance_status" property="balanceStatus" jdbcType="TINYINT"/>
+		<result column="balance_number" property="balanceNumber" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	product_org_id,
+	    	invest_time,
+	    	feedetail_id,
+	    	invest_id,
+	    	user_id,
+	    	product_id,
+	    	product_amount,
+	    	product_deadline,
+	    	is_redemption,
+	    	redemption_date,
+	    	yearpur_amount,
+	    	is_first_invest,
+	    	fixed_amount,
+	    	float_fixed_amount,
+	    	proportion_ratio,
+	    	proportion_amount,
+	    	year_proportion_ratio,
+	    	year_proportion_amount,
+	    	fee_amount,
+	    	repayment_time,
+	    	balance_status,
+	    	balance_number,
+	    	create_time,
+	    	update_time,
+	    	remark,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != productOrgId and ''!= productOrgId  ">
+			and product_org_id = #{productOrgId}
+		</if>
+		<if test=" null != investTime ">
+			and invest_time = #{investTime}
+		</if>
+		<if test=" null != feedetailId and ''!= feedetailId  ">
+			and feedetail_id = #{feedetailId}
+		</if>
+		<if test=" null != investId and ''!= investId  ">
+			and invest_id = #{investId}
+		</if>
+		<if test=" null != userId and ''!= userId  ">
+			and user_id = #{userId}
+		</if>
+		<if test=" null != productId and ''!= productId  ">
+			and product_id = #{productId}
+		</if>
+		<if test=" null != productAmount ">
+			and product_amount = #{productAmount}
+		</if>
+		<if test=" null != productDeadline ">
+			and product_deadline = #{productDeadline}
+		</if>
+		<if test=" null != isRedemption ">
+			and is_redemption = #{isRedemption}
+		</if>
+		<if test=" null != redemptionDate ">
+			and redemption_date = #{redemptionDate}
+		</if>
+		<if test=" null != yearpurAmount ">
+			and yearpur_amount = #{yearpurAmount}
+		</if>
+		<if test=" null != isFirstInvest ">
+			and is_first_invest = #{isFirstInvest}
+		</if>
+		<if test=" null != fixedAmount ">
+			and fixed_amount = #{fixedAmount}
+		</if>
+		<if test=" null != floatFixedAmount ">
+			and float_fixed_amount = #{floatFixedAmount}
+		</if>
+		<if test=" null != proportionRatio ">
+			and proportion_ratio = #{proportionRatio}
+		</if>
+		<if test=" null != proportionAmount ">
+			and proportion_amount = #{proportionAmount}
+		</if>
+		<if test=" null != yearProportionRatio ">
+			and year_proportion_ratio = #{yearProportionRatio}
+		</if>
+		<if test=" null != yearProportionAmount ">
+			and year_proportion_amount = #{yearProportionAmount}
+		</if>
+		<if test=" null != feeAmount ">
+			and fee_amount = #{feeAmount}
+		</if>
+		<if test=" null != repaymentTime ">
+			and repayment_time = #{repaymentTime}
+		</if>
+		<if test=" null != balanceStatus ">
+			and balance_status = #{balanceStatus}
+		</if>
+		<if test=" null != balanceNumber and ''!= balanceNumber  ">
+			and balance_number = #{balanceNumber}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.cim.CimOrgFeeGather">
+		select <include refid="Base_Column_List" /> from tcim_org_fee_gather 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.cim.CimOrgFeeGather">
+		select <include refid="Base_Column_List" /> from tcim_org_fee_gather 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_org_fee_gather
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_org_fee_gather
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.cim.CimOrgFeeGather" >
+    INSERT INTO tcim_org_fee_gather
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != productOrgId and ''!= productOrgId  ">
+					product_org_id,
+				</if>
+			 	<if test=" null != investTime ">
+					invest_time,
+				</if>
+			 	<if test=" null != feedetailId and ''!= feedetailId  ">
+					feedetail_id,
+				</if>
+			 	<if test=" null != investId and ''!= investId  ">
+					invest_id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != productAmount ">
+					product_amount,
+				</if>
+			 	<if test=" null != productDeadline ">
+					product_deadline,
+				</if>
+			 	<if test=" null != isRedemption ">
+					is_redemption,
+				</if>
+			 	<if test=" null != redemptionDate ">
+					redemption_date,
+				</if>
+			 	<if test=" null != yearpurAmount ">
+					yearpur_amount,
+				</if>
+			 	<if test=" null != isFirstInvest ">
+					is_first_invest,
+				</if>
+			 	<if test=" null != fixedAmount ">
+					fixed_amount,
+				</if>
+			 	<if test=" null != floatFixedAmount ">
+					float_fixed_amount,
+				</if>
+			 	<if test=" null != proportionRatio ">
+					proportion_ratio,
+				</if>
+			 	<if test=" null != proportionAmount ">
+					proportion_amount,
+				</if>
+			 	<if test=" null != yearProportionRatio ">
+					year_proportion_ratio,
+				</if>
+			 	<if test=" null != yearProportionAmount ">
+					year_proportion_amount,
+				</if>
+			 	<if test=" null != feeAmount ">
+					fee_amount,
+				</if>
+			 	<if test=" null != repaymentTime ">
+					repayment_time,
+				</if>
+			 	<if test=" null != balanceStatus ">
+					balance_status,
+				</if>
+			 	<if test=" null != balanceNumber and ''!= balanceNumber  ">
+					balance_number,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != productOrgId and ''!= productOrgId  ">
+					 	#{productOrgId},
+				</if>
+			 	<if test=" null != investTime ">
+					 	#{investTime},
+				</if>
+			 	<if test=" null != feedetailId and ''!= feedetailId  ">
+					 	#{feedetailId},
+				</if>
+			 	<if test=" null != investId and ''!= investId  ">
+					 	#{investId},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != productAmount ">
+					 	#{productAmount},
+				</if>
+			 	<if test=" null != productDeadline ">
+					 	#{productDeadline},
+				</if>
+			 	<if test=" null != isRedemption ">
+					 	#{isRedemption},
+				</if>
+			 	<if test=" null != redemptionDate ">
+					 	#{redemptionDate},
+				</if>
+			 	<if test=" null != yearpurAmount ">
+					 	#{yearpurAmount},
+				</if>
+			 	<if test=" null != isFirstInvest ">
+					 	#{isFirstInvest},
+				</if>
+			 	<if test=" null != fixedAmount ">
+					 	#{fixedAmount},
+				</if>
+			 	<if test=" null != floatFixedAmount ">
+					 	#{floatFixedAmount},
+				</if>
+			 	<if test=" null != proportionRatio ">
+					 	#{proportionRatio},
+				</if>
+			 	<if test=" null != proportionAmount ">
+					 	#{proportionAmount},
+				</if>
+			 	<if test=" null != yearProportionRatio ">
+					 	#{yearProportionRatio},
+				</if>
+			 	<if test=" null != yearProportionAmount ">
+					 	#{yearProportionAmount},
+				</if>
+			 	<if test=" null != feeAmount ">
+					 	#{feeAmount},
+				</if>
+			 	<if test=" null != repaymentTime ">
+					 	#{repaymentTime},
+				</if>
+			 	<if test=" null != balanceStatus ">
+					 	#{balanceStatus},
+				</if>
+			 	<if test=" null != balanceNumber and ''!= balanceNumber  ">
+					 	#{balanceNumber},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.cim.CimOrgFeeGather" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcim_org_fee_gather
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != productOrgId and ''!= productOrgId  ">
+					product_org_id,
+				</if>
+			 	<if test=" null != investTime ">
+					invest_time,
+				</if>
+			 	<if test=" null != feedetailId and ''!= feedetailId  ">
+					feedetail_id,
+				</if>
+			 	<if test=" null != investId and ''!= investId  ">
+					invest_id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != productAmount ">
+					product_amount,
+				</if>
+			 	<if test=" null != productDeadline ">
+					product_deadline,
+				</if>
+			 	<if test=" null != isRedemption ">
+					is_redemption,
+				</if>
+			 	<if test=" null != redemptionDate ">
+					redemption_date,
+				</if>
+			 	<if test=" null != yearpurAmount ">
+					yearpur_amount,
+				</if>
+			 	<if test=" null != isFirstInvest ">
+					is_first_invest,
+				</if>
+			 	<if test=" null != fixedAmount ">
+					fixed_amount,
+				</if>
+			 	<if test=" null != floatFixedAmount ">
+					float_fixed_amount,
+				</if>
+			 	<if test=" null != proportionRatio ">
+					proportion_ratio,
+				</if>
+			 	<if test=" null != proportionAmount ">
+					proportion_amount,
+				</if>
+			 	<if test=" null != yearProportionRatio ">
+					year_proportion_ratio,
+				</if>
+			 	<if test=" null != yearProportionAmount ">
+					year_proportion_amount,
+				</if>
+			 	<if test=" null != feeAmount ">
+					fee_amount,
+				</if>
+			 	<if test=" null != repaymentTime ">
+					repayment_time,
+				</if>
+			 	<if test=" null != balanceStatus ">
+					balance_status,
+				</if>
+			 	<if test=" null != balanceNumber and ''!= balanceNumber  ">
+					balance_number,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != productOrgId and ''!= productOrgId  ">
+					 	#{productOrgId},
+				</if>
+			 	<if test=" null != investTime ">
+					 	#{investTime},
+				</if>
+			 	<if test=" null != feedetailId and ''!= feedetailId  ">
+					 	#{feedetailId},
+				</if>
+			 	<if test=" null != investId and ''!= investId  ">
+					 	#{investId},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != productAmount ">
+					 	#{productAmount},
+				</if>
+			 	<if test=" null != productDeadline ">
+					 	#{productDeadline},
+				</if>
+			 	<if test=" null != isRedemption ">
+					 	#{isRedemption},
+				</if>
+			 	<if test=" null != redemptionDate ">
+					 	#{redemptionDate},
+				</if>
+			 	<if test=" null != yearpurAmount ">
+					 	#{yearpurAmount},
+				</if>
+			 	<if test=" null != isFirstInvest ">
+					 	#{isFirstInvest},
+				</if>
+			 	<if test=" null != fixedAmount ">
+					 	#{fixedAmount},
+				</if>
+			 	<if test=" null != floatFixedAmount ">
+					 	#{floatFixedAmount},
+				</if>
+			 	<if test=" null != proportionRatio ">
+					 	#{proportionRatio},
+				</if>
+			 	<if test=" null != proportionAmount ">
+					 	#{proportionAmount},
+				</if>
+			 	<if test=" null != yearProportionRatio ">
+					 	#{yearProportionRatio},
+				</if>
+			 	<if test=" null != yearProportionAmount ">
+					 	#{yearProportionAmount},
+				</if>
+			 	<if test=" null != feeAmount ">
+					 	#{feeAmount},
+				</if>
+			 	<if test=" null != repaymentTime ">
+					 	#{repaymentTime},
+				</if>
+			 	<if test=" null != balanceStatus ">
+					 	#{balanceStatus},
+				</if>
+			 	<if test=" null != balanceNumber and ''!= balanceNumber  ">
+					 	#{balanceNumber},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.cim.CimOrgFeeGather" >
+  		UPDATE tcim_org_fee_gather
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != productOrgId and ''!= productOrgId  ">
+						product_org_id = #{productOrgId},
+					</if>
+					<if test=" null != investTime ">
+						invest_time = #{investTime},
+					</if>
+					<if test=" null != feedetailId and ''!= feedetailId  ">
+						feedetail_id = #{feedetailId},
+					</if>
+					<if test=" null != investId and ''!= investId  ">
+						invest_id = #{investId},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != productAmount ">
+						product_amount = #{productAmount},
+					</if>
+					<if test=" null != productDeadline ">
+						product_deadline = #{productDeadline},
+					</if>
+					<if test=" null != isRedemption ">
+						is_redemption = #{isRedemption},
+					</if>
+					<if test=" null != redemptionDate ">
+						redemption_date = #{redemptionDate},
+					</if>
+					<if test=" null != yearpurAmount ">
+						yearpur_amount = #{yearpurAmount},
+					</if>
+					<if test=" null != isFirstInvest ">
+						is_first_invest = #{isFirstInvest},
+					</if>
+					<if test=" null != fixedAmount ">
+						fixed_amount = #{fixedAmount},
+					</if>
+					<if test=" null != floatFixedAmount ">
+						float_fixed_amount = #{floatFixedAmount},
+					</if>
+					<if test=" null != proportionRatio ">
+						proportion_ratio = #{proportionRatio},
+					</if>
+					<if test=" null != proportionAmount ">
+						proportion_amount = #{proportionAmount},
+					</if>
+					<if test=" null != yearProportionRatio ">
+						year_proportion_ratio = #{yearProportionRatio},
+					</if>
+					<if test=" null != yearProportionAmount ">
+						year_proportion_amount = #{yearProportionAmount},
+					</if>
+					<if test=" null != feeAmount ">
+						fee_amount = #{feeAmount},
+					</if>
+					<if test=" null != repaymentTime ">
+						repayment_time = #{repaymentTime},
+					</if>
+					<if test=" null != balanceStatus ">
+						balance_status = #{balanceStatus},
+					</if>
+					<if test=" null != balanceNumber and ''!= balanceNumber  ">
+						balance_number = #{balanceNumber},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.cim.CimOrgFeeGather" >
+	    UPDATE tcim_org_fee_gather
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != productOrgId and ''!= productOrgId  ">
+						product_org_id = #{productOrgId},
+					</if>
+					<if test=" null != investTime ">
+						invest_time = #{investTime},
+					</if>
+					<if test=" null != feedetailId and ''!= feedetailId  ">
+						feedetail_id = #{feedetailId},
+					</if>
+					<if test=" null != investId and ''!= investId  ">
+						invest_id = #{investId},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != productAmount ">
+						product_amount = #{productAmount},
+					</if>
+					<if test=" null != productDeadline ">
+						product_deadline = #{productDeadline},
+					</if>
+					<if test=" null != isRedemption ">
+						is_redemption = #{isRedemption},
+					</if>
+					<if test=" null != redemptionDate ">
+						redemption_date = #{redemptionDate},
+					</if>
+					<if test=" null != yearpurAmount ">
+						yearpur_amount = #{yearpurAmount},
+					</if>
+					<if test=" null != isFirstInvest ">
+						is_first_invest = #{isFirstInvest},
+					</if>
+					<if test=" null != fixedAmount ">
+						fixed_amount = #{fixedAmount},
+					</if>
+					<if test=" null != floatFixedAmount ">
+						float_fixed_amount = #{floatFixedAmount},
+					</if>
+					<if test=" null != proportionRatio ">
+						proportion_ratio = #{proportionRatio},
+					</if>
+					<if test=" null != proportionAmount ">
+						proportion_amount = #{proportionAmount},
+					</if>
+					<if test=" null != yearProportionRatio ">
+						year_proportion_ratio = #{yearProportionRatio},
+					</if>
+					<if test=" null != yearProportionAmount ">
+						year_proportion_amount = #{yearProportionAmount},
+					</if>
+					<if test=" null != feeAmount ">
+						fee_amount = #{feeAmount},
+					</if>
+					<if test=" null != repaymentTime ">
+						repayment_time = #{repaymentTime},
+					</if>
+					<if test=" null != balanceStatus ">
+						balance_status = #{balanceStatus},
+					</if>
+					<if test=" null != balanceNumber and ''!= balanceNumber  ">
+						balance_number = #{balanceNumber},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcim_org_fee_gather
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+	<select id="queryRedemptionDetialByPate" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		tcim_org_fee_gather t
+		WHERE
+		t.repayment_time IS NULL
+		AND t.is_redemption IN (2, 3)
+		AND date_add(
+		t.invest_time,
+		INTERVAL t.product_deadLineMin DAY
+		) >= now()
+	</select>
+	
+
+	<select id="queryOrgSaleFee" resultType="com.linkwee.web.model.vo.OrgSaleFeeData">
+		
+		SELECT
+		sum(t.product_amount) daySaleAmount,
+		sum(t.yearpur_amount) daySaleForYearAmount,
+		count(DISTINCT t.user_id) investPersonAmount,
+		count(
+		DISTINCT
+		case t.is_first_invest when 1 then t.user_id when 0 then null end
+		) newInvestor,
+		sum(t.fee_amount) totalFeeAmount,
+		sum(case t.is_first_invest when 1 then t.fee_amount when 0 then 0 end )
+		newInvestAmount,
+		DATE_FORMAT(t.invest_time, '%Y-%m-%d') statDate,
+		t1.`name` orgName
+		FROM
+		tcim_org_fee_gather t left join tcim_org_info t1 on t.product_org_id = t1.org_number
+		WHERE 1 = 1
+         <if test="orgNumber!=null and orgNumber!='99' ">  
+               and t.product_org_id = #{orgNumber}
+         </if>		
+		<if test=" null != startDate and '' != startDate ">
+			AND DATE_FORMAT(t.invest_time, '%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate},
+			'%Y-%m-%d')
+		</if>
+		<if test=" null != endDate and '' != endDate ">
+			AND DATE_FORMAT(t.invest_time, '%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate},
+			'%Y-%m-%d')
+		</if>
+		GROUP BY
+		DATE_FORMAT(t.invest_time, '%Y-%m-%d'),t.product_org_id
+		order by t.invest_time desc
+		
+	</select>
+	<select id="queryInvestAmount" resultType="Double">
+		select sum(t.product_amount) from tcim_org_fee_gather t where 1=1
+		<if test="orgNumber!=null and orgNumber!='99' ">
+			and t.product_org_id = #{orgNumber}
+		</if>
+		<if test=" null != startDate and '' != startDate ">
+			AND DATE_FORMAT(t.invest_time, '%Y-%m-%d') &gt;=
+			DATE_FORMAT(#{startDate},'%Y-%m-%d')
+		</if>
+		<if test=" null != endDate and '' != endDate ">
+			AND DATE_FORMAT(t.invest_time, '%Y-%m-%d') &lt;=
+			DATE_FORMAT(#{endDate},'%Y-%m-%d')
+		</if>
+
+	</select>
+
+</mapper>

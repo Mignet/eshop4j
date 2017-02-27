@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkwee.web.dao.SysConfigMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.linkwee.web.model.SysConfig" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="config_name" property="configName" jdbcType="VARCHAR"/>
+		<result column="config_type" property="configType" jdbcType="VARCHAR"/>
+		<result column="config_key" property="configKey" jdbcType="VARCHAR"/>
+		<result column="config_value" property="configValue" jdbcType="VARCHAR"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="crt_time" property="crtTime" jdbcType="TIMESTAMP"/>
+		<result column="app_type" property="appType" jdbcType="INTEGER"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	config_name,
+	    	config_type,
+	    	config_key,
+	    	config_value,
+	    	remark,
+	    	crt_time,
+	    	app_type,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and t.id = #{id}
+		</if>
+		<if test=" null != configName and ''!= configName  ">
+			and t.config_name = #{configName}
+		</if>
+		<if test=" null != configType and ''!= configType  ">
+			and t.config_type = #{configType}
+		</if>
+		<if test=" null != configKey and ''!= configKey  ">
+			and t.config_key = #{configKey}
+		</if>
+		<if test=" null != configValue and ''!= configValue  ">
+			and t.config_value = #{configValue}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and t.remark = #{remark}
+		</if>
+		<if test=" null != crtTime ">
+			and t.crt_time = #{crtTime}
+		</if>
+		<if test=" null != appType ">
+			and t.app_type = #{appType}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.SysConfig">
+		SELECT <include refid="Base_Column_List" /> FROM tsys_config t
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.SysConfig">
+		SELECT <include refid="Base_Column_List" /> FROM tsys_config t
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsys_config
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tsys_config
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.linkwee.web.model.SysConfig" >
+    INSERT INTO tsys_config
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != configName and ''!= configName  ">
+					config_name,
+				</if>
+			 	<if test=" null != configType and ''!= configType  ">
+					config_type,
+				</if>
+			 	<if test=" null != configKey and ''!= configKey  ">
+					config_key,
+				</if>
+			 	<if test=" null != configValue and ''!= configValue  ">
+					config_value,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != crtTime ">
+					crt_time,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != configName and ''!= configName  ">
+					 	#{configName},
+				</if>
+			 	<if test=" null != configType and ''!= configType  ">
+					 	#{configType},
+				</if>
+			 	<if test=" null != configKey and ''!= configKey  ">
+					 	#{configKey},
+				</if>
+			 	<if test=" null != configValue and ''!= configValue  ">
+					 	#{configValue},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != crtTime ">
+					 	#{crtTime},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.linkwee.web.model.SysConfig" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tsys_config
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != configName and ''!= configName  ">
+					config_name,
+				</if>
+			 	<if test=" null != configType and ''!= configType  ">
+					config_type,
+				</if>
+			 	<if test=" null != configKey and ''!= configKey  ">
+					config_key,
+				</if>
+			 	<if test=" null != configValue and ''!= configValue  ">
+					config_value,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != crtTime ">
+					crt_time,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != configName and ''!= configName  ">
+					 	#{configName},
+				</if>
+			 	<if test=" null != configType and ''!= configType  ">
+					 	#{configType},
+				</if>
+			 	<if test=" null != configKey and ''!= configKey  ">
+					 	#{configKey},
+				</if>
+			 	<if test=" null != configValue and ''!= configValue  ">
+					 	#{configValue},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != crtTime ">
+					 	#{crtTime},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkwee.web.model.SysConfig" >
+  		UPDATE tsys_config
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != configName and ''!= configName  ">
+						config_name = #{configName},
+					</if>
+					<if test=" null != configType and ''!= configType  ">
+						config_type = #{configType},
+					</if>
+					<if test=" null != configKey and ''!= configKey  ">
+						config_key = #{configKey},
+					</if>
+					<if test=" null != configValue and ''!= configValue  ">
+						config_value = #{configValue},
+					</if>
+					<if test=" null != remark ">
+						remark = #{remark},
+					</if>
+					<if test=" null != crtTime ">
+						crt_time = #{crtTime},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.linkwee.web.model.SysConfig" >
+	    UPDATE tsys_config
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != configName and ''!= configName  ">
+						config_name = #{configName},
+					</if>
+					<if test=" null != configType and ''!= configType  ">
+						config_type = #{configType},
+					</if>
+					<if test=" null != configKey and ''!= configKey  ">
+						config_key = #{configKey},
+					</if>
+					<if test=" null != configValue and ''!= configValue  ">
+						config_value = #{configValue},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != crtTime ">
+						crt_time = #{crtTime},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tsys_config
+        <where> 
+        <if test="dt.search!=null">  
+                config_name LIKE CONCAT('%','${dt.search.value}','%' )  
+                or
+                config_key LIKE CONCAT('%','${dt.search.value}','%' )  
+                or
+                config_value LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+    
+    
+    
+    <select id="selectByName" resultMap="BaseResultMap"  parameterType="com.linkwee.web.model.SysConfig">
+		SELECT <include refid="Base_Column_List" /> FROM tsys_config t
+		where 1=1 
+		<if test=" null != configName and ''!= configName  ">
+					and	t.config_name like CONCAT('${configName}','%' )  
+		</if>
+		<if test=" null != appType">
+		 and	t.app_type = #{appType}
+		</if>
+		<if test=" null != configKey and ''!= configKey  ">
+					and	t.config_key like CONCAT('%','${configKey}','%' )  
+		</if>
+  </select>
+  
+  
+  <update id="updateSysConfigByKey" parameterType="com.linkwee.web.model.SysConfig" >
+  		UPDATE tsys_config
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != configName and ''!= configName  ">
+						config_name = #{configName},
+					</if>
+					<if test=" null != configType and ''!= configType  ">
+						config_type = #{configType},
+					</if>
+					<if test=" null != configValue and ''!= configValue  ">
+						config_value = #{configValue},
+					</if>
+					<if test=" null != remark ">
+						remark = #{remark},
+					</if>
+					<if test=" null != crtTime ">
+						crt_time = #{crtTime},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 config_key = #{configKey}
+		</where>
+	</update>
+
+</mapper>
