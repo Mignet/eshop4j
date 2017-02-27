@@ -12,7 +12,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
  * 
  * @创建时间：2016年10月26日 16:02:33
  * 
- * Copyright (c) 深圳领会科技有限公司-版权所有
+ * Copyright (c) 深圳ESHOP有限公司-版权所有
  */
 public class CimOrgPicture implements Serializable {
 	

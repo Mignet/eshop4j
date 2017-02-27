@@ -12,7 +12,7 @@ import org.omg.CORBA.PRIVATE_MEMBER;
  * 
  * @创建时间：2016年06月28日 16:08:06
  * 
- * Copyright (c) 深圳领会科技有限公司-版权所有
+ * Copyright (c) 深圳ESHOP有限公司-版权所有
  */
 public class ActivityList implements Serializable {
 	

@@ -14,7 +14,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
  * 
  * @创建时间：2016年11月03日 13:45:44
  * 
- * Copyright (c) 深圳领会科技有限公司-版权所有
+ * Copyright (c) 深圳ESHOP有限公司-版权所有
  */
 public class SmNewsClassify implements Serializable {
 	

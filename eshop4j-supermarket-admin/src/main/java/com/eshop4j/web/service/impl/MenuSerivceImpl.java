@@ -4,7 +4,7 @@ import com.eshop4j.core.datatable.DataTableReturn;
 import com.eshop4j.core.orm.paging.Page;
 import com.eshop4j.web.dao.MenuDao;
 import com.eshop4j.web.model.MenusModel;
-import com.eshop4j.web.request.CfpCommonRequest;
+import com.eshop4j.web.request.CommonRequest;
 import com.eshop4j.web.response.MenuTreeResp;
 import com.eshop4j.web.response.MenusResp;
 import com.eshop4j.web.service.MenuSerivce;
@@ -27,7 +27,7 @@ public class MenuSerivceImpl implements MenuSerivce {
     private MenuDao menuDao;
 
     @Override
-    public DataTableReturn findMenuList(CfpCommonRequest<MenusModel> cfpCommonRequest) throws Exception {
+    public DataTableReturn findMenuList(CommonRequest<MenusModel> cfpCommonRequest) throws Exception {
 
         Page<MenusModel> menusModelPage = new Page<MenusModel>(cfpCommonRequest.getPageIndex(),cfpCommonRequest.getLength());
         List<MenusResp> menusModelList = menuDao.findMenuList(cfpCommonRequest,menusModelPage);
@@ -47,7 +47,7 @@ public class MenuSerivceImpl implements MenuSerivce {
     }
 
     @Override
-    public List<MenusResp> findMenuAllList(CfpCommonRequest<MenusModel> cfpCommonRequest) throws Exception {
+    public List<MenusResp> findMenuAllList(CommonRequest<MenusModel> cfpCommonRequest) throws Exception {
         return menuDao.findMenuList(cfpCommonRequest);
     }
 
@@ -84,7 +84,7 @@ public class MenuSerivceImpl implements MenuSerivce {
 
     @Override
     public List<MenuTreeResp> findMenuTree() throws Exception {
-        CfpCommonRequest<MenusModel> cfpCommonRequest = new CfpCommonRequest<MenusModel>();
+        CommonRequest<MenusModel> cfpCommonRequest = new CommonRequest<MenusModel>();
         cfpCommonRequest.setParams(new MenusModel());
         cfpCommonRequest.getParams().setIsDisable(0);
         List<MenusResp> menusRespList = menuDao.findMenuList(cfpCommonRequest);

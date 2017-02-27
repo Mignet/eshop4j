@@ -54,7 +54,7 @@ INSERT INTO `tsys_config` VALUES ('22', '邀请理财师推荐信息', null, 'rc
 INSERT INTO `tsys_config` VALUES ('23', '邀请理财师推荐信息', null, 'rc_message_anonymous', '【小牛钱罐子】亲爱的罐主，您已经成为钱罐子理财达人啦，我们推荐您晋级为领会理财师，既能赚收益又能赚佣金！限量开放，马上加入吧 %s', null, '2015-10-13 19:23:52', '0');
 INSERT INTO `tsys_config` VALUES ('24', '消息推送', 'pushmessage', 'pushmessage_rclcs_anonymous', 'RCLCS_ANONYMOUS', null, '2015-10-13 19:24:47', '0');
 INSERT INTO `tsys_config` VALUES ('25', '微信分享-邀请客户', 'wechat_share_customer', 'wechat_share_customer_link', 'http://minvestor.xiaoniuapp.com/pages/user/register.html?recommendCode=%s&name=%s', null, '2015-10-15 15:18:58', '0');
-INSERT INTO `tsys_config` VALUES ('26', '微信分享-邀请客户', 'wechat_share_customer', 'wechat_share_customer_desc', '领会科技旗下创新理财平台！专业理财师贴身服务，年化收益高达11%！PICC全额保障账户安全！', '', '2015-10-13 17:28:37', '0');
+INSERT INTO `tsys_config` VALUES ('26', '微信分享-邀请客户', 'wechat_share_customer', 'wechat_share_customer_desc', 'ESHOP旗下创新理财平台！专业理财师贴身服务，年化收益高达11%！PICC全额保障账户安全！', '', '2015-10-13 17:28:37', '0');
 INSERT INTO `tsys_config` VALUES ('27', '微信分享-邀请客户', 'wechat_share_customer', 'wechat_share_customer_imgurl', 'http://minvestor.xiaoniuapp.com/static/images/shareImg100_100.png', '', '2015-10-13 17:28:42', '0');
 INSERT INTO `tsys_config` VALUES ('28', '微信分享-邀请客户', 'wechat_share_customer', 'wechat_share_customer_title', '领会金服', '', '2015-10-13 17:28:46', '0');
 INSERT INTO `tsys_config` VALUES ('29', '交易中心分配的签名key', null, 'TRANS_MD5_SIGN_KEY', '495256cf3723b9087b4a7', null, '2015-09-17 17:12:33', '0');

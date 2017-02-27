@@ -16,7 +16,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.eshop4j.core.util.DateUtils;
 import com.eshop4j.core.util.NetUtils;
-import com.eshop4j.xoss.helper.JsonWebTokenHepler;
 import com.eshop4j.xoss.util.AccessParamRecord;
 import com.eshop4j.xoss.util.RequestLogging;
 
@@ -51,7 +50,7 @@ public class LoggingHandler extends HandlerInterceptorAdapter {
 					StringBuilder logs = new StringBuilder();
 					logs.append(NetUtils.getIpAddress(request));
 					logs.append("|");
-					logs.append(currentUser != null?JsonWebTokenHepler.getUserIdByToken(request.getParameter("token")):null);
+					logs.append(currentUser);
 					logs.append("|");
 					logs.append(DateUtils.getNow(DateUtils.FORMAT_LONG));
 					logs.append("|"+classValue+"->"+methodValue);

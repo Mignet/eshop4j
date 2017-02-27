@@ -1,4 +1,4 @@
-package com.eshop4j.xoss.filter;
+/*package com.eshop4j.xoss.filter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -75,14 +75,14 @@ public class MobileAuthenticationFilter extends AccessControlFilter {
 		return false;
 	}
 	
-	/**
+	*//**
 	 * 
 	 * 全部参数校验,判断参数的合法性
 	 * @param request
 	 * @param response
 	 * @return
 	 * @throws IOException 
-	 */
+	 *//*
 	public boolean checkAccess(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		
 		HashMap<String, String> params = RequestHeadUtil.getRequestParams(request);
@@ -94,19 +94,19 @@ public class MobileAuthenticationFilter extends AccessControlFilter {
 		return checkAppSysParams(req,params,response) && checkAppToken(request,response,req);
 	}
 	
-	/**
+	*//**
 	 * APP系统参数校验
 	 * @param req
 	 * @param params
 	 * @return
-	 */
+	 *//*
 	private boolean checkAppSysParams(AppRequestHead req,HashMap<String, String> params,HttpServletResponse response){
 		
 		List<BaseResponse> errors = new ArrayList<BaseResponse>();
 		String secret = "";
-		/*
+		
 		 * APP标示校验
-		 */
+		 
 		if(StringUtils.isBlank(req.getOrgNumber())){
 			errors.add(InnerResponseConstant.ORGNUMBER_NOTNULL);
 		} else {			
@@ -129,31 +129,31 @@ public class MobileAuthenticationFilter extends AccessControlFilter {
 			}
 		}
 		
-		/*
+		
 		 * APP类型校验
-		 */
+		 
 		if(StringUtils.isBlank(req.getAppKind())){
 			errors.add(InnerResponseConstant.APPKIND_NOTNULL);
 		}
 		
-		/*
+		
 		 * APP客户端 校验
-		 */
+		 
 		if(StringUtils.isBlank(req.getAppClient())){
 			errors.add(InnerResponseConstant.APPCLIENT_NOTNULL);
 		}
 		
 		
-		/*
+		
 		 * app版本号校验
-		 */
+		 
 		if(StringUtils.isBlank(req.getAppVersion())){
 			errors.add(InnerResponseConstant.APPVERSION_NOTNULL);
 		}
 		
-		/*
+		
 		 * timestamp校验
-		 */
+		 
 		if(StringUtils.isBlank(req.getTimestamp())){
 			errors.add(InnerResponseConstant.TIMESTAMP_NOTNULL);
 		}
@@ -161,9 +161,9 @@ public class MobileAuthenticationFilter extends AccessControlFilter {
 			errors.add(InnerResponseConstant.TIMESTAMP_FORMATEERROR);
 		}
 		
-		/*
+		
 		 * API版本号 校验
-		 */
+		 
 		if(StringUtils.isBlank(req.getV())){
 			errors.add(InnerResponseConstant.V_NOTNULL);
 		}
@@ -173,9 +173,9 @@ public class MobileAuthenticationFilter extends AccessControlFilter {
 			return false;
 		}
 		
-		/*
+		
 		 * 签名校验
-		 */
+		 
 		if(PlatformEnum.ANDROID.equals(AppUtils.getPlatform(req.getOrgNumber())) || PlatformEnum.IOS.equals(AppUtils.getPlatform(req.getOrgNumber()))){
 			if(StringUtils.isBlank(req.getSign())){
 				RequestHeadUtil.responseOutWithJson(response,AppResponseUtil.getErrorSign(InnerResponseConstant.SIGN_NOTNULL));
@@ -196,12 +196,12 @@ public class MobileAuthenticationFilter extends AccessControlFilter {
 		return true;
 	}
 	
-	/**
+	*//**
 	 * APP token校验
 	 * @param req
 	 * @param response
 	 * @return
-	 */
+	 *//*
 	private boolean checkAppToken(HttpServletRequest request,HttpServletResponse response,AppRequestHead req){
 		//获取请求的方法
 		String currentURL = request.getRequestURI(); // 取得根目录所对应的绝对路径:  
@@ -238,35 +238,35 @@ public class MobileAuthenticationFilter extends AccessControlFilter {
 		}
 	}
 	
-	/**
+	*//**
 	 * 认证成功进行的操作处理
 	 * 
 	 * @param request
 	 * @param response
 	 * @return true 继续后续处理，false 不需要后续处理
 	 * @throws Exception 
-	 */
+	 *//*
 	public boolean onAccessSuccess(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		return true;
 	}
 
-	/**
+	*//**
 	 * 认证失败时处理结果
 	 * 
 	 * @param request
 	 * @param response
 	 * @return true 继续后续处理，false 不需要后续处理
 	 * @throws IOException 
-	 */
+	 *//*
 	public boolean onAccessFail(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		return false;
 	}
 
-	/**
+	*//**
 	 * 查询机构秘钥
 	 * @param OrgNumber  机构编码
 	 * @return
-	 */
+	 *//*
 	private String queryOrgSecret(String orgNumber){
 		String orgSecret = null;
 		if(jedisCluster != null){//若redis存在
@@ -285,12 +285,12 @@ public class MobileAuthenticationFilter extends AccessControlFilter {
 		return orgSecret;
 	}
 	
-	/**
+	*//**
 	 * 查询机构秘钥DB
 	 * @param orgNumber 机构编码
 	 * @param orgKey 机构公钥
 	 * @return
-	 */
+	 *//*
 	private String queryOrgSecretByDB(String orgNumber){
 		String secret = null;
 		SysThirdkeyConfig sysThirdkeyConfig = new SysThirdkeyConfig();
@@ -302,3 +302,4 @@ public class MobileAuthenticationFilter extends AccessControlFilter {
 		return secret;
 	}
 }
+*/

@@ -13,7 +13,7 @@ import java.io.Serializable;
  * 
  * @创建时间：2016年07月26日 20:22:43
  * 
- * Copyright (c) 深圳领会科技有限公司-版权所有
+ * Copyright (c) 深圳ESHOP有限公司-版权所有
  */
 public class SmAppVersion implements Serializable {
 	

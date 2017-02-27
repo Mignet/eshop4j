@@ -16,7 +16,7 @@ public class PermissionGenerator {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			Connection conn = DriverManager.getConnection(
-					"jdbc:mysql://10.16.0.200:3306/channel?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull",
+					"jdbc:mysql://10.16.0.200:3306/eshop4j?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull",
 					"root", "root123");
 			ResultSet rs = conn.createStatement().executeQuery(sql);
 			while(rs.next()){

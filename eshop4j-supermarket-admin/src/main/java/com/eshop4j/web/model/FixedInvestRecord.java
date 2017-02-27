@@ -16,7 +16,7 @@ import com.eshop4j.core.base.BaseEntity;
  * 
  * @创建时间：2016年06月07日 10:42:59
  * 
- * Copyright (c) 深圳领会科技有限公司-版权所有
+ * Copyright (c) 深圳ESHOP有限公司-版权所有
  */
 public class FixedInvestRecord extends BaseEntity {
 	

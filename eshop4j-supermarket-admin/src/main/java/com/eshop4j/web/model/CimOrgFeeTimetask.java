@@ -16,7 +16,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
  * 
  * @创建时间：2016年10月11日 17:22:28
  * 
- * Copyright (c) 深圳领会科技有限公司-版权所有
+ * Copyright (c) 深圳ESHOP有限公司-版权所有
  */
 public class CimOrgFeeTimetask implements Serializable {
 	

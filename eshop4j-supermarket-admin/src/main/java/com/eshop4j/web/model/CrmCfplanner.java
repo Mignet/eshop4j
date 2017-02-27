@@ -14,7 +14,7 @@ import java.io.Serializable;
  * 
  * @创建时间：2016年07月12日 10:25:55
  * 
- * Copyright (c) 深圳领会科技有限公司-版权所有
+ * Copyright (c) 深圳ESHOP有限公司-版权所有
  */
 public class CrmCfplanner implements Serializable {
 	

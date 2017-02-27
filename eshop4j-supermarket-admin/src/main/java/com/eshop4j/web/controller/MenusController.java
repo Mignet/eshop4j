@@ -2,7 +2,7 @@ package com.eshop4j.web.controller;
 
 import com.eshop4j.core.datatable.DataTableReturn;
 import com.eshop4j.web.model.MenusModel;
-import com.eshop4j.web.request.CfpCommonRequest;
+import com.eshop4j.web.request.CommonRequest;
 import com.eshop4j.web.service.MenuSerivce;
 import com.eshop4j.web.service.PermissionService;
 import com.eshop4j.xoss.util.RequestLogging;
@@ -35,7 +35,7 @@ public class MenusController {
     @RequestLogging("菜单列表-ui")
     public ModelAndView findMenusList() throws Exception{
         ModelAndView modelAndView = new ModelAndView("menus/menu-list");
-        CfpCommonRequest<MenusModel> cfpCommonRequest = new CfpCommonRequest<MenusModel>();
+        CommonRequest<MenusModel> cfpCommonRequest = new CommonRequest<MenusModel>();
         cfpCommonRequest.setParams(new MenusModel());
         cfpCommonRequest.getParams().setParentId(0);
         modelAndView.addObject("parentList",menuSerivce.findMenuAllList(cfpCommonRequest));
@@ -46,7 +46,7 @@ public class MenusController {
     @RequestLogging("菜单新增或更新")
     public ModelAndView findMenusSave(MenusModel menusModel) throws Exception{
         ModelAndView modelAndView = new ModelAndView("menus/menu-save");
-        CfpCommonRequest<MenusModel> cfpCommonRequest = new CfpCommonRequest<MenusModel>();
+        CommonRequest<MenusModel> cfpCommonRequest = new CommonRequest<MenusModel>();
         cfpCommonRequest.setParams(new MenusModel());
         cfpCommonRequest.getParams().setParentId(0);
         modelAndView.addObject("menu",menuSerivce.findMenuOne(menusModel));
@@ -70,7 +70,7 @@ public class MenusController {
     @RequestMapping("/list_json")
     @RequestLogging("菜单列表-AJAX")
     @ResponseBody
-    public DataTableReturn findMenusListForData(@RequestBody CfpCommonRequest<MenusModel> cfpCommonRequest) throws Exception{
+    public DataTableReturn findMenusListForData(@RequestBody CommonRequest<MenusModel> cfpCommonRequest) throws Exception{
         return menuSerivce.findMenuList(cfpCommonRequest);
     }
 

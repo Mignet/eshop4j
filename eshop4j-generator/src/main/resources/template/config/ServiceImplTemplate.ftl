@@ -27,7 +27,7 @@ import ${serviceImpl.fullName};
  * 
  * @创建时间：${generate.createDate}
  * 
- * Copyright (c) 深圳领会科技有限公司-版权所有
+ * Copyright (c) 深圳ESHOP有限公司-版权所有
  */
 @Service("${service.aliasName}")
 public class ${serviceImpl.shortName} extends GenericServiceImpl<${entity.shortName}, Long> implements ${service.shortName}{

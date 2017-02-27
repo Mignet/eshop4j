@@ -2,7 +2,7 @@ package com.eshop4j.web.service;
 
 import com.eshop4j.core.datatable.DataTableReturn;
 import com.eshop4j.web.model.MenusModel;
-import com.eshop4j.web.request.CfpCommonRequest;
+import com.eshop4j.web.request.CommonRequest;
 import com.eshop4j.web.response.MenuTreeResp;
 import com.eshop4j.web.response.MenusResp;
 
@@ -16,9 +16,9 @@ import java.util.List;
  */
 public interface MenuSerivce {
 
-    public DataTableReturn findMenuList(CfpCommonRequest<MenusModel> cfpCommonRequest) throws Exception;
+    public DataTableReturn findMenuList(CommonRequest<MenusModel> cfpCommonRequest) throws Exception;
 
-    public List<MenusResp> findMenuAllList(CfpCommonRequest<MenusModel> cfpCommonRequest) throws Exception;
+    public List<MenusResp> findMenuAllList(CommonRequest<MenusModel> cfpCommonRequest) throws Exception;
 
     public MenusModel findMenuOne(MenusModel menusModel) throws Exception;
 

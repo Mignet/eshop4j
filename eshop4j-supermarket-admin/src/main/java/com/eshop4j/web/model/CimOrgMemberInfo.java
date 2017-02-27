@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 描述：团队介绍
  * @author yalin
  * @date 2016年7月20日 上午10:17:43 
- * Copyright (c) 深圳市前海领会科技有限公司
+ * Copyright (c) 深圳市前海ESHOP有限公司
  */
 public class CimOrgMemberInfo implements Serializable {
 	

@@ -15,7 +15,7 @@ import java.io.Serializable;
  * 
  * @创建时间：2016年07月18日 11:33:49
  * 
- * Copyright (c) 深圳领会科技有限公司-版权所有
+ * Copyright (c) 深圳ESHOP有限公司-版权所有
  */
 public class SmMessageQueue implements Serializable {
 	

@@ -15,7 +15,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
  * 
  * @创建时间：${generate.createDate}
  * 
- * Copyright (c) 深圳领会科技有限公司-版权所有
+ * Copyright (c) 深圳ESHOP有限公司-版权所有
  */
 public class ${entity.shortName} implements Serializable {
 	

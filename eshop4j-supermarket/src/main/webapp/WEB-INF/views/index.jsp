@@ -333,7 +333,7 @@ String basePath = "//" + request.getServerName() +  port + path + "/";
         <!-- BEGIN FOOTER -->
         <div class="footer">
             <div class="footer-inner">
-                2016 &copy; Rapid4J By 领会科技.
+                2016 &copy; Rapid4J By ESHOP.
             </div>
             <div class="footer-tools">
                 <span class="go-top"><i class="fa fa-angle-up"></i></span>

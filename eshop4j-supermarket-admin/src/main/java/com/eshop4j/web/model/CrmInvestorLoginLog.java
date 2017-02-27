@@ -13,7 +13,7 @@ import java.io.Serializable;
  * 
  * @创建时间：2016年08月17日 19:11:18
  * 
- * Copyright (c) 深圳领会科技有限公司-版权所有
+ * Copyright (c) 深圳ESHOP有限公司-版权所有
  */
 public class CrmInvestorLoginLog implements Serializable {
 	

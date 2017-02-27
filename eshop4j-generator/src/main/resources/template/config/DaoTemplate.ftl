@@ -16,7 +16,7 @@ import ${entity.fullName};
  * 
  * @创建时间：${generate.createDate}
  * 
- * Copyright (c) 深圳领会科技有限公司-版权所有
+ * Copyright (c) 深圳ESHOP有限公司-版权所有
  */
 public interface ${dao.shortName} extends GenericDao<${entity.shortName},Long>{
 	

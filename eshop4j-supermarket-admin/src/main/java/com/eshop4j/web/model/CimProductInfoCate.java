@@ -15,7 +15,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
  * 
  * @创建时间：2016年09月13日 20:10:31
  * 
- * Copyright (c) 深圳领会科技有限公司-版权所有
+ * Copyright (c) 深圳ESHOP有限公司-版权所有
  */
 public class CimProductInfoCate implements Serializable {
 	
