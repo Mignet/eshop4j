@@ -1,6 +1,6 @@
-package com.eshop4j.core.constant;
+package com.linkwee.xoss.constant;
 
-public class Constants {
+public class WebConstants {
 	/**
 	 * 系统版本号
 	 */
@@ -34,4 +34,18 @@ public class Constants {
 	 * 投资者端账户明细类别列表Key
 	 */
 	public static final String investor_myaccountdetailtypekey = "investor_myaccountdetailtype";
+	/**
+	 * 接入用户中心约定的签名key
+	 */
+	public static final String USER_MD5_SIGN_KEY = "lh_userCenter_signKey";
+	
+	/**
+	 * 图片服务器地址Key
+	 */
+	public static final String IMAGE_SERVER_URL = "img_server_url";
+	
+	/**
+	 * jpress服务器地址key
+	 */
+	public static final String JPRESS_SERVER_URL = "jpress_server_url";
 }

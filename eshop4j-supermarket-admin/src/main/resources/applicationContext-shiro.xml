@@ -24,24 +24,10 @@
                 /rest/log = anon
                 /rest/log/data = anon
                 /rest/image/captcha = anon
-                <!-- Rest Api for Mobile-->
-                /rest/api/** = app
-                <!-- Open Api for Third Partner-->
-                /rest/openapi/** = openapi
                 <!-- 其他资源需要认证 -->
                 /** = authc
             </value>
         </property>
-        <property name="filters">
-			<map>
-				<entry key="app">
-					<bean class="com.eshop4j.xoss.filter.MobileAuthenticationFilter"></bean>
-				</entry>
-				<entry key="openapi">
-					<bean class="com.eshop4j.xoss.filter.OpenApiAuthenticationFilter"></bean>
-				</entry>
-			</map>
-		</property>
     </bean>
 
    <!-- 缓存管理器 使用Ehcache实现 -->

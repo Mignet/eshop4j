@@ -54,8 +54,6 @@
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
         <!-- 日志拦截器 -->
         <bean class="com.eshop4j.xoss.interceptors.LoggingHandler" />
-        <!-- 服务层日志跟踪拦截器 -->
-        <bean class="com.eshop4j.xoss.interceptors.TraceHandlerInterceptor"></bean>
     </mvc:interceptors>
 
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">

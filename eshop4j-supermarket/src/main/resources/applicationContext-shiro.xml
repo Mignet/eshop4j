@@ -25,8 +25,6 @@
                 /rest/image/captcha = anon
                 <!-- Rest Api for Mobile-->
                 /rest/api/** = app
-                <!-- Open Api for Third Partner-->
-                /rest/openapi/** = openapi
                 <!-- 其他资源需要认证 -->
                 /** = authc
             </value>
@@ -36,14 +34,11 @@
 				<entry key="app">
 					<bean class="com.eshop4j.xoss.filter.MobileAuthenticationFilter"></bean>
 				</entry>
-				<entry key="openapi">
-					<bean class="com.eshop4j.xoss.filter.OpenApiAuthenticationFilter"></bean>
-				</entry>
 			</map>
 		</property>
     </bean>
 
-   <!-- 缓存管理器 使用Ehcache实现 -->
+   <!-- 缓存管理器 使用Ehcache实现 cacheManager,集合spring缓存工厂-->
     <bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
         <property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml"/>
     </bean>
@@ -63,7 +58,6 @@
                 <ref bean="securityRealm"/>
             </list>
         </property>
-        <!-- cacheManager,集合spring缓存工厂 -->
         <property name="cacheManager" ref="shiroEhcacheManager" />
         <property name="sessionManager" ref="sessionManager" />
     </bean>

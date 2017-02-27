@@ -64,17 +64,6 @@
 			<property name="minIdle" value="8" />
 			<property name="maxIdle" value="100" />
 	</bean>
-
-	<bean id="jedisCluster" class="com.eshop4j.xoss.util.JedisClusterFactoryHelper">
-		<property name="addressConfig">
-			<value>classpath:config/redis-cluster.properties</value>
-		</property>
-		<!--  属性文件里  key的前缀 -->
-		<property name="addressKeyPrefix" value="redisAddress" />   
-		<property name="timeout" value="300000" />
-		<property name="maxRedirections" value="6" />
-		<property name="genericObjectPoolConfig" ref="genericObjectPoolConfig" />
-	</bean>
 	
     <!-- dataSource 配置 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
