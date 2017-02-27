@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eshop4j.web.dao.ActRedpacketDetailMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.eshop4j.act.redpacket.model.ActRedpacketDetail" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="redpacket_id" property="redpacketId" jdbcType="VARCHAR"/>
+		<result column="send_id" property="sendId" jdbcType="VARCHAR"/>
+		<result column="redpacket_detail_id" property="redpacketDetailId" jdbcType="VARCHAR"/>
+		<result column="name" property="name" jdbcType="VARCHAR"/>
+		<result column="money" property="money" jdbcType="DECIMAL"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="type" property="type" jdbcType="INTEGER"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="expires_date" property="expiresDate" jdbcType="TIMESTAMP"/>
+		<result column="user_mobile" property="userMobile" jdbcType="VARCHAR"/>
+		<result column="user_name" property="userName" jdbcType="VARCHAR"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="cfplanner_id" property="cfplannerId" jdbcType="VARCHAR"/>
+		<result column="cfplanner_name" property="cfplannerName" jdbcType="VARCHAR"/>
+		<result column="cfplanner_mobile" property="cfplannerMobile" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	redpacket_id,
+	    	send_id,
+	    	redpacket_detail_id,
+	    	name,
+	    	money,
+	    	remark,
+	    	type,
+	    	status,
+	    	expires_date,
+	    	user_mobile,
+	    	user_name,
+	    	user_id,
+	    	cfplanner_id,
+	    	cfplanner_name,
+	    	cfplanner_mobile,
+	    	create_time,
+	    	update_time,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != redpacketId and ''!= redpacketId  ">
+			and redpacket_id = #{redpacketId}
+		</if>
+		<if test=" null != sendId and ''!= sendId  ">
+			and send_id = #{sendId}
+		</if>
+		<if test=" null != redpacketDetailId and ''!= redpacketDetailId  ">
+			and redpacket_detail_id = #{redpacketDetailId}
+		</if>
+		<if test=" null != name and ''!= name  ">
+			and name = #{name}
+		</if>
+		<if test=" null != money ">
+			and money = #{money}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+		<if test=" null != type ">
+			and type = #{type}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+		<if test=" null != expiresDate ">
+			and expires_date = #{expiresDate}
+		</if>
+		<if test=" null != userMobile and ''!= userMobile  ">
+			and user_mobile = #{userMobile}
+		</if>
+		<if test=" null != userName and ''!= userName  ">
+			and user_name = #{userName}
+		</if>
+		<if test=" null != userId and ''!= userId  ">
+			and user_id = #{userId}
+		</if>
+		<if test=" null != cfplannerId and ''!= cfplannerId  ">
+			and cfplanner_id = #{cfplannerId}
+		</if>
+		<if test=" null != cfplannerName and ''!= cfplannerName  ">
+			and cfplanner_name = #{cfplannerName}
+		</if>
+		<if test=" null != cfplannerMobile and ''!= cfplannerMobile  ">
+			and cfplanner_mobile = #{cfplannerMobile}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.eshop4j.act.redpacket.model.ActRedpacketDetail">
+		select <include refid="Base_Column_List" /> from tact_redpacket_detail 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.eshop4j.act.redpacket.model.ActRedpacketDetail">
+		select <include refid="Base_Column_List" /> from tact_redpacket_detail 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tact_redpacket_detail
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tact_redpacket_detail
+    where id = #{0}
+  </delete>
+
+<insert id="inserts" parameterType="com.eshop4j.act.redpacket.model.ActRedpacketDetail" >
+		INSERT INTO tact_redpacket_detail    
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+				    	redpacket_id,
+				    	send_id,
+				    	redpacket_detail_id,
+				    	name,
+				    	money,
+				    	remark,
+				    	type,
+				    	status,
+				    	expires_date,
+				    	user_mobile,
+				    	user_name,
+				    	user_id,
+				    	cfplanner_id,
+				    	cfplanner_name,
+				    	cfplanner_mobile,
+				    	create_time,
+				    	update_time,
+		</trim>
+		VALUES
+		<foreach item="item" index="index" collection="redpackets" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+					 	#{item.redpacketId},
+					 	#{item.sendId},
+					 	#{item.redpacketDetailId},
+					 	#{item.name},
+					 	#{item.money},
+					 	#{item.remark},
+					 	#{item.type},
+					 	#{item.status},
+					 	#{item.expiresDate},
+					 	#{item.userMobile},
+					 	#{item.userName},
+					 	#{item.userId},
+					 	#{item.cfplannerId},
+					 	#{item.cfplannerName},
+					 	#{item.cfplannerMobile},
+					 	#{item.createTime},
+					 	#{item.updateTime},
+			</trim>
+		</foreach>
+
+</insert>
+
+  <insert id="insert" parameterType="com.eshop4j.act.redpacket.model.ActRedpacketDetail" >
+    INSERT INTO tact_redpacket_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					redpacket_id,
+				</if>
+			 	<if test=" null != sendId and ''!= sendId  ">
+					send_id,
+				</if>
+			 	<if test=" null != redpacketDetailId and ''!= redpacketDetailId  ">
+					redpacket_detail_id,
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					name,
+				</if>
+			 	<if test=" null != money ">
+					money,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != type ">
+					type,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != expiresDate ">
+					expires_date,
+				</if>
+			 	<if test=" null != userMobile and ''!= userMobile  ">
+					user_mobile,
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					user_name,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != cfplannerId and ''!= cfplannerId  ">
+					cfplanner_id,
+				</if>
+			 	<if test=" null != cfplannerName and ''!= cfplannerName  ">
+					cfplanner_name,
+				</if>
+			 	<if test=" null != cfplannerMobile and ''!= cfplannerMobile  ">
+					cfplanner_mobile,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					 	#{redpacketId},
+				</if>
+			 	<if test=" null != sendId and ''!= sendId  ">
+					 	#{sendId},
+				</if>
+			 	<if test=" null != redpacketDetailId and ''!= redpacketDetailId  ">
+					 	#{redpacketDetailId},
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					 	#{name},
+				</if>
+			 	<if test=" null != money ">
+					 	#{money},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != type ">
+					 	#{type},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != expiresDate ">
+					 	#{expiresDate},
+				</if>
+			 	<if test=" null != userMobile and ''!= userMobile  ">
+					 	#{userMobile},
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					 	#{userName},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != cfplannerId and ''!= cfplannerId  ">
+					 	#{cfplannerId},
+				</if>
+			 	<if test=" null != cfplannerName and ''!= cfplannerName  ">
+					 	#{cfplannerName},
+				</if>
+			 	<if test=" null != cfplannerMobile and ''!= cfplannerMobile  ">
+					 	#{cfplannerMobile},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.eshop4j.act.redpacket.model.ActRedpacketDetail" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tact_redpacket_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					redpacket_id,
+				</if>
+			 	<if test=" null != sendId and ''!= sendId  ">
+					send_id,
+				</if>
+			 	<if test=" null != redpacketDetailId and ''!= redpacketDetailId  ">
+					redpacket_detail_id,
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					name,
+				</if>
+			 	<if test=" null != money ">
+					money,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != type ">
+					type,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != expiresDate ">
+					expires_date,
+				</if>
+			 	<if test=" null != userMobile and ''!= userMobile  ">
+					user_mobile,
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					user_name,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != cfplannerId and ''!= cfplannerId  ">
+					cfplanner_id,
+				</if>
+			 	<if test=" null != cfplannerName and ''!= cfplannerName  ">
+					cfplanner_name,
+				</if>
+			 	<if test=" null != cfplannerMobile and ''!= cfplannerMobile  ">
+					cfplanner_mobile,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != redpacketId and ''!= redpacketId  ">
+					 	#{redpacketId},
+				</if>
+			 	<if test=" null != sendId and ''!= sendId  ">
+					 	#{sendId},
+				</if>
+			 	<if test=" null != redpacketDetailId and ''!= redpacketDetailId  ">
+					 	#{redpacketDetailId},
+				</if>
+			 	<if test=" null != name and ''!= name  ">
+					 	#{name},
+				</if>
+			 	<if test=" null != money ">
+					 	#{money},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != type ">
+					 	#{type},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != expiresDate ">
+					 	#{expiresDate},
+				</if>
+			 	<if test=" null != userMobile and ''!= userMobile  ">
+					 	#{userMobile},
+				</if>
+			 	<if test=" null != userName and ''!= userName  ">
+					 	#{userName},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != cfplannerId and ''!= cfplannerId  ">
+					 	#{cfplannerId},
+				</if>
+			 	<if test=" null != cfplannerName and ''!= cfplannerName  ">
+					 	#{cfplannerName},
+				</if>
+			 	<if test=" null != cfplannerMobile and ''!= cfplannerMobile  ">
+					 	#{cfplannerMobile},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.eshop4j.act.redpacket.model.ActRedpacketDetail" >
+  		UPDATE tact_redpacket_detail
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != redpacketId and ''!= redpacketId  ">
+						redpacket_id = #{redpacketId},
+					</if>
+					<if test=" null != sendId and ''!= sendId  ">
+						send_id = #{sendId},
+					</if>
+					<if test=" null != redpacketDetailId and ''!= redpacketDetailId  ">
+						redpacket_detail_id = #{redpacketDetailId},
+					</if>
+					<if test=" null != name and ''!= name  ">
+						name = #{name},
+					</if>
+					<if test=" null != money ">
+						money = #{money},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != type ">
+						type = #{type},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != expiresDate ">
+						expires_date = #{expiresDate},
+					</if>
+					<if test=" null != userMobile and ''!= userMobile  ">
+						user_mobile = #{userMobile},
+					</if>
+					<if test=" null != userName and ''!= userName  ">
+						user_name = #{userName},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != cfplannerId and ''!= cfplannerId  ">
+						cfplanner_id = #{cfplannerId},
+					</if>
+					<if test=" null != cfplannerName and ''!= cfplannerName  ">
+						cfplanner_name = #{cfplannerName},
+					</if>
+					<if test=" null != cfplannerMobile and ''!= cfplannerMobile  ">
+						cfplanner_mobile = #{cfplannerMobile},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.eshop4j.act.redpacket.model.ActRedpacketDetail" >
+	    UPDATE tact_redpacket_detail
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != redpacketId and ''!= redpacketId  ">
+						redpacket_id = #{redpacketId},
+					</if>
+					<if test=" null != sendId and ''!= sendId  ">
+						send_id = #{sendId},
+					</if>
+					<if test=" null != redpacketDetailId and ''!= redpacketDetailId  ">
+						redpacket_detail_id = #{redpacketDetailId},
+					</if>
+					<if test=" null != name and ''!= name  ">
+						name = #{name},
+					</if>
+					<if test=" null != money ">
+						money = #{money},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != type ">
+						type = #{type},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != expiresDate ">
+						expires_date = #{expiresDate},
+					</if>
+					<if test=" null != userMobile and ''!= userMobile  ">
+						user_mobile = #{userMobile},
+					</if>
+					<if test=" null != userName and ''!= userName  ">
+						user_name = #{userName},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != cfplannerId and ''!= cfplannerId  ">
+						cfplanner_id = #{cfplannerId},
+					</if>
+					<if test=" null != cfplannerName and ''!= cfplannerName  ">
+						cfplanner_name = #{cfplannerName},
+					</if>
+					<if test=" null != cfplannerMobile and ''!= cfplannerMobile  ">
+						cfplanner_mobile = #{cfplannerMobile},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+	  
+	  <!-- 查询用户可用红包 -->
+	  <select id="queryInvestorRedPacketCount" resultType="int">
+	  		SELECT count(redpacket_detail_id) FROM tact_redpacket_detail WHERE user_id=#{userId} AND status=2
+	  </select>
+	  
+	  <!-- 查询理财师可派发红包 -->
+	  <select id="queryCfplannerRedPacketCount" resultType="int">
+	  	SELECT count(redpacket_detail_id) FROM tact_redpacket_detail WHERE cfplanner_id=#{userId} AND status=1
+	  </select>
+	  
+	  <!-- 查询客户红包信息 -->
+	  <select id="queryInvestorRedPacket" resultType="com.eshop4j.api.response.act.RedpacketResponse">
+	  	SELECT
+				t.redpacket_id rid,
+				t.money money,
+				t.name name,
+				t.remark remark,
+				<choose>	
+			  		<when test="type == 2">
+			  			 u.use_date
+			  		</when>
+			  		<otherwise>
+			  			t.expires_date 
+			  		</otherwise>
+			  	</choose>
+				expireDate,
+				t.cfplanner_id cfplannerId
+	  	FROM tact_redpacket_detail t
+	  	<if test="type == 2">
+	  		LEFT JOIN tact_redpacket_use_record u on t.redpacket_detail_id = u.redpacket_detail_id
+	  	</if>
+	 	WHERE t.user_id = #{userId}
+		<choose>	
+	  		<when test="type == 1">
+	  			AND t.status=2
+	  			<!-- 按发放时间排序 时间相同按金额排序 -->
+	  			order by t.create_time desc,money desc
+	  		</when>
+	  		<when test="type == 2">
+	  			AND t.status = 3
+	  			
+	  			<!-- 按使用时间排序 时间相同按金额排序 -->
+	  			order by expireDate desc,money desc
+	  		</when>
+	  		<when test="type == 3">
+	  			AND t.status=4 
+	  			<!-- 按过期时间排序 时间相同按金额排序 -->
+	  			order by expireDate desc,money desc
+	  		</when>
+	  		<otherwise>
+	  			AND t.status=2
+	  			order by t.create_time desc,money desc
+	  		</otherwise>
+	  	</choose>
+	  </select>
+	  
+	  
+	  <!-- 查询理财师红包 -->
+	  <select id="queryCfplannerRedPacket" resultType="com.eshop4j.api.response.act.RedpacketResponse">
+	  		SELECT
+				t.redpacket_id rid,
+				t.money money,
+				t.name name,
+				t.remark remark,
+				t.expires_date expireDate
+			<if test="type == 2">
+				,t.user_mobile userMobile
+				,t.user_name userName
+				,c.head_image userImage
+				,t.status status
+				,count(t.redpacket_id) count
+			</if>
+			<if test="type == 1 or type == 3">
+				,count(t.redpacket_id) count
+			</if>
+			FROM
+				tact_redpacket_detail t
+			<if test="type == 2">
+				LEFT JOIN tcrm_investor c ON t.user_id = c.user_id
+			</if>
+			WHERE
+				t.cfplanner_id = #{userId}
+			<choose>	
+		  		<when test="type == 1">
+		  			AND t.status=1 GROUP BY t.redpacket_id,t.status,t.expires_date
+		  			<!-- 按发放时间排序 时间相同按金额排序 -->
+		  			order by t.create_time desc,money desc
+		  		</when>
+		  		<when test="type == 2">
+		  			AND t.status IN (2,3,4) AND t.user_id is not null
+		  			GROUP BY t.redpacket_id,t.user_id,t.status
+		  			<!-- 按状态与更新时间排序  -->
+		  			order by status asc,t.update_time desc
+		  		</when>
+		  		<when test="type == 3">
+		  			AND t.status=4 and t.user_id is null GROUP BY t.redpacket_id,t.status
+		  			<!-- 按过期时间排序 时间相同按金额排序 -->
+		  			order by expireDate desc,money desc
+		  		</when>
+		  		<otherwise>
+		  			AND t.status=1 GROUP BY t.redpacket_id,t.status
+		  			order by t.create_time desc,money desc
+		  		</otherwise>
+		  	</choose>
+		  
+	  </select>
+	  
+	  
+	  <!-- 获取发放红包编号 -->
+	<select id="getSendRedpacketIds" resultType="String">
+		SELECT redpacket_detail_id FROM tact_redpacket_detail WHERE cfplanner_id=#{userId}  AND status=1 AND redpacket_id=#{redpacketId}	
+	</select>
+	
+	<!-- 发放红包给用户 -->
+	<update id="sendRedpacket">
+		  UPDATE tact_redpacket_detail
+	   <set>
+			<trim suffixOverrides=",">
+					status = 2,update_time = now(),
+					<if test=" null != userMobile and ''!= userMobile  ">
+						user_mobile = #{userMobile},
+					</if>
+					<if test=" null != userName and ''!= userName  ">
+						user_name = #{userName},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+			</trim>
+		</set>
+		<where>
+			redpacket_detail_id = #{redpacketDetailId}
+		</where>
+	</update>
+	
+	<!-- 更新红包过期状态 -->
+	<update id="updateExpirationStatus">
+		UPDATE tact_redpacket_detail 
+		<set>
+			<trim suffixOverrides=",">
+				status = 4,update_time = now(),
+			</trim>
+		</set>
+		<where>
+		 	<foreach item="sendRedpacketId" collection="sendRedpacketIds" open="send_id IN (" close=")" separator=",">
+		 		#{sendRedpacketId}
+		 	</foreach>
+		</where>
+	</update>
+	
+	<!-- 使用红包更新 -->
+	<update id="useRedpacket">
+		  UPDATE tact_redpacket_detail
+	   <set>
+			<trim suffixOverrides=",">
+				status = 3,update_time = now(),
+			</trim>
+		</set>
+		<where>
+			redpacket_detail_id = #{redpacketId} and update_time = #{updateTime}
+		</where>
+	</update>
+	
+	<!-- 获取用户可使用红包 -->
+	<select id="getUserUsableRedpackets" resultMap="BaseResultMap">
+		SELECT
+			r.redpacket_id,
+			r.send_id,
+			r.redpacket_detail_id,
+			r.type,
+			r.`name`,
+			r.remark,
+			r.money,
+			r.user_id,
+			r.user_mobile,
+			r.user_name,
+			r.cfplanner_id,
+			r.cfplanner_mobile,
+			r.cfplanner_name,
+			r.expires_date,
+			r.update_time
+		FROM
+			tact_redpacket_detail r
+		WHERE
+			r.user_id = #{userId}
+		AND r.`status` = 2
+	</select>
+	
+	
+	<select id="getRedpacketRulesByUid" resultType="com.eshop4j.act.redpacket.model.ActRedpacketRuleDetail">
+		SELECT
+			rr.redpacket_id redpacketId,
+			rd.invest_limit investLlimit,
+			rd.platform_limit platformLimit,
+			rd.platform_id platformId,
+			IF(rd.platform_limit=1,(SELECT o.`name` FROM tcim_org_info o WHERE o.org_number = rd.platform_id),NULL) platformName,
+			rd.product_limit productLimit,
+			rd.product_id productId,
+			rd.product_deadline productDeadline
+		FROM
+			tact_redpacket_detail r
+		LEFT JOIN `tact_redpacket_rule` rr ON r.redpacket_id = rr.redpacket_id
+		AND rr.rule_type = 2
+		LEFT JOIN tact_redpacket_rule_detail rd ON rr.rule_id = rd.rule_id
+		<where>
+			r.user_id=#{userId} AND r.`status`=2
+		</where>
+		GROUP BY r.redpacket_id
+	</select>
+	
+	<select id="getRedpacketRulesByRid" resultType="com.eshop4j.act.redpacket.model.ActRedpacketRuleDetail">
+		SELECT
+			rr.redpacket_id redpacketId,
+			rd.invest_limit investLlimit,
+			rd.platform_limit platformLimit,
+			rd.platform_id platformId,
+			IF(rd.platform_limit=1, (SELECT o.`name` FROM tcim_org_info o WHERE o.org_number = rd.platform_id),NULL) platformName,
+			rd.product_limit productLimit,
+			rd.product_id productId,
+			rd.product_deadline productDeadline
+		FROM
+			`tact_redpacket_rule` rr
+		LEFT JOIN tact_redpacket_rule_detail rd ON rr.rule_id = rd.rule_id
+		<where>
+			rr.rule_type = 2 AND  
+			rr.redpacket_id IN
+		 	<foreach item="rid" collection="rids" open="(" close=")" separator=",">
+		 		#{rid}
+		 	</foreach>
+		</where>
+	</select>
+	
+	<select id="getProductNames" resultType="map">
+		SELECT p.product_id pid, p.product_name pname FROM tcim_product p 
+		<where>
+			p.product_id IN
+		 	<foreach item="pid" collection="pids" open="(" close=")" separator=",">
+		 		#{pid}
+		 	</foreach>
+		</where>
+	</select>
+	
+	<select id="getUserRedpacketCountByRid" resultType="int">
+	
+			SELECT COUNT(r.redpacket_detail_id) FROM tact_redpacket_detail r 
+			<where> 
+				r.user_id=#{userId} AND r.`status`=2 AND 
+				r.redpacket_id in
+		 		<foreach item="rid" collection="rids" open="(" close=")" separator=",">
+		 			#{rid}
+		 		</foreach>
+		 	</where>
+	</select>
+	
+	<!-- 查询客户红包信息 -->
+	  <select id="getUserRedpacketByRid" resultType="com.eshop4j.api.response.act.RedpacketResponse">
+	  	SELECT
+				t.redpacket_id rid,
+				t.money money,
+				t.name name,
+				t.remark remark,
+				t.expires_date expireDate,
+				t.cfplanner_id cfplannerId
+	  	FROM tact_redpacket_detail t
+	 	<where> 
+	 	 	t.user_id = #{userId}
+			AND t.status=2 AND 
+			t.redpacket_id in
+	 		<foreach item="rid" collection="rids" open="(" close=")" separator=",">
+	 			#{rid}
+	 		</foreach>
+	  	</where>	
+	  	order by t.create_time desc,money desc
+	  </select>
+	
+	
+</mapper>

@@ -7,11 +7,11 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import com.linkwee.core.datatable.DataTable;
-import com.linkwee.core.datatable.DataTableReturn;
-import com.linkwee.core.generic.GenericDao;
-import com.linkwee.core.generic.GenericServiceImpl;
-import com.linkwee.core.orm.paging.Page;
+import com.eshop4j.core.datatable.DataTable;
+import com.eshop4j.core.datatable.DataTableReturn;
+import com.eshop4j.core.generic.GenericDao;
+import com.eshop4j.core.generic.GenericServiceImpl;
+import com.eshop4j.core.orm.paging.Page;
 
 import ${entity.fullName};
 import ${dao.fullName};

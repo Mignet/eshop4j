@@ -31,12 +31,12 @@
     </bean>
 
     <!-- 自定义redis缓存管理器 -->  
-    <bean id="redisCacheManager" class="com.linkwee.xoss.session.RedisCacheManager">  
+    <bean id="redisCacheManager" class="com.eshop4j.xoss.session.RedisCacheManager">  
         <property name="jedisCluster" ref="jedisCluster" />  
     </bean>
 
     <!-- 集群要求session能够共享，我们自定义RedisSessionDAO继承自AbstractSessionDAO，实现基于Redis对session的操作 -->
-    <bean id="sessionDAO" class="com.linkwee.xoss.session.RedisSessionDAO">  
+    <bean id="sessionDAO" class="com.eshop4j.xoss.session.RedisSessionDAO">  
         <property name="jedisCluster" ref="jedisCluster" />  
     </bean> 
 

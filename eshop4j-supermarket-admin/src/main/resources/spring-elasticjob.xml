@@ -16,10 +16,10 @@
     <!--配置作业注册中心 -->
     <reg:zookeeper id="regCenter" server-lists="${zookeeperAddress}" namespace="dd-job" base-sleep-time-milliseconds="1000" max-sleep-time-milliseconds="3000" max-retries="3" />
     
-    <!-- <job:dataflow id="myDataFlowJob" class="com.linkwee.job.MyDataFlowJob" registry-center-ref="regCenter" cron="0/10 * * * * ?" sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C" process-count-interval-seconds="10" concurrent-data-process-thread-count="10" /> -->
+    <!-- <job:dataflow id="myDataFlowJob" class="com.eshop4j.job.MyDataFlowJob" registry-center-ref="regCenter" cron="0/10 * * * * ?" sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C" process-count-interval-seconds="10" concurrent-data-process-thread-count="10" /> -->
    
    <!-- 配置简单作业-->
-    <job:simple id="simpleElasticJob" class="com.linkwee.job.MySimpleJob" registry-center-ref="regCenter" cron="0/30 * * * * ?"   sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
+    <job:simple id="simpleElasticJob" class="com.eshop4j.job.MySimpleJob" registry-center-ref="regCenter" cron="0/30 * * * * ?"   sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
     
     <!-- 配置数据流作业-->
     <!-- <job:dataflow id="throughputDataflow" class="xxx.MyThroughputDataflowElasticJob" registry-center-ref="regCenter" cron="0/10 * * * * ?" sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C" process-count-interval-seconds="10" concurrent-data-process-thread-count="10" /> -->

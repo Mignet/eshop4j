@@ -26,7 +26,7 @@
         </thead>
     </table>
 
-	<script type="text/linkwee-template" id="template-tools">
+	<script type="text/eshop4j-template" id="template-tools">
             <div class="row">
                 <div class="col-sm-1">
 					<input id="month" placeholder="请选择月份" name="month" class="form-control Wdate" type="text" autocomplete="off" onfocus="WdatePicker({dateFmt:'yyyyMM'})">

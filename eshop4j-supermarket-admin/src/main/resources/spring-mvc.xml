@@ -13,9 +13,9 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- 扫描controller（controller层注入） -->
-    <context:component-scan base-package="com.linkwee.web.controller"/>
-    <context:component-scan base-package="com.linkwee.api.controller"/>
-    <context:component-scan base-package="com.linkwee.openapi.controller"/>
+    <context:component-scan base-package="com.eshop4j.web.controller"/>
+    <context:component-scan base-package="com.eshop4j.api.controller"/>
+    <context:component-scan base-package="com.eshop4j.openapi.controller"/>
 
     <!-- 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean,是spring MVC为@Controllers分发请求所必须的 -->
     <!-- 指定自己定义的validator -->
@@ -23,7 +23,7 @@
 	    <mvc:message-converters register-defaults="true">
 	        <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 	            <property name="objectMapper">
-	                <bean class="com.linkwee.core.jackson.BaseObjectMapper"/>
+	                <bean class="com.eshop4j.core.jackson.BaseObjectMapper"/>
 	            </property>
 	        </bean>
 	    </mvc:message-converters>
@@ -53,8 +53,8 @@
     <mvc:interceptors>
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
         <!-- 日志拦截器 -->
-        <bean class="com.linkwee.xoss.interceptors.LoggingHandler" />
-        <bean class="com.linkwee.xoss.interceptors.TraceHandlerInterceptor"></bean>
+        <bean class="com.eshop4j.xoss.interceptors.LoggingHandler" />
+        <bean class="com.eshop4j.xoss.interceptors.TraceHandlerInterceptor"></bean>
     </mvc:interceptors>
 
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
@@ -98,6 +98,6 @@
     </bean>
 
 	<!-- 通用异常处理记录日志 -->
-    <bean class="com.linkwee.core.resolver.CommonHandlerExceptionResolver" id="commonHandlerExceptionResolver"/>
+    <bean class="com.eshop4j.core.resolver.CommonHandlerExceptionResolver" id="commonHandlerExceptionResolver"/>
 	
 </beans>

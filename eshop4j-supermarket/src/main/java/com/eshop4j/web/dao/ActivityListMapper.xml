@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eshop4j.web.dao.ActivityListMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.eshop4j.web.model.ActivityList" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="activity_name" property="activityName" jdbcType="VARCHAR"/>
+		<result column="activity_img" property="activityImg" jdbcType="VARCHAR"/>
+		<result column="link_url" property="linkUrl" jdbcType="VARCHAR"/>
+		<result column="start_date" property="startDate" jdbcType="TIMESTAMP"/>
+		<result column="end_date" property="endDate" jdbcType="TIMESTAMP"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="activity_type" property="activityType" jdbcType="INTEGER"/>
+		<result column="activity_code" property="activityCode" jdbcType="VARCHAR"/>
+		<result column="app_type" property="appType" jdbcType="INTEGER"/>
+		<result column="activity_end_img" property="activityEndImg" jdbcType="VARCHAR"/>
+		<result column="share_title" property="shareTitle" jdbcType="VARCHAR"/>
+		<result column="share_desc" property="shareDesc" jdbcType="VARCHAR"/>
+		<result column="share_icon" property="shareIcon" jdbcType="VARCHAR"/>
+		<result column="share_link" property="shareLink" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<resultMap  type="com.eshop4j.web.model.ActivityList" id="AllActivityListResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="activity_name" property="activityName" jdbcType="VARCHAR"/>
+		<result column="activity_img" property="activityImg" jdbcType="VARCHAR"/>
+		<result column="link_url" property="linkUrl" jdbcType="VARCHAR"/>
+		<result column="start_date" property="startDate" jdbcType="TIMESTAMP"/>
+		<result column="end_date" property="endDate" jdbcType="TIMESTAMP"/>
+		<result column="activitystatustag" property="status" jdbcType="INTEGER"/>
+		<result column="app_type" property="appType" jdbcType="INTEGER"/>
+		<result column="activity_code" property="activityCode" jdbcType="VARCHAR"/>
+		<result column="activity_end_img" property="activityEndImg" jdbcType="VARCHAR"/>
+		<result column="share_title" property="shareTitle" jdbcType="VARCHAR"/>
+		<result column="share_desc" property="shareDesc" jdbcType="VARCHAR"/>
+		<result column="share_icon" property="shareIcon" jdbcType="VARCHAR"/>
+		<result column="share_link" property="shareLink" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<resultMap  type="com.eshop4j.web.model.ActivityList" id="PlatformActivityListResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="activity_name" property="activityName" jdbcType="VARCHAR"/>
+		<result column="activity_img" property="activityImg" jdbcType="VARCHAR"/>
+		<result column="link_url" property="linkUrl" jdbcType="VARCHAR"/>
+		<result column="start_date" property="startDate" jdbcType="TIMESTAMP"/>
+		<result column="end_date" property="endDate" jdbcType="TIMESTAMP"/>
+		<result column="activityStatus" property="activityStatus" jdbcType="INTEGER"/>
+		<result column="app_type" property="appType" jdbcType="INTEGER"/>
+		<result column="activity_code" property="activityCode" jdbcType="VARCHAR"/>
+		<result column="activity_end_img" property="activityEndImg" jdbcType="VARCHAR"/>
+		<result column="share_title" property="shareTitle" jdbcType="VARCHAR"/>
+		<result column="share_desc" property="shareDesc" jdbcType="VARCHAR"/>
+		<result column="share_icon" property="shareIcon" jdbcType="VARCHAR"/>
+		<result column="share_link" property="shareLink" jdbcType="VARCHAR"/>
+		<result column="activity_platform" property="activityPlatform" jdbcType="VARCHAR"/>
+		<result column="platform_img" property="platformImg" jdbcType="VARCHAR"/>
+		<result column="activity_desc" property="activityDesc" jdbcType="VARCHAR"/>
+		<result column="is_cover" property="isCover" jdbcType="INTEGER"/>
+		<result column="prize_issue_style" property="prizeIssueStyle" jdbcType="INTEGER"/>
+		<result column="prize_balance_time" property="prizeBalanceTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	activity_name,
+	    	activity_img,
+	    	link_url,
+	    	start_date,
+	    	end_date,
+	    	status,
+	    	activity_type,
+	    	activity_code,
+	    	app_type,
+	    	activity_end_img,
+	    	share_title,
+	    	share_desc,
+	    	share_icon,
+	    	share_link,
+    </trim>
+  </sql>  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsm_activity_list
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tsm_activity_list
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.eshop4j.web.model.ActivityList" >
+    INSERT INTO tsm_activity_list
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != activityName and ''!= activityName  ">
+					activity_name,
+				</if>
+			 	<if test=" null != activityImg and ''!= activityImg  ">
+					activity_img,
+				</if>
+			 	<if test=" null != linkUrl and ''!= linkUrl  ">
+					link_url,
+				</if>
+			 	<if test=" null != startDate ">
+					start_date,
+				</if>
+			 	<if test=" null != endDate ">
+					end_date,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != activityType ">
+					activity_type,
+				</if>
+			 	<if test=" null != activityCode and ''!= activityCode  ">
+					activity_code,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+			 	<if test=" null != activityEndImg and ''!= activityEndImg  ">
+					activity_end_img,
+				</if>
+			 	<if test=" null != shareTitle and ''!= shareTitle  ">
+					share_title,
+				</if>
+			 	<if test=" null != shareDesc and ''!= shareDesc  ">
+					share_desc,
+				</if>
+			 	<if test=" null != shareIcon and ''!= shareIcon  ">
+					share_icon,
+				</if>
+			 	<if test=" null != shareLink and ''!= shareLink  ">
+					share_link,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != activityName and ''!= activityName  ">
+					 	#{activityName},
+				</if>
+			 	<if test=" null != activityImg and ''!= activityImg  ">
+					 	#{activityImg},
+				</if>
+			 	<if test=" null != linkUrl and ''!= linkUrl  ">
+					 	#{linkUrl},
+				</if>
+			 	<if test=" null != startDate ">
+					 	#{startDate},
+				</if>
+			 	<if test=" null != endDate ">
+					 	#{endDate},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != activityType ">
+					 	#{activityType},
+				</if>
+			 	<if test=" null != activityCode and ''!= activityCode  ">
+					 	#{activityCode},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+			 	<if test=" null != activityEndImg and ''!= activityEndImg  ">
+					 	#{activityEndImg},
+				</if>
+			 	<if test=" null != shareTitle and ''!= shareTitle  ">
+					 	#{shareTitle},
+				</if>
+			 	<if test=" null != shareDesc and ''!= shareDesc  ">
+					 	#{shareDesc},
+				</if>
+			 	<if test=" null != shareIcon and ''!= shareIcon  ">
+					 	#{shareIcon},
+				</if>
+			 	<if test=" null != shareLink and ''!= shareLink  ">
+					 	#{shareLink},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.eshop4j.web.model.ActivityList" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tsm_activity_list
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != activityName and ''!= activityName  ">
+					activity_name,
+				</if>
+			 	<if test=" null != activityImg and ''!= activityImg  ">
+					activity_img,
+				</if>
+			 	<if test=" null != linkUrl and ''!= linkUrl  ">
+					link_url,
+				</if>
+			 	<if test=" null != startDate ">
+					start_date,
+				</if>
+			 	<if test=" null != endDate ">
+					end_date,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != activityType ">
+					activity_type,
+				</if>
+			 	<if test=" null != activityCode and ''!= activityCode  ">
+					activity_code,
+				</if>
+			 	<if test=" null != appType ">
+					app_type,
+				</if>
+			 	<if test=" null != activityEndImg and ''!= activityEndImg  ">
+					activity_end_img,
+				</if>
+			 	<if test=" null != shareTitle and ''!= shareTitle  ">
+					share_title,
+				</if>
+			 	<if test=" null != shareDesc and ''!= shareDesc  ">
+					share_desc,
+				</if>
+			 	<if test=" null != shareIcon and ''!= shareIcon  ">
+					share_icon,
+				</if>
+			 	<if test=" null != shareLink and ''!= shareLink  ">
+					share_link,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != activityName and ''!= activityName  ">
+					 	#{activityName},
+				</if>
+			 	<if test=" null != activityImg and ''!= activityImg  ">
+					 	#{activityImg},
+				</if>
+			 	<if test=" null != linkUrl and ''!= linkUrl  ">
+					 	#{linkUrl},
+				</if>
+			 	<if test=" null != startDate ">
+					 	#{startDate},
+				</if>
+			 	<if test=" null != endDate ">
+					 	#{endDate},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != activityType ">
+					 	#{activityType},
+				</if>
+			 	<if test=" null != activityCode and ''!= activityCode  ">
+					 	#{activityCode},
+				</if>
+			 	<if test=" null != appType ">
+					 	#{appType},
+				</if>
+			 	<if test=" null != activityEndImg and ''!= activityEndImg  ">
+					 	#{activityEndImg},
+				</if>
+			 	<if test=" null != shareTitle and ''!= shareTitle  ">
+					 	#{shareTitle},
+				</if>
+			 	<if test=" null != shareDesc and ''!= shareDesc  ">
+					 	#{shareDesc},
+				</if>
+			 	<if test=" null != shareIcon and ''!= shareIcon  ">
+					 	#{shareIcon},
+				</if>
+			 	<if test=" null != shareLink and ''!= shareLink  ">
+					 	#{shareLink},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.eshop4j.web.model.ActivityList" >
+  		UPDATE tsm_activity_list
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != activityName and ''!= activityName  ">
+						activity_name = #{activityName},
+					</if>
+					<if test=" null != activityImg and ''!= activityImg  ">
+						activity_img = #{activityImg},
+					</if>
+					<if test=" null != linkUrl and ''!= linkUrl  ">
+						link_url = #{linkUrl},
+					</if>
+					<if test=" null != startDate ">
+						start_date = #{startDate},
+					</if>
+					<if test=" null != endDate ">
+						end_date = #{endDate},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != activityType ">
+						activity_type = #{activityType},
+					</if>
+					<if test=" null != activityCode and ''!= activityCode  ">
+						activity_code = #{activityCode},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != activityEndImg and ''!= activityEndImg  ">
+						activity_end_img = #{activityEndImg},
+					</if>
+					<if test=" null != shareTitle and ''!= shareTitle  ">
+						share_title = #{shareTitle},
+					</if>
+					<if test=" null != shareDesc and ''!= shareDesc  ">
+						share_desc = #{shareDesc},
+					</if>
+					<if test=" null != shareIcon and ''!= shareIcon  ">
+						share_icon = #{shareIcon},
+					</if>
+					<if test=" null != shareLink and ''!= shareLink  ">
+						share_link = #{shareLink},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.eshop4j.web.model.ActivityList" >
+	    UPDATE tsm_activity_list
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != activityName and ''!= activityName  ">
+						activity_name = #{activityName},
+					</if>
+					<if test=" null != activityImg and ''!= activityImg  ">
+						activity_img = #{activityImg},
+					</if>
+					<if test=" null != linkUrl and ''!= linkUrl  ">
+						link_url = #{linkUrl},
+					</if>
+					<if test=" null != startDate ">
+						start_date = #{startDate},
+					</if>
+					<if test=" null != endDate ">
+						end_date = #{endDate},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != activityType ">
+						activity_type = #{activityType},
+					</if>
+					<if test=" null != activityCode and ''!= activityCode  ">
+						activity_code = #{activityCode},
+					</if>
+					<if test=" null != appType ">
+						app_type = #{appType},
+					</if>
+					<if test=" null != activityEndImg and ''!= activityEndImg  ">
+						activity_end_img = #{activityEndImg},
+					</if>
+					<if test=" null != shareTitle and ''!= shareTitle  ">
+						share_title = #{shareTitle},
+					</if>
+					<if test=" null != shareDesc and ''!= shareDesc  ">
+						share_desc = #{shareDesc},
+					</if>
+					<if test=" null != shareIcon and ''!= shareIcon  ">
+						share_icon = #{shareIcon},
+					</if>
+					<if test=" null != shareLink and ''!= shareLink  ">
+						share_link = #{shareLink},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" >
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tsm_activity_list
+        <where> 
+        <if test="actitityName!=null and actitityName!='' ">  
+                activity_name LIKE CONCAT('%','${actitityName}','%' )  
+         </if>  
+        </where>
+        order by id desc
+    </select>
+	
+	<!-- 查询所有精彩活动  活动状态标示activitystatustag  0:进行中，1:已结束，-1:即将开始，-2其他情况 -->
+	<select id="queryActivities" resultMap="AllActivityListResultMap" >		
+	  SELECT *,CASE 
+	  <![CDATA[
+	 		WHEN start_date > now() THEN '-1'
+			WHEN start_date <= now() and end_date >= now() THEN '0'			
+			WHEN end_date < now() THEN '1' ELSE '-2' END activitystatustag
+			]]>
+			FROM tsm_activity_list 
+			WHERE 1=1
+			  <if test=" null != appType and ''!= appType">
+		 		AND app_type = #{appType}
+	 		</if>
+	       ORDER BY activitystatustag,start_date DESC
+	</select>
+	
+	<select id="queryActivitiesByPlatform" resultMap="PlatformActivityListResultMap" >			
+		  SELECT * ,CASE 
+		  <![CDATA[
+		 		WHEN start_date > now() THEN '-1'
+				WHEN start_date <= now() and end_date >= now() THEN '0'			
+				WHEN end_date < now() THEN '1' ELSE '-2' END activityStatus
+				]]>
+				FROM tsm_activity_list WHERE 1=1 AND is_cover = 1
+			<![CDATA[and start_date <= now()]]>
+			<if test=" null != appType and ''!= appType">
+		 		AND app_type = #{appType}
+	 		</if>
+		ORDER BY activityStatus asc,show_index ASC,start_date DESC
+	</select>
+
+	<select id="queryActivitiesListByPlatform" resultMap="PlatformActivityListResultMap" >			
+		  SELECT *,CASE 
+		  <![CDATA[
+		 		WHEN start_date > now() THEN '-1'
+				WHEN start_date <= now() and end_date >= now() THEN '0'			
+				WHEN end_date < now() THEN '1' ELSE '-2' END activityStatus
+				]]>
+				FROM tsm_activity_list 
+				WHERE 1=1
+				<if test=" null != appType and ''!= appType">
+			 		AND app_type = #{appType}
+		 		</if>
+		 		<if test=" null != activityPlatform and ''!= activityPlatform">
+			 		AND activity_platform = #{activityPlatform}
+		 		</if>
+		 		<![CDATA[and start_date <= now()]]> 
+		       ORDER BY activityStatus asc,show_index asc,start_date DESC
+	</select>
+	
+	<select id="queryPlatformActivities" resultMap="PlatformActivityListResultMap" >			
+		  SELECT * FROM tsm_activity_list 
+				WHERE 1=1
+				<if test=" null != appType and ''!= appType">
+			 		AND app_type = #{appType}
+		 		</if>
+		 		<if test=" null != activityPlatform and ''!= activityPlatform">
+			 		AND activity_platform = #{activityPlatform}
+		 		</if>
+		 		<![CDATA[and start_date <= now() and end_date >= now()]]> 
+		       ORDER BY show_index asc,start_date DESC
+	</select>
+	
+	<select id="queryNewest" resultMap="PlatformActivityListResultMap" >			
+		  SELECT * FROM tsm_activity_list 
+				WHERE 1=1
+				<if test=" null != appType and ''!= appType">
+			 		AND app_type = #{appType}
+		 		</if>
+		 		<![CDATA[and start_date <= now() and end_date >= now()]]> 
+		       ORDER BY start_date DESC limit 1
+	</select>
+	
+	<select id="queryActivity" resultMap="PlatformActivityListResultMap" >			
+		  SELECT * FROM tsm_activity_list 
+				WHERE 1=1
+			 		AND activity_name like CONCAT('%',#{activityName},'%')
+			 		AND activity_platform = #{activityPlatform}
+		 		<![CDATA[and start_date <= now() and end_date >= now()]]> 
+		       ORDER BY start_date DESC
+	</select>
+</mapper>

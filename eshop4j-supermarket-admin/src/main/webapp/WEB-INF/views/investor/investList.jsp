@@ -137,7 +137,7 @@
 
     </script>
 
-    <script type="text/linkwee-template" id="template-search">
+    <script type="text/eshop4j-template" id="template-search">
             <div class="row">
                 <div class="col-xs-8">
 					<input  class="easyui-textbox" name="nameOrMobile" id="nameOrMobile" type="text" placeholder="输入手机号或姓名"/>

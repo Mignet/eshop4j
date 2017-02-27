@@ -27,11 +27,11 @@
     
    
 
-    <!-- 自动扫描linkwee包 ,将带有注解的类 纳入spring容器管理 -->
-    <context:component-scan base-package="com.linkwee"></context:component-scan>
+    <!-- 自动扫描eshop4j包 ,将带有注解的类 纳入spring容器管理 -->
+    <context:component-scan base-package="com.eshop4j"></context:component-scan>
 
     <!-- 引入配置文件 -->
-    <bean  class="com.linkwee.xoss.helper.SpringPropertyPlaceholder" id="propertyConfigurer">
+    <bean  class="com.eshop4j.xoss.helper.SpringPropertyPlaceholder" id="propertyConfigurer">
 		<property name="locations">
 			<list>
                 <value>classpath:config/*.properties</value>
@@ -65,7 +65,7 @@
 			<property name="maxIdle" value="100" />
 	</bean>
 
-	<bean id="jedisCluster" class="com.linkwee.xoss.util.JedisClusterFactoryHelper">
+	<bean id="jedisCluster" class="com.eshop4j.xoss.util.JedisClusterFactoryHelper">
 		<property name="addressConfig">
 			<value>classpath:config/redis-cluster.properties</value>
 		</property>
@@ -113,10 +113,10 @@
     <!-- mybatis文件配置，扫描所有mapper文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" p:dataSource-ref="dataSource"
           p:configLocation="classpath:mybatis-config.xml"
-          p:mapperLocations="classpath:com/linkwee/web/dao/*.xml"/>
+          p:mapperLocations="classpath:com/eshop4j/web/dao/*.xml"/>
 
     <!-- spring与mybatis整合配置，扫描所有dao -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.linkwee.web.dao"
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.eshop4j.web.dao"
           p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
 
     <!-- 对dataSource 数据源进行事务管理 -->
@@ -140,7 +140,7 @@
 
     <!-- 事务 aop 配置 -->
     <aop:config>
-        <aop:pointcut id="serviceMethods" expression="execution(* com.linkwee.web.service..*(..))"/>
+        <aop:pointcut id="serviceMethods" expression="execution(* com.eshop4j.web.service..*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
     </aop:config>
     
@@ -177,22 +177,22 @@
     </bean>  
       
    	<!-- 配置简单作业-->
-  <!--   <job:simple id="simpleElasticJob" class="com.linkwee.job.MySimpleJob" registry-center-ref="regCenter" cron="0/30 * * * * ?"   sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" /> -->
-    <job:simple id="rejectedExecuteRetryJob" class="com.linkwee.job.RejectedExecuteRetryJob" registry-center-ref="regCenter" cron="0 0/30 * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
-    <job:simple id="everyDayFeeCalcJob" class="com.linkwee.job.EveryDayFeeCalcJob" registry-center-ref="regCenter" cron="0 0 1 * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
-    <job:simple id="checkExpirationRedpacketJob" class="com.linkwee.job.CheckExpirationRedpacketJob" registry-center-ref="regCenter" cron="0 */1 * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
-    <job:simple id="advanceSendRedPacketExpireMsgJob" class="com.linkwee.job.AdvanceSendRedPacketExpireMsgJob" registry-center-ref="regCenter" cron="0 0 10 * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
-    <job:simple id="pushMessgeJob" class="com.linkwee.job.PushMessageThreadJob" registry-center-ref="regCenter" cron="0/30 * * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />  
-    <job:simple id="acWithdrawApplyJob" class="com.linkwee.job.AcWithdrawApplyJob" registry-center-ref="regCenter" cron="0 0 7,10,12,14,16,18,20,22 * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />  
-    <job:simple id="sysPushMessgeJob" class="com.linkwee.job.SysPushMessageThreadJob" registry-center-ref="regCenter" cron="0 */1 * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
+  <!--   <job:simple id="simpleElasticJob" class="com.eshop4j.job.MySimpleJob" registry-center-ref="regCenter" cron="0/30 * * * * ?"   sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" /> -->
+    <job:simple id="rejectedExecuteRetryJob" class="com.eshop4j.job.RejectedExecuteRetryJob" registry-center-ref="regCenter" cron="0 0/30 * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
+    <job:simple id="everyDayFeeCalcJob" class="com.eshop4j.job.EveryDayFeeCalcJob" registry-center-ref="regCenter" cron="0 0 1 * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
+    <job:simple id="checkExpirationRedpacketJob" class="com.eshop4j.job.CheckExpirationRedpacketJob" registry-center-ref="regCenter" cron="0 */1 * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
+    <job:simple id="advanceSendRedPacketExpireMsgJob" class="com.eshop4j.job.AdvanceSendRedPacketExpireMsgJob" registry-center-ref="regCenter" cron="0 0 10 * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
+    <job:simple id="pushMessgeJob" class="com.eshop4j.job.PushMessageThreadJob" registry-center-ref="regCenter" cron="0/30 * * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />  
+    <job:simple id="acWithdrawApplyJob" class="com.eshop4j.job.AcWithdrawApplyJob" registry-center-ref="regCenter" cron="0 0 7,10,12,14,16,18,20,22 * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />  
+    <job:simple id="sysPushMessgeJob" class="com.eshop4j.job.SysPushMessageThreadJob" registry-center-ref="regCenter" cron="0 */1 * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
     <!--机构佣金修改定时任务  (cron = "0 0 0/1 * * ?")//每小时  cron="0 0 */1 * * ?"-->
-    <job:simple id="modifyOrgFeeRatioJob" class="com.linkwee.job.ModifyOrgFeeRatioJob" registry-center-ref="regCenter" cron="0 */1 * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
+    <job:simple id="modifyOrgFeeRatioJob" class="com.eshop4j.job.ModifyOrgFeeRatioJob" registry-center-ref="regCenter" cron="0 */1 * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
     <!-- 回款提前提醒  0 0 8 * * ?-->
-    <job:simple id="advancePaymentReminderJob" class="com.linkwee.job.AdvancePaymentReminderJob" registry-center-ref="regCenter" cron="0 0 8 * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
-     <job:simple id="advanceSendRedPacketByDate" class="com.linkwee.job.AdvanceSendRedPacketByDate" registry-center-ref="regCenter" cron="0 0 8 * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" /> 
-     <!-- <job:simple id="advanceSendRedPacketByDate" class="com.linkwee.job.AdvanceSendRedPacketByDate" registry-center-ref="regCenter" cron="0 */1 * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" /> -->
-     <job:simple id="advanceSendRedPacketByNow" class="com.linkwee.job.AdvanceSendRedPacketByNow" registry-center-ref="regCenter" cron="0 */1 * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
-    <job:simple id="weiXinMsgJob" class="com.linkwee.job.WeiXinMsgJob" registry-center-ref="regCenter" cron="0 0 */1 * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
+    <job:simple id="advancePaymentReminderJob" class="com.eshop4j.job.AdvancePaymentReminderJob" registry-center-ref="regCenter" cron="0 0 8 * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
+     <job:simple id="advanceSendRedPacketByDate" class="com.eshop4j.job.AdvanceSendRedPacketByDate" registry-center-ref="regCenter" cron="0 0 8 * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" /> 
+     <!-- <job:simple id="advanceSendRedPacketByDate" class="com.eshop4j.job.AdvanceSendRedPacketByDate" registry-center-ref="regCenter" cron="0 */1 * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" /> -->
+     <job:simple id="advanceSendRedPacketByNow" class="com.eshop4j.job.AdvanceSendRedPacketByNow" registry-center-ref="regCenter" cron="0 */1 * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
+    <job:simple id="weiXinMsgJob" class="com.eshop4j.job.WeiXinMsgJob" registry-center-ref="regCenter" cron="0 0 */1 * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
     <!-- 分布式定时任务调度 结束 - (基于ZooKeeper)-  -->
     
 </beans>

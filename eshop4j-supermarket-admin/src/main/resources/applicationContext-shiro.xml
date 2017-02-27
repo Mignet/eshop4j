@@ -35,10 +35,10 @@
         <property name="filters">
 			<map>
 				<entry key="app">
-					<bean class="com.linkwee.xoss.filter.MobileAuthenticationFilter"></bean>
+					<bean class="com.eshop4j.xoss.filter.MobileAuthenticationFilter"></bean>
 				</entry>
 				<entry key="openapi">
-					<bean class="com.linkwee.xoss.filter.OpenApiAuthenticationFilter"></bean>
+					<bean class="com.eshop4j.xoss.filter.OpenApiAuthenticationFilter"></bean>
 				</entry>
 			</map>
 		</property>

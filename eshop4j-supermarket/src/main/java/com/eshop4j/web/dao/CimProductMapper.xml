@@ -1,0 +1,2784 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eshop4j.web.dao.CimProductMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.eshop4j.web.model.CimProduct" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="product_name" property="productName" jdbcType="VARCHAR"/>
+		<result column="product_desc" property="productDesc" jdbcType="VARCHAR"/>
+		<result column="product_type" property="productType" jdbcType="INTEGER"/>
+		<result column="repayment_way" property="repaymentWay" jdbcType="INTEGER"/>
+		<result column="sale_start_time" property="saleStartTime" jdbcType="TIMESTAMP"/>
+		<result column="sale_end_time" property="saleEndTime" jdbcType="TIMESTAMP"/>
+		<result column="is_flow" property="isFlow" jdbcType="INTEGER"/>
+		<result column="flow_min_rate" property="flowMinRate" jdbcType="DECIMAL"/>
+		<result column="flow_max_rate" property="flowMaxRate" jdbcType="DECIMAL"/>
+		<result column="add_rate" property="addRate" jdbcType="DECIMAL"/>
+		<result column="platform_cashback" property="platformCashback" jdbcType="DECIMAL"/>
+		<result column="is_fixed_deadline" property="isFixedDeadline" jdbcType="INTEGER"/>
+		<result column="dead_line_min_value" property="deadLineMinValue" jdbcType="INTEGER"/>
+		<result column="dead_line_max_value" property="deadLineMaxValue" jdbcType="INTEGER"/>
+		<result column="dead_line_min_self_defined" property="deadLineMinSelfDefined" jdbcType="VARCHAR"/>
+		<result column="dead_line_max_self_defined" property="deadLineMaxSelfDefined" jdbcType="VARCHAR"/>
+		<result column="is_collect" property="isCollect" jdbcType="INTEGER"/>
+		<result column="collect_begin_time" property="collectBeginTime" jdbcType="TIMESTAMP"/>
+		<result column="collect_end_time" property="collectEndTime" jdbcType="TIMESTAMP"/>
+		<result column="interest_way" property="interestWay" jdbcType="INTEGER"/>
+		<result column="valid_begin_date" property="validBeginDate" jdbcType="TIMESTAMP"/>
+		<result column="valid_end_date" property="validEndDate" jdbcType="TIMESTAMP"/>
+		<result column="buy_min_money" property="buyMinMoney" jdbcType="DECIMAL"/>
+		<result column="buy_max_money" property="buyMaxMoney" jdbcType="DECIMAL"/>
+		<result column="buy_total_money" property="buyTotalMoney" jdbcType="DECIMAL"/>
+		<result column="show_index" property="showIndex" jdbcType="INTEGER"/>
+		<result column="is_have_progress" property="isHaveProgress" jdbcType="INTEGER"/>
+		<result column="is_redemption" property="isRedemption" jdbcType="INTEGER"/>
+		<result column="redemption_time" property="redemptionTime" jdbcType="INTEGER"/>
+		<result column="assignment_time" property="assignmentTime" jdbcType="INTEGER"/>
+		<result column="money_type" property="moneyType" jdbcType="INTEGER"/>
+		<result column="risk_control_type" property="riskControlType" jdbcType="INTEGER"/>
+		<result column="risk_level" property="riskLevel" jdbcType="INTEGER"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="creator" property="creator" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="updater" property="updater" jdbcType="VARCHAR"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="product_id" property="productId" jdbcType="VARCHAR"/>
+		<result column="org_number" property="orgNumber" jdbcType="VARCHAR"/>
+		<result column="third_product_id" property="thirdProductId" jdbcType="VARCHAR"/>
+		<result column="is_quota" property="isQuota" jdbcType="INTEGER"/>
+		<result column="detail_open_url" property="detailOpenUrl" jdbcType="VARCHAR"/>
+		<result column="detail_open_type" property="detailOpenType" jdbcType="INTEGER"/>
+		<result column="buy_increase_money" property="buyIncreaseMoney" jdbcType="DECIMAL"/>
+		<result column="fee_ratio" property="feeRatio" jdbcType="DECIMAL"/>
+		<result column="audit_status" property="auditStatus" jdbcType="INTEGER"/>
+		<result column="audit_time" property="auditTime" jdbcType="TIMESTAMP"/>
+		<result column="source_way" property="sourceWay" jdbcType="INTEGER"/>
+	</resultMap>
+	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	product_name,
+	    	product_desc,
+	    	product_type,
+	    	repayment_way,
+	    	sale_start_time,
+	    	sale_end_time,
+	    	is_flow,
+	    	flow_min_rate,
+	    	flow_max_rate,
+	    	add_rate,
+	    	platform_cashback,
+	    	is_fixed_deadline,
+	    	dead_line_min_value,
+	    	dead_line_max_value,
+	    	dead_line_min_self_defined,
+	    	dead_line_max_self_defined,
+	    	is_collect,
+	    	collect_begin_time,
+	    	collect_end_time,
+	    	interest_way,
+	    	valid_begin_date,
+	    	valid_end_date,
+	    	buy_min_money,
+	    	buy_max_money,
+	    	buy_total_money,
+	    	show_index,
+	    	is_have_progress,
+	    	is_redemption,
+	    	redemption_time,
+	    	assignment_time,
+	    	money_type,
+	    	risk_control_type,
+	    	risk_level,
+	    	status,
+	    	creator,
+	    	create_time,
+	    	updater,
+	    	update_time,
+	    	remark,
+	    	product_id,
+	    	org_number,
+	    	third_product_id,
+	    	is_quota,
+	    	detail_open_url,
+	    	detail_open_type,
+	    	buy_increase_money,
+	    	fee_ratio,
+	    	audit_status,
+	    	audit_time,
+	    	source_way,
+    </trim>
+  </sql>
+  
+  <sql id="Base_Column_List_T">
+    <trim suffixOverrides=",">
+	    	t.id,
+	    	t.product_name,
+	    	t.product_desc,
+	    	t.product_type,
+	    	t.repayment_way,
+	    	t.sale_start_time,
+	    	t.sale_end_time,
+	    	t.is_flow,
+	    	t.flow_min_rate,
+	    	t.flow_max_rate,
+	    	t.add_rate,
+	    	t.platform_cashback,
+	    	t.is_fixed_deadline,
+	    	t.dead_line_min_value,
+	    	t.dead_line_max_value,
+	    	t.dead_line_min_self_defined,
+	    	t.dead_line_max_self_defined,
+	    	t.is_collect,
+	    	t.collect_begin_time,
+	    	t.collect_end_time,
+	    	t.interest_way,
+	    	t.valid_begin_date,
+	    	t.valid_end_date,
+	    	t.buy_min_money,
+	    	t.buy_max_money,
+	    	t.buy_total_money,
+	    	t.show_index,
+	    	t.is_have_progress,
+	    	t.is_redemption,
+	    	t.redemption_time,
+	    	t.assignment_time,
+	    	t.money_type,
+	    	t.risk_control_type,
+	    	t.risk_level,
+	    	t.status,
+	    	t.creator,
+	    	t.create_time,
+	    	t.updater,
+	    	t.update_time,
+	    	t.remark,
+	    	t.product_id,
+	    	t.org_number,
+	    	t.third_product_id,
+	    	t.is_quota,
+	    	t.detail_open_url,
+	    	t.detail_open_type,
+	    	t.buy_increase_money,
+	    	t.fee_ratio,
+	    	t.audit_status,
+	    	t.audit_time,
+	    	t.source_way,
+    </trim>
+  </sql>
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != productName and ''!= productName  ">
+			and product_name = #{productName}
+		</if>
+		<if test=" null != productDesc and ''!= productDesc  ">
+			and product_desc = #{productDesc}
+		</if>
+		<if test=" null != productType ">
+			and product_type = #{productType}
+		</if>
+		<if test=" null != repaymentWay ">
+			and repayment_way = #{repaymentWay}
+		</if>
+		<if test=" null != saleStartTime ">
+			and sale_start_time = #{saleStartTime}
+		</if>
+		<if test=" null != saleEndTime ">
+			and sale_end_time = #{saleEndTime}
+		</if>
+		<if test=" null != isFlow ">
+			and is_flow = #{isFlow}
+		</if>
+		<if test=" null != flowMinRate ">
+			and flow_min_rate = #{flowMinRate}
+		</if>
+		<if test=" null != flowMaxRate ">
+			and flow_max_rate = #{flowMaxRate}
+		</if>
+		<if test=" null != addRate ">
+			and add_rate = #{addRate}
+		</if>
+		<if test=" null != platformCashback ">
+			and platform_cashback = #{platformCashback}
+		</if>
+		<if test=" null != isFixedDeadline ">
+			and is_fixed_deadline = #{isFixedDeadline}
+		</if>
+		<if test=" null != deadLineMinValue ">
+			and dead_line_min_value = #{deadLineMinValue}
+		</if>
+		<if test=" null != deadLineMaxValue ">
+			and dead_line_max_value = #{deadLineMaxValue}
+		</if>
+		<if test=" null != deadLineMinSelfDefined and ''!= deadLineMinSelfDefined  ">
+			and dead_line_min_self_defined = #{deadLineMinSelfDefined}
+		</if>
+		<if test=" null != deadLineMaxSelfDefined and ''!= deadLineMaxSelfDefined  ">
+			and dead_line_max_self_defined = #{deadLineMaxSelfDefined}
+		</if>
+		<if test=" null != isCollect ">
+			and is_collect = #{isCollect}
+		</if>
+		<if test=" null != collectBeginTime ">
+			and collect_begin_time = #{collectBeginTime}
+		</if>
+		<if test=" null != collectEndTime ">
+			and collect_end_time = #{collectEndTime}
+		</if>
+		<if test=" null != interestWay ">
+			and interest_way = #{interestWay}
+		</if>
+		<if test=" null != validBeginDate ">
+			and valid_begin_date = #{validBeginDate}
+		</if>
+		<if test=" null != validEndDate ">
+			and valid_end_date = #{validEndDate}
+		</if>
+		<if test=" null != buyMinMoney ">
+			and buy_min_money = #{buyMinMoney}
+		</if>
+		<if test=" null != buyMaxMoney ">
+			and buy_max_money = #{buyMaxMoney}
+		</if>
+		<if test=" null != buyTotalMoney ">
+			and buy_total_money = #{buyTotalMoney}
+		</if>
+		<if test=" null != showIndex ">
+			and show_index = #{showIndex}
+		</if>
+		<if test=" null != isHaveProgress ">
+			and is_have_progress = #{isHaveProgress}
+		</if>
+		<if test=" null != isRedemption ">
+			and is_redemption = #{isRedemption}
+		</if>
+		<if test=" null != redemptionTime ">
+			and redemption_time = #{redemptionTime}
+		</if>
+		<if test=" null != assignmentTime ">
+			and assignment_time = #{assignmentTime}
+		</if>
+		<if test=" null != moneyType ">
+			and money_type = #{moneyType}
+		</if>
+		<if test=" null != riskControlType ">
+			and risk_control_type = #{riskControlType}
+		</if>
+		<if test=" null != riskLevel ">
+			and risk_level = #{riskLevel}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+		<if test=" null != creator and ''!= creator  ">
+			and creator = #{creator}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != updater and ''!= updater  ">
+			and updater = #{updater}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+		<if test=" null != remark and ''!= remark  ">
+			and remark = #{remark}
+		</if>
+		<if test=" null != productId and ''!= productId  ">
+			and product_id = #{productId}
+		</if>
+		<if test=" null != orgNumber and ''!= orgNumber  ">
+			and org_number = #{orgNumber}
+		</if>
+		<if test=" null != thirdProductId and ''!= thirdProductId  ">
+			and third_product_id = #{thirdProductId}
+		</if>
+		<if test=" null != isQuota ">
+			and is_quota = #{isQuota}
+		</if>
+		<if test=" null != detailOpenUrl and ''!= detailOpenUrl  ">
+			and detail_open_url = #{detailOpenUrl}
+		</if>
+		<if test=" null != detailOpenType ">
+			and detail_open_type = #{detailOpenType}
+		</if>
+		<if test=" null != buyIncreaseMoney ">
+			and buy_increase_money = #{buyIncreaseMoney}
+		</if>
+		<if test=" null != feeRatio ">
+			and fee_ratio = #{feeRatio}
+		</if>
+		<if test=" null != auditStatus ">
+			and audit_status = #{auditStatus}
+		</if>
+		<if test=" null != auditTime ">
+			and audit_time = #{auditTime}
+		</if>
+		<if test=" null != sourceWay ">
+			and source_way = #{sourceWay}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.eshop4j.web.model.CimProduct">
+		select <include refid="Base_Column_List" /> from tcim_product 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.eshop4j.web.model.CimProduct">
+		select <include refid="Base_Column_List" /> from tcim_product 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_product
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_product
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.eshop4j.web.model.CimProduct" >
+    INSERT INTO tcim_product
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != productName and ''!= productName  ">
+					product_name,
+				</if>
+			 	<if test=" null != productDesc and ''!= productDesc  ">
+					product_desc,
+				</if>
+			 	<if test=" null != productType ">
+					product_type,
+				</if>
+			 	<if test=" null != repaymentWay ">
+					repayment_way,
+				</if>
+			 	<if test=" null != saleStartTime ">
+					sale_start_time,
+				</if>
+			 	<if test=" null != saleEndTime ">
+					sale_end_time,
+				</if>
+			 	<if test=" null != isFlow ">
+					is_flow,
+				</if>
+			 	<if test=" null != flowMinRate ">
+					flow_min_rate,
+				</if>
+			 	<if test=" null != flowMaxRate ">
+					flow_max_rate,
+				</if>
+			 	<if test=" null != addRate ">
+					add_rate,
+				</if>
+			 	<if test=" null != platformCashback ">
+					platform_cashback,
+				</if>
+			 	<if test=" null != isFixedDeadline ">
+					is_fixed_deadline,
+				</if>
+			 	<if test=" null != deadLineMinValue ">
+					dead_line_min_value,
+				</if>
+			 	<if test=" null != deadLineMaxValue ">
+					dead_line_max_value,
+				</if>
+			 	<if test=" null != deadLineMinSelfDefined and ''!= deadLineMinSelfDefined  ">
+					dead_line_min_self_defined,
+				</if>
+			 	<if test=" null != deadLineMaxSelfDefined and ''!= deadLineMaxSelfDefined  ">
+					dead_line_max_self_defined,
+				</if>
+			 	<if test=" null != isCollect ">
+					is_collect,
+				</if>
+			 	<if test=" null != collectBeginTime ">
+					collect_begin_time,
+				</if>
+			 	<if test=" null != collectEndTime ">
+					collect_end_time,
+				</if>
+			 	<if test=" null != interestWay ">
+					interest_way,
+				</if>
+			 	<if test=" null != validBeginDate ">
+					valid_begin_date,
+				</if>
+			 	<if test=" null != validEndDate ">
+					valid_end_date,
+				</if>
+			 	<if test=" null != buyMinMoney ">
+					buy_min_money,
+				</if>
+			 	<if test=" null != buyMaxMoney ">
+					buy_max_money,
+				</if>
+			 	<if test=" null != buyTotalMoney ">
+					buy_total_money,
+				</if>
+			 	<if test=" null != showIndex ">
+					show_index,
+				</if>
+			 	<if test=" null != isHaveProgress ">
+					is_have_progress,
+				</if>
+			 	<if test=" null != isRedemption ">
+					is_redemption,
+				</if>
+			 	<if test=" null != redemptionTime ">
+					redemption_time,
+				</if>
+			 	<if test=" null != assignmentTime ">
+					assignment_time,
+				</if>
+			 	<if test=" null != moneyType ">
+					money_type,
+				</if>
+			 	<if test=" null != riskControlType ">
+					risk_control_type,
+				</if>
+			 	<if test=" null != riskLevel ">
+					risk_level,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != creator and ''!= creator  ">
+					creator,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updater and ''!= updater  ">
+					updater,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					org_number,
+				</if>
+			 	<if test=" null != thirdProductId and ''!= thirdProductId  ">
+					third_product_id,
+				</if>
+			 	<if test=" null != isQuota ">
+					is_quota,
+				</if>
+			 	<if test=" null != detailOpenUrl and ''!= detailOpenUrl  ">
+					detail_open_url,
+				</if>
+			 	<if test=" null != detailOpenType ">
+					detail_open_type,
+				</if>
+			 	<if test=" null != buyIncreaseMoney ">
+					buy_increase_money,
+				</if>
+			 	<if test=" null != feeRatio ">
+					fee_ratio,
+				</if>
+			 	<if test=" null != auditStatus ">
+					audit_status,
+				</if>
+			 	<if test=" null != auditTime ">
+					audit_time,
+				</if>
+			 	<if test=" null != sourceWay ">
+					source_way,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != productName and ''!= productName  ">
+					 	#{productName},
+				</if>
+			 	<if test=" null != productDesc and ''!= productDesc  ">
+					 	#{productDesc},
+				</if>
+			 	<if test=" null != productType ">
+					 	#{productType},
+				</if>
+			 	<if test=" null != repaymentWay ">
+					 	#{repaymentWay},
+				</if>
+			 	<if test=" null != saleStartTime ">
+					 	#{saleStartTime},
+				</if>
+			 	<if test=" null != saleEndTime ">
+					 	#{saleEndTime},
+				</if>
+			 	<if test=" null != isFlow ">
+					 	#{isFlow},
+				</if>
+			 	<if test=" null != flowMinRate ">
+					 	#{flowMinRate},
+				</if>
+			 	<if test=" null != flowMaxRate ">
+					 	#{flowMaxRate},
+				</if>
+			 	<if test=" null != addRate ">
+					 	#{addRate},
+				</if>
+			 	<if test=" null != platformCashback ">
+					 	#{platformCashback},
+				</if>
+			 	<if test=" null != isFixedDeadline ">
+					 	#{isFixedDeadline},
+				</if>
+			 	<if test=" null != deadLineMinValue ">
+					 	#{deadLineMinValue},
+				</if>
+			 	<if test=" null != deadLineMaxValue ">
+					 	#{deadLineMaxValue},
+				</if>
+			 	<if test=" null != deadLineMinSelfDefined and ''!= deadLineMinSelfDefined  ">
+					 	#{deadLineMinSelfDefined},
+				</if>
+			 	<if test=" null != deadLineMaxSelfDefined and ''!= deadLineMaxSelfDefined  ">
+					 	#{deadLineMaxSelfDefined},
+				</if>
+			 	<if test=" null != isCollect ">
+					 	#{isCollect},
+				</if>
+			 	<if test=" null != collectBeginTime ">
+					 	#{collectBeginTime},
+				</if>
+			 	<if test=" null != collectEndTime ">
+					 	#{collectEndTime},
+				</if>
+			 	<if test=" null != interestWay ">
+					 	#{interestWay},
+				</if>
+			 	<if test=" null != validBeginDate ">
+					 	#{validBeginDate},
+				</if>
+			 	<if test=" null != validEndDate ">
+					 	#{validEndDate},
+				</if>
+			 	<if test=" null != buyMinMoney ">
+					 	#{buyMinMoney},
+				</if>
+			 	<if test=" null != buyMaxMoney ">
+					 	#{buyMaxMoney},
+				</if>
+			 	<if test=" null != buyTotalMoney ">
+					 	#{buyTotalMoney},
+				</if>
+			 	<if test=" null != showIndex ">
+					 	#{showIndex},
+				</if>
+			 	<if test=" null != isHaveProgress ">
+					 	#{isHaveProgress},
+				</if>
+			 	<if test=" null != isRedemption ">
+					 	#{isRedemption},
+				</if>
+			 	<if test=" null != redemptionTime ">
+					 	#{redemptionTime},
+				</if>
+			 	<if test=" null != assignmentTime ">
+					 	#{assignmentTime},
+				</if>
+			 	<if test=" null != moneyType ">
+					 	#{moneyType},
+				</if>
+			 	<if test=" null != riskControlType ">
+					 	#{riskControlType},
+				</if>
+			 	<if test=" null != riskLevel ">
+					 	#{riskLevel},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != creator and ''!= creator  ">
+					 	#{creator},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updater and ''!= updater  ">
+					 	#{updater},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					 	#{orgNumber},
+				</if>
+			 	<if test=" null != thirdProductId and ''!= thirdProductId  ">
+					 	#{thirdProductId},
+				</if>
+			 	<if test=" null != isQuota ">
+					 	#{isQuota},
+				</if>
+			 	<if test=" null != detailOpenUrl and ''!= detailOpenUrl  ">
+					 	#{detailOpenUrl},
+				</if>
+			 	<if test=" null != detailOpenType ">
+					 	#{detailOpenType},
+				</if>
+			 	<if test=" null != buyIncreaseMoney ">
+					 	#{buyIncreaseMoney},
+				</if>
+			 	<if test=" null != feeRatio ">
+					 	#{feeRatio},
+				</if>
+			 	<if test=" null != auditStatus ">
+					 	#{auditStatus},
+				</if>
+			 	<if test=" null != auditTime ">
+					 	#{auditTime},
+				</if>
+			 	<if test=" null != sourceWay ">
+					 	#{sourceWay},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.eshop4j.web.model.CimProduct" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcim_product
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != productName and ''!= productName  ">
+					product_name,
+				</if>
+			 	<if test=" null != productDesc and ''!= productDesc  ">
+					product_desc,
+				</if>
+			 	<if test=" null != productType ">
+					product_type,
+				</if>
+			 	<if test=" null != repaymentWay ">
+					repayment_way,
+				</if>
+			 	<if test=" null != saleStartTime ">
+					sale_start_time,
+				</if>
+			 	<if test=" null != saleEndTime ">
+					sale_end_time,
+				</if>
+			 	<if test=" null != isFlow ">
+					is_flow,
+				</if>
+			 	<if test=" null != flowMinRate ">
+					flow_min_rate,
+				</if>
+			 	<if test=" null != flowMaxRate ">
+					flow_max_rate,
+				</if>
+			 	<if test=" null != addRate ">
+					add_rate,
+				</if>
+			 	<if test=" null != platformCashback ">
+					platform_cashback,
+				</if>
+			 	<if test=" null != isFixedDeadline ">
+					is_fixed_deadline,
+				</if>
+			 	<if test=" null != deadLineMinValue ">
+					dead_line_min_value,
+				</if>
+			 	<if test=" null != deadLineMaxValue ">
+					dead_line_max_value,
+				</if>
+			 	<if test=" null != deadLineMinSelfDefined and ''!= deadLineMinSelfDefined  ">
+					dead_line_min_self_defined,
+				</if>
+			 	<if test=" null != deadLineMaxSelfDefined and ''!= deadLineMaxSelfDefined  ">
+					dead_line_max_self_defined,
+				</if>
+			 	<if test=" null != isCollect ">
+					is_collect,
+				</if>
+			 	<if test=" null != collectBeginTime ">
+					collect_begin_time,
+				</if>
+			 	<if test=" null != collectEndTime ">
+					collect_end_time,
+				</if>
+			 	<if test=" null != interestWay ">
+					interest_way,
+				</if>
+			 	<if test=" null != validBeginDate ">
+					valid_begin_date,
+				</if>
+			 	<if test=" null != validEndDate ">
+					valid_end_date,
+				</if>
+			 	<if test=" null != buyMinMoney ">
+					buy_min_money,
+				</if>
+			 	<if test=" null != buyMaxMoney ">
+					buy_max_money,
+				</if>
+			 	<if test=" null != buyTotalMoney ">
+					buy_total_money,
+				</if>
+			 	<if test=" null != showIndex ">
+					show_index,
+				</if>
+			 	<if test=" null != isHaveProgress ">
+					is_have_progress,
+				</if>
+			 	<if test=" null != isRedemption ">
+					is_redemption,
+				</if>
+			 	<if test=" null != redemptionTime ">
+					redemption_time,
+				</if>
+			 	<if test=" null != assignmentTime ">
+					assignment_time,
+				</if>
+			 	<if test=" null != moneyType ">
+					money_type,
+				</if>
+			 	<if test=" null != riskControlType ">
+					risk_control_type,
+				</if>
+			 	<if test=" null != riskLevel ">
+					risk_level,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != creator and ''!= creator  ">
+					creator,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updater and ''!= updater  ">
+					updater,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					remark,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					org_number,
+				</if>
+			 	<if test=" null != thirdProductId and ''!= thirdProductId  ">
+					third_product_id,
+				</if>
+			 	<if test=" null != isQuota ">
+					is_quota,
+				</if>
+			 	<if test=" null != detailOpenUrl and ''!= detailOpenUrl  ">
+					detail_open_url,
+				</if>
+			 	<if test=" null != detailOpenType ">
+					detail_open_type,
+				</if>
+			 	<if test=" null != buyIncreaseMoney ">
+					buy_increase_money,
+				</if>
+			 	<if test=" null != feeRatio ">
+					fee_ratio,
+				</if>
+			 	<if test=" null != auditStatus ">
+					audit_status,
+				</if>
+			 	<if test=" null != auditTime ">
+					audit_time,
+				</if>
+			 	<if test=" null != sourceWay ">
+					source_way,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != productName and ''!= productName  ">
+					 	#{productName},
+				</if>
+			 	<if test=" null != productDesc and ''!= productDesc  ">
+					 	#{productDesc},
+				</if>
+			 	<if test=" null != productType ">
+					 	#{productType},
+				</if>
+			 	<if test=" null != repaymentWay ">
+					 	#{repaymentWay},
+				</if>
+			 	<if test=" null != saleStartTime ">
+					 	#{saleStartTime},
+				</if>
+			 	<if test=" null != saleEndTime ">
+					 	#{saleEndTime},
+				</if>
+			 	<if test=" null != isFlow ">
+					 	#{isFlow},
+				</if>
+			 	<if test=" null != flowMinRate ">
+					 	#{flowMinRate},
+				</if>
+			 	<if test=" null != flowMaxRate ">
+					 	#{flowMaxRate},
+				</if>
+			 	<if test=" null != addRate ">
+					 	#{addRate},
+				</if>
+			 	<if test=" null != platformCashback ">
+					 	#{platformCashback},
+				</if>
+			 	<if test=" null != isFixedDeadline ">
+					 	#{isFixedDeadline},
+				</if>
+			 	<if test=" null != deadLineMinValue ">
+					 	#{deadLineMinValue},
+				</if>
+			 	<if test=" null != deadLineMaxValue ">
+					 	#{deadLineMaxValue},
+				</if>
+			 	<if test=" null != deadLineMinSelfDefined and ''!= deadLineMinSelfDefined  ">
+					 	#{deadLineMinSelfDefined},
+				</if>
+			 	<if test=" null != deadLineMaxSelfDefined and ''!= deadLineMaxSelfDefined  ">
+					 	#{deadLineMaxSelfDefined},
+				</if>
+			 	<if test=" null != isCollect ">
+					 	#{isCollect},
+				</if>
+			 	<if test=" null != collectBeginTime ">
+					 	#{collectBeginTime},
+				</if>
+			 	<if test=" null != collectEndTime ">
+					 	#{collectEndTime},
+				</if>
+			 	<if test=" null != interestWay ">
+					 	#{interestWay},
+				</if>
+			 	<if test=" null != validBeginDate ">
+					 	#{validBeginDate},
+				</if>
+			 	<if test=" null != validEndDate ">
+					 	#{validEndDate},
+				</if>
+			 	<if test=" null != buyMinMoney ">
+					 	#{buyMinMoney},
+				</if>
+			 	<if test=" null != buyMaxMoney ">
+					 	#{buyMaxMoney},
+				</if>
+			 	<if test=" null != buyTotalMoney ">
+					 	#{buyTotalMoney},
+				</if>
+			 	<if test=" null != showIndex ">
+					 	#{showIndex},
+				</if>
+			 	<if test=" null != isHaveProgress ">
+					 	#{isHaveProgress},
+				</if>
+			 	<if test=" null != isRedemption ">
+					 	#{isRedemption},
+				</if>
+			 	<if test=" null != redemptionTime ">
+					 	#{redemptionTime},
+				</if>
+			 	<if test=" null != assignmentTime ">
+					 	#{assignmentTime},
+				</if>
+			 	<if test=" null != moneyType ">
+					 	#{moneyType},
+				</if>
+			 	<if test=" null != riskControlType ">
+					 	#{riskControlType},
+				</if>
+			 	<if test=" null != riskLevel ">
+					 	#{riskLevel},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != creator and ''!= creator  ">
+					 	#{creator},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updater and ''!= updater  ">
+					 	#{updater},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+			 	<if test=" null != remark and ''!= remark  ">
+					 	#{remark},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != orgNumber and ''!= orgNumber  ">
+					 	#{orgNumber},
+				</if>
+			 	<if test=" null != thirdProductId and ''!= thirdProductId  ">
+					 	#{thirdProductId},
+				</if>
+			 	<if test=" null != isQuota ">
+					 	#{isQuota},
+				</if>
+			 	<if test=" null != detailOpenUrl and ''!= detailOpenUrl  ">
+					 	#{detailOpenUrl},
+				</if>
+			 	<if test=" null != detailOpenType ">
+					 	#{detailOpenType},
+				</if>
+			 	<if test=" null != buyIncreaseMoney ">
+					 	#{buyIncreaseMoney},
+				</if>
+			 	<if test=" null != feeRatio ">
+					 	#{feeRatio},
+				</if>
+			 	<if test=" null != auditStatus ">
+					 	#{auditStatus},
+				</if>
+			 	<if test=" null != auditTime ">
+					 	#{auditTime},
+				</if>
+			 	<if test=" null != sourceWay ">
+					 	#{sourceWay},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.eshop4j.web.model.CimProduct" >
+  		UPDATE tcim_product
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != productName and ''!= productName  ">
+						product_name = #{productName},
+					</if>
+					<if test=" null != productDesc and ''!= productDesc  ">
+						product_desc = #{productDesc},
+					</if>
+					<if test=" null != productType ">
+						product_type = #{productType},
+					</if>
+					<if test=" null != repaymentWay ">
+						repayment_way = #{repaymentWay},
+					</if>
+					<if test=" null != saleStartTime ">
+						sale_start_time = #{saleStartTime},
+					</if>
+					<if test=" null != saleEndTime ">
+						sale_end_time = #{saleEndTime},
+					</if>
+					<if test=" null != isFlow ">
+						is_flow = #{isFlow},
+					</if>
+					<if test=" null != flowMinRate ">
+						flow_min_rate = #{flowMinRate},
+					</if>
+					<if test=" null != flowMaxRate ">
+						flow_max_rate = #{flowMaxRate},
+					</if>
+					<if test=" null != addRate ">
+						add_rate = #{addRate},
+					</if>
+					<if test=" null != platformCashback ">
+						platform_cashback = #{platformCashback},
+					</if>
+					<if test=" null != isFixedDeadline ">
+						is_fixed_deadline = #{isFixedDeadline},
+					</if>
+					<if test=" null != deadLineMinValue ">
+						dead_line_min_value = #{deadLineMinValue},
+					</if>
+					<if test=" null != deadLineMaxValue ">
+						dead_line_max_value = #{deadLineMaxValue},
+					</if>
+					<if test=" null != deadLineMinSelfDefined and ''!= deadLineMinSelfDefined  ">
+						dead_line_min_self_defined = #{deadLineMinSelfDefined},
+					</if>
+					<if test=" null != deadLineMaxSelfDefined and ''!= deadLineMaxSelfDefined  ">
+						dead_line_max_self_defined = #{deadLineMaxSelfDefined},
+					</if>
+					<if test=" null != isCollect ">
+						is_collect = #{isCollect},
+					</if>
+					<if test=" null != collectBeginTime ">
+						collect_begin_time = #{collectBeginTime},
+					</if>
+					<if test=" null != collectEndTime ">
+						collect_end_time = #{collectEndTime},
+					</if>
+					<if test=" null != interestWay ">
+						interest_way = #{interestWay},
+					</if>
+					<if test=" null != validBeginDate ">
+						valid_begin_date = #{validBeginDate},
+					</if>
+					<if test=" null != validEndDate ">
+						valid_end_date = #{validEndDate},
+					</if>
+					<if test=" null != buyMinMoney ">
+						buy_min_money = #{buyMinMoney},
+					</if>
+					<if test=" null != buyMaxMoney ">
+						buy_max_money = #{buyMaxMoney},
+					</if>
+					<if test=" null != buyTotalMoney ">
+						buy_total_money = #{buyTotalMoney},
+					</if>
+					<if test=" null != showIndex ">
+						show_index = #{showIndex},
+					</if>
+					<if test=" null != isHaveProgress ">
+						is_have_progress = #{isHaveProgress},
+					</if>
+					<if test=" null != isRedemption ">
+						is_redemption = #{isRedemption},
+					</if>
+					<if test=" null != redemptionTime ">
+						redemption_time = #{redemptionTime},
+					</if>
+					<if test=" null != assignmentTime ">
+						assignment_time = #{assignmentTime},
+					</if>
+					<if test=" null != moneyType ">
+						money_type = #{moneyType},
+					</if>
+					<if test=" null != riskControlType ">
+						risk_control_type = #{riskControlType},
+					</if>
+					<if test=" null != riskLevel ">
+						risk_level = #{riskLevel},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != creator and ''!= creator  ">
+						creator = #{creator},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updater and ''!= updater  ">
+						updater = #{updater},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != orgNumber and ''!= orgNumber  ">
+						org_number = #{orgNumber},
+					</if>
+					<if test=" null != thirdProductId and ''!= thirdProductId  ">
+						third_product_id = #{thirdProductId},
+					</if>
+					<if test=" null != isQuota ">
+						is_quota = #{isQuota},
+					</if>
+					<if test=" null != detailOpenUrl and ''!= detailOpenUrl  ">
+						detail_open_url = #{detailOpenUrl},
+					</if>
+					<if test=" null != detailOpenType ">
+						detail_open_type = #{detailOpenType},
+					</if>
+					<if test=" null != buyIncreaseMoney ">
+						buy_increase_money = #{buyIncreaseMoney},
+					</if>
+					<if test=" null != feeRatio ">
+						fee_ratio = #{feeRatio},
+					</if>
+					<if test=" null != auditStatus ">
+						audit_status = #{auditStatus},
+					</if>
+					<if test=" null != auditTime ">
+						audit_time = #{auditTime},
+					</if>
+					<if test=" null != sourceWay ">
+						source_way = #{sourceWay},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.eshop4j.web.model.CimProduct" >
+	    UPDATE tcim_product
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != productName and ''!= productName  ">
+						product_name = #{productName},
+					</if>
+					<if test=" null != productDesc and ''!= productDesc  ">
+						product_desc = #{productDesc},
+					</if>
+					<if test=" null != productType ">
+						product_type = #{productType},
+					</if>
+					<if test=" null != repaymentWay ">
+						repayment_way = #{repaymentWay},
+					</if>
+					<if test=" null != saleStartTime ">
+						sale_start_time = #{saleStartTime},
+					</if>
+					<if test=" null != saleEndTime ">
+						sale_end_time = #{saleEndTime},
+					</if>
+					<if test=" null != isFlow ">
+						is_flow = #{isFlow},
+					</if>
+					<if test=" null != flowMinRate ">
+						flow_min_rate = #{flowMinRate},
+					</if>
+					<if test=" null != flowMaxRate ">
+						flow_max_rate = #{flowMaxRate},
+					</if>
+					<if test=" null != addRate ">
+						add_rate = #{addRate},
+					</if>
+					<if test=" null != platformCashback ">
+						platform_cashback = #{platformCashback},
+					</if>
+					<if test=" null != isFixedDeadline ">
+						is_fixed_deadline = #{isFixedDeadline},
+					</if>
+					<if test=" null != deadLineMinValue ">
+						dead_line_min_value = #{deadLineMinValue},
+					</if>
+					<if test=" null != deadLineMaxValue ">
+						dead_line_max_value = #{deadLineMaxValue},
+					</if>
+					<if test=" null != deadLineMinSelfDefined and ''!= deadLineMinSelfDefined  ">
+						dead_line_min_self_defined = #{deadLineMinSelfDefined},
+					</if>
+					<if test=" null != deadLineMaxSelfDefined and ''!= deadLineMaxSelfDefined  ">
+						dead_line_max_self_defined = #{deadLineMaxSelfDefined},
+					</if>
+					<if test=" null != isCollect ">
+						is_collect = #{isCollect},
+					</if>
+					<if test=" null != collectBeginTime ">
+						collect_begin_time = #{collectBeginTime},
+					</if>
+					<if test=" null != collectEndTime ">
+						collect_end_time = #{collectEndTime},
+					</if>
+					<if test=" null != interestWay ">
+						interest_way = #{interestWay},
+					</if>
+					<if test=" null != validBeginDate ">
+						valid_begin_date = #{validBeginDate},
+					</if>
+					<if test=" null != validEndDate ">
+						valid_end_date = #{validEndDate},
+					</if>
+					<if test=" null != buyMinMoney ">
+						buy_min_money = #{buyMinMoney},
+					</if>
+					<if test=" null != buyMaxMoney ">
+						buy_max_money = #{buyMaxMoney},
+					</if>
+					<if test=" null != buyTotalMoney ">
+						buy_total_money = #{buyTotalMoney},
+					</if>
+					<if test=" null != showIndex ">
+						show_index = #{showIndex},
+					</if>
+					<if test=" null != isHaveProgress ">
+						is_have_progress = #{isHaveProgress},
+					</if>
+					<if test=" null != isRedemption ">
+						is_redemption = #{isRedemption},
+					</if>
+					<if test=" null != redemptionTime ">
+						redemption_time = #{redemptionTime},
+					</if>
+					<if test=" null != assignmentTime ">
+						assignment_time = #{assignmentTime},
+					</if>
+					<if test=" null != moneyType ">
+						money_type = #{moneyType},
+					</if>
+					<if test=" null != riskControlType ">
+						risk_control_type = #{riskControlType},
+					</if>
+					<if test=" null != riskLevel ">
+						risk_level = #{riskLevel},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != creator and ''!= creator  ">
+						creator = #{creator},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updater and ''!= updater  ">
+						updater = #{updater},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+					<if test=" null != remark and ''!= remark  ">
+						remark = #{remark},
+					</if>
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != orgNumber and ''!= orgNumber  ">
+						org_number = #{orgNumber},
+					</if>
+					<if test=" null != thirdProductId and ''!= thirdProductId  ">
+						third_product_id = #{thirdProductId},
+					</if>
+					<if test=" null != isQuota ">
+						is_quota = #{isQuota},
+					</if>
+					<if test=" null != detailOpenUrl and ''!= detailOpenUrl  ">
+						detail_open_url = #{detailOpenUrl},
+					</if>
+					<if test=" null != detailOpenType ">
+						detail_open_type = #{detailOpenType},
+					</if>
+					<if test=" null != buyIncreaseMoney ">
+						buy_increase_money = #{buyIncreaseMoney},
+					</if>
+					<if test=" null != feeRatio ">
+						fee_ratio = #{feeRatio},
+					</if>
+					<if test=" null != auditStatus ">
+						audit_status = #{auditStatus},
+					</if>
+					<if test=" null != auditTime ">
+						audit_time = #{auditTime},
+					</if>
+					<if test=" null != sourceWay ">
+						source_way = #{sourceWay},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.eshop4j.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcim_product
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+    
+    <!-- 查询热门产品 -->
+    <select id="queryHotProduct" parameterType="com.eshop4j.api.request.cim.HotProductRequest" resultType="com.eshop4j.api.response.cim.ProductPageListResponse">
+		SELECT
+			<choose>
+				<when test="appKind == 'channel'">
+						COUNT(tpr.id) AS cfpRecommend,
+				</when>
+			</choose>
+			temp.*,
+			tc.config_value AS productDetailUrl
+		FROM
+			(
+				SELECT									<!-- #查询热门产品列表 -->
+					tp.flow_max_rate AS flowMaxRate,
+					tp.flow_min_rate AS flowMinRate,
+					tp.is_flow AS isFlow,
+					tp.product_id AS productId,
+					tp.product_name AS productName,
+					tp. STATUS AS STATUS,
+					tp.org_number AS orgNumber,
+					tp.third_product_id AS thirdProductId,
+					tp.buy_total_money AS buyTotalMoney,
+					tp.buy_min_money AS buyMinMoney,
+					tp.buy_max_money AS buyMaxMoney,
+					tp.is_quota AS isQuota,
+					tp.fee_ratio AS feeRatio,
+					tp.is_redemption AS isRedemption,
+					tp.redemption_time AS redemptionTime,
+					tp.assignment_time AS assignmentTime,
+					tp.is_fixed_deadline AS isFixedDeadline,
+					tp.dead_line_min_value AS deadLineMinValue,
+					tp.dead_line_max_value AS deadLineMaxValue,
+					tp.dead_line_min_self_defined AS deadLineMinSelfDefined,
+					tp.dead_line_max_self_defined AS deadLineMaxSelfDefined,
+					tp.is_collect AS isCollect,
+					tp.collect_begin_time AS collectBeginTime,
+					tp.collect_end_time AS collectEndTime,
+					tp.add_rate AS addRate,
+					tp.platform_cashback AS platformCashback,
+					tp.is_have_progress AS isHaveProgress,
+					tp.sale_start_time AS saleStartTime,
+					toi.platformlist_ico AS productLogo,
+					toi.org_isstaticproduct AS orgIsstaticproduct,
+					toi.grade AS grade,
+					tps.buyed_total_money AS buyedTotalMoney,
+					tps.buyed_total_people AS buyedTotalPeople,
+					toi.org_fee_type AS orgFeeType,
+					tp.show_index AS showIndex,
+					tp.create_time AS createTime,
+					toi. NAME AS orgName,
+					toi.org_amount_limit AS orgAmountLimit,
+					tpic.sort AS hotSort,			<!-- #合并结果热门产品排在最前面 -->
+					1 AS orderByIndex
+				FROM
+					tcim_product tp,
+					tcim_product_info_cate tpic,
+					tcim_product_cate tpc,
+					tcim_product_statistics tps,
+					tcim_org_info toi
+				WHERE
+					tp.product_id = tpic.product_id
+				AND tpic.cate_id = tpc.cate_id
+				AND tpc.cate_name = '热门产品'
+				AND tpc.disabled = 0
+				AND tp.product_id = tps.product_id
+				AND toi.org_number = tp.org_number
+				AND toi. STATUS = 1
+				<if test=" ifHaveGray == false "> <!-- 增加灰度权限管控-->
+					AND toi.org_gray_status = 0
+				</if>				
+				AND tp. STATUS = 1
+				AND tp.audit_status = 1
+			UNION
+				SELECT								<!-- #销售量低于80%的自动加入热门产品列表 -->
+					tp.flow_max_rate AS flowMaxRate,
+					tp.flow_min_rate AS flowMinRate,
+					tp.is_flow AS isFlow,
+					tp.product_id AS productId,
+					tp.product_name AS productName,
+					tp. STATUS AS STATUS,
+					tp.org_number AS orgNumber,
+					tp.third_product_id AS thirdProductId,
+					tp.buy_total_money AS buyTotalMoney,
+					tp.buy_min_money AS buyMinMoney,
+					tp.buy_max_money AS buyMaxMoney,
+					tp.is_quota AS isQuota,
+					tp.fee_ratio AS feeRatio,
+					tp.is_redemption AS isRedemption,
+					tp.redemption_time AS redemptionTime,
+					tp.assignment_time AS assignmentTime,
+					tp.is_fixed_deadline AS isFixedDeadline,
+					tp.dead_line_min_value AS deadLineMinValue,
+					tp.dead_line_max_value AS deadLineMaxValue,
+					tp.dead_line_min_self_defined AS deadLineMinSelfDefined,
+					tp.dead_line_max_self_defined AS deadLineMaxSelfDefined,
+					tp.is_collect AS isCollect,
+					tp.collect_begin_time AS collectBeginTime,
+					tp.collect_end_time AS collectEndTime,
+					tp.add_rate AS addRate,
+					tp.platform_cashback AS platformCashback,
+					tp.is_have_progress AS isHaveProgress,
+					tp.sale_start_time AS saleStartTime,
+					toi.platformlist_ico AS productLogo,
+					toi.org_isstaticproduct AS orgIsstaticproduct,
+					toi.grade AS grade,
+					tps.buyed_total_money AS buyedTotalMoney,
+					tps.buyed_total_people AS buyedTotalPeople,
+					toi.org_fee_type AS orgFeeType,
+					tp.show_index AS showIndex,
+					tp.create_time AS createTime,
+					toi. NAME AS orgName,
+					toi.org_amount_limit AS orgAmountLimit,
+					0 AS hotSort,					<!-- #合并结果用于热门排序 -->
+					0 AS orderByIndex
+				FROM
+					tcim_product tp,
+					tcim_product_statistics tps,
+					tcim_org_info toi
+				WHERE
+					tp.product_id = tps.product_id
+				AND toi.org_number = tp.org_number
+				AND toi.STATUS = 1
+				<if test=" ifHaveGray == false "> <!-- 增加灰度权限管控-->
+					AND toi.org_gray_status = 0
+				</if>
+				AND tp.buy_total_money <![CDATA[ > ]]> tps.buyed_total_money
+				AND tp. STATUS = 1
+				AND tp.audit_status = 1
+				AND tps.buyed_total_money / tp.buy_total_money <![CDATA[ <= ]]> 0.8   <!-- #高于80%自动从热门产品列表移除 -->
+			) temp
+		<choose>
+			<when test="appKind == 'channel'">
+				LEFT JOIN tsys_config tc ON tc.app_type = 1
+					AND tc.config_type = 'product_config'
+					AND tc.config_key = 'productDetailUrl_channel'			
+				LEFT JOIN tcim_product_ref tpr ON tpr.sale_user_id = #{userId,jdbcType=VARCHAR}
+					AND tpr.product_id = temp.productId
+			</when>
+			<otherwise>
+				LEFT JOIN tsys_config tc ON tc.app_type = 2
+					AND tc.config_type = 'product_config'
+					AND tc.config_key = 'productDetailUrl_investor'
+			</otherwise>
+		</choose>
+		<if test=" null != orgNumber and ''!= orgNumber  ">
+			where temp.orgNumber = #{orgNumber,jdbcType=VARCHAR}
+		</if>
+		GROUP BY
+			temp.productId	<!-- #根据productId去掉合并后重复的记录-->
+		ORDER BY
+			temp.orderByIndex DESC,
+			temp.hotSort DESC,
+			temp.showIndex DESC,
+			temp.createTime DESC    
+    </select>
+    
+     <!-- 产品列表返回基本对象  包含[查询产品列表  所有产品] [根据产品分类表查询产品分类列表 ] [扩展产品分类信息查询产品分类列表  翻页] [查询理财师推荐产品列表 ]必需的表有【tcim_product,tcim_product_statistics,tcim_org_info】 -->
+	  <sql id="Base_Column_List_ProductPageListResponse">
+	    <trim suffixOverrides=",">
+			tp.flow_max_rate AS flowMaxRate,
+			tp.flow_min_rate AS flowMinRate,
+			tp.is_flow AS isFlow,
+			tp.product_id AS productId,
+			tp.product_name AS productName,
+			tp.status AS status,
+			tp.org_number AS orgNumber,
+			tp.third_product_id AS thirdProductId,
+			tp.buy_total_money AS buyTotalMoney,
+			tp.buy_min_money AS buyMinMoney,
+			tp.buy_max_money AS buyMaxMoney,
+			tp.is_quota AS isQuota,
+			tp.fee_ratio AS feeRatio,
+			tp.is_redemption AS isRedemption,
+			tp.redemption_time AS redemptionTime,
+			tp.assignment_time AS assignmentTime,
+			tp.is_fixed_deadline AS isFixedDeadline,
+			tp.dead_line_min_value AS deadLineMinValue,
+			tp.dead_line_max_value AS deadLineMaxValue,
+			tp.dead_line_min_self_defined AS deadLineMinSelfDefined,
+			tp.dead_line_max_self_defined AS deadLineMaxSelfDefined,
+			tp.is_collect AS isCollect,
+			tp.collect_begin_time AS collectBeginTime,
+			tp.collect_end_time AS collectEndTime,
+			tp.add_rate AS addRate,
+			tp.platform_cashback AS platformCashback,
+			tp.is_have_progress AS isHaveProgress,
+			tp.sale_start_time AS saleStartTime,
+			toi.platformlist_ico AS productLogo,
+			toi.org_isstaticproduct AS orgIsstaticproduct,
+			toi.org_amount_limit AS orgAmountLimit,
+			toi.grade AS grade,
+			toi.org_joint_type AS orgJointType,
+			<choose>
+				<when test="appKind == 'investor'">
+					(
+					  SELECT
+							tc.config_value
+						FROM
+							tsys_config tc
+						WHERE
+							tc.config_type = 'product_config'
+						AND tc.config_key = 'productDetailUrl_investor'
+						AND tc.app_type = 2
+					) AS productDetailUrl,	
+				</when>
+				<otherwise>
+					(
+					  SELECT
+							tc.config_value
+						FROM
+							tsys_config tc
+						WHERE
+							tc.config_type = 'product_config'
+						AND tc.config_key = 'productDetailUrl_channel'
+						AND tc.app_type = 1
+					) AS productDetailUrl,
+				</otherwise>
+			</choose>
+			tps.buyed_total_money AS buyedTotalMoney,
+			tps.buyed_total_people AS buyedTotalPeople,
+			toi.org_fee_type AS orgFeeType,
+			toi.name AS orgName,
+			case when tp.sale_start_time <![CDATA[ < ]]> NOW() THEN 1 ELSE 0 END isSalling
+	    </trim>
+	  </sql>
+      
+    <!-- 查询产品列表  所有产品-->
+    <select id="queryProductPageList" parameterType="com.eshop4j.api.request.cim.ProductPageListRequest" resultType="com.eshop4j.api.response.cim.ProductPageListResponse">
+    	SELECT
+   			<choose>
+				<when test="appKind == 'channel'">
+			       (
+						SELECT
+							count(*)
+						FROM
+							tcim_product_ref tpr
+						WHERE
+							tpr.sale_user_id = tc.user_id
+						AND tpr.product_id = tp.product_id
+					) AS cfpRecommend,				
+				</when>
+			</choose>
+			<include refid="Base_Column_List_ProductPageListResponse" />
+		FROM
+			<choose>
+				<when test="appKind == 'channel'">
+						tcrm_cfplanner tc,
+				</when>
+			</choose>
+			tcim_product tp,
+			tcim_product_statistics tps,
+			tcim_org_info toi
+		WHERE
+			tp.product_id = tps.product_id
+		AND toi.org_number = tp.org_number
+		AND toi.status = 1
+		<if test=" ifHaveGray == false "> <!-- 增加灰度权限管控-->
+			AND toi.org_gray_status = 0
+		</if>
+		AND tp.buy_total_money <![CDATA[ > ]]> tps.buyed_total_money
+		AND tp.status = 1
+		AND tp.audit_status = 1
+		<choose>
+			<when test="appKind == 'channel'">
+					AND tc.user_id = #{userId,jdbcType=VARCHAR}
+			</when>
+		</choose>		
+		<if test=" null != orgNumber and ''!= orgNumber  ">
+			AND toi.org_number = #{orgNumber,jdbcType=VARCHAR}
+		</if>
+		ORDER BY isSalling DESC
+		<if test=" null != sort and  null != order"> 
+			<if test="sort ==  1">
+				,tp.show_index
+			</if>
+			<if test="sort ==  2 and order ==  0">
+				,tp.flow_min_rate
+			</if>
+			<if test="sort ==  2 and order ==  1">
+				,tp.flow_max_rate
+			</if>
+			<if test="sort ==  3 and order ==  0">
+				,tp.dead_line_min_value
+			</if>
+			<if test="sort ==  3 and order ==  1">
+				,tp.dead_line_max_value
+			</if>
+			<if test="sort ==  4">
+				,tp.fee_ratio
+			</if>			
+			<if test="order ==  0">
+				ASC
+			</if>
+			<if test="order ==  1">
+				DESC
+			</if>
+			,tp.create_time DESC
+		</if>
+    </select>
+    
+    <!-- 根据产品分类表查询产品分类列表 -->
+    <select id="queryProductCatePageList" parameterType="com.eshop4j.api.request.cim.ProductPageListClassifyRequest" resultType="com.eshop4j.api.response.cim.ProductPageListResponse">
+    	SELECT
+   			<choose>
+				<when test="appKind == 'channel'">
+			       (
+						SELECT
+							count(*)
+						FROM
+							tcim_product_ref tpr
+						WHERE
+							tpr.sale_user_id = tc.user_id
+						AND tpr.product_id = tp.product_id
+					) AS cfpRecommend,				
+				</when>
+			</choose>
+			<include refid="Base_Column_List_ProductPageListResponse" />		
+		FROM
+			<choose>
+				<when test="appKind == 'channel'">
+						tcrm_cfplanner tc,
+				</when>
+			</choose>
+			tcim_product tp,
+			tcim_product_statistics tps,
+			tcim_product_info_cate tpic,
+			tcim_product_cate tpc,			
+			tcim_org_info toi
+		WHERE
+			tp.product_id = tpic.product_id
+		AND tpic.cate_id = tpc.cate_id
+		<if test="null != cateId"> 		<!-- 根据产品标签进行产品分类 -->
+			AND tpc.cate_id = #{cateId,jdbcType=INTEGER}
+		</if>
+		AND tpc.disabled = 0		
+		AND	tp.product_id = tps.product_id
+		AND toi.org_number = tp.org_number
+		AND toi.status = 1
+		<if test=" ifHaveGray == false "> <!-- 增加灰度权限管控-->
+			AND toi.org_gray_status = 0
+		</if>	
+		AND tp.buy_total_money <![CDATA[ > ]]> tps.buyed_total_money	
+		AND tp.status = 1
+		AND tp.audit_status = 1
+		<choose>
+			<when test="appKind == 'channel'">
+					AND tc.user_id = #{userId,jdbcType=VARCHAR}
+			</when>
+		</choose>		
+		<if test=" null != orgNumber and ''!= orgNumber  ">
+			AND toi.org_number = #{orgNumber,jdbcType=VARCHAR}
+		</if>
+		ORDER BY isSalling DESC
+		<if test=" null != sort and  null != order">
+			,tpic.sort DESC,
+			<if test="sort ==  1">
+				tp.show_index
+			</if>
+			<if test="sort ==  2 and order ==  0">
+				tp.flow_min_rate
+			</if>
+			<if test="sort ==  2 and order ==  1">
+				tp.flow_max_rate
+			</if>
+			<if test="sort ==  3 and order ==  0">
+				tp.dead_line_min_value
+			</if>
+			<if test="sort ==  3 and order ==  1">
+				tp.dead_line_max_value
+			</if>
+			<if test="sort ==  4">
+				tp.fee_ratio
+			</if>			
+			<if test="order ==  0">
+				ASC
+			</if>
+			<if test="order ==  1">
+				DESC
+			</if>
+			,tp.create_time DESC
+		</if>
+    </select>
+    
+    <!-- 扩展产品分类信息查询产品分类列表  翻页 -->
+    <!--cateId  901-首投标   902-复投标 -->
+    <select id="queryProductCateExtendsPageList" parameterType="com.eshop4j.api.request.cim.ProductPageListClassifyRequest" resultType="com.eshop4j.api.response.cim.ProductPageListResponse">
+    	SELECT
+   			<choose>
+				<when test="appKind == 'channel'">
+			       (
+						SELECT
+							count(*)
+						FROM
+							tcim_product_ref tpr
+						WHERE
+							tpr.sale_user_id = tc.user_id
+						AND tpr.product_id = tp.product_id
+					) AS cfpRecommend,				
+				</when>
+			</choose>
+			<include refid="Base_Column_List_ProductPageListResponse" />
+		FROM
+			<choose>
+				<when test="appKind == 'channel'">
+						tcrm_cfplanner tc,
+				</when>
+			</choose>
+			tcim_product tp,
+			tcim_product_statistics tps,
+			tcim_org_info toi
+		WHERE
+			tp.product_id = tps.product_id
+		AND toi.org_number = tp.org_number
+		AND toi.status = 1
+		<if test=" ifHaveGray == false "> <!-- 增加灰度权限管控-->
+			AND toi.org_gray_status = 0
+		</if>	
+		AND tp.buy_total_money <![CDATA[ > ]]> tps.buyed_total_money	
+		AND tp.status = 1
+		AND tp.audit_status = 1
+		<if test="cateId  == 901">		<!-- 扩展产品分类标签   901-首投标   902-复投标 -->
+			AND toi.org_fee_type = 1
+		</if>
+		<if test="cateId  == 902">
+			AND toi.org_fee_type = 2
+		</if>
+		<choose>
+			<when test="appKind == 'channel'">
+					AND tc.user_id = #{userId,jdbcType=VARCHAR}
+			</when>
+		</choose>		
+		<if test=" null != orgNumber and ''!= orgNumber  ">
+			AND toi.org_number = #{orgNumber,jdbcType=VARCHAR}
+		</if>
+		ORDER BY isSalling DESC
+		<if test=" null != sort and  null != order">
+			<if test="sort ==  1">
+				,tp.show_index
+			</if>
+			<if test="sort ==  2 and order ==  0">
+				,tp.flow_min_rate
+			</if>
+			<if test="sort ==  2 and order ==  1">
+				,tp.flow_max_rate
+			</if>
+			<if test="sort ==  3 and order ==  0">
+				,tp.dead_line_min_value
+			</if>
+			<if test="sort ==  3 and order ==  1">
+				,tp.dead_line_max_value
+			</if>
+			<if test="sort ==  4">
+				,tp.fee_ratio
+			</if>
+			<if test="order ==  0">
+				ASC
+			</if>
+			<if test="order ==  1">
+				DESC
+			</if>
+			,tp.create_time DESC
+		</if>    
+    </select>
+    
+    <!-- 查询理财师推荐产品列表 -->
+    <select id="queryRecdProductPageList" parameterType="com.eshop4j.api.request.cim.ProductPageListRecommendRequest" resultType="com.eshop4j.api.response.cim.ProductPageListResponse">
+		SELECT
+			<include refid="Base_Column_List_ProductPageListResponse" />
+		FROM
+			tcim_product_ref tpr,
+			tcim_product tp,
+			tcim_product_statistics tps,
+			tcim_org_info toi
+		WHERE
+			tp.product_id = tps.product_id
+		AND toi.org_number = tp.org_number
+		AND toi.status = 1
+		<if test=" ifHaveGray == false "> <!-- 增加灰度权限管控-->
+			AND toi.org_gray_status = 0
+		</if>	
+		AND tp.buy_total_money <![CDATA[ > ]]> tps.buyed_total_money	
+		AND tp.status = 1
+		AND tp.audit_status = 1
+		AND tp.product_id = tpr.product_id
+		AND tpr.investor_user_id = #{userId,jdbcType=VARCHAR}
+		AND tpr.sale_user_id = #{cfplannerUserId,jdbcType=VARCHAR}
+		<if test=" null != orgNumber and ''!= orgNumber  ">
+			AND toi.org_number = #{orgNumber,jdbcType=VARCHAR}
+		</if>
+		<if test=" null != sort and  null != order">
+			ORDER BY 
+			<if test="sort ==  1">
+				tp.show_index
+			</if>
+			<if test="sort ==  2 and order ==  0">
+				tp.flow_min_rate
+			</if>
+			<if test="sort ==  2 and order ==  1">
+				tp.flow_max_rate
+			</if>
+			<if test="sort ==  3 and order ==  0">
+				tp.dead_line_min_value
+			</if>
+			<if test="sort ==  3 and order ==  1">
+				tp.dead_line_max_value
+			</if>
+			<if test="sort ==  4">
+				tp.fee_ratio
+			</if>
+			<if test="order ==  0">
+				ASC
+			</if>
+			<if test="order ==  1">
+				DESC
+			</if>
+			,tp.create_time DESC
+		</if>
+    </select>
+    
+    <!-- 查询产品分类统计 根据产品分类表[tcim_product_cate]   统计最小和最大利率-->
+    <select id="productClassifyStatistics" parameterType="com.eshop4j.api.request.cim.ProductStatisticsRequest" resultType="com.eshop4j.api.response.cim.ProductStatisticsResponse">
+		SELECT
+			tpc.cate_id AS cateId,
+			tpc.description AS cateName,
+			tpc.cate_logo_investor AS cateLogoInvestor,
+			tpc.cate_logo_channel AS cateLogoChannel,
+			tpc.url_link AS urlLink,
+			tpc.cate_declare AS cateDeclare,
+			count(tp.product_id) AS count,
+			IFNULL(MIN(tp.flow_min_rate), 0) AS flowMinRateStatistics,
+			IFNULL(MAX(tp.flow_max_rate), 0) AS flowMaxRateStatistics
+		FROM
+			tcim_product_cate tpc
+		LEFT JOIN tcim_product_info_cate tpic ON tpic.cate_id = tpc.cate_id
+		LEFT JOIN tcim_product tp ON tp.product_id = tpic.product_id
+		AND tp. STATUS = 1
+		AND tp.audit_status = 1
+		LEFT JOIN tcim_product_statistics tps ON tp.product_id = tps.product_id
+		LEFT JOIN tcim_org_info toi ON toi.org_number = tp.org_number	
+		WHERE
+			tpc.disabled = 0
+		AND toi. STATUS = 1
+		<if test=" ifHaveGray == false "> <!-- 增加灰度权限管控-->
+			AND toi.org_gray_status = 0
+		</if>
+		AND tp.buy_total_money <![CDATA[ > ]]> tps.buyed_total_money			
+		AND tpc.cate_id IN (${cateIdList})
+		GROUP BY tpc.cate_id
+		ORDER BY tpc.order_num ASC
+	</select>
+	
+	<!-- 查询理财师推荐产品 统计 -->
+    <select id="queryRecdProductStatistics" parameterType="com.eshop4j.api.request.cim.ProductStatisticsRequest" resultType="com.eshop4j.api.response.cim.ProductStatisticsResponse">
+		SELECT
+			801 AS cateId,
+			"理财师推荐产品" AS cateName,
+			(
+				SELECT
+					tc.config_value
+				FROM
+					tsys_config tc
+				WHERE
+					tc.config_type = 'product_extendsCate_config'
+				AND tc.config_key = 'productCate_Logo_801'
+			) AS cateLogoInvestor,			
+			count(*) AS count,
+			IFNULL(MIN(tp.flow_min_rate),7) AS flowMinRateStatistics,
+			IFNULL(MAX(tp.flow_max_rate),12) AS flowMaxRateStatistics,
+			(
+				SELECT
+					tc.config_value
+				FROM
+					tsys_config tc
+				WHERE
+					tc.config_type = 'product_extendsCate_config'
+				AND tc.config_key = 'productCate_Declare_801'
+			) AS cateDeclare
+		FROM
+			tcim_product_ref tpr,
+			tcim_product tp,
+			tcim_org_info toi,
+			tcim_product_statistics tps
+		WHERE
+			toi.org_number = tp.org_number
+		AND tp.product_id = tps.product_id
+		AND toi. STATUS = 1
+		<if test=" ifHaveGray == false "> <!-- 增加灰度权限管控-->
+			AND toi.org_gray_status = 0
+		</if>
+		AND tp.buy_total_money <![CDATA[ > ]]> tps.buyed_total_money		
+		AND tp. STATUS = 1
+		AND tp.audit_status = 1
+		AND tp.product_id = tpr.product_id
+		AND tpr.sale_user_id = #{cfplannerUserId,jdbcType=VARCHAR}
+	</select>
+	
+    <!-- 901-首投标   902-复投标 产品 统计 -->
+    <select id="queryProductCateExtendsStatistics" parameterType="com.eshop4j.api.request.cim.ProductStatisticsRequest" resultType="com.eshop4j.api.response.cim.ProductStatisticsResponse">
+		SELECT
+			<if test="cateIdList  == 901">		<!-- 扩展产品分类标签   901-首投标   902-复投标 -->
+			901 AS cateId,
+			"首投标" AS cateName,
+			(
+				SELECT
+					tc.config_value
+				FROM
+					tsys_config tc
+				WHERE
+					tc.config_type = 'product_extendsCate_config'
+				AND tc.config_key = 'productCate_Logo_901'
+				AND tc.app_type = 1
+			) AS cateLogoChannel,
+			(
+				SELECT
+					tc.config_value
+				FROM
+					tsys_config tc
+				WHERE
+					tc.config_type = 'product_extendsCate_config'
+				AND tc.config_key = 'productUrl_Link_901'
+				AND tc.app_type = 1
+			) AS urlLink,			
+			</if>
+			<if test="cateIdList  == 902">
+			902 AS cateId,
+			"复投标" AS cateName,
+			(
+				SELECT
+					tc.config_value
+				FROM
+					tsys_config tc
+				WHERE
+					tc.config_type = 'product_extendsCate_config'
+				AND tc.config_key = 'productCate_Logo_902'
+				AND tc.app_type = 1
+			) AS cateLogoChannel,
+			(
+				SELECT
+					tc.config_value
+				FROM
+					tsys_config tc
+				WHERE
+					tc.config_type = 'product_extendsCate_config'
+				AND tc.config_key = 'productUrl_Link_902'
+				AND tc.app_type = 1
+			) AS urlLink,			
+			</if>
+			count(*) AS count,
+			MIN(tp.flow_min_rate) AS flowMinRateStatistics,
+			MAX(tp.flow_max_rate) AS flowMaxRateStatistics
+		FROM
+			tcim_product tp,
+			tcim_product_statistics tps,
+			tcim_org_info toi
+		WHERE
+			tp.product_id = tps.product_id
+		AND toi.org_number = tp.org_number
+		AND toi.status = 1
+		<if test=" ifHaveGray == false "> <!-- 增加灰度权限管控-->
+			AND toi.org_gray_status = 0
+		</if>	
+		AND tp.buy_total_money <![CDATA[ > ]]> tps.buyed_total_money	
+		AND tp.status = 1
+		AND tp.audit_status = 1
+		<if test="cateIdList  == 901">		<!-- 扩展产品分类标签   901-首投标   902-复投标 -->
+			AND toi.org_fee_type = 1
+		</if>
+		<if test="cateIdList  == 902">
+			AND toi.org_fee_type = 2
+		</if>
+	</select>
+    
+    <select id="queryOrgSaleProducts"  resultType="com.eshop4j.web.response.orgInfo.OrgSaleProductResponse">
+    	SELECT
+			t.is_flow isFlow,
+			t.flow_min_rate feeRateMin,
+			t.flow_max_rate feeRateMax,
+			t.product_id proId,
+			t.product_name proName,
+			t.buy_total_money totalMoney,
+			IFNULL(SUM(t1.invest_amt), 0) investmentAmount
+		FROM
+			tcim_product t
+		LEFT JOIN tcim_product_invest_record t1 ON t.product_id = t1.product_id
+		WHERE
+			t.org_number = #{orgNumber} AND t.status=1
+		GROUP BY
+			t.product_id		
+	</select>
+	
+	<!-- 查询产品详情 -->
+    <select id="queryProductDetail"  parameterType="com.eshop4j.api.request.cim.ProductDetailRequest" resultType="com.eshop4j.api.response.cim.ProductDetailResponse">
+        select 
+   			<choose>
+				<when test="appKind == 'channel'">
+			       (
+						SELECT
+							count(*)
+						FROM
+							tcim_product_ref tpr
+						WHERE
+							tpr.sale_user_id = tc.user_id
+						AND tpr.product_id = t.product_id
+					) AS cfpRecommend,				
+				</when>
+			</choose>
+	   		<include refid="Base_Column_List_T" />,
+	    	tps.buyed_total_money AS buyedTotalMoney,
+			tps.buyed_total_people AS buyedTotalPeople
+		FROM
+			<choose>
+				<when test="appKind == 'channel'">
+						tcrm_cfplanner tc,
+				</when>
+			</choose>
+			tcim_product t,
+			tcim_product_statistics tps
+		WHERE
+			t.product_id =#{productId}
+		<choose>
+			<when test="appKind == 'channel'">
+					AND tc.user_id = #{userId,jdbcType=VARCHAR}
+			</when>
+		</choose>		
+		AND t.product_id = tps.product_id
+	</select>
+	
+	<!-- 查询产品可展示的标签列表 -->
+    <select id="queryProductCateForShow"  parameterType="com.eshop4j.api.request.cim.ProductCateForShowRequest" resultType="java.lang.String">
+		SELECT
+			tpc.description
+		FROM
+			tcim_product_cate tpc,
+			tcim_product_info_cate tpic
+		WHERE
+			tpc.cate_id = tpic.cate_id
+		AND tpc.disabled = '0'
+		AND tpc.if_show  = 0
+		<choose>
+			<when test="appKind == 'channel'">
+					AND tpc.ispublic in (0,2)
+			</when>
+			<when test="appKind == 'investor'">
+					AND tpc.ispublic in (0,1)
+			</when>
+		</choose>
+		AND tpic.product_id = #{productId,jdbcType=VARCHAR}    
+	</select>	
+	
+	<!-- 管理后台  查询产品列表 -->
+    <select id="selectProductListForManage"  parameterType="com.eshop4j.web.request.ProductListDataRequest" resultType="com.eshop4j.web.response.ProductListForManageResponse">
+        select 
+        	t.id AS id,
+	    	t.product_name AS productName,
+	    	t.product_type AS productType,
+	    	t.sale_start_time AS saleStartTime,
+	    	t.is_flow AS isFlow,
+	    	t.flow_min_rate AS flowMinRate,
+	    	t.flow_max_rate AS flowMaxRate,
+	    	t.is_fixed_deadline AS isFixedDeadline,
+	    	t.dead_line_min_value AS deadLineMinValue,
+	    	t.dead_line_max_value AS deadLineMaxValue,
+	    	t.dead_line_min_self_defined AS deadLineMinSelfDefined,
+	    	t.dead_line_max_self_defined AS deadLineMaxSelfDefined,
+	    	t.buy_total_money AS buyTotalMoney,
+	    	t.show_index AS showIndex,
+	    	t.status AS status,
+	    	t.product_id AS productId,
+	    	t.org_number AS orgNumber,
+	    	t.fee_ratio AS feeRatio,
+	    	t.audit_status AS auditStatus,
+	    	t.audit_time AS auditTime,
+			(
+				SELECT
+					tpic.sort
+				FROM
+					tcim_product_info_cate tpic
+				WHERE
+					tpic.product_id = t.product_id
+					and tpic.cate_id = 1
+			) AS hotIndex,
+			toi.name As orgName
+		FROM
+			tcim_product t,
+			tcim_org_info toi
+		WHERE
+	        toi.org_number = t.org_number
+	        and toi.status = 1
+	        <if test="query.productName!=null and query.productName!='' ">  
+	               and t.product_name LIKE CONCAT('%','${query.productName}','%' )
+	         </if>
+	         <if test="query.orgNumber!=null and query.orgNumber!='99' ">  
+	               and t.org_number =#{query.orgNumber}
+	         </if>
+	         <if test="query.productType!=null and query.productType != 99 ">  
+	               and t.product_type =#{query.productType}
+	         </if>	         
+	         <if test="query.status!=null and query.status != 99 ">  
+	               and t.status =#{query.status}
+	         </if>
+	         <if test="query.auditStatus!=null and query.auditStatus != 99 ">  
+	               and t.audit_status =#{query.auditStatus}
+	         </if>
+	         <choose>
+		         <when test="query.order != null and query.order.size != 0">  
+		               <foreach collection="query.order" index="index" item="item" open="order by" separator="," close=" ">
+							<choose>
+								<when test="item.name == 'productRateText' and item.dir == 'asc'">
+										flowMinRate ASC
+								</when>
+								<when test="item.name == 'productRateText' and item.dir == 'desc'">
+										flowMaxRate DESC
+								</when>
+								<when test="item.name == 'deadLineValueText' and item.dir == 'asc'">
+										deadLineMinValue ASC
+								</when>
+								<when test="item.name == 'deadLineValueText' and item.dir == 'desc'">
+										deadLineMaxValue DESC
+								</when>
+								<otherwise>
+									${item.name} ${item.dir}
+								</otherwise>
+							</choose>
+								,t.create_time DESC
+		                </foreach>
+		         </when>
+				<otherwise>
+					order by t.create_time DESC
+				</otherwise>		         
+	         </choose>
+	</select>
+	
+	<!--管理后台   查询产品详情 -->
+    <select id="queryProductDetailForManerge"  parameterType="java.lang.String" resultType="com.eshop4j.web.response.ProductDetailForManageResponse">
+        select 
+	   		<include refid="Base_Column_List_T" />,
+	    	tps.buyed_total_money AS buyedTotalMoney,
+			tps.buyed_total_people AS buyedTotalPeople
+		FROM
+			tcim_product t,
+			tcim_product_statistics tps
+		WHERE
+			t.product_id =#{productId}
+		AND t.product_id = tps.product_id
+	</select>
+	
+	<!--管理后台   产品审核 -->
+    <select id="productAudit"  parameterType="java.lang.String" >
+		UPDATE tcim_product tp
+		SET 
+         <if test="auditCode == 1 ">  
+               tp.audit_status = 1,
+         </if>
+         <if test="auditCode == 3 ">  
+               tp.audit_status = 3,
+         </if>
+		 tp.audit_time = NOW()
+		WHERE
+	         <if test="auditType == 'partAudit' and productTableIdList != '' ">  	
+					tp.id in (${productTableIdList})
+	         </if>
+	         <if test="auditType == 'allAudit' ">  
+	                tp.audit_status = 2
+	         </if>
+	</select>
+	
+	<!--管理后台   查询产品销售列表-->
+    <select id="selectProductSaleListForManage"  parameterType="com.eshop4j.web.request.ProductSaleListRequest" resultType="com.eshop4j.web.response.ProductSaleListResponse">
+		SELECT
+			tp.product_id AS productId,
+			tp.product_name AS productName,
+			tp.buy_total_money AS buyTotalMoney,
+			tp.sale_start_time AS saleStartTime,
+			tp.sale_end_time AS saleEndTime,
+			tp.product_type AS productType,
+			tp. STATUS AS STATUS,
+			toi. NAME AS orgName,
+			tps.buyed_total_money AS buyedTotalMoney,
+			(tp.buy_total_money - tps.buyed_total_money) AS surplusMoney
+		FROM
+			tcim_product tp,
+			tcim_product_statistics tps,
+			tcim_org_info toi
+		WHERE
+			tp.product_id = tps.product_id
+		AND toi.org_number = tp.org_number
+		AND toi. STATUS = 1
+        <if test="query.productName!=null and query.productName!='' ">  
+               and tp.product_name LIKE CONCAT('%','${query.productName}','%' )
+         </if>
+         <if test="query.orgNumber!=null and query.orgNumber!='99' ">  
+               and tp.org_number =#{query.orgNumber}
+         </if>         
+         <if test="query.status!=null and query.status != 99 ">  
+               and tp.status =#{query.status}
+         </if>
+         <if test="query.productType!=null and query.productType != 99 ">  
+               and tp.product_type =#{query.productType}
+         </if>         
+         <if test="query.order != null and query.order.size != 0">  
+               <foreach collection="query.order" index="index" item="item" open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+                ,tp.create_time DESC
+         </if>  
+	</select>
+	
+	<!--管理后台   查询产品销售详情 -->
+    <select id="selectProductSaleDetail"  parameterType="com.eshop4j.web.request.ProductSaleDetailRequest" resultType="com.eshop4j.web.response.ProductSaleDetailResponse">
+		SELECT
+			tui.user_name AS investorUserName,
+			tui.mobile AS investorUserMobile,
+			tpir.invest_amt AS investAmt,
+			tpir.start_time AS startTime
+		FROM
+			tcim_product_invest_record tpir,
+			tcrm_user_info tui
+		WHERE
+			tpir.user_id = tui.user_id
+		AND tpir.product_id = #{query.productId}
+        <if test="query.productNaOrNumber!=null and query.productNaOrNumber!='' ">  
+               and (tui.user_name LIKE CONCAT('%','${query.productNaOrNumber}','%' ) or tui.mobile LIKE CONCAT('%','${query.productNaOrNumber}','%' ))
+         </if>
+         <if test="query.investStartTime!=null">  
+               and tpir.start_time <![CDATA[ >= ]]> #{query.investStartTime}
+         </if>
+         <if test="query.investEndTime!=null">  
+               and tpir.start_time <![CDATA[ <= ]]> #{query.investEndTime}
+         </if>
+         order by tpir.start_time desc
+	</select>
+	
+	
+	<!--查询产品销售详情 分页 (PC端)-->
+    <select id="getProductInvestList" resultType="com.eshop4j.api.response.cim.ProductInvestResponse">
+		SELECT
+			tui.user_name AS user,
+			tui.mobile AS mobile,
+			tpir.invest_amt AS amt,
+			tpir.start_time AS time
+		FROM
+			tcim_product_invest_record tpir LEFT JOIN tcrm_user_info tui ON tpir.user_id = tui.user_id
+		WHERE
+			tpir.product_id = #{productId}
+         order by tpir.start_time desc
+	</select>
+		
+    
+    <!--管理后台-查询产品销售统计 -->
+    <select id="selectSalesStatisticsByDatatables" parameterType="com.eshop4j.web.request.ProductsSalesStatisticsRequest" resultType="com.eshop4j.web.response.ProductsSalesStatisticsResponse">
+        SELECT
+			tp.product_id AS productId,
+			tp.product_name AS productName,
+			tp.product_type AS productType,
+			tp.status AS STATUS,
+			tp.is_fixed_deadline AS isFixedDeadline,
+			tp.dead_line_min_value AS deadLineMinValue,
+			tp.dead_line_max_value AS deadLineMaxValue,
+			tp.dead_line_min_self_defined AS deadLineMinSelfDefined,
+			tp.dead_line_max_self_defined AS deadLineMaxSelfDefined,
+			tp.is_flow AS isFlow,
+			tp.flow_min_rate AS flowMinRate,
+			tp.flow_max_rate AS flowMaxRate,
+			tp.audit_time AS auditPassTime,
+			toi. NAME AS orgName,
+			(
+				SELECT
+					sum(tofg.product_amount)
+				FROM
+					tcim_org_fee_gather tofg
+				WHERE
+					tofg.product_id = tp.product_id
+			) AS saleroom,
+			(
+				SELECT
+					sum(tf.yearpur_amount)
+				FROM
+					tcim_feedetail tf
+				WHERE
+					tf.product_id = tp.product_id
+				AND tf.fee_type = '1001'		
+			) AS saleroomYear,
+			(
+				SELECT
+					sum(tofg.fee_amount)
+				FROM
+					tcim_org_fee_gather tofg
+				WHERE
+					tofg.product_id = tp.product_id
+			) AS saleCost,
+			(
+				SELECT
+					count(DISTINCT tofg.user_id)
+				FROM
+					tcim_org_fee_gather tofg
+				WHERE
+					tofg.product_id = tp.product_id
+			) AS investNumberOfPeople
+        FROM tcim_product tp,
+        	tcim_org_info toi
+        <where>
+			toi.org_number = tp.org_number
+        and toi.status = 1
+        and tp.audit_status = 1
+        <if test="query.productName!=null and query.productName!='' ">  
+               and tp.product_name LIKE CONCAT('%','${query.productName}','%' )
+         </if>
+         <if test="query.orgNumber!=null and query.orgNumber!='99' ">  
+               and tp.org_number = #{query.orgNumber}
+         </if>       
+         <if test="query.status!=null and query.status != 99 ">  
+               and tp.status =#{query.status}
+         </if>
+         <if test="query.auditStartTime!=null">  
+               and tp.audit_time <![CDATA[ >= ]]> #{query.auditStartTime}
+         </if>
+         <if test="query.auditEndTime!=null">  
+               and tp.audit_time <![CDATA[ <= ]]> #{query.auditEndTime}
+         </if>
+         <if test="query.order != null and query.order.size != 0">  
+               <foreach collection="query.order" index="index" item="item" open="order by" separator="," close=" ">
+					<choose>
+							<when test="item.name == 'productRateText' and item.dir == 'asc'">
+									flowMinRate ASC
+							</when>
+							<when test="item.name == 'productRateText' and item.dir == 'desc'">
+									flowMaxRate DESC
+							</when>
+							<when test="item.name == 'deadLineValueText' and item.dir == 'asc'">
+									deadLineMinValue ASC
+							</when>
+							<when test="item.name == 'deadLineValueText' and item.dir == 'desc'">
+									deadLineMaxValue DESC
+							</when>							
+							<otherwise>
+								${item.name} ${item.dir}
+							</otherwise>
+						</choose>               
+                    ,tp.create_time DESC
+                </foreach>
+         </if> 
+        </where>
+    </select>
+    		
+	<!-- 获取有投资记录的cps模式的可转让可赎回产品 -->
+	<select id="getFlowProducts" resultMap="BaseResultMap">
+		SELECT
+			p.org_number,
+			p.product_name,
+			p.product_name,
+			p.product_type,
+			p.dead_line_min_value,
+			p.product_id,
+			p.fee_ratio,
+			p.is_collect,
+			p.sale_start_time,
+			p.sale_end_time,
+			p.product_id,
+			p.dead_line_max_value,
+			p.is_redemption,
+			p.`status`,
+			COUNT(i.invest_id) investCount
+		FROM
+			tcim_product p
+		LEFT JOIN tcim_org_info o ON p.org_number = o.org_number
+		LEFT JOIN tcim_product_invest_record i  ON i.product_id = p.product_id 
+		WHERE
+			p.is_redemption IN (1, 2, 3) AND o.org_fee_type = 2 AND o.org_isstaticproduct=0 AND ((p.is_collect=1 ) or (p.is_collect=2 AND p.`status` = 2))
+		GROUP BY p.product_id HAVING investCount > 0
+	</select>
+	   
+	<!-- 产品筛选分页 -->
+    <select id="queryProductScreenPageList" parameterType="com.eshop4j.api.request.cim.ScreenProductPageListRequest" resultType="com.eshop4j.api.response.cim.ProductPageListResponse">
+    	SELECT
+   			<choose>
+				<when test="appKind == 'channel'">
+			       (
+						SELECT
+							count(*)
+						FROM
+							tcim_product_ref tpr
+						WHERE
+							tpr.sale_user_id = tc.user_id
+						AND tpr.product_id = tp.product_id
+					) AS cfpRecommend,				
+				</when>
+			</choose>
+			<include refid="Base_Column_List_ProductPageListResponse" />
+		FROM
+			<choose>
+				<when test="appKind == 'channel'">
+						tcrm_cfplanner tc,
+				</when>
+			</choose>
+			tcim_product tp,
+			tcim_product_statistics tps,
+			tcim_org_info toi
+		WHERE
+			tp.product_id = tps.product_id
+		AND tp.sale_start_time <![CDATA[ <= ]]>  now()
+		AND toi.org_number = tp.org_number
+		AND toi.status = 1
+		<if test=" ifHaveGray == false "> <!-- 增加灰度权限管控-->
+			AND toi.org_gray_status = 0
+		</if>
+		AND tp.buy_total_money <![CDATA[ > ]]> tps.buyed_total_money		
+		AND tp.status = 1
+		AND tp.audit_status = 1
+		<choose>
+			<when test="appKind == 'channel'">
+					AND tc.user_id = #{userId,jdbcType=VARCHAR}
+			</when>
+		</choose>		
+		<if test=" null != orgNumber and ''!= orgNumber  ">
+			AND toi.org_number = #{orgNumber,jdbcType=VARCHAR}
+		</if>
+		<if test=" null != minDeadLine and ''!= minDeadLine and null != maxDeadLine and ''!= maxDeadLine ">
+			<![CDATA[
+				AND (
+					   (tp.dead_line_min_value <= #{minDeadLine} AND tp.dead_line_max_value >= #{maxDeadLine})
+					OR (tp.dead_line_min_value >= #{minDeadLine} AND tp.dead_line_min_value <= #{maxDeadLine}) 
+					OR (tp.dead_line_max_value >= #{minDeadLine} AND tp.dead_line_max_value <= #{maxDeadLine})  						
+				)
+			]]>
+		</if>		
+		<if test=" null != minYearProfit and ''!= minYearProfit and null != maxYearProfit and ''!= maxYearProfit ">
+			<![CDATA[
+				AND (
+						((tp.flow_min_rate+IFNULL(tp.add_rate,0)+IFNULL(tp.platform_cashback,0)) <= #{minYearProfit} AND (tp.flow_max_rate+IFNULL(tp.add_rate,0)+IFNULL(tp.platform_cashback,0)) >= #{maxYearProfit}) 
+					 OR ((tp.flow_min_rate+IFNULL(tp.add_rate,0)+IFNULL(tp.platform_cashback,0)) >= #{minYearProfit} AND (tp.flow_min_rate+IFNULL(tp.add_rate,0)+IFNULL(tp.platform_cashback,0)) <= #{maxYearProfit})
+					 OR ((tp.flow_max_rate+IFNULL(tp.add_rate,0)+IFNULL(tp.platform_cashback,0)) >= #{minYearProfit} AND (tp.flow_max_rate+IFNULL(tp.add_rate,0)+IFNULL(tp.platform_cashback,0)) <= #{maxYearProfit})  
+				)
+			]]>
+		</if>				
+		<if test=" null != platformContext and ''!= platformContext ">			
+			<![CDATA[				 
+				AND tp.org_number in
+				(select org_number from tcim_org_info where context = #{platformContext})
+			]]>			
+		</if>
+		<if test=" null != securityLevel and ''!= securityLevel">
+			and toi.grade ${securityLevel}
+		</if> 
+		<if test=" null != sort and  null != order">
+			ORDER BY 
+			<if test="sort ==  1">
+				tp.show_index
+			</if>
+			<if test="sort ==  2 and order ==  0">
+				tp.flow_min_rate
+			</if>
+			<if test="sort ==  2 and order ==  1">
+				tp.flow_max_rate
+			</if>
+			<if test="sort ==  3 and order ==  0">
+				tp.dead_line_min_value
+			</if>
+			<if test="sort ==  3 and order ==  1">
+				tp.dead_line_max_value
+			</if>
+			<if test="sort ==  4">
+				tp.fee_ratio
+			</if>			
+			<if test="order ==  0">
+				ASC
+			</if>
+			<if test="order ==  1">
+				DESC
+			</if>
+			,tp.create_time DESC
+		</if> 	  	   
+    </select>
+    
+    
+    <select id="queryProductByProductName" resultType="com.eshop4j.web.response.act.ProductPageResponse">
+		SELECT
+			tp.flow_max_rate AS flowMaxRate,
+			tp.flow_min_rate AS flowMinRate,
+			tp.is_flow AS isFlow,
+			tp.product_id AS productId,
+			tp.product_name AS productName,
+			tp.fee_ratio AS feeRatio,
+			tp.is_fixed_deadline AS isFixedDeadline,
+			tp.dead_line_min_value AS deadLineMinValue,
+			tp.dead_line_max_value AS deadLineMaxValue,
+			tp.dead_line_min_self_defined AS deadLineMinSelfDefined,
+			tp.dead_line_max_self_defined AS deadLineMaxSelfDefined
+		FROM
+			tcim_product tp
+		WHERE
+			1=1
+			<if test="proName!=null and proName!='' ">
+				AND tp.product_name LIKE CONCAT('%','${proName}','%' )
+			</if>
+			<if test="orgNumber and orgNumber!='' ">
+				AND tp.org_number=#{orgNumber}
+			</if>
+    </select>
+    <select id="queryProductByProductIds" resultType="com.eshop4j.web.response.act.ProductPageResponse">
+		SELECT
+			tp.flow_max_rate AS flowMaxRate,
+			tp.flow_min_rate AS flowMinRate,
+			tp.is_flow AS isFlow,
+			tp.product_id AS productId,
+			tp.product_name AS productName,
+			tp.fee_ratio AS feeRatio,
+			tp.is_fixed_deadline AS isFixedDeadline,
+			tp.dead_line_min_value AS deadLineMinValue,
+			tp.dead_line_max_value AS deadLineMaxValue,
+			tp.dead_line_min_self_defined AS deadLineMinSelfDefined,
+			tp.dead_line_max_self_defined AS deadLineMaxSelfDefined
+		FROM
+			tcim_product tp
+		WHERE
+			tp.product_id 
+				<foreach item="pid" open="in (" separator="," close=")" collection="pids">
+					#{pid}
+				</foreach>
+    </select>
+    
+     <!-- 根据机构代码更改产品的佣金 -->
+	 <update id="updateFeeRatioByOrgNumber">
+		UPDATE tcim_product
+			SET fee_ratio = #{feeRatio}
+		where
+		 org_number = #{orgNumber}
+		AND STATUS = 1
+	 </update>
+	 
+	 <!-- 热推产品列表-->
+    <select id="queryHotRecommendPageList" parameterType="com.eshop4j.api.request.cim.ProductPageListClassifyRequest" resultType="com.eshop4j.api.response.cim.ProductPageListResponse">
+		SELECT
+    		<choose>
+				<when test="appKind == 'channel'">
+			       (
+						SELECT
+							count(*)
+						FROM
+							tcim_product_ref tpr
+						WHERE
+							tpr.sale_user_id = tc.user_id
+						AND tpr.product_id = tp.product_id
+					) AS cfpRecommend,				
+				</when>
+			</choose>
+   			COUNT(*) recommendTimes,
+			<include refid="Base_Column_List_ProductPageListResponse" />
+		FROM	
+			<choose>
+				<when test="appKind == 'channel'">
+						tcrm_cfplanner tc,
+				</when>
+			</choose>		
+			tcim_product tp,
+			tcim_product_statistics tps,
+			tcim_org_info toi,
+			tcim_product_ref tpr
+		WHERE
+		
+			tp.product_id = tps.product_id
+		AND tpr.product_id = tp.product_id
+		AND toi.org_number = tp.org_number
+		AND toi.status = 1
+		<choose>
+			<when test="appKind == 'channel'">
+					AND tc.user_id = #{userId,jdbcType=VARCHAR}
+			</when>
+		</choose>
+		<if test=" ifHaveGray == false "> <!-- 增加灰度权限管控-->
+			AND toi.org_gray_status = 0
+		</if>
+		AND tp.buy_total_money <![CDATA[ > ]]> tps.buyed_total_money
+		AND toi.org_isstaticproduct = 0		
+		AND tp.status = 1
+		AND tp.audit_status = 1			
+		AND DATE_FORMAT(tpr.recommend_time,'%Y-%m-%d') >= DATE_FORMAT(DATE_SUB(NOW(),INTERVAL 2 DAY),'%Y-%m-%d')		
+		GROUP BY tpr.product_id 
+		ORDER BY recommendTimes DESC	
+    </select>
+    
+    <!-- 查询理财师最新推荐产品 -->
+    <select id="queryNewestRecdProduct" parameterType="com.eshop4j.api.request.cim.ProductPageListRecommendRequest" resultType="com.eshop4j.api.response.cim.ProductPageListResponse">
+		SELECT
+			<include refid="Base_Column_List_ProductPageListResponse" />
+		FROM
+			tcim_product_ref tpr,
+			tcim_product tp,
+			tcim_product_statistics tps,
+			tcim_org_info toi
+		WHERE
+			tp.product_id = tps.product_id
+		AND toi.org_number = tp.org_number
+		AND toi.status = 1
+		<if test=" ifHaveGray == false "> <!-- 增加灰度权限管控-->
+			AND toi.org_gray_status = 0
+		</if>
+		AND tp.buy_total_money <![CDATA[ > ]]> tps.buyed_total_money		
+		AND tp.status = 1
+		AND tp.audit_status = 1
+		AND tp.product_id = tpr.product_id
+		AND tpr.investor_user_id = #{userId,jdbcType=VARCHAR}
+		AND tpr.sale_user_id = #{cfplannerUserId,jdbcType=VARCHAR}
+		<if test=" null != orgNumber and ''!= orgNumber  ">
+			AND toi.org_number = #{orgNumber,jdbcType=VARCHAR}
+		</if>		
+		ORDER BY tpr.recommend_time DESC limit 1
+    </select>
+    
+    <!-- 用户没有投资记录的平台的新手标 -->
+    <select id="queryNotInvestPlatformNewerProduct" parameterType="com.eshop4j.api.request.cim.ProductPageListClassifyRequest" resultType="com.eshop4j.api.response.cim.ProductPageListResponse">
+    	SELECT
+   			<choose>
+				<when test="appKind == 'channel'">
+			       (
+						SELECT
+							count(*)
+						FROM
+							tcim_product_ref tpr
+						WHERE
+							tpr.sale_user_id = tc.user_id
+						AND tpr.product_id = tp.product_id
+					) AS cfpRecommend,				
+				</when>
+			</choose>    	
+			<include refid="Base_Column_List_ProductPageListResponse" />
+		FROM
+			<choose>
+				<when test="appKind == 'channel'">
+						tcrm_cfplanner tc,
+				</when>
+			</choose>		
+			tcim_product tp,
+			tcim_product_statistics tps,
+			tcim_product_info_cate tpic,
+			tcim_product_cate tpc,			
+			tcim_org_info toi
+		WHERE
+			tp.product_id = tpic.product_id
+		<choose>
+			<when test="appKind == 'channel'">
+					AND tc.user_id = #{userId,jdbcType=VARCHAR}
+			</when>
+		</choose>			
+		AND tpic.cate_id = tpc.cate_id
+		AND tpc.cate_id = 2
+		AND tpc.disabled = 0		
+		AND	tp.product_id = tps.product_id
+		AND toi.org_number = tp.org_number
+		AND toi.status = 1
+		<if test=" ifHaveGray == false "> <!-- 增加灰度权限管控-->
+			AND toi.org_gray_status = 0
+		</if>
+		AND tp.buy_total_money <![CDATA[ > ]]> tps.buyed_total_money		
+		AND tp.status = 1
+		AND tp.audit_status = 1		
+		AND toi.org_number in 
+		(SELECT
+			toi.org_number
+		FROM
+			tcim_org_info toi
+		LEFT JOIN (
+			SELECT
+				*
+			FROM
+				tcim_product_invest_record
+			WHERE
+				user_id = #{userId,jdbcType=VARCHAR}
+		) tpir ON tpir.platfrom = toi.org_number
+		WHERE
+			tpir.invest_id IS NULL)  
+		order by isSalling DESC,(tp.flow_max_rate+IFNULL(tp.add_rate,0)+IFNULL(tp.platform_cashback,0)) desc 
+		limit 1
+    </select>
+    
+    <!-- 根据产品分类表查询产品分类列表 -->
+    <select id="queryProductCateList" parameterType="com.eshop4j.api.request.cim.ProductPageListClassifyRequest" resultType="com.eshop4j.api.response.cim.ProductPageListResponse">
+    	SELECT
+			<include refid="Base_Column_List_ProductPageListResponse" />
+		FROM
+			tcim_product tp,
+			tcim_product_statistics tps,
+			tcim_product_info_cate tpic,
+			tcim_product_cate tpc,			
+			tcim_org_info toi
+		WHERE
+			tp.product_id = tpic.product_id
+		AND tpic.cate_id = tpc.cate_id
+		<if test="null != cateId"> 		<!-- 根据产品标签进行产品分类 -->
+			AND tpc.cate_id = #{cateId,jdbcType=INTEGER}
+		</if>
+		AND tpc.disabled = 0		
+		AND	tp.product_id = tps.product_id
+		AND toi.org_number = tp.org_number
+		AND toi.status = 1
+		<if test=" ifHaveGray == false "> <!-- 增加灰度权限管控-->
+			AND toi.org_gray_status = 0
+		</if>
+		AND tp.buy_total_money <![CDATA[ > ]]> tps.buyed_total_money		
+		AND tp.status = 1
+		AND tp.audit_status = 1		
+		<if test=" null != orgNumber and ''!= orgNumber  ">
+			AND toi.org_number = #{orgNumber,jdbcType=VARCHAR}
+		</if>
+		ORDER BY isSalling DESC
+		<if test="3 == cateId"> 		<!-- 短期产品         选择期限最短的产品展示在首页 -->
+			,tp.dead_line_min_value asc
+		</if>
+		<if test="4 == cateId"> 		<!-- 高收益产品      选择收益最高的那个产品展示在首页-->
+			,(tp.flow_max_rate+IFNULL(tp.add_rate,0)+IFNULL(tp.platform_cashback,0)) desc
+		</if>
+		<if test="5 == cateId"> 		<!-- 中长期产品      选择期限最短、收益最高的产品展示在首页-->
+			,tp.dead_line_min_value asc,
+			(tp.flow_max_rate+IFNULL(tp.add_rate,0)+IFNULL(tp.platform_cashback,0)) desc
+		</if>
+		limit 1
+    </select>
+    
+     <!-- 热推产品列表top10 -->
+    <select id="queryHotRecommendPageListTop" parameterType="com.eshop4j.api.request.cim.ProductPageListClassifyRequest" resultType="com.eshop4j.api.response.cim.ProductPageListResponse">
+    	SELECT
+    		<choose>
+				<when test="appKind == 'channel'">
+			       (
+						SELECT
+							count(*)
+						FROM
+							tcim_product_ref tpr
+						WHERE
+							tpr.sale_user_id = tc.user_id
+						AND tpr.product_id = tp.product_id
+					) AS cfpRecommend,				
+				</when>
+			</choose>
+   			COUNT(*) recommendTimes,
+			<include refid="Base_Column_List_ProductPageListResponse" />
+		FROM	
+			<choose>
+				<when test="appKind == 'channel'">
+						tcrm_cfplanner tc,
+				</when>
+			</choose>		
+			tcim_product tp,
+			tcim_product_statistics tps,
+			tcim_org_info toi,
+			tcim_product_ref tpr
+		WHERE
+		
+			tp.product_id = tps.product_id
+		AND tpr.product_id = tp.product_id
+		AND toi.org_number = tp.org_number
+		AND toi.status = 1
+		<choose>
+			<when test="appKind == 'channel'">
+					AND tc.user_id = #{userId,jdbcType=VARCHAR}
+			</when>
+		</choose>
+		<if test=" ifHaveGray == false "> <!-- 增加灰度权限管控-->
+			AND toi.org_gray_status = 0
+		</if>
+		AND tp.buy_total_money <![CDATA[ > ]]> tps.buyed_total_money
+		AND toi.org_isstaticproduct = 0		
+		AND tp.status = 1
+		AND tp.audit_status = 1	
+		AND DATE_FORMAT(tpr.recommend_time,'%Y-%m-%d') >= DATE_FORMAT(DATE_SUB(NOW(),INTERVAL 2 DAY),'%Y-%m-%d')	
+		GROUP BY tpr.product_id 
+		ORDER BY recommendTimes DESC limit 10	
+    </select>
+</mapper>

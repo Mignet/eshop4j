@@ -28,7 +28,7 @@
         </thead>
     </table>
 
-	<script type="text/linkwee-template" id="template-search">
+	<script type="text/eshop4j-template" id="template-search">
             <div class="row">
                 <div class="col-sm-3">
 					 <input  placeholder="日期" id="date" name="date" class="Wdate" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})">

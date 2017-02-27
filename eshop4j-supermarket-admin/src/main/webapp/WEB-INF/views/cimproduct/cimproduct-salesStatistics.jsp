@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="assets/plugins/data-tables/css/dataTables.bootstrap.min.css"  />
 <script type="text/javascript" src="assets/plugins/data-tables/js/jquery.dataTables.min.js" ></script>
 <script type="text/javascript" src="assets/plugins/My97DatePicker/WdatePicker.js"  ></script>
-<script type="text/javascript" src="app/js/jquery.linkwee.js"></script>
+<script type="text/javascript" src="app/js/jquery.eshop4j.js"></script>
 <script type="text/javascript" src="app/js/common.js"></script>
 
 <div id="main-news" class="container-fluid">
@@ -34,7 +34,7 @@
 	    var linkFormat = function (data,type,full,meta) {
 	        return '<p title="'+data+'" >'+cutFormatString(data,18)+'</p>';
 	    }
-       var $db= $("#J-newslist").linkweeTable();
+       var $db= $("#J-newslist").eshop4jTable();
        
        $(function(){  	   
 	    	$("#main-news").on('click','#J_export',function(event){
@@ -44,7 +44,7 @@
        });
     </script>
     
-    <script type="text/linkwee-template" id="template-search">
+    <script type="text/eshop4j-template" id="template-search">
         <form id="salesStatisticsQueryForm">
         	<input name="productName"  class="easyui-textbox" style="width:200px"  placeholder="产品名称">
 			机构类型:

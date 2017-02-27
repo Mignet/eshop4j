@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <properties>
-        <property name="dialectClass" value="com.linkwee.core.orm.dialect.MySql5Dialect"/>
+        <property name="dialectClass" value="com.eshop4j.core.orm.dialect.MySql5Dialect"/>
     </properties>
 
     <!-- 配置mybatis的缓存，延迟加载等等一系列属性 -->
@@ -57,17 +57,17 @@
     </settings>
 
     <typeAliases>
-        <package name="com.linkwee.web.model"/>
-        <package name="com.linkwee.web.enums"/>
+        <package name="com.eshop4j.web.model"/>
+        <package name="com.eshop4j.web.enums"/>
     </typeAliases>
 
 	<typeHandlers>
-    		<typeHandler handler="com.linkwee.xoss.util.DateTypeHandler" javaType="Date" jdbcType="DECIMAL"/>
+    		<typeHandler handler="com.eshop4j.xoss.util.DateTypeHandler" javaType="Date" jdbcType="DECIMAL"/>
     </typeHandlers>
     
     <plugins>
-        <plugin interceptor="com.linkwee.core.orm.paging.PaginationResultSetHandlerInterceptor"/>
-        <plugin interceptor="com.linkwee.core.orm.paging.PaginationStatementHandlerInterceptor"/>
+        <plugin interceptor="com.eshop4j.core.orm.paging.PaginationResultSetHandlerInterceptor"/>
+        <plugin interceptor="com.eshop4j.core.orm.paging.PaginationStatementHandlerInterceptor"/>
     </plugins>
 
 	

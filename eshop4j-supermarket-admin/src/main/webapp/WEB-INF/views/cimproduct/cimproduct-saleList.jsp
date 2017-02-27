@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="assets/plugins/data-tables/css/jquery.dataTables.min.css"  />
 <link rel="stylesheet" type="text/css" href="assets/plugins/data-tables/css/dataTables.bootstrap.min.css"  />
 <script type="text/javascript" src="assets/plugins/data-tables/js/jquery.dataTables.min.js" ></script>
-<script type="text/javascript" src="app/js/jquery.linkwee.js"></script>
+<script type="text/javascript" src="app/js/jquery.eshop4j.js"></script>
 <script type="text/javascript" src="app/cimproduct/cimproduct-saleList.js"></script>
 <script type="text/javascript" src="assets/plugins/My97DatePicker/WdatePicker.js"></script>
 
@@ -35,10 +35,10 @@
 	        var edit = '<a href="#" class="btn btn-sm btn-default btn-icon J_productSale_detail" data-title="销售明细" data-productId='+full.productId+' data-productName='+full.productName+' "><i class="fa fa-search-plus"></i>销售明细</a>';
             return edit;
         }
-       var $db= $("#J-newslist").linkweeTable();
+       var $db= $("#J-newslist").eshop4jTable();
     </script>
     
-    <script type="text/linkwee-template" id="template-search">
+    <script type="text/eshop4j-template" id="template-search">
           	<div class="row">
           	  <div class="col-xs-8 ">
 			        <form>

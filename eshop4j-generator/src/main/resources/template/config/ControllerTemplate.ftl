@@ -28,14 +28,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ${entity.fullName};
 import ${service.fullName};
-import com.linkwee.core.datatable.DataInfo;
-import com.linkwee.core.datatable.DataResult;
-import com.linkwee.core.datatable.DataTable;
-import com.linkwee.core.datatable.DataTableReturn;
-import com.linkwee.core.datatable.ErrorField;
-import com.linkwee.core.util.JsonUtils;
-import com.linkwee.xoss.interceptors.DateConvertEditor;
-import com.linkwee.xoss.util.RequestLogging;
+import com.eshop4j.core.datatable.DataInfo;
+import com.eshop4j.core.datatable.DataResult;
+import com.eshop4j.core.datatable.DataTable;
+import com.eshop4j.core.datatable.DataTableReturn;
+import com.eshop4j.core.datatable.ErrorField;
+import com.eshop4j.core.util.JsonUtils;
+import com.eshop4j.xoss.interceptors.DateConvertEditor;
+import com.eshop4j.xoss.util.RequestLogging;
 
  /**
  * 

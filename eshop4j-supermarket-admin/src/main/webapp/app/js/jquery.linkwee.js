@@ -23,7 +23,7 @@
  */
 ;(function ($) {
     $.fn.extend({
-        linkweeFormObject:function () {
+        eshop4jFormObject:function () {
 
             var arrs =  $(this).serializeArray();
 
@@ -36,7 +36,7 @@
             }
             return result;
         },
-        linkweeTable:function (options) {
+        eshop4jTable:function (options) {
             var _defaults = {
                 ordering:false,
                 order:[],
@@ -179,10 +179,10 @@
                                 var searchForm = findWrapper($target).find(".J_toolbar").find("form");
                                 if(searchForm.length ==1){
                                     if(o.xparams){
-                                        params["params"] = $(searchForm).linkweeFormObject();
+                                        params["params"] = $(searchForm).eshop4jFormObject();
                                     }
                                     else{
-                                        params=$.extend(params,$(searchForm).linkweeFormObject());
+                                        params=$.extend(params,$(searchForm).eshop4jFormObject());
                                     }
 
                                 }

@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-<link rel="stylesheet" type="text/css" href="app/css/linkwee.tables.css"  />
+<link rel="stylesheet" type="text/css" href="app/css/eshop4j.tables.css"  />
 <script type="text/javascript" src="assets/plugins/data-tables/js/jquery.dataTables.min.js"  ></script>
 
 <div class="container-fluid">

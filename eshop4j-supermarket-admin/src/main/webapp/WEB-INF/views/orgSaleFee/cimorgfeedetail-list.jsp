@@ -134,7 +134,7 @@
 		});
 
     </script>
-    <script type="text/linkwee-template" id="template-search">
+    <script type="text/eshop4j-template" id="template-search">
 		<form id="orgFeeSearchForm">
 		机构类型:
 		<select id="orgNumber" name="orgNumber">

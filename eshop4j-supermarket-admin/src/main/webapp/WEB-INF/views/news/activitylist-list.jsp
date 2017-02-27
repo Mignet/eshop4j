@@ -3,10 +3,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- <link rel="stylesheet" type="text/css" href="assets/plugins/data-tables/css/jquery.dataTables.min.css"  />
 <link rel="stylesheet" type="text/css" href="assets/plugins/data-tables/css/dataTables.bootstrap.min.css"  /> -->
-<link rel="stylesheet" type="text/css" href="app/css/linkwee.tables.css"  />
+<link rel="stylesheet" type="text/css" href="app/css/eshop4j.tables.css"  />
 <script type="text/javascript" src="assets/plugins/data-tables/js/jquery.dataTables.min.js" ></script>
 <script type="text/javascript" src="assets/plugins/My97DatePicker/WdatePicker.js"  ></script>
-<script type="text/javascript" src="app/js/jquery.linkwee.js"></script>
+<script type="text/javascript" src="app/js/jquery.eshop4j.js"></script>
 <div id="main-news" class="container-fluid">
     <div class="table-responsive">
         <table id="J-activityList" class="table table-bordered" data-defer="false" data-xtoolbars="#template-search" data-url="rest/cms/activitylist/list_ajax" data-order="false" data-paging="true" data-size="10">
@@ -56,9 +56,9 @@
         	return '<a class="btn btn-sm btn-default btn-icon ui-redirect" href="javascript:;" data-title="活动编辑" data-url="/rest/cms/activitylist/toEdit?id='+data+'" ><i class="fa fa-edit"></i>编辑</a>';
         }
 
-       var $db= $("#J-activityList").linkweeTable();
+       var $db= $("#J-activityList").eshop4jTable();
     </script>
-    <script type="text/linkwee-template" id="template-search">
+    <script type="text/eshop4j-template" id="template-search">
 		<form>
             <div class="row">
                 <div class="col-sm-6">

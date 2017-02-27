@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ page import="com.linkwee.web.enums.AdvPlacementEnum" %>
+<%@ page import="com.eshop4j.web.enums.AdvPlacementEnum" %>
 <%
  	request.setAttribute("ctx", request.getContextPath());
 	AdvPlacementEnum[] advPlacementList = AdvPlacementEnum.values();

@@ -49,10 +49,10 @@
         	return meta.row+1;
         }
 
-       var $db= $("#J-newslist").linkweeTable();
+       var $db= $("#J-newslist").eshop4jTable();
        
     </script>
-    <script type="text/linkwee-template" id="template-search">
+    <script type="text/eshop4j-template" id="template-search">
         <form id="exportCfpAchievement">
         客户数<select id="name" name="name">
 			<option value="">全部</option>
@@ -123,10 +123,10 @@
         	return data?data.substring(0,data.length-8)+'****'+data.substring(data.length-4,data.length):"--";
         }
 
-       var $db= $("#J-newslist2").linkweeTable();
+       var $db= $("#J-newslist2").eshop4jTable();
        
     </script>
-    <script type="text/linkwee-template" id="template-search2">
+    <script type="text/eshop4j-template" id="template-search2">
         <form id="exportCfpAchievement2">
         年化业绩<select id="name" name="name">
 			<option value="">全部</option>

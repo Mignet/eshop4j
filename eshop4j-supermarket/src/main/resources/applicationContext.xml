@@ -27,11 +27,11 @@
     
    
 
-    <!-- 自动扫描linkwee包 ,将带有注解的类 纳入spring容器管理 -->
-    <context:component-scan base-package="com.linkwee"></context:component-scan>
+    <!-- 自动扫描eshop4j包 ,将带有注解的类 纳入spring容器管理 -->
+    <context:component-scan base-package="com.eshop4j"></context:component-scan>
 
     <!-- 引入配置文件 -->
-    <bean  class="com.linkwee.xoss.helper.SpringPropertyPlaceholder" id="propertyConfigurer">
+    <bean  class="com.eshop4j.xoss.helper.SpringPropertyPlaceholder" id="propertyConfigurer">
 		<property name="locations">
 			<list>
                 <value>classpath:config/*.properties</value>
@@ -65,7 +65,7 @@
 			<property name="maxIdle" value="100" />
 	</bean>
 
-	<bean id="jedisCluster" class="com.linkwee.xoss.util.JedisClusterFactoryHelper">
+	<bean id="jedisCluster" class="com.eshop4j.xoss.util.JedisClusterFactoryHelper">
 		<property name="addressConfig">
 			<value>classpath:config/redis-cluster.properties</value>
 		</property>
@@ -113,10 +113,10 @@
     <!-- mybatis文件配置，扫描所有mapper文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" p:dataSource-ref="dataSource"
           p:configLocation="classpath:mybatis-config.xml"
-          p:mapperLocations="classpath:com/linkwee/web/dao/*.xml"/>
+          p:mapperLocations="classpath:com/eshop4j/web/dao/*.xml"/>
 
     <!-- spring与mybatis整合配置，扫描所有dao -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.linkwee.web.dao"
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.eshop4j.web.dao"
           p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
 
     <!-- 对dataSource 数据源进行事务管理 -->
@@ -140,7 +140,7 @@
 
     <!-- 事务 aop 配置 -->
     <aop:config>
-        <aop:pointcut id="serviceMethods" expression="execution(* com.linkwee.web.service..*(..))"/>
+        <aop:pointcut id="serviceMethods" expression="execution(* com.eshop4j.web.service..*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
     </aop:config>
     

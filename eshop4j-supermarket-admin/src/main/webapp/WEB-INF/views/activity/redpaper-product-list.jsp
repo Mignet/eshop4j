@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-<link rel="stylesheet" type="text/css" href="app/css/linkwee.tables.css"  />
+<link rel="stylesheet" type="text/css" href="app/css/eshop4j.tables.css"  />
 <script type="text/javascript" src="assets/plugins/data-tables/js/jquery.dataTables.min.js"  ></script>
 <div class="container-fluid">
 	<div class="table-responsive">
@@ -15,7 +15,7 @@
 			</thead>
 		</table>
 	</div>
-	<script type="text/linkwee-template" id="template-search">
+	<script type="text/eshop4j-template" id="template-search">
 		<input name="pname"  class="easyui-textbox" style="width:200px"  placeholder="产品名称">
 		<select name="pdeadline">
 			<option value="0">不限</option>

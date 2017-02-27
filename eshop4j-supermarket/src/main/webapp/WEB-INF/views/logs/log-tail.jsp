@@ -99,7 +99,7 @@ String basePath = "//" + request.getServerName() +  port + path + "/";
 <div id="logs-show" class="log-content log-content-o"><div style="display: table-cell; vertical-align: middle; text-align: center; width: 100%;"><i class="fa fa-play" style="display: none;"></i><i class="fa fa-pause"></i></div></div>
 <script type="text/javascript">
     $(document).ready(function () {
-        window.linkwee = {logger:null};
+        window.eshop4j = {logger:null};
         var loadLog = function () {
             $.get("rest/log/data",{seek:50000},function (result) {
                 $("#logs").html(result.content);
@@ -117,7 +117,7 @@ String basePath = "//" + request.getServerName() +  port + path + "/";
             if(keycode == 32){
                 var tim =  $("#logs").attr("data-time")=="false"?false:true;
                 if(!tim){ // 开始
-                    linkwee.logger =startLoad();
+                    eshop4j.logger =startLoad();
                     $("#logs").attr("data-time","true");
 
                     $("#logs-show .fa").hide();
@@ -126,7 +126,7 @@ String basePath = "//" + request.getServerName() +  port + path + "/";
 
                 }
                 else{ //暂停
-                    clearInterval(linkwee.logger);
+                    clearInterval(eshop4j.logger);
                     $("#logs").attr("data-time","false");
                     $("#logs-show  .fa").hide();
                     $("#logs-show  .fa-play").fadeIn();
@@ -138,7 +138,7 @@ String basePath = "//" + request.getServerName() +  port + path + "/";
 
         });
         loadLog();
-       linkwee.logger =startLoad();
+       eshop4j.logger =startLoad();
     });
 </script>
 </body>

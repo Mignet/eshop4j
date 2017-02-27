@@ -1,8 +1,8 @@
 package ${service.strPackage};
 
-import com.linkwee.core.datatable.DataTable;
-import com.linkwee.core.datatable.DataTableReturn;
-import com.linkwee.core.generic.GenericService;
+import com.eshop4j.core.datatable.DataTable;
+import com.eshop4j.core.datatable.DataTableReturn;
+import com.eshop4j.core.generic.GenericService;
 import ${entity.fullName};
 import ${service.fullName};
  /**

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.linkwee.web.enums.AdvPlacementEnum" %>
+<%@ page import="com.eshop4j.web.enums.AdvPlacementEnum" %>
 <%
 	AdvPlacementEnum[] advPlacementList = AdvPlacementEnum.values();
 	request.setAttribute("advPlacementList", advPlacementList);
@@ -215,7 +215,7 @@
         
 
     </script>
-    <script type="text/linkwee-template" id="template-search">
+    <script type="text/eshop4j-template" id="template-search">
  		<select id="news_app_type" name="appType" class="form-control" style="width: 94px; display: inline-block;">
             <option value="1">理财师</option>
             <option value="2">投资端</option>

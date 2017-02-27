@@ -8,10 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<link rel="stylesheet" type="text/css" href="app/css/linkwee.tables.css"  />
+<link rel="stylesheet" type="text/css" href="app/css/eshop4j.tables.css"  />
 <script type="text/javascript" src="assets/plugins/data-tables/js/jquery.dataTables.min.js" ></script>
 <script type="text/javascript" src="assets/plugins/My97DatePicker/WdatePicker.js"  ></script>
-<script type="text/javascript" src="app/js/jquery.linkwee.js"></script>
+<script type="text/javascript" src="app/js/jquery.eshop4j.js"></script>
 <div id="main-classify" class="container-fluid">
     <div class="table-responsive">
         <table id="J-classifylist" class="table table-bordered" data-xtoolbars="#template-search"  data-url="rest/news/classify/list_ajax" data-order="false" data-paging="true" data-size="10">
@@ -31,7 +31,7 @@
               return '<a class="btn btn-sm btn-default btn-icon ui-redirect" href="javascript:;" data-title="资讯编辑" data-url="/rest/news/classify/tosave?id='+data+'" ><i class="fa fa-edit"></i>编辑</a> &nbsp;&nbsp;<a class="btn btn-sm btn-danger btn-icon J_classify_delete" data-id="'+data+'" href="javascript:;"><i class="fa fa-trash-o"></i>删除</a>';
         }
 
-       var $db= $("#J-classifylist").linkweeTable();
+       var $db= $("#J-classifylist").eshop4jTable();
         $("#main-classify").delegate("a.J_classify_delete","click",function () {
             var iid = $(this).attr("data-id");
             bootbox.confirm("确定要执行删除操作吗？",function (result) {
@@ -45,7 +45,7 @@
             });
         });
     </script>
-    <script type="text/linkwee-template" id="template-search">
+    <script type="text/eshop4j-template" id="template-search">
         <form>
             <div class="row">
                 <div class="col-sm-3">

@@ -16,7 +16,7 @@
 	</context-param> -->
 	<!-- <context-param>
 		<param-name>contextInitializerClasses</param-name>
-		<param-value>com.linkwee.xoss.spring.CustomerApplicationContextInitializer</param-value>
+		<param-value>com.eshop4j.xoss.spring.CustomerApplicationContextInitializer</param-value>
 	</context-param> -->
     <!-- 配置Spring上下文监听器 -->
     <listener>

@@ -3,10 +3,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- DataTables -->
-<link rel="stylesheet" type="text/css" href="app/css/linkwee.tables.css"  />
+<link rel="stylesheet" type="text/css" href="app/css/eshop4j.tables.css"  />
 <script type="text/javascript" src="assets/plugins/data-tables/js/jquery.dataTables.min.js" ></script>
 <script type="text/javascript" src="assets/plugins/My97DatePicker/WdatePicker.js"  ></script>
-<script type="text/javascript" src="app/js/jquery.linkwee.js"></script>
+<script type="text/javascript" src="app/js/jquery.eshop4j.js"></script>
 <div id="main-dynamicnews" class="container-fluid">
     <div class="table-responsive">
 		<table id="J-dynamicnewslist" class="table table-bordered" data-xtoolbars="#template-search"  data-url="rest/sm/smdynamicnews/list_ajax" data-order="false" data-paging="true" data-size="10">
@@ -51,7 +51,7 @@
             return "启用";
         }
 
-       var $db= $("#J-dynamicnewslist").linkweeTable();
+       var $db= $("#J-dynamicnewslist").eshop4jTable();
         $("#main-dynamicnews").delegate("a.J_dynamicnews_delete","click",function () {
             var iid = $(this).attr("data-id");
             bootbox.confirm("确定要执行删除操作吗？",function (result) {
@@ -65,7 +65,7 @@
             });
         });
     </script>
-    <script type="text/linkwee-template" id="template-search">
+    <script type="text/eshop4j-template" id="template-search">
         <form>
             <div class="row">
                 <div class="col-sm-3">

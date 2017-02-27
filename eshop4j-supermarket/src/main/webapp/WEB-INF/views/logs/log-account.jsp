@@ -6,13 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link rel="stylesheet" type="text/css" href="app/css/linkwee.tables.css"  />
+<link rel="stylesheet" type="text/css" href="app/css/eshop4j.tables.css"  />
 <%--<link rel="stylesheet" type="text/css" href="assets/plugins/data-tables/css/dataTables.bootstrap.min.css"  />--%>
 
 <script type="text/javascript" src="assets/plugins/data-tables/js/jquery.dataTables.js"  ></script>
 <script type="text/javascript" src="assets/plugins/data-tables/extensions/Select/js/dataTables.select.min.js"  ></script>
 <script type="text/javascript" src="assets/plugins/My97DatePicker/WdatePicker.js"  ></script>
-<script type="text/javascript" src="app/js/jquery.linkwee.js"></script>
+<script type="text/javascript" src="app/js/jquery.eshop4j.js"></script>
 <div class="ux-warpper">
 <div class="container-fluid" id="main-accountlog">
     <div class="table-responsive">
@@ -52,12 +52,12 @@
                     break;
             }
         }
-        $("#accountlog-table").linkweeTable();
+        $("#accountlog-table").eshop4jTable();
         
     </script>
 </div>
 </div>
-<script type="text/linkwee-template" id="accountlog-template">
+<script type="text/eshop4j-template" id="accountlog-template">
     <form>
         <input name="searchValue"  style="width:200px"  placeholder="输入电话或姓名">
         日期从: <input id="lcsDataViewStartDate" name="startDate" class="Wdate" type="text"  onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'lcsDataViewEndDate\',{d:-1})}'})"/>

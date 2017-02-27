@@ -127,7 +127,7 @@
 	  </update>
 
 	<!-- 分页条件查询 -->
-    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.linkwee.core.datatable.DataTable">
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.eshop4j.core.datatable.DataTable">
         SELECT
         <include refid="Base_Column_List" />
         FROM ${vo.table.sqlName}

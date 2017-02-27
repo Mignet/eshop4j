@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="assets/plugins/data-tables/css/dataTables.bootstrap.min.css"  />
 <script type="text/javascript" src="assets/plugins/data-tables/js/jquery.dataTables.min.js" ></script>
 <script type="text/javascript" src="assets/plugins/My97DatePicker/WdatePicker.js"  ></script>
-<script type="text/javascript" src="app/js/jquery.linkwee.js"></script>
+<script type="text/javascript" src="app/js/jquery.eshop4j.js"></script>
 <div id="main-news" class="container-fluid">
     <div class="table-responsive">
         <table id="J-newslist" class="table table-bordered" data-defer="false" data-xtoolbars="#template-search" data-url="rest/cfplannerSale/getAllowanceDetailList?userId=${userId}" data-order="false" data-paging="true" data-size="10">
@@ -32,9 +32,9 @@
         	return meta.row+1;
         }
 
-       var $db= $("#J-newslist").linkweeTable();
+       var $db= $("#J-newslist").eshop4jTable();
     </script>
-    <script type="text/linkwee-template" id="template-search">
+    <script type="text/eshop4j-template" id="template-search">
         <form>
         <input name="name"  class="easyui-textbox" style="width:200px"  placeholder="输入姓名或手机号...">
 &nbsp;&nbsp;&nbsp;&nbsp;

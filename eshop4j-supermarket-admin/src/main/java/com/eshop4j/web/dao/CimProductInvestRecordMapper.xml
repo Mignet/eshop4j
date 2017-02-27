@@ -1,0 +1,877 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eshop4j.web.dao.CimProductInvestRecordMapper">
+	<!-- Result Map-->
+	<resultMap  type="com.eshop4j.web.model.cim.CimProductInvestRecord" id="BaseResultMap">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="invest_id" property="investId" jdbcType="VARCHAR"/>
+		<result column="invest_record_no" property="investRecordNo" jdbcType="VARCHAR"/>
+		<result column="tx_id" property="txId" jdbcType="VARCHAR"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="product_id" property="productId" jdbcType="VARCHAR"/>
+		<result column="third_product_id" property="thirdProductId" jdbcType="VARCHAR"/>
+		<result column="product_fee_rate" property="productFeeRate" jdbcType="DECIMAL"/>
+		<result column="invest_amt" property="investAmt" jdbcType="DECIMAL"/>
+		<result column="profit" property="profit" jdbcType="DECIMAL"/>
+		<result column="accurate_profit" property="accurateProfit" jdbcType="DECIMAL"/>
+		<result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+		<result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+		<result column="status" property="status" />
+		<result column="platfrom" property="platfrom" jdbcType="VARCHAR"/>
+		<result column="is_platfrom_first_invest" property="isPlatfromFirstInvest" jdbcType="INTEGER"/>
+		<result column="is_first_invest" property="isFirstInvest" jdbcType="INTEGER"/>
+		<result column="biz_time" property="bizTime" jdbcType="TIMESTAMP"/>
+		<result column="create_time" property="createTime"  jdbcType="TIMESTAMP"/>
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+		
+	</resultMap>
+ 	
+  <sql id="Base_Column_List">
+    <trim suffixOverrides=",">
+	    	id,
+	    	invest_id,
+	    	invest_record_no,
+	    	tx_id,
+	    	user_id,
+	    	product_id,
+	    	third_product_id,
+	    	invest_amt,
+	    	profit,
+	    	accurate_profit,
+	    	start_time,
+	    	end_time,
+	    	status,
+	    	platfrom,
+	    	biz_time,
+	    	is_first_invest,
+	    	create_time,
+	    	update_time,
+    </trim>
+  </sql>  
+  
+  <sql id="Base_Condition">
+		<if test=" null != id ">
+			and id = #{id}
+		</if>
+		<if test=" null != investId and ''!= investId  ">
+			and invest_id = #{investId}
+		</if>
+		<if test=" null != investRecordNo and ''!= investRecordNo  ">
+			and invest_record_no = #{investRecordNo}
+		</if>
+		<if test=" null != txId and ''!= txId  ">
+			and tx_id = #{txId}
+		</if>
+		<if test=" null != userId and ''!= userId  ">
+			and user_id = #{userId}
+		</if>
+		<if test=" null != productId and ''!= productId  ">
+			and product_id = #{productId}
+		</if>
+		<if test=" null != thirdProductId and ''!= thirdProductId  ">
+			and third_product_id = #{thirdProductId}
+		</if>
+		<if test=" null != investAmt ">
+			and invest_amt = #{investAmt}
+		</if>
+		<if test=" null != profit ">
+			and profit = #{profit}
+		</if>
+		<if test=" null != accurateProfit ">
+			and accurate_profit = #{accurateProfit}
+		</if>
+		<if test=" null != startTime ">
+			and start_time = #{startTime}
+		</if>
+		<if test=" null != endTime ">
+			and end_time = #{endTime}
+		</if>
+		<if test=" null != status ">
+			and status = #{status}
+		</if>
+		<if test=" null != platfrom and ''!= platfrom  ">
+			and platfrom = #{platfrom}
+		</if>
+		<if test=" null != bizTime ">
+			and biz_time = #{bizTime}
+		</if>
+		<if test=" null != isFirstInvest ">
+			and is_first_invest = #{isFirstInvest}
+		</if>
+		<if test=" null != createTime ">
+			and create_time = #{createTime}
+		</if>
+		<if test=" null != updateTime ">
+			and update_time = #{updateTime}
+		</if>
+  </sql>
+  
+  <select id="selectOneByCondition" resultMap="BaseResultMap"  parameterType="com.eshop4j.web.model.cim.CimProductInvestRecord">
+		select <include refid="Base_Column_List" /> from tcim_product_invest_record 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap"  parameterType="com.eshop4j.web.model.cim.CimProductInvestRecord">
+		select <include refid="Base_Column_List" /> from tcim_product_invest_record 
+		where 1=1 <include refid="Base_Condition" />
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_product_invest_record
+    where  id = #{0}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tcim_product_invest_record
+    where id = #{0}
+  </delete>
+
+  <insert id="insert" parameterType="com.eshop4j.web.model.cim.CimProductInvestRecord" >
+    INSERT INTO tcim_product_invest_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != investId and ''!= investId  ">
+					invest_id,
+				</if>
+			 	<if test=" null != investRecordNo and ''!= investRecordNo  ">
+					invest_record_no,
+				</if>
+				<if test=" null != txId and ''!= txId  ">
+					tx_id,
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != thirdProductId and ''!= thirdProductId  ">
+					third_product_id,
+				</if>
+			 	<if test=" null != investAmt ">
+					invest_amt,
+				</if>
+			 	<if test=" null != profit ">
+					profit,
+				</if>
+			 	<if test=" null != accurateProfit ">
+					accurate_profit,
+				</if>
+			 	<if test=" null != startTime ">
+					start_time,
+				</if>
+			 	<if test=" null != endTime ">
+					end_time,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != platfrom and ''!= platfrom  ">
+					platfrom,
+				</if>
+				<if test=" null != isPlatfromFirstInvest and ''!= isPlatfromFirstInvest  ">
+					is_platfrom_first_invest,
+				</if>
+				
+				<if test=" null != isFirstInvest ">
+					 is_first_invest,
+				</if>
+			 	<if test=" null != bizTime ">
+					biz_time,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != investId and ''!= investId  ">
+					 	#{investId},
+				</if>
+			 	<if test=" null != investRecordNo and ''!= investRecordNo  ">
+					 	#{investRecordNo},
+				</if>
+				<if test=" null != txId and ''!= txId  ">
+					 	#{txId},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != thirdProductId and ''!= thirdProductId  ">
+					 	#{thirdProductId},
+				</if>
+			 	<if test=" null != investAmt ">
+					 	#{investAmt},
+				</if>
+			 	<if test=" null != profit ">
+					 	#{profit},
+				</if>
+			 	<if test=" null != accurateProfit ">
+					 	#{accurateProfit},
+				</if>
+			 	<if test=" null != startTime ">
+					 	#{startTime},
+				</if>
+			 	<if test=" null != endTime ">
+					 	#{endTime},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != platfrom and ''!= platfrom  ">
+					 	#{platfrom},
+				</if>
+				<if test=" null != isPlatfromFirstInvest and ''!= isPlatfromFirstInvest  ">
+					#{isPlatfromFirstInvest},
+				</if>
+				<if test=" null != isFirstInvest ">
+				 		#{isFirstInvest},
+				</if>
+			 	<if test=" null != bizTime ">
+					 	#{bizTime},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+		</trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.eshop4j.web.model.cim.CimProductInvestRecord" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tcim_product_invest_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					id,
+				</if>
+			 	<if test=" null != investId and ''!= investId  ">
+					invest_id,
+				</if>
+			 	<if test=" null != investRecordNo and ''!= investRecordNo  ">
+					invest_record_no,
+				</if>
+				<if test=" null != txId and ''!= txId  ">
+					tx_id,
+				</if>
+				
+			 	<if test=" null != userId and ''!= userId  ">
+					user_id,
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					product_id,
+				</if>
+			 	<if test=" null != thirdProductId and ''!= thirdProductId  ">
+					third_product_id,
+				</if>
+			 	<if test=" null != investAmt ">
+					invest_amt,
+				</if>
+			 	<if test=" null != profit ">
+					profit,
+				</if>
+			 	<if test=" null != accurateProfit ">
+					accurate_profit,
+				</if>
+			 	<if test=" null != startTime ">
+					start_time,
+				</if>
+			 	<if test=" null != endTime ">
+					end_time,
+				</if>
+			 	<if test=" null != status ">
+					status,
+				</if>
+			 	<if test=" null != platfrom and ''!= platfrom  ">
+					platfrom,
+				</if>
+				<if test=" null != isPlatfromFirstInvest and ''!= isPlatfromFirstInvest  ">
+					is_platfrom_first_invest,
+				</if>
+				<if test=" null != isFirstInvest ">
+				 	is_first_invest,
+				</if>
+			 	<if test=" null != bizTime ">
+					biz_time,
+				</if>
+			 	<if test=" null != createTime ">
+					create_time,
+				</if>
+			 	<if test=" null != updateTime ">
+					update_time,
+				</if>
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			 	<if test=" null != id ">
+					 	#{id},
+				</if>
+			 	<if test=" null != investId and ''!= investId  ">
+					 	#{investId},
+				</if>
+			 	<if test=" null != investRecordNo and ''!= investRecordNo  ">
+					 	#{investRecordNo},
+				</if>
+				<if test=" null != txId and ''!= txId  ">
+						#{txId},
+				</if>
+			 	<if test=" null != userId and ''!= userId  ">
+					 	#{userId},
+				</if>
+			 	<if test=" null != productId and ''!= productId  ">
+					 	#{productId},
+				</if>
+			 	<if test=" null != thirdProductId and ''!= thirdProductId  ">
+					 	#{thirdProductId},
+				</if>
+			 	<if test=" null != investAmt ">
+					 	#{investAmt},
+				</if>
+			 	<if test=" null != profit ">
+					 	#{profit},
+				</if>
+			 	<if test=" null != accurateProfit ">
+					 	#{accurateProfit},
+				</if>
+			 	<if test=" null != startTime ">
+					 	#{startTime},
+				</if>
+			 	<if test=" null != endTime ">
+					 	#{endTime},
+				</if>
+			 	<if test=" null != status ">
+					 	#{status},
+				</if>
+			 	<if test=" null != platfrom and ''!= platfrom  ">
+					 	#{platfrom},
+				</if>
+				<if test=" null != isPlatfromFirstInvest and ''!= isPlatfromFirstInvest  ">
+					#{isPlatfromFirstInvest},
+				</if>
+				<if test=" null != isFirstInvest ">
+				 		#{isFirstInvest},
+				</if>
+			 	<if test=" null != bizTime ">
+					 	#{bizTime},
+				</if>
+			 	<if test=" null != createTime ">
+					 	#{createTime},
+				</if>
+			 	<if test=" null != updateTime ">
+					 	#{updateTime},
+				</if>
+		</trim>
+	</insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.eshop4j.web.model.cim.CimProductInvestRecord" >
+  		UPDATE tcim_product_invest_record
+		<set>
+			<trim suffixOverrides=",">
+					<if test=" null != investId and ''!= investId  ">
+						invest_id = #{investId},
+					</if>
+					<if test=" null != investRecordNo and ''!= investRecordNo  ">
+						invest_record_no = #{investRecordNo},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != thirdProductId and ''!= thirdProductId  ">
+						third_product_id = #{thirdProductId},
+					</if>
+					<if test=" null != investAmt ">
+						invest_amt = #{investAmt},
+					</if>
+					<if test=" null != profit ">
+						profit = #{profit},
+					</if>
+					<if test=" null != accurateProfit ">
+						accurate_profit = #{accurateProfit},
+					</if>
+					<if test=" null != startTime ">
+						start_time = #{startTime},
+					</if>
+					<if test=" null != endTime ">
+						end_time = #{endTime},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != platfrom and ''!= platfrom  ">
+						platfrom = #{platfrom},
+					</if>
+					<if test=" null != isFirstInvest ">
+						is_first_invest = #{isFirstInvest}
+					</if>
+					<if test=" null != bizTime ">
+						biz_time = #{bizTime},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			 id = #{id}
+		</where>
+	</update>
+	
+	
+	<update id="updateInvestRecordEndTimeByProductId">
+			UPDATE tcim_product_invest_record  SET
+				end_time = #{endTime},
+				update_time=now()	
+			WHERE product_id = #{productId}
+	</update>
+	
+	<!-- 更新回款状态 -->
+	<update id="updateRepaymentStatus">
+	
+		UPDATE tcim_product_invest_record  SET
+		<if test="status == 2">
+			status=2,accurate_profit=accurate_profit + #{accurateProfit},
+		</if>
+		<if test="status == 3">
+			status=3,accurate_profit=accurate_profit + #{accurateProfit},end_time=#{repaymentTime},
+		</if>
+		<if test="status == 4">
+			invest_amt= (CASE  WHEN invest_amt - #{repaymentAmount} >0  then invest_amt - #{repaymentAmount} ELSE 0 END),
+		</if>
+		update_time=now()	WHERE invest_record_no=#{investRecordNo}
+	</update>
+  
+	<update id="updateByPrimaryKey" parameterType="com.eshop4j.web.model.cim.CimProductInvestRecord" >
+	    UPDATE tcim_product_invest_record
+	   <set>
+			<trim suffixOverrides=",">
+					<if test=" null != investId and ''!= investId  ">
+						invest_id = #{investId},
+					</if>
+					<if test=" null != investRecordNo and ''!= investRecordNo  ">
+						invest_record_no = #{investRecordNo},
+					</if>
+					<if test=" null != userId and ''!= userId  ">
+						user_id = #{userId},
+					</if>
+					<if test=" null != productId and ''!= productId  ">
+						product_id = #{productId},
+					</if>
+					<if test=" null != thirdProductId and ''!= thirdProductId  ">
+						third_product_id = #{thirdProductId},
+					</if>
+					<if test=" null != investAmt ">
+						invest_amt = #{investAmt},
+					</if>
+					<if test=" null != profit ">
+						profit = #{profit},
+					</if>
+					<if test=" null != accurateProfit ">
+						accurate_profit = #{accurateProfit},
+					</if>
+					<if test=" null != startTime ">
+						start_time = #{startTime},
+					</if>
+					<if test=" null != endTime ">
+						end_time = #{endTime},
+					</if>
+					<if test=" null != status ">
+						status = #{status},
+					</if>
+					<if test=" null != platfrom and ''!= platfrom  ">
+						platfrom = #{platfrom},
+					</if>
+					<if test=" null != isFirstInvest ">
+						is_first_invest = #{isFirstInvest}
+					</if>
+					<if test=" null != bizTime ">
+						biz_time = #{bizTime},
+					</if>
+					<if test=" null != createTime ">
+						create_time = #{createTime},
+					</if>
+					<if test=" null != updateTime ">
+						update_time = #{updateTime},
+					</if>
+			</trim>
+		</set>
+		<where>
+			id = #{0}
+		</where>
+	  </update>
+
+	<!-- 分页条件查询 -->
+    <select id="selectBySearchInfo" resultMap="BaseResultMap" parameterType="com.eshop4j.core.datatable.DataTable">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tcim_product_invest_record
+        <where> 
+        <if test="dt.search!=null">  
+                name LIKE CONCAT('%','${dt.search.value}','%' )  
+         </if>  
+         <if test="dt.order!=null">  
+               <foreach collection="dt.order" index="index" item="item"
+                    open="order by" separator="," close=" ">
+                    ${item.name} ${item.dir} 
+                </foreach>
+         </if>  
+        </where>
+    </select>
+    
+     <select id="selectRefInvestRecord" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT distinct user_id FROM tcim_product_invest_record
+        <where>
+			<foreach item="item" index="index" collection="list" open=" user_id in ("
+				separator="," close=") ">
+				#{item}
+			</foreach>
+		</where> 
+    </select>
+
+    
+     <select id="queryFirsInvestTime" resultType="int" >
+        SELECT count(id) FROM tcim_product_invest_record 
+        <where>
+			user_id = #{userId} and   platfrom =#{orgNumber}
+		</where> 
+    </select>
+    
+
+    
+    <!-- 查询客户投资总额 -->
+    <select id="queryCustomerInvestTotalAmount" resultType="BigDecimal">
+    	SELECT IFNULL(SUM(t.invest_amt),0) FROM tcim_product_invest_record t WHERE t.user_id=#{userId}
+    </select>
+    
+    <!-- 查询当前在投总额-->
+     <select id="queryCurrInvestAmount" resultType="BigDecimal">
+    	SELECT IFNULL(SUM(t.invest_amt),0) FROM tcim_product_invest_record t WHERE t.user_id=#{userId} and t.status=1
+    </select>
+    
+     <!-- 查询客户投资收益 -->
+    <select id="queryCustomerInvestTotalProfit" resultType="BigDecimal">
+    	 SELECT IFNULL(SUM(t.accurate_profit),0) FROM tcim_product_invest_record t WHERE t.user_id=#{userId} AND t.status IN (2,3)
+    </select> 
+    
+    
+	
+	<select id="queryCustomerInvestTradeMsgCount" resultType="int">
+		<![CDATA[ 
+			SELECT
+				count(*)
+			FROM
+				tcim_product_invest_record a
+			LEFT JOIN tcim_fee b ON a.invest_id = b.bill_id
+			AND b.fee_type = '1001'
+			WHERE
+				a.`status` = 1
+			AND b.profit_cfplanner_id = #{userId} AND a.create_time > DATE_FORMAT(#{readTime},'%Y-%m-%d %H:%i:%s')
+		]]> 
+	</select>
+	
+	<select id="queryCustomerRepaymentTradeMsgCount" resultType="int">
+		<![CDATA[ 
+			SELECT
+				count(*)
+			FROM
+				tcim_product_repayment_record a WHERE a.user_id IN (SELECT i.user_id from tcrm_investor i where i.cfplanner=#{userId}) AND a.repayment_time > DATE_FORMAT(#{readTime},'%Y-%m-%d %H:%i:%s')
+		]]> 
+	</select>
+	
+	
+	
+	
+	<select id="queryCfpNewlyDynamicUnReadCount" resultType="int">
+	<![CDATA[ 
+	SELECT 
+	count(t.id)
+	FROM
+	tcim_fee t
+	WHERE
+	(
+	t.fee_type = '1001'
+	OR t.fee_type = '1002'
+	)
+	AND t.profit_cfplanner_id =  #{userId}
+    and  t.create_time >= '${date}'
+	 ]]>
+	</select>
+	
+	<!-- 根据产品编号查询在投投资记录 -->
+	<select id="getInvestRecordByProductIds" resultMap="BaseResultMap">
+
+		SELECT
+			t.invest_id,
+			t.invest_record_no,
+			t.user_id,
+			t.product_id,
+			t.product_fee_rate,
+			t.invest_amt,
+			t.platfrom,
+			t.start_time,
+			t.is_first_invest,
+			t.is_platfrom_first_invest
+		FROM
+			tcim_product_invest_record t
+		WHERE
+			t.product_id 
+			<foreach collection="productIds" item="productId" open="IN (" separator="," close=")">
+				#{productId}
+			</foreach>
+			<![CDATA[ AND t.status <> 3]]>
+		
+	</select>
+	<!-- 查询机构当月投资总额 -->
+	<select id="queryMonthInvestAmount" resultType="java.math.BigDecimal">
+		SELECT
+		SUM(t.invest_amt)
+		FROM
+		tcim_product_invest_record t
+		WHERE
+		t.platfrom = #{orgNumber}
+		AND DATE_FORMAT(t.start_time, '%Y-%m') = DATE_FORMAT(CURDATE(), '%Y-%m')
+	</select>
+	
+	<!-- 查询用户投资次数 -->
+	<select id="queryUserInvestCount" resultType="int">
+				SELECT
+			count(*)
+		FROM
+			(
+				SELECT
+					invest_id
+				FROM
+					tcim_product_invest_record
+				WHERE
+					user_id = #{userId}
+				UNION
+					SELECT
+						invest_id
+					FROM
+						tcim_product_unrecord_invest
+					WHERE
+						user_id = #{userId}
+			) a
+	<!-- SELECT COUNT(invest_id) FROM tcim_product_invest_record  WHERE user_id=#{userId} -->
+	</select>
+	
+	<select id="queryUserInvestCountByPlatFormModel" resultType="String">
+			
+			<!-- SELECT
+			COUNT(DISTINCT o.org_number) platformCount,
+			COUNT(DISTINCT i.platfrom) investPlatformCount
+		FROM
+			tcim_org_info o
+		LEFT JOIN tcim_product_invest_record i ON o.org_number = i.platfrom AND i.user_id = #{userId} 
+		WHERE
+			 
+			o.`status` = 1
+		AND o.org_fee_type =#{model} AND o.org_gray_status=0 AND o.org_isstaticproduct=0; -->
+		
+SELECT
+	*
+FROM
+	(
+		SELECT
+			r.platform_id
+		FROM
+			(
+				SELECT
+					o.org_number,
+					COUNT(i.platfrom) investPlatformCount
+				FROM
+					tcim_org_info o
+				LEFT JOIN tcim_product_invest_record i ON o.org_number = i.platfrom
+				AND i.user_id = #{userId} 
+				WHERE
+					o.`status` = 1
+				AND o.org_fee_type = #{model}
+				AND o.org_gray_status = 0
+				AND o.org_isstaticproduct = 0
+				GROUP BY
+					o.org_number
+				HAVING
+					investPlatformCount = 0
+			) a
+		LEFT JOIN tact_repayment_redpacket_pool r ON a.org_number = r.platform_id
+	) a
+WHERE
+	a.platform_id IS NOT NULL
+		
+		<!-- SELECT a.org_number from (
+
+SELECT
+	 o.org_number,
+	COUNT(i.platfrom) investPlatformCount
+FROM
+	tcim_org_info o
+
+LEFT JOIN tcim_product_invest_record i ON o.org_number = i.platfrom AND i.user_id = #{userId} 
+
+WHERE
+	 
+	o.`status` = 1
+AND o.org_fee_type =#{model} AND o.org_gray_status=0 AND o.org_isstaticproduct=0 GROUP BY o.org_number HAVING investPlatformCount=0)a; -->
+			
+		
+	</select>
+	
+	<!-- 查询用户平台投资次数 -->
+	<select id="queryUserPlatfromInvestCount" resultType="int">
+		SELECT COUNT(invest_id) FROM tcim_product_invest_record WHERE platfrom=#{platfromId} AND user_id=#{userId}
+	</select>
+	
+	
+	<select id="getInvestRecordCounts" resultType="map">
+		SELECT
+			IFNULL(
+				count(
+					CASE
+					WHEN i.`status` = 1 THEN
+						1
+					ELSE
+						NULL
+					END
+				),
+				0
+			) tzz,
+			IFNULL(
+				count(
+					CASE
+					WHEN i.`status` = 2 THEN
+						1
+					ELSE
+						NULL
+					END
+				),
+				0
+			) hkz,
+			IFNULL(
+				count(
+					CASE
+					WHEN i.`status` = 3 THEN
+						1
+					ELSE
+						NULL
+					END
+				),
+				0
+			) hkwc,
+			(
+				SELECT
+					IFNULL(
+						count(
+							CASE
+							WHEN u.`status` = 1 THEN
+								1
+							ELSE
+								NULL
+							END
+						),
+						0
+					)
+				FROM
+					tcim_product_unrecord_invest u
+				WHERE
+					u.user_mobile = (
+						SELECT
+							mobile
+						FROM
+							tcrm_investor i
+						WHERE
+							i.user_id = #{userId}
+					)
+			) qt
+		FROM
+			tcim_product_invest_record i
+		WHERE
+			i.user_id = #{userId}
+	</select>
+	
+	<select id="getInvestInfoByDate" resultType="com.eshop4j.web.model.vo.InvestInfo">
+		SELECT
+		    i.end_time endTime,
+			ii.user_id uid,
+			ii.user_name uname,
+			ii.mobile umobile,
+			ci.user_id cid,
+			ci.user_name cname,
+			ci.mobile cmobile,
+			p.product_id productId,
+			p.product_name,
+			p.is_redemption deadlineType,
+			o.org_number platfrom,
+			o.org_fee_type model,
+			i.invest_amt investAmt,
+			o.org_amount_limit amtLimit,
+			i.is_first_invest isFirstInvest,
+			i.is_platfrom_first_invest isPlatfromFirstInvest
+		FROM
+			tcim_product_invest_record i
+		LEFT JOIN tcrm_investor iv ON i.user_id = iv.user_id
+		LEFT JOIN tcrm_user_info ii ON i.user_id = ii.user_id
+		LEFT JOIN tcrm_cfplanner c ON iv.cfplanner = c.user_id
+		LEFT JOIN tcrm_user_info ci ON c.user_id = ci.user_id
+		LEFT JOIN tcim_product p ON i.product_id = p.product_id
+		LEFT JOIN tcim_org_info o ON i.platfrom = o.org_number
+		WHERE
+		
+			(DATE(i.end_time)=#{date}  <!-- AND  o.`status` = 1 -->  AND
+		
+				o.org_fee_type = 2
+				AND p.is_redemption = 0	
+			)
+		OR 
+			(DATE(i.end_time)=#{date} AND o.org_fee_type = 1)
+	</select>
+	
+	<select id="getInvestInfoByNow" resultType="com.eshop4j.web.model.vo.InvestInfo">
+		SELECT
+			ii.user_id uid,
+			ii.user_name uname,
+			ii.mobile umobile,
+			ci.user_id cid,
+			ci.user_name cname,
+			ci.mobile cmobile,
+			p.product_id productId,
+			p.is_redemption deadlineType,
+			o.org_number platfrom,
+			o.org_fee_type model,
+			i.invest_amt investAmt,
+			o.org_amount_limit amtLimit,
+			i.is_first_invest isFirstInvest,
+			i.is_platfrom_first_invest isPlatfromFirstInvest
+		FROM
+			tcim_product_invest_record i
+		LEFT JOIN tcrm_investor iv ON i.user_id = iv.user_id
+		LEFT JOIN tcrm_user_info ii ON i.user_id = ii.user_id
+		LEFT JOIN tcrm_cfplanner c ON iv.cfplanner = c.user_id
+		LEFT JOIN tcrm_user_info ci ON c.user_id = ci.user_id
+		LEFT JOIN tcim_product p ON i.product_id = p.product_id
+		LEFT JOIN tcim_org_info o ON i.platfrom = o.org_number
+		WHERE
+			
+			DATE_FORMAT(i.end_time,'%Y-%m-%d %H:%i')=#{today}  
+			<!-- AND  o.`status` = 1   -->
+			AND o.org_fee_type = 2
+			AND i.`status` = 3
+			AND <![CDATA[  p.is_redemption <> 0 ]]>
+			
+	</select>
+</mapper>

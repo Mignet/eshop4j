@@ -7,10 +7,10 @@
   理财师销售与收益列表
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link rel="stylesheet" type="text/css" href="app/css/linkwee.tables.css"  />
+<link rel="stylesheet" type="text/css" href="app/css/eshop4j.tables.css"  />
 <script type="text/javascript" src="assets/plugins/data-tables/js/jquery.dataTables.min.js"  ></script>
 <script type="text/javascript" src="assets/plugins/My97DatePicker/WdatePicker.js"  ></script>
-<script type="text/javascript" src="app/js/jquery.linkwee.js"></script>
+<script type="text/javascript" src="app/js/jquery.eshop4j.js"></script>
 
 
 <div id="main-sale" class="container-fluid">
@@ -64,7 +64,7 @@
             }
             return data?'<a class="ui-redirect" data-title="'+title+'" data-url="'+url+'">'+num.toFixed(2)+'</a>':'0';
         }
-       var $datatables =  $("#J-salelist").linkweeTable();
+       var $datatables =  $("#J-salelist").eshop4jTable();
        
        var nameFormat = function (data,type,full,meta) {
        	if(data!=null && data !='') {
@@ -75,7 +75,7 @@
        }
     </script>
 
-    <script type="text/linkwee-template" id="template-search">
+    <script type="text/eshop4j-template" id="template-search">
         <form>
 <div class="input-group">
             <input name="name"  class="form-control" style="width:200px"  placeholder="输入姓名或手机号...">

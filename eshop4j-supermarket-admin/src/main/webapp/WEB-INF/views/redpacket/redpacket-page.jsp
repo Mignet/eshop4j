@@ -28,7 +28,7 @@
         </thead>
     </table>
 
-	<script type="text/linkwee-template" id="template-tools">
+	<script type="text/eshop4j-template" id="template-tools">
             <div class="row">
                 <div class="col-sm-3">
                     <div class="input-group">

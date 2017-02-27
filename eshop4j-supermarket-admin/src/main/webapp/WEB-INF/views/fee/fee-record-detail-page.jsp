@@ -29,7 +29,7 @@
         </thead>
     </table>
 
-	<script type="text/linkwee-template" id="template-tools">
+	<script type="text/eshop4j-template" id="template-tools">
             <div class="row">
                 <div class="col-sm-2">
                     <input name="customerMobile" class="form-control"   placeholder="请输入客户手机号码" autocomplete="off">

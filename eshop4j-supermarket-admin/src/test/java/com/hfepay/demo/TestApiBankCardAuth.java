@@ -10,9 +10,9 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import com.alibaba.fastjson.JSONObject;
-import com.linkwee.xoss.crypto.Cipher3DES;
-import com.linkwee.xoss.crypto.HttpRequestClient;
-import com.linkwee.xoss.crypto.RsaSignCoder;
+import com.eshop4j.xoss.crypto.Cipher3DES;
+import com.eshop4j.xoss.crypto.HttpRequestClient;
+import com.eshop4j.xoss.crypto.RsaSignCoder;
 
 
 public class TestApiBankCardAuth {

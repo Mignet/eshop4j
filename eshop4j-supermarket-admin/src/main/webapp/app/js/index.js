@@ -1,9 +1,9 @@
 ;(function ($win,$) {
 
-        $win.linkwee= {routerTree:[]};
-        linkwee.router={
+        $win.eshop4j= {routerTree:[]};
+        eshop4j.router={
         breadcrumbChangeEvent:function () {
-            var nodes = linkwee.routerTree;
+            var nodes = eshop4j.routerTree;
 //            console.log(nodes);
                var count = nodes.length;
                var lastNode = nodes[count-1];
@@ -22,14 +22,14 @@
                 
             }
         };
-        linkwee.addRouterTree = function (title,url) {
+        eshop4j.addRouterTree = function (title,url) {
             var burl = $("base").attr("href");
             var is_parent = arguments[2]?arguments[2]:false;
             var hasnode = false;
-            var nodes = linkwee.routerTree;
+            var nodes = eshop4j.routerTree;
             url = url.replace(burl,"").replace("http:","").replace("https:","");
             if(is_parent){
-                linkwee.routerTree = [{title:title,url:url}];
+                eshop4j.routerTree = [{title:title,url:url}];
             }
             else{
                 for(var i=0;i<nodes.length;i++){
@@ -40,11 +40,11 @@
                     }
                 }
                 if(!hasnode || nodes.length<=0){
-                    linkwee.routerTree.push({title:title,url:url});
+                    eshop4j.routerTree.push({title:title,url:url});
                 }
 
             }
-            linkwee.router.breadcrumbChangeEvent();
+            eshop4j.router.breadcrumbChangeEvent();
 
 
 
@@ -82,7 +82,7 @@ $(function() {
          */
         me.switchPage = function (pageName,pageUrl) {
             var $method = "GET";
-            linkwee.addRouterTree(pageName,pageUrl);
+            eshop4j.addRouterTree(pageName,pageUrl);
             changeMenu(pageName);
             $.ajax({
                 type :$method,
@@ -120,7 +120,7 @@ $(function() {
                 var url = this.href;
                 if (url !== null && url !== 'javascript:;') {
                 	//设置引导显示menu>menu2
-                    linkwee.addRouterTree(this.text,url,true);
+                    eshop4j.addRouterTree(this.text,url,true);
                     self.switchPage(this.text,url);
 
                 }

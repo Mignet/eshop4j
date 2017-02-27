@@ -86,8 +86,8 @@
 		    <artifactId>jibx-run</artifactId>
 		    <version>1.2.6</version>
 		</dependency>
-		<!-- 快钱独有 -->
-		<dependency>
+		<!-- 快钱支付 -->
+		<!-- <dependency>
 		  <groupId>com.bill99</groupId>
 		  <artifactId>fo-jibx-commons</artifactId>
 		  <version>1.0.2</version>
@@ -116,7 +116,7 @@
 		  <groupId>com.bill99</groupId>
 		  <artifactId>if-util</artifactId>
 		  <version>3.2.8</version>
-		</dependency>
+		</dependency> -->
 		<!-- https://mvnrepository.com/artifact/org.apache.axis/axis -->
 		<dependency>
 		    <groupId>org.apache.axis</groupId>

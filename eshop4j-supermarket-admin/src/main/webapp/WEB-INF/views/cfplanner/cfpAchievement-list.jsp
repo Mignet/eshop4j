@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="assets/plugins/data-tables/css/dataTables.bootstrap.min.css"  />
 <script type="text/javascript" src="assets/plugins/data-tables/js/jquery.dataTables.min.js" ></script>
 <script type="text/javascript" src="assets/plugins/My97DatePicker/WdatePicker.js"  ></script>
-<script type="text/javascript" src="app/js/jquery.linkwee.js"></script>
+<script type="text/javascript" src="app/js/jquery.eshop4j.js"></script>
 <div id="main-news" class="container-fluid">
     <div class="table-responsive">
         <table id="J-newslist" class="table table-bordered" data-defer="false" data-xtoolbars="#template-search" data-url="rest/cfpAchievement/getCfpAchievement" data-order="false" data-paging="true" data-size="10">
@@ -34,7 +34,7 @@
         	return data?data.substring(0,data.length-8)+'****'+data.substring(data.length-4,data.length):"--";
         }
 
-       var $db= $("#J-newslist").linkweeTable();
+       var $db= $("#J-newslist").eshop4jTable();
        
        function exportCfpAchievement(){
     	   $form = $("#exportCfpAchievement").attr("action","rest/cfpAchievement/exportCfpAchievement");
@@ -42,7 +42,7 @@
    		return false;
        }
     </script>
-    <script type="text/linkwee-template" id="template-search">
+    <script type="text/eshop4j-template" id="template-search">
         <form id="exportCfpAchievement">
         城市<select id="name" name="name">
 			<option value="">全部</option>

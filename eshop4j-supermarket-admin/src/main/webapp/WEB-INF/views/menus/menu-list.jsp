@@ -7,10 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" type="text/css" href="app/css/linkwee.tables.css"  />
+<link rel="stylesheet" type="text/css" href="app/css/eshop4j.tables.css"  />
 <script type="text/javascript" src="assets/plugins/data-tables/js/jquery.dataTables.min.js"  ></script>
 <script type="text/javascript" src="assets/plugins/handlebars/handlebars-4.0.5.js"  ></script>
-<script type="text/javascript" src="app/js/jquery.linkwee.js"></script>
+<script type="text/javascript" src="app/js/jquery.eshop4j.js"></script>
 
 <div class="ux-warpper">
 <div id="main-menus" class="container-fluid">
@@ -75,7 +75,7 @@
             return true;
         });
 
-       var menusDb= $("#JmenuList").linkweeTable({
+       var menusDb= $("#JmenuList").eshop4jTable({
             formats:{
                 "opts":function (data,type,full,meta) {
                     return '<a class="btn btn-sm btn-default btn-icon J_menu_save" href="javascript:;" data-title="更新菜单"  data-url="/rest/menus/save?id='+data+'" ><i class="fa fa-edit"></i>编辑</a> &nbsp;&nbsp;<a class="btn btn-sm btn-danger btn-icon J_menus_delete" data-id="'+data+'" href="javascript:;"><i class="fa fa-trash-o"></i>删除</a>';
@@ -125,7 +125,7 @@
                                       async:false,
                                       url:$form.attr("action"),
                                       dataType:"json",
-                                      data:$form.linkweeFormObject(),
+                                      data:$form.eshop4jFormObject(),
                                       error:function () {
                                           
                                       },
@@ -183,7 +183,7 @@
         });
     </script>
 
-    <script type="text/linkwee-template" id="template-search">
+    <script type="text/eshop4j-template" id="template-search">
         <form>
             <div class="row">
                 <div class="col-sm-2">

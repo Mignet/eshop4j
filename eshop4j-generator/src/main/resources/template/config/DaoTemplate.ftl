@@ -4,8 +4,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
-import com.linkwee.core.datatable.DataTable;
-import com.linkwee.core.generic.GenericDao;
+import com.eshop4j.core.datatable.DataTable;
+import com.eshop4j.core.generic.GenericDao;
 import ${entity.fullName};
 
  /**

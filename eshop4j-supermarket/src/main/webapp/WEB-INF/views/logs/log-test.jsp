@@ -1,6 +1,6 @@
 <%@ page import="java.lang.*" %>
 <%@ page import="java.io.*" %>
-<%@ page import="com.linkwee.core.bytecode.*" %>
+<%@ page import="com.eshop4j.core.bytecode.*" %>
 <%
 	InputStream is = new FileInputStream("/data/TestClass.class");
 	byte[] b = new byte[is.available()];

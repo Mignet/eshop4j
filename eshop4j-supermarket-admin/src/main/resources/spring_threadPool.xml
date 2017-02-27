@@ -31,7 +31,7 @@
     </property>  
   </bean>  
   
-  <bean id="mainExecutor" class="com.linkwee.web.service.impl.MainExecutor">  
+  <bean id="mainExecutor" class="com.eshop4j.web.service.impl.MainExecutor">  
     <property name="threadPool" ref="threadPool" />   
   </bean>  
   

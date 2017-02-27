@@ -31,7 +31,7 @@
     </div>
     
     
-        <script type="text/linkwee-template" id="template-search">
+        <script type="text/eshop4j-template" id="template-search">
   			<form id="export_investorRepayment">
             <div class="row">
 				<div class="col-xs-3">
