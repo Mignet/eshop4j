@@ -62,7 +62,7 @@ public class OneSpider {
     			 for (int j = 0; j < tds.size(); j++) {
     				 Element e = tds.get(j);
     				 String text = e.text();
-    				 String imgUrl = e.attr("src");
+    				 String imgUrl = e.select("img").attr("src");
     				 if(!StringUtils.isBlank(imgUrl)){
     					 text = imgUrl;
     				 }
