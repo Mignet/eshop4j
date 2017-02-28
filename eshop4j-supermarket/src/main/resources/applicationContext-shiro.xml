@@ -21,7 +21,7 @@
                 /assets/** = anon
                 <!-- 登录允许访问 -->
                 /rest/auth/login = anon
-                /rest/log/** = anon
+                /rest/log/** = authcBasic
                 /rest/image/captcha = anon
                 <!-- Rest Api for Mobile-->
                 /rest/api/** = app

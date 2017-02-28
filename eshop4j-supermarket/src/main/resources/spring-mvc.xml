@@ -15,7 +15,6 @@
     <!-- 扫描controller（controller层注入） -->
     <context:component-scan base-package="com.eshop4j.web.controller"/>
     <context:component-scan base-package="com.eshop4j.api.controller"/>
-    <context:component-scan base-package="com.eshop4j.openapi.controller"/>
 
     <!-- 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean,是spring MVC为@Controllers分发请求所必须的 -->
     <!-- 指定自己定义的validator -->
