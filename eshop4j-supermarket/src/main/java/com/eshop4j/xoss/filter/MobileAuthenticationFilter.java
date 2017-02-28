@@ -24,10 +24,10 @@ import com.eshop4j.core.base.api.BaseResponse;
 import com.eshop4j.core.util.DateUtils;
 import com.eshop4j.core.util.NetUtils;
 import com.eshop4j.core.util.SignUtils;
+import com.eshop4j.xoss.api.AppRequestHead;
+import com.eshop4j.xoss.constant.InnerResponseConstant;
 import com.eshop4j.xoss.util.AppResponseUtil;
 import com.eshop4j.xoss.util.RequestHeadUtil;
-import com.linkwee.xoss.api.AppRequestHead;
-import com.linkwee.xoss.constant.InnerResponseConstant;
 
 public class MobileAuthenticationFilter extends AccessControlFilter {
 	

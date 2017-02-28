@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @描述：日期工具类 默认使用 "yyyy-MM-dd HH:mm:ss" 格式化日期
  *
- * @author 何源
+ * @author Mignet
  * @时间  2015年8月20日下午1:57:08
  *
  */

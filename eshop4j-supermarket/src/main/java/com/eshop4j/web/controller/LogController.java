@@ -29,16 +29,6 @@ public class LogController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogController.class);
 
-    /**
-     * 账号操作日志列表显示列表页
-     * @return
-     */
-    @RequestMapping(value = "/account")
-    @RequestLogging("账号操作日志列表显示列表页")
-    public String accountLog(){
-        return "logs/log-account";
-    }
-
     @RequestMapping(value = "/thread",method = RequestMethod.GET)
     public String showThreads() throws Exception{
         return "logs/log-thread";
@@ -54,7 +44,7 @@ public class LogController {
     public Map<String,Object> showLoggerAjax(int seek) throws Exception{
         Map<String,Object> result = new HashMap<String, Object>();
         seek = seek<=0?5000:seek;
-        File f = new File(File.separator+"data"+File.separator+"logs"+File.separator+"eshop4j-supermarket-admin-tomcat"+File.separator+"eshop4j-supermarket-admin.log");
+        File f = new File(File.separator+"data"+File.separator+"logs"+File.separator+"eshop4j-supermarket-tomcat"+File.separator+"eshop4j-supermarket.log");
         if(f.exists()){
             result.put("size",f.length());
 
@@ -69,7 +59,7 @@ public class LogController {
             result.put("content",content);
             result.put("seek",le);
         }else{
-            result.put("content","/data/logs/eshop4j-supermarket-admin-tomcat/eshop4j-supermarket-admin.log,文件不存在");
+            result.put("content","/data/logs/eshop4j-supermarket-tomcat/eshop4j-supermarket.log,文件不存在");
             result.put("seek",0);
         }
         return result;

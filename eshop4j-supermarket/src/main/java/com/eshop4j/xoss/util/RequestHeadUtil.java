@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSONObject;
-import com.linkwee.xoss.api.AppRequestHead;
-import com.linkwee.xoss.api.OpenRequestHead;
+import com.eshop4j.xoss.api.AppRequestHead;
+import com.eshop4j.xoss.api.OpenRequestHead;
 
 public class RequestHeadUtil {
 	

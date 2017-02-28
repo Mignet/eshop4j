@@ -2,9 +2,6 @@ package com.eshop4j.core.base;
 
 import java.util.List;
 
-import com.xiaoniu.mybatis.paginator.domain.PageList;
-import com.xiaoniu.mybatis.paginator.domain.PageRequest;
-
 
 /**
  * 
@@ -79,13 +76,6 @@ public interface BasePageDao<T> extends BaseDao{
 	 */
 	public T getByPrimaryKey(Object id);
 
-	/**
-	 * 分页
-	 * @param objects
-	 * @return
-	 */
-	public PageList<T> list(PageRequest request);
-	
 	/**
 	 * 条件查询
 	 * @param objects
