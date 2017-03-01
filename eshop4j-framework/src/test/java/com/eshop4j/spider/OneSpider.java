@@ -15,6 +15,10 @@ public class OneSpider {
      private static final String ORDER_URL="http://zhihe.cnyirui.cn/backend/pcgkdd/list?";//293
      private static final String USER_URL="http://zhihe.cnyirui.cn/backend/pcgk/list?";//890
      
+     /**
+      * orders
+      * @throws Exception
+      */
      private void spiderOrderData() throws Exception{
     	 Map<String, String> cookies = new HashMap<String, String>();
     	 cookies.put("JSESSIONID", "693d6e61-0ff7-4279-a1fc-42865198871d");
@@ -42,6 +46,10 @@ public class OneSpider {
     	 fw.flush();
      }
      
+     /**
+      * customers
+      * @throws Exception
+      */
      private void spiderUserData() throws Exception{
     	 Map<String, String> cookies = new HashMap<String, String>();
     	 cookies.put("JSESSIONID", "693d6e61-0ff7-4279-a1fc-42865198871d");
