@@ -17,7 +17,7 @@ String basePath = "//" + request.getServerName() +  port + path + "/";
     <head>
         <base href="<%=basePath%>">
         <meta charset="utf-8" />
-        <title>金融超市运营管理系统</title>
+        <title>ESHOP运营管理系统</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         <meta content="" name="description" />
@@ -333,7 +333,7 @@ String basePath = "//" + request.getServerName() +  port + path + "/";
         <!-- BEGIN FOOTER -->
         <div class="footer">
             <div class="footer-inner">
-                2016 &copy; Rapid4J By 米格网络科技.
+                2017 &copy; Rapid4J By 米格网络.
             </div>
             <div class="footer-tools">
                 <span class="go-top"><i class="fa fa-angle-up"></i></span>
