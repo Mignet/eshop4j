@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>茅之和</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">茅之和</h1>
+		</header>
+		<div class="mui-content">
+			<img width="100%" src="../img/mzh-2f03e43.jpg" />
+			<h4>茅之和</h4
+			<h4>¥ 980.0 免邮</h4>
+			<hr/>
+			<h5>商品详情</h5>
+			<img width="100%" src="../img/mzh-cf1bb36.jpg" />
+		</div>
+		<div style="position:fixed;bottom:0">
+			<nav class="bar bar-tab cart_nav" >
+				<a id="promptBtn" class="button tab-item cart btn" style="background: 0px 0px rgb(46, 46, 46);"><b>加入购物车</b></a>
+				<a id="checkoutBtn" class="button tab-item buy btn" style="background: 0px 0px rgb(179, 23, 32);"><b>立即购买</b></a>
+			</nav>
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		document.getElementById("promptBtn").addEventListener('tap', function(e) {
+				e.detail.gesture.preventDefault(); //修复iOS 8.x平台存在的bug，使用plus.nativeUI.prompt会造成输入法闪一下又没了
+				var btnArray = ['取消', '确定'];
+				mui.prompt('请输入你的购买数量：', 1, '茅之和', btnArray, function(e) {
+					if (e.index == 1) {
+						var num = e.value==""?1:e.value;
+						if( isNaN(num)){
+							console.log(num);
+							mui.toast('请输入数字!');return;
+						}
+						num = (num|0);
+						console.log('你的购买数量：' + (num));
+						//增加num个
+						addItem1(num);
+						mui.confirm('加入购物车成功，是否马上去结算？', '结算确认', btnArray, function(e) {
+							if (e.index == 1) {
+								console.log("跳转到购物车去结算");
+								window.location.href = '/';
+								setCookie('cart',1,7);
+							} else {
+								console.log("nothing");
+							}
+						})
+					} else {
+						console.log('你点了取消按钮');
+					}
+				},'div')
+				document.querySelector('.mui-popup-input input').type='number';
+			});
+		document.getElementById("checkoutBtn").addEventListener('tap', function(e) {
+			e.detail.gesture.preventDefault();
+			addItem1(1);
+			console.log("跳转到购物车去结算");
+			window.location.href = '/';
+			setCookie('cart',1,7);
+		});
+	</script>
+</html>
