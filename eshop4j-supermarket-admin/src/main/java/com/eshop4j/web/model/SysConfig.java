@@ -13,7 +13,7 @@ import java.io.Serializable;
  * 
  * @创建时间：2016年07月08日 16:50:33
  * 
- * Copyright (c) 深圳ESHOP有限公司-版权所有
+ * Copyright (c) 深圳米格网络科技有限公司-版权所有
  */
 public class SysConfig implements Serializable {
 	

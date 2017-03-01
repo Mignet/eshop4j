@@ -46,7 +46,7 @@ import com.eshop4j.xoss.util.RequestLogging;
  * 
  * @创建时间：2016年07月08日 14:46:57
  * 
- * Copyright (c) 深圳ESHOP有限公司-版权所有
+ * Copyright (c) 深圳米格网络科技有限公司-版权所有
  */
 @Controller
 @RequestMapping(value = "sysconfig")
