@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
  * 描述：json null值 日期格式化处理
  * @author yalin
  * @date 2016年7月22日 下午3:05:39 
- * Copyright (c) 深圳市前海ESHOP有限公司
+ * Copyright (c) 深圳市前海米格网络科技有限公司
  */
 public class BaseObjectMapper extends ObjectMapper {  
     /**

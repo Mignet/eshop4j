@@ -29,8 +29,6 @@ public class StringUtils {
 
 	/**
 	 * 字符串是否为数字
-	 * @Auther ZhongLing
-	 * @Date 2016年2月22日
 	 * @param str
 	 * @return
 	 */

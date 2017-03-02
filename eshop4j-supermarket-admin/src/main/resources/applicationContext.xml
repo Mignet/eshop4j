@@ -64,17 +64,18 @@
 			<property name="minIdle" value="8" />
 			<property name="maxIdle" value="100" />
 	</bean>
-
+	
+	<!-- 
 	<bean id="jedisCluster" class="com.eshop4j.xoss.util.JedisClusterFactoryHelper">
 		<property name="addressConfig">
 			<value>classpath:config/redis-cluster.properties</value>
 		</property>
-		<!--  属性文件里  key的前缀 -->
+		 属性文件里  key的前缀
 		<property name="addressKeyPrefix" value="redisAddress" />   
 		<property name="timeout" value="300000" />
 		<property name="maxRedirections" value="6" />
 		<property name="genericObjectPoolConfig" ref="genericObjectPoolConfig" />
-	</bean>
+	</bean> -->
 	
     <!-- dataSource 配置 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
@@ -178,21 +179,6 @@
       
    	<!-- 配置简单作业-->
   <!--   <job:simple id="simpleElasticJob" class="com.eshop4j.job.MySimpleJob" registry-center-ref="regCenter" cron="0/30 * * * * ?"   sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" /> -->
-    <job:simple id="rejectedExecuteRetryJob" class="com.eshop4j.job.RejectedExecuteRetryJob" registry-center-ref="regCenter" cron="0 0/30 * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
-    <job:simple id="everyDayFeeCalcJob" class="com.eshop4j.job.EveryDayFeeCalcJob" registry-center-ref="regCenter" cron="0 0 1 * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
-    <job:simple id="checkExpirationRedpacketJob" class="com.eshop4j.job.CheckExpirationRedpacketJob" registry-center-ref="regCenter" cron="0 */1 * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
-    <job:simple id="advanceSendRedPacketExpireMsgJob" class="com.eshop4j.job.AdvanceSendRedPacketExpireMsgJob" registry-center-ref="regCenter" cron="0 0 10 * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
-    <job:simple id="pushMessgeJob" class="com.eshop4j.job.PushMessageThreadJob" registry-center-ref="regCenter" cron="0/30 * * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />  
-    <job:simple id="acWithdrawApplyJob" class="com.eshop4j.job.AcWithdrawApplyJob" registry-center-ref="regCenter" cron="0 0 7,10,12,14,16,18,20,22 * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />  
-    <job:simple id="sysPushMessgeJob" class="com.eshop4j.job.SysPushMessageThreadJob" registry-center-ref="regCenter" cron="0 */1 * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
-    <!--机构佣金修改定时任务  (cron = "0 0 0/1 * * ?")//每小时  cron="0 0 */1 * * ?"-->
-    <job:simple id="modifyOrgFeeRatioJob" class="com.eshop4j.job.ModifyOrgFeeRatioJob" registry-center-ref="regCenter" cron="0 */1 * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
-    <!-- 回款提前提醒  0 0 8 * * ?-->
-    <job:simple id="advancePaymentReminderJob" class="com.eshop4j.job.AdvancePaymentReminderJob" registry-center-ref="regCenter" cron="0 0 8 * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
-     <job:simple id="advanceSendRedPacketByDate" class="com.eshop4j.job.AdvanceSendRedPacketByDate" registry-center-ref="regCenter" cron="0 0 8 * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" /> 
-     <!-- <job:simple id="advanceSendRedPacketByDate" class="com.eshop4j.job.AdvanceSendRedPacketByDate" registry-center-ref="regCenter" cron="0 */1 * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" /> -->
-     <job:simple id="advanceSendRedPacketByNow" class="com.eshop4j.job.AdvanceSendRedPacketByNow" registry-center-ref="regCenter" cron="0 */1 * * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
-    <job:simple id="weiXinMsgJob" class="com.eshop4j.job.WeiXinMsgJob" registry-center-ref="regCenter" cron="0 0 */1 * * ?" sharding-total-count="1" sharding-item-parameters="0=A,1=B,2=C" />
     <!-- 分布式定时任务调度 结束 - (基于ZooKeeper)-  -->
     
 </beans>

@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
+import com.eshop4j.core.util.StringUtils;
 import com.google.zxing.client.j2se.MatrixToImageConfig;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
@@ -20,7 +21,7 @@ import com.google.zxing.common.BitMatrix;
  * 
  * @描述：二维码工具
  *
- * @author 何源
+ * @author Mignet
  * @时间  2015年8月5日上午10:09:35
  *
  */

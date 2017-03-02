@@ -1,0 +1,77 @@
+/*
+ *这是单独为hello mui准备的个性化css，可以覆盖标准mui的css定义；
+ * 在实际项目开发时，建议为App单独写一个css文件，从而实现项目的自定义皮肤功能；
+ * 
+ * */
+
+.mui-plus.mui-android header.mui-bar {
+	display: none;
+}
+
+.mui-plus.mui-android .mui-bar-nav~.mui-content {
+	padding: 0;
+}
+
+.box
+{
+　　-moz-border-radius:8px;/*8px是圆角的角度，值越大则圆角效果越明显，如果修改此项，请修改以下两项的值，使之相同*/
+　　-webkit-border-radius:8px;
+　　border-radius: 8px;
+}
+
+.btn{
+	ox-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: 0px; 
+	color: rgb(255, 255, 255); border: 0px; text-align: center; display: table-cell; 
+	border-radius: 0px; line-height: 1.25rem; -webkit-appearance: none; 
+	padding: 0px 0.5rem; margin: 0px; 
+	height: 60px; white-space: nowrap; position: relative; 
+	text-overflow: ellipsis; font-size: 0.7rem; font-family: inherit; cursor: pointer; 
+	width: 250px; vertical-align: middle; top: 0px; z-index: 20; 
+}
+/*hm开头的表示仅为 Hello MUI示例定义*/
+
+.hm-description {
+	margin: .5em 0;
+}
+
+.hm-description>li {
+	font-size: 14px;
+	color: #8f8f94;
+}
+// -- add --
+.title {
+	margin: 20px 15px 10px;
+	color: #6d6d72;
+	font-size: 15px;
+}
+
+.oa-contact-cell.mui-table .mui-table-cell {
+	padding: 11px 0;
+	vertical-align: middle;
+}
+
+.oa-contact-cell {
+	position: relative;
+	margin: -11px 0;
+}
+
+.oa-contact-avatar {
+	width: 75px;
+}
+
+.oa-contact-avatar img {
+	border-radius: 50%;
+}
+
+.oa-contact-content {
+	width: 100%;
+}
+
+.oa-contact-name {
+	margin-right: 20px;
+}
+
+.oa-contact-name,
+oa-contact-position {
+	float: left;
+}

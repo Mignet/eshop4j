@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>致和集团君义酒业</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css"/>
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="css/app.css"/>
+	</head>
+
+	<body>
+		<!--<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon  mui-pull-left"></a>
+			<h1 class="mui-title">致和集团君义酒业</h1>
+		</header>-->
+		<nav class="mui-bar mui-bar-tab" id="nav-div">
+			<a id="homeTab" class="mui-tab-item mui-active" href="#tabbar-with-home">
+				<span class="mui-icon iconfont icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a id="cartTab" class="mui-tab-item" href="#tabbar-with-cart" >
+				<span class="mui-icon iconfont icon-cart"><span id='itemInCartCnt' class="mui-badge">0</span></span>
+				<span class="mui-tab-label">购物车</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-usercenter">
+				<span class="mui-icon iconfont icon-wode"></span>
+				<span class="mui-tab-label">会员</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-help">
+				<span class="mui-icon mui-icon-help"></span>
+				<span class="mui-tab-label">帮助</span>
+			</a>
+		</nav>
+		<div class="mui-content">
+			<div id="tabbar-with-home" class="mui-control-content mui-active">
+				<div id="slider" class="mui-slider">
+					<div class="mui-slider-group mui-slider-loop">
+						<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="act/104.html">
+								<img src="img/4-af4c014.jpg">
+							</a>
+						</div>
+						<!-- 第一张 -->
+						<div class="mui-slider-item">
+							<a href="act/101.html">
+								<img src="img/1-1ad519a.jpg">
+							</a>
+						</div>
+						<!-- 第二张 -->
+						<div class="mui-slider-item">
+							<a href="act/102.html">
+								<img src="img/2-8cfcdd7.jpg">
+							</a>
+						</div>
+						<!-- 第三张 -->
+						<div class="mui-slider-item">
+							<a href="act/103.html">
+								<img src="img/3-93a37d3.jpg">
+							</a>
+						</div>
+						<!-- 第四张 -->
+						<div class="mui-slider-item">
+							<a href="act/104.html">
+								<img src="img/4-af4c014.jpg">
+							</a>
+						</div>
+						<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="act/101.html">
+								<img src="img/1-1ad519a.jpg">
+							</a>
+						</div>
+					</div>
+					<div class="mui-slider-indicator">
+						<div class="mui-indicator mui-active"></div>
+						<div class="mui-indicator"></div>
+						<div class="mui-indicator"></div>
+						<div class="mui-indicator"></div>
+					</div>
+				</div>
+				<!--
+                	product list
+                -->
+               <ul class="mui-table-view mui-grid-view">
+			        <li class="mui-table-view-cell mui-media mui-col-xs-6">
+			            <a href="product/101.html">
+			                <img class="mui-media-object" src="img/mzh-home.jpg">
+			                <div class="mui-media-body">茅之和</div></a></li>
+			        <li class="mui-table-view-cell mui-media mui-col-xs-6">
+			            <a href="product/102.html">
+			                <img class="mui-media-object" src="img/msh-home.jpg">
+			                <div class="mui-media-body">茅台奢华套餐</div></a></li>
+			        <li class="mui-table-view-cell mui-media mui-col-xs-6">
+			            <a href="contact/company.html"><img class="mui-media-object" src="img/qy-home.jpg">
+			                <div class="mui-media-body">企业简介</div></a></li>
+			        <li class="mui-table-view-cell mui-media mui-col-xs-6">
+			            <a href="contact/gift.html">
+			                <img class="mui-media-object" src="img/fuli-home.jpg">
+			                <div class="mui-media-body">福利介绍</div></a></li>
+			    </ul>    
+				
+			</div>
+			<div id="tabbar-with-cart" class="mui-control-content">
+				<header class="mui-bar mui-bar-nav">
+					<!-- <a href="#tabbar" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+					<h1 class="mui-title">购物车</h1>
+				</header>
+				<div class="mui-content">
+				<form class="mui-input-group">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell mui-media" id="item1">
+								<img class="mui-media-object mui-pull-left" src="img/mzh-2f03e43.jpg">
+								<div class="mui-media-body">
+									<label>茅之和</label>
+									<font color="red" >&yen; 980.00</font>
+									<div class="mui-numbox" style="float:right">
+										<button class="mui-btn mui-btn-numbox-minus" type="button" >-</button>
+										<input id="product101" onchange="changeItem1()" class="mui-input-numbox" type="number" min="0"/>
+										<button class="mui-btn mui-btn-numbox-plus" type="button" >+</button>
+									</div>
+								</div>
+						</li>
+						<li class="mui-table-view-cell mui-media" id="item2">
+								<img class="mui-media-object mui-pull-left" src="img/msh-8d81845.jpg">
+								<div class="mui-media-body">
+									<label>茅台奢华套餐</label>
+									<font color="red" >&yen; 980.00</font>
+									<div class="mui-numbox" style="float:right">
+										<button class="mui-btn mui-btn-numbox-minus" type="button" >-</button>
+										<input id="product102" onchange="changeItem2()" class="mui-input-numbox" type="number" min="0"/>
+										<button class="mui-btn mui-btn-numbox-plus" type="button" >+</button>
+									</div>
+								</div>
+						</li>
+					</ul>
+					<hr>
+					<div align="center">合计:<font color="red" >&yen; <span id='total'>0.00</span></font></div>
+					<hr>
+					<button id="payBtn" type="button" class="mui-btn mui-btn-success mui-btn-block">微信支付</button>
+				</form>
+				</div>
+			</div>
+			<div id="tabbar-with-usercenter" class="mui-control-content">
+				<header class="mui-bar mui-bar-nav">
+					<!-- <a href="#tabbar" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+					<h1 class="mui-title">会员中心</h1>
+				</header>
+				<div class="mui-content">
+					<div class="mui-slider-cell">
+						<div class="oa-contact-cell mui-table">
+							<div class="oa-contact-avatar mui-table-cell">
+								<img src="http://wx.qlogo.cn/mmopen/qcnoUFhpq7HbEBLIFNqF0MZK0ndem0J2eN8m9229uVNOXNsF0GTdwsNWcLarxUyqgDBWudGbpQiaNl5HyP8njsyGkz36Xpicmm/0" 
+									style="margin: 0px; padding: 0px; box-sizing: border-box; -webkit-tap-highlight-color: transparent; border: 0px; width: 4rem; height: 4rem;"/>
+							</div>
+							<div class="oa-contact-content mui-table-cell">
+								<div class="mui-clearfix">
+									<h4 class="oa-contact-name">MignetWee</h4>
+									<span class="oa-contact-position mui-h5">会员</span>
+								</div>
+								<p class="oa-contact-email mui-h6">
+									微信账户信息
+								</p>
+							</div>
+						</div>
+					</div>
+					<button type="button" class="mui-btn mui-btn-block">马上提现</button>
+			<table class="mui-table">
+				<tr>
+					<td class="mui-table-view-cell">销售积分：0.0</td>
+					<td class="mui-table-view-cell">分享积分：0.0</td>
+					<td class="mui-table-view-cell">累计积分：0.0</td>
+				</tr>
+				<tr>
+					<td class="mui-table-view-cell">股权积分：0.0</td>
+					<td class="mui-table-view-cell">购物积分：0.0</td>
+					<td class="mui-table-view-cell">重消积分：0.0</td>
+				</tr>
+			</table>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						排行榜
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						我的订单
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						我的佣金
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						会员关系
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						推荐二维码
+					</a>
+				</li>
+			</ul>
+			</div>
+				</div>
+			<div id="tabbar-with-help" class="mui-control-content">
+				<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right" href="contact/company.html">
+						<img class="mui-media-object mui-pull-left" src="img/zh-brand.jpeg">
+						<div class="mui-media-body">
+							企业介绍
+							<p class='mui-ellipsis'>2016-12-10</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class='mui-navigate-right' href="contact/gift2.html">
+						<img class="mui-media-object mui-pull-left" src="img/zh-brand.jpeg">
+						<div class="mui-media-body">
+							促销福利
+							<p class='mui-ellipsis'>2016-12-22</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right" href="contact/gift.html">
+						<img class="mui-media-object mui-pull-left" src="img/zh-logo.png">
+						<div class="mui-media-body">
+							福利介绍
+							<p class='mui-ellipsis'>2016-12-10</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right" href="contact/yuandan.html">
+						<img class="mui-media-object mui-pull-left" src="img/zh-logo.png">
+						<div class="mui-media-body">
+							元旦促销活动
+							<p class='mui-ellipsis'>2016-12-30</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right" href="act/101.html">
+						<img class="mui-media-object mui-pull-left" src="img/1-1ad519a.jpg">
+						<div class="mui-media-body">
+							西江千户苗寨游
+							<p class='mui-ellipsis'>2017-1-11</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right" href="act/102.html">
+						<img class="mui-media-object mui-pull-left" src="img/2-8cfcdd7.jpg">
+						<div class="mui-media-body">
+							泰国游
+							<p class='mui-ellipsis'>2017-1-11</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right" href="act/103.html">
+						<img class="mui-media-object mui-pull-left" src="img/3-93a37d3.jpg">
+						<div class="mui-media-body">
+							醉美茅台就等你来
+							<p class='mui-ellipsis'>2017-1-13</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right" href="act/104.html">
+						<img class="mui-media-object mui-pull-left" src="img/4-af4c014.jpg">
+						<div class="mui-media-body">
+							迪拜游
+							<p class='mui-ellipsis'>2017-1-13</p>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script src="js/common.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		console.log(document.body.scrollHeight);
+		console.log(document.getElementById("slider").offsetHeight);
+		console.log(document.getElementById("nav-div").offsetHeight);
+		var h = Math.round((document.body.scrollHeight - document.getElementById("slider").offsetHeight - document.getElementById("nav-div").offsetHeight)/2);
+		var slider = mui("#slider");
+			slider.slider({
+				interval: 2000
+			});
+		var luckElements = document.getElementsByName("ex-div");
+        for(var i=0;i<luckElements.length;i++){  
+            luckElements[i].style.display = "inline-block";  
+            luckElements[i].style.width = "49%";  
+            luckElements[i].style.height = h+"px";
+		}	
+
+		//items in cart
+		var item1Cnt = getCookie("item1Cnt");
+		if(item1Cnt==""||item1Cnt==0){
+			item1Cnt = 0;
+		}else{
+			item1Cnt = item1Cnt|0;
+		}
+		var item2Cnt = getCookie("item2Cnt");
+		if(item2Cnt==""||item2Cnt==0){
+			item2Cnt = 0;
+		}else{
+			item2Cnt = item2Cnt|0;
+		}
+		setCookie('item1Cnt',item1Cnt,7);
+		setCookie('item2Cnt',item2Cnt,7);
+//		setCookie('items',items,7);
+		calcTotal();
+		if(getCookie('cart')=='1'){
+			setCookie('cart',0,7);
+			var defaultTab = document.getElementById("cartTab");
+		    //模拟购物车点击
+		    mui.trigger(defaultTab, 'tap');
+		    //切换选项卡高亮
+		    var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+		    if (defaultTab !== current) {
+		       	if(current){
+		    		current.classList.remove('mui-active');
+		    	}
+		        defaultTab.classList.add('mui-active');
+		        document.querySelector("#tabbar-with-home").classList.remove("mui-active");
+		        document.querySelector("#tabbar-with-cart").classList.add("mui-active");
+		    }
+		}else{
+			//homeTab
+			//模拟首页点击
+			var defaultTab = document.getElementById("homeTab");
+		    mui.trigger(defaultTab, 'tap');
+		    //切换选项卡高亮
+		    var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+		    if (defaultTab !== current) {
+		    	if(current){
+		    		current.classList.remove('mui-active');
+		    	}
+		        defaultTab.classList.add('mui-active');
+		        document.querySelector("#tabbar-with-home").classList.add("mui-active");
+		    }
+		}
+		//init end
+		document.getElementById("payBtn").addEventListener('tap', function(e) {
+			e.detail.gesture.preventDefault();
+			console.log("微信支付API");
+			var item1Cnt = getNumFromCookie("item1Cnt");
+			var item2Cnt = getNumFromCookie("item2Cnt");
+			var total = item1Cnt*980+item2Cnt*980;
+			if(total<=0){
+				return;
+			}
+			console.log("item1:"+item1Cnt);
+			console.log("item2:"+item2Cnt);
+			console.log("total:"+(total));
+			mui.toast("请开通微信支付,金额:&yen;"+(total)+".00",{'verticalAlign':'middle'});
+		});
+		</script>
+</html>

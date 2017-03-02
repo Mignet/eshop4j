@@ -11,4 +11,4 @@
 /rest/openapi/** = openapi
 | openapi.controller
 
-Copyright 2016 Mignet
+Copyright 2017 Mignet

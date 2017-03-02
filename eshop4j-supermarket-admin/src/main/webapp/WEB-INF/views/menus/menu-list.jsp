@@ -7,10 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" type="text/css" href="app/css/eshop4j.tables.css"  />
+<link rel="stylesheet" type="text/css" href="app/css/linkwee.tables.css"  />
 <script type="text/javascript" src="assets/plugins/data-tables/js/jquery.dataTables.min.js"  ></script>
 <script type="text/javascript" src="assets/plugins/handlebars/handlebars-4.0.5.js"  ></script>
-<script type="text/javascript" src="app/js/jquery.eshop4j.js"></script>
+<script type="text/javascript" src="app/js/jquery.linkwee.js"></script>
 
 <div class="ux-warpper">
 <div id="main-menus" class="container-fluid">
@@ -125,7 +125,7 @@
                                       async:false,
                                       url:$form.attr("action"),
                                       dataType:"json",
-                                      data:$form.eshop4jFormObject(),
+                                      data:$form.linkweeFormObject(),
                                       error:function () {
                                           
                                       },
@@ -183,7 +183,7 @@
         });
     </script>
 
-    <script type="text/eshop4j-template" id="template-search">
+    <script type="text/linkwee-template" id="template-search">
         <form>
             <div class="row">
                 <div class="col-sm-2">

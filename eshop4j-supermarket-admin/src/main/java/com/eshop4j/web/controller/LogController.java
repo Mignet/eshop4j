@@ -54,7 +54,7 @@ public class LogController {
     public Map<String,Object> showLoggerAjax(int seek) throws Exception{
         Map<String,Object> result = new HashMap<String, Object>();
         seek = seek<=0?5000:seek;
-        File f = new File(File.separator+"data"+File.separator+"logs"+File.separator+"lhlc-eshop4j-admin-tomcat"+File.separator+"eshop4j-supermarket-admin.log");
+        File f = new File(File.separator+"data"+File.separator+"logs"+File.separator+"eshop4j-supermarket-admin-tomcat"+File.separator+"eshop4j-supermarket-admin.log");
         if(f.exists()){
             result.put("size",f.length());
 
@@ -69,7 +69,7 @@ public class LogController {
             result.put("content",content);
             result.put("seek",le);
         }else{
-            result.put("content","/data/logs/lhlc-eshop4j-admin-tomcat/eshop4j-eshop4j-admin.log,文件不存在");
+            result.put("content","/data/logs/eshop4j-supermarket-admin-tomcat/eshop4j-supermarket-admin.log,文件不存在");
             result.put("seek",0);
         }
         return result;

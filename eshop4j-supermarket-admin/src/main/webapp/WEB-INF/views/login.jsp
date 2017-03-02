@@ -96,11 +96,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 			<p>点击 <a href="javascript:;" id="forget-password">这里</a> 重置您的密码.
 			</p>
 		</div>
-		<div class="create-account">
+		<!-- <div class="create-account">
 			<p>
 				 还没有账号 ?&nbsp; <a href="javascript:;" id="register-btn">创建一个账号</a>
 			</p>
-		</div>
+		</div> -->
 	</form>
 	<!-- END LOGIN FORM -->
 	<!-- BEGIN FORGOT PASSWORD FORM -->
@@ -446,7 +446,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
 <div class="copyright">
-	 2016 &copy; Rapid4J By ESHOP.
+	 2017 &copy; Rapid4J By 米格网络.
 </div>
 <!-- END COPYRIGHT -->
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
