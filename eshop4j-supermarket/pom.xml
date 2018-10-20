@@ -23,7 +23,7 @@
  </repositories>
 
 	<dependencies>
-		<!-- 依赖领会核心框架 -->
+		<!-- 依赖公共核心框架 -->
 		<dependency>
 			<groupId>com.eshop4j</groupId>
 			<artifactId>eshop4j-framework</artifactId>
